@@ -119,23 +119,23 @@
 
         if(sortType == 'alphaSort') {
 
-            $('#' + key).parent().parent().find('img#sortFacetCount').attr('src', '/fanstatic/datagovtheme/images/number.png')
+            $('#' + key).parent().parent().find('img#sortFacetCount').attr('src', '/fanstatic/geodatagov/images/number.png')
 
             if(sort == 'desc')
-                $('#' + key).parent().parent().find('img#sortFacetAlpha').attr('src', '/fanstatic/datagovtheme/images/alpha_down.png');
+                $('#' + key).parent().parent().find('img#sortFacetAlpha').attr('src', '/fanstatic/geodatagov/images/alpha_down.png');
             else
-                $('#' + key).parent().parent().find('img#sortFacetAlpha').attr('src', '/fanstatic/datagovtheme/images/alpha_up.png');
+                $('#' + key).parent().parent().find('img#sortFacetAlpha').attr('src', '/fanstatic/geodatagov/images/alpha_up.png');
 
         }
 
         if(sortType == 'cntSort') {
 
-            $('#' + key).parent().parent().find('img#sortFacetAlpha').attr('src', '/fanstatic/datagovtheme/images/alpha.png');
+            $('#' + key).parent().parent().find('img#sortFacetAlpha').attr('src', '/fanstatic/geodatagov/images/alpha.png');
 
             if(sort == 'desc')
-                $('#' + key).parent().parent().find('img#sortFacetCount').attr('src', '/fanstatic/datagovtheme/images/number_down.png');
+                $('#' + key).parent().parent().find('img#sortFacetCount').attr('src', '/fanstatic/geodatagov/images/number_down.png');
             else
-                $('#' + key).parent().parent().find('img#sortFacetCount').attr('src', '/fanstatic/datagovtheme/images/number_up.png');
+                $('#' + key).parent().parent().find('img#sortFacetCount').attr('src', '/fanstatic/geodatagov/images/number_up.png');
         }
 
  }
