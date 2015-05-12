@@ -9,6 +9,7 @@ class DatagovTheme(p.SingletonPlugin):
     # Declare that this class implements IConfigurer.
     p.implements(p.IConfigurer)
     p.implements(p.IFacets, inherit=True)
+    p.implements(p.IRoutes, inherit=True)
 
     def update_config(self, config):
 
@@ -18,7 +19,7 @@ class DatagovTheme(p.SingletonPlugin):
         p.toolkit.add_public_directory(config, 'public')
         p.toolkit.add_resource('fanstatic_library', 'datagovtheme')
     
-    
+    ## IFacets
     def dataset_facets(self, facets_dict, package_type):
 
         if package_type != 'dataset':
@@ -69,3 +70,10 @@ class DatagovTheme(p.SingletonPlugin):
                                ])
         else:
             return facets_dict
+        
+    ## IRoutes
+    def before_map(self, map):
+        controller = 'ckanext.datagovtheme.controllers:ViewController'
+        map.connect('map_viewer', '/viewer',controller=controller, action='show')
+        map.redirect('/', '/dataset')
+        return map
