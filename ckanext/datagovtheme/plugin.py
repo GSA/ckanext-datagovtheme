@@ -80,10 +80,10 @@ class DatagovTheme(p.SingletonPlugin):
         return map
 
     ## ITemplateHelpers
-
     def get_helpers(self):
         from ckanext.datagovtheme import helpers as datagovtheme_helpers
         return {
             'render_datetime_datagov': datagovtheme_helpers.render_datetime_datagov,
             'get_harvest_object_formats': datagovtheme_helpers.get_harvest_object_formats,
+            'get_dynamic_menu': geodatagov_helpers.get_dynamic_menu,
         }
