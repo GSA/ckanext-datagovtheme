@@ -48,3 +48,13 @@ def get_harvest_object_formats(harvest_object_id):
         else:
             format_type = ''
         return format_type
+
+    format_name = get_extra(obj, 'format', 'iso')
+    original_format_name = get_extra(obj, 'original_format')
+
+    return {
+            'object_format': format_title(format_name),
+            'object_format_type': format_type(format_name),
+            'original_format': format_title(original_format_name),
+            'original_format_type': format_type(original_format_name),
+           }
