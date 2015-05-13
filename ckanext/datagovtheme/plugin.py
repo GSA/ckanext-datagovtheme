@@ -85,5 +85,5 @@ class DatagovTheme(p.SingletonPlugin):
         return {
             'render_datetime_datagov': datagovtheme_helpers.render_datetime_datagov,
             'get_harvest_object_formats': datagovtheme_helpers.get_harvest_object_formats,
-            'get_dynamic_menu': geodatagov_helpers.get_dynamic_menu,
+            'get_dynamic_menu': datagovtheme_helpers.get_dynamic_menu,
         }
