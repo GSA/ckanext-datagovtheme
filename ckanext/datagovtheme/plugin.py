@@ -10,6 +10,7 @@ class DatagovTheme(p.SingletonPlugin):
     p.implements(p.IConfigurer)
     p.implements(p.IFacets, inherit=True)
     p.implements(p.IRoutes, inherit=True)
+    p.implements(p.ITemplateHelpers)
 
     def update_config(self, config):
 
@@ -77,3 +78,12 @@ class DatagovTheme(p.SingletonPlugin):
         map.connect('map_viewer', '/viewer',controller=controller, action='show')
         map.redirect('/', '/dataset')
         return map
+
+    ## ITemplateHelpers
+
+    def get_helpers(self):
+        from ckanext.datagovtheme import helpers as datagovtheme_helpers
+        return {
+            'render_datetime_datagov': datagovtheme_helpers.render_datetime_datagov,
+            'get_harvest_object_formats': datagovtheme_helpers.get_harvest_object_formats,
+        }
