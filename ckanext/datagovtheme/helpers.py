@@ -225,3 +225,15 @@ def get_dynamic_menu():
 def get_collection_package(collection_package_id):
     package = p.toolkit.get_action('package_show')({}, {'id': collection_package_id})
     return package
+
+def get_harvest_source_link(package_dict):
+    harvest_source_id = h.get_pkg_dict_extra(package_dict, 'harvest_source_id', None)
+    harvest_source_title = h.get_pkg_dict_extra(package_dict, 'harvest_source_title', None)
+
+    if harvest_source_id and harvest_source_title:
+       msg = p.toolkit._('Harvested from')
+       url = h.url_for('harvest_read', id=harvest_source_id)
+       link = '{msg} <a href="{url}">{title}</a>'.format(url=url, msg=msg, title=harvest_source_title)
+       return p.toolkit.literal(link)
+
+    return ''
