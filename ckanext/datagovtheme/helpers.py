@@ -333,9 +333,9 @@ def is_arcgis_format(resource):
     return is_type_format('arcgis', resource)
 
 def arcgis_format_query(resource):
-    mimetype = resource.get('mimetype')
+    mimetype = resource.get('mimetype', None)
     kmlstring = re.compile('(kml|kmz)');
-    if kmlstring.match(mimetype):
+    if kmlstring.match(str(mimetype)):
         return 'kml'
     else:
         # wms, georss
