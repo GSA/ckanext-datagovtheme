@@ -6,6 +6,7 @@ from pylons import config, request
 
 from ckan import plugins as p
 from ckan.lib import helpers as h
+from ckanext.geodatagov.plugins import RESOURCE_MAPPING
 
 log = logging.getLogger(__name__)
 
