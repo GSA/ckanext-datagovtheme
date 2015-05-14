@@ -97,5 +97,6 @@ class DatagovTheme(p.SingletonPlugin):
             'is_plotly_format': datagovtheme_helpers.is_plotly_format,
             'is_cartodb_format': datagovtheme_helpers.is_cartodb_format,
             'is_arcgis_format': datagovtheme_helpers.is_arcgis_format,
+            'arcgis_format_query': datagovtheme_helpers.arcgis_format_query,
             'convert_resource_format':datagovtheme_helpers.convert_resource_format,
         }
