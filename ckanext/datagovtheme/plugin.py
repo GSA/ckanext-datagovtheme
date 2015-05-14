@@ -88,5 +88,7 @@ class DatagovTheme(p.SingletonPlugin):
             'get_dynamic_menu': datagovtheme_helpers.get_dynamic_menu,
             'get_collection_package': datagovtheme_helpers.get_collection_package,
             'get_harvest_source_link': datagovtheme_helpers.get_harvest_source_link,
-
+            'is_map_viewer_format' : datagovtheme_helpers.is_map_viewer_format,
+            'get_map_viewer_params': datagovtheme_helpers.get_map_viewer_params,
+            'resource_preview_custom': datagovtheme_helpers.resource_preview_custom,
         }
