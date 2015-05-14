@@ -99,4 +99,5 @@ class DatagovTheme(p.SingletonPlugin):
             'is_arcgis_format': datagovtheme_helpers.is_arcgis_format,
             'arcgis_format_query': datagovtheme_helpers.arcgis_format_query,
             'convert_resource_format':datagovtheme_helpers.convert_resource_format,
+            'remove_extra_chars':geodatagov_helpers.remove_extra_chars,
         }
