@@ -100,4 +100,6 @@ class DatagovTheme(p.SingletonPlugin):
             'arcgis_format_query': datagovtheme_helpers.arcgis_format_query,
             'convert_resource_format':datagovtheme_helpers.convert_resource_format,
             'remove_extra_chars':datagovtheme_helpers.remove_extra_chars,
+            'schema11_key_mod':datagovtheme_helpers.schema11_key_mod,
+            'schema11_frequency_mod':datagovtheme_helpers.schema11_frequency_mod,
         }
