@@ -1,1 +1,1 @@
-setuptools 
+-e git+https://github.com/GSA/ckanext-geodatagov.git@datagov#egg=ckanext-geodatagov
