@@ -1,1 +1,1 @@
--e git+https://github.com/GSA/ckanext-geodatagov.git@datagov#egg=ckanext-geodatagov
+-e git+https://github.com/GSA/ckanext-geodatagov.git#egg=ckanext-geodatagov
