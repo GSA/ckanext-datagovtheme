@@ -188,7 +188,7 @@ def get_dynamic_menu():
         if navigations:
             submenus = []
             for submenu in navigations:
-                if re.search(r'/#$', submenu['link']):
+                if re.search(r'Yes', submenu['Parent']):
                     submenu['has_children'] = True
                 submenus.append(submenu)
             menus['submenus'] = submenus
