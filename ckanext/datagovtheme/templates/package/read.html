@@ -87,7 +87,11 @@
   <span>
     <i class="fa fa-file-text-o"></i>
     <strong>License:</strong>
-      <a href="{{ h.get_pkg_dict_extra(c.pkg_dict, 'license') }}" rel="dc:rights">See this page for license information.</a>
+      {% if dataset_is_schema11 %}
+        <a href="{{ h.get_pkg_dict_extra(c.pkg_dict, 'license') }}" rel="dc:rights">See this page for license information.</a>
+      {% else %}
+        {{ h.get_pkg_dict_extra(c.pkg_dict, 'license') }}
+      {% endif %}
   </span>
   {% else %}
   <span>
