@@ -73,7 +73,7 @@
      {% endif %}
     </span>
   {% endif %}
-  {% if pkg_dict.license_id%}
+  {% if pkg_dict.license_id and pkg_dict.license_id != 'notspecified' and pkg_dict.license_id != 'other-license-specified'%}
   <span>
     <i class="fa fa-file-text-o"></i>
     <strong>License:</strong>
