@@ -1903,3 +1903,11 @@ p.module-content{padding-left: 18px !important;}
     width:770px;
 }
 .resource-item .description{width:380px;}
+/* Adjust margins for dataset page headings */
+article.module.prose .module-content:first-child {
+padding-top : 0;
+}
+
+article.module.prose h3 {
+margin-top : 2.5em;
+}
