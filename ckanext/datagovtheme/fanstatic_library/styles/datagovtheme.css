@@ -1911,3 +1911,6 @@ padding-top : 0;
 article.module.prose h3 {
 margin-top : 2.5em;
 }
+.primary .module-ratings {
+  display: none;
+}
