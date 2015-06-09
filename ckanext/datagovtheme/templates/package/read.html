@@ -37,7 +37,7 @@
     {% block package_notes %}
       {% if c.pkg_notes_formatted %}
         <div class="notes embedded-content">
-          {{ c.pkg_notes_formatted }}
+          {{ pkg_dict.notes | striptags }}
         </div>
       {% endif %}
     {% endblock %}
