@@ -1,0 +1,6 @@
+.idea
+syntax: glob
+*.pyc
+*.egg-info
+*.swo
+*.swp
