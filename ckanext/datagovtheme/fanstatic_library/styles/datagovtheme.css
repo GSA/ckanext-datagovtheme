@@ -647,7 +647,6 @@ a {
 }
 .dataset-item {
     position: relative;
-    overflow: hidden;
     padding-bottom: 0;
     margin-bottom: 0;
     border-bottom-width: 0;
@@ -703,6 +702,12 @@ a {
 .context-info .module-content {
     position: relative;
     overflow: hidden;
+}
+.organization-type-wrap {
+    position:absolute;
+    right:0; top:0;
+    overflow:hidden;
+    width:100px;height:100px;
 }
 .organization-type {
     -webkit-transform: rotate(45deg);

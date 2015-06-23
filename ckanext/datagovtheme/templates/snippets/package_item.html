@@ -27,9 +27,11 @@ Example:
     <div class="dataset-content">
       {% set organization_type = organization.organization_type|replace(' Government', '') %}
       {% if organization_type and show_organization %}
+        <div class="organization-type-wrap">
         <span class="organization-type" title="{{ organization.organization_type }}" data-organization-type="{{ organization_type|lower }}">
           <span>{{ organization_type }}</span>
         </span>
+        </div>
       {% endif %}
       <h3 class="dataset-heading">
         {% if package.private %}
