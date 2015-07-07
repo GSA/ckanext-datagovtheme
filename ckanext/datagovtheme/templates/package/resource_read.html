@@ -76,7 +76,7 @@
     {% endif %}
     {% if not res.description and c.package.notes %}
       <h4>{{ _('From the dataset abstract') }}</h4>
-      <blockquote>{{ h.markdown_extract(c.package.get('notes')) }}</blockquote>
+      <blockquote>{{ h.markdown_extract(h.render_markdown(c.package.get('notes'))) }}</blockquote>
     {% endif %}
     <p>{% trans dataset=c.package.title, url=h.url_for(controller='package', action='read', id=c.package['name']) %}Source: <a href="{{ url }}">{{ dataset }}</a>{% endtrans %}</p>
 {% endblock %}
