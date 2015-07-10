@@ -1931,3 +1931,6 @@ margin-top : 2.5em;
 .topics.nav-simple > li{
     padding: 7px 25px;
 }
+.nav-item > ul > li {
+    padding: 5px 15px;
+}
