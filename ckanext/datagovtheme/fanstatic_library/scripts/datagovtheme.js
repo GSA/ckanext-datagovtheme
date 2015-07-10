@@ -283,6 +283,18 @@ if((ieDetector.isIE) && (ieDetector.Version <= 9))
 {
 jQuery('.fa-line-chart').replaceWith( '<img src="../fanstatic/datagovtheme/images/bar-chart.png"' );
 }
+    jQuery('li.nav-item').hover(function(){
+
+        jQuery(this).children('ul').stop().slideToggle(400);
+    });
 });
 
+jQuery("li.nav-item").on({
+    mouseenter : function() {
+        $(this).children().children('i').removeClass( "fa-plus-circle" ).addClass( "fa-minus-circle" );
+    },
+    mouseleave : function() {
+        $(this).children().children('i').removeClass( "fa-minus-circle" ).addClass( "fa-plus-circle" );
+    }
 
+});

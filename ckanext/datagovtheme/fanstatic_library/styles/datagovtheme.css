@@ -1923,3 +1923,11 @@ margin-top : 2.5em;
 .primary .module-ratings {
   display: none;
 }
+.secondary .module .topics .nav-item > a
+{
+    padding: 5px 15px;
+
+}
+.topics.nav-simple > li{
+    padding: 7px 25px;
+}
