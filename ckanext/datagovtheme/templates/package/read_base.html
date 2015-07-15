@@ -84,7 +84,7 @@
             <ul style="display: none;" class="sub_nav nav-simple">
                 {% for sub_nav in subnav %}
                 {% if dupe != sub_nav %}
-                <li class="nav-item"><a href = "/dataset?vocab_category_all={{ sub_nav|replace(' ','+') }}">{{sub_nav}}</a></li>
+                <li class="nav-item"><a href = "/group/{{group.id}}?vocab___category_tag_{{group.id}}={{ sub_nav|replace(' ','+') }}">{{sub_nav}}</a></li>
                 {% endif %}
                 {% set dupe = sub_nav %}
                 {% endfor %}
