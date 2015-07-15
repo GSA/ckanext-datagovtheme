@@ -1934,3 +1934,16 @@ margin-top : 2.5em;
 .nav-item > ul > li {
     padding: 5px 15px;
 }
+.ie .nav-item > ul > li > a{
+    margin: -7px -15px;
+}
+.ie9 .nav-item > ul > li > a{
+    margin: -7px -15px;
+}
+.ie10 .nav-item > ul > li > a{
+    margin: -7px -15px;
+}
+.sub_nav.nav-simple{
+    margin-top:8px;
+    border-top:1px solid #444;
+}

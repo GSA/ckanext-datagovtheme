@@ -285,16 +285,16 @@ jQuery('.fa-line-chart').replaceWith( '<img src="../fanstatic/datagovtheme/image
 }
     jQuery('.topics li.nav-item').hover(function(){
 
-        jQuery(this).children('ul').stop().slideToggle(400);
+        jQuery(this).children('ul').slideToggle(400);
     });
 });
 
 jQuery(".topics li.nav-item").on({
     mouseenter : function() {
-        $(this).children().children('i').removeClass( "fa-plus-circle" ).addClass( "fa-minus-circle" );
+        jQuery(this).children().children('i').removeClass( "fa-plus-circle" ).addClass( "fa-minus-circle" );
     },
     mouseleave : function() {
-        $(this).children().children('i').removeClass( "fa-minus-circle" ).addClass( "fa-plus-circle" );
+        jQuery(this).children().children('i').removeClass( "fa-minus-circle" ).addClass( "fa-plus-circle" );
     }
 
 });
