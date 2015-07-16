@@ -285,7 +285,7 @@ jQuery('.fa-line-chart').replaceWith( '<img src="../fanstatic/datagovtheme/image
 }
     jQuery('.topics li.nav-item').hover(function(){
 
-        jQuery(this).children('ul').slideToggle(400);
+        jQuery(this).children('ul').stop().Toggle(400);
     });
 });
 
