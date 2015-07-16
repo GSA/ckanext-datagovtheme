@@ -77,8 +77,10 @@
                 {% if sub_navs %}
                 <i class="fa fa-plus-circle"></i>
                 {% endif %}
+                {% if not sub_navs %}<span style="margin-left: 15px;"></span>{% endif %}
                 {{ group.title or group.name }}
             </a>
+            {% if sub_navs %}
             {% set subnav = h.convert_top_category_to_list(sub_navs) %}
             {% set dupe ='' %}
             <ul style="display: none;" class="sub_nav nav-simple">
@@ -89,6 +91,7 @@
                 {% set dupe = sub_nav %}
                 {% endfor %}
             </ul>
+            {% endif %}
         </li>
         {% endfor %}
     </ul>
