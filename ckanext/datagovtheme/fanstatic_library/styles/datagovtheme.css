@@ -1945,5 +1945,5 @@ margin-top : 2.5em;
 }
 .sub_nav.nav-simple{
     margin-top:8px;
-    border-top:1px solid #444;
+    border-top:1px dotted #dddddd;
 }
