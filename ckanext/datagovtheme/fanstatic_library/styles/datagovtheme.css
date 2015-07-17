@@ -1932,7 +1932,11 @@ margin-top : 2.5em;
     padding: 7px 25px;
 }
 .nav-item > ul > li {
-    padding: 5px 15px;
+    padding: 5px;
+}
+.sub_nav .nav-item > a {
+    margin: -7px -15px !important;
+    padding: 5px 15px !important;
 }
 .ie .nav-item > ul > li > a{
     margin: -7px -15px;
