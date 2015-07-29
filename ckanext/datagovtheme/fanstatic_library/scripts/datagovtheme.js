@@ -281,20 +281,20 @@ if (browser.isIE) {
 jQuery(document).ready(function () {
 if((ieDetector.isIE) && (ieDetector.Version <= 9))
 {
-jQuery('.fa-line-chart').replaceWith( '<img src="../fanstatic/datagovtheme/images/bar-chart.png"' );
+$('.fa-line-chart').replaceWith( '<img src="../fanstatic/datagovtheme/images/bar-chart.png"' );
 }
-    jQuery('.topics li.nav-item').hover(function(){
+    $('.topics li.nav-item').hover(function(){
 
-        jQuery(this).children('ul').stop().Toggle(400);
+        $(this).children('ul').stop().Toggle(400);
     });
 });
 
-jQuery(".topics li.nav-item").on({
+$(".topics li.nav-item").on({
     mouseenter : function() {
-        jQuery(this).children().children('i').removeClass( "fa-plus-circle" ).addClass( "fa-minus-circle" );
+        $(this).children().children('i').removeClass( "fa-plus-circle" ).addClass( "fa-minus-circle" );
     },
     mouseleave : function() {
-        jQuery(this).children().children('i').removeClass( "fa-minus-circle" ).addClass( "fa-plus-circle" );
+        $(this).children().children('i').removeClass( "fa-minus-circle" ).addClass( "fa-plus-circle" );
     }
 
 });
