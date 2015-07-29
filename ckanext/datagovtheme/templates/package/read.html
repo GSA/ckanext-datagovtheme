@@ -15,7 +15,7 @@
         {{ _('Private') }}
       </span>
     {% endif %}
-    <h1 style="margin-bottom:5px;">
+    <h1 itemprop="name" style="margin-bottom:5px;">
         {% block page_heading %}
         {{ pkg.title or pkg.name }}
         {% if pkg.state.startswith('draft') %}
@@ -26,7 +26,7 @@
 
     {% if h.render_datetime_datagov(pkg.metadata_modified) and h.render_datetime_datagov(pkg.metadata_modified).strip()|length > 0 %}
     <div style="display:inline;">
-       <i class="icon-calendar" style="color:#949494;"></i><span style="font-weight:bold;color:#6e6e6e;margin-left:8px;">Metadata Updated:</span> <span style="color:#7d7d7d;"><a href="#sec-dates">{{ h.render_datetime_datagov(pkg.metadata_modified) }}</a></span>
+       <i class="icon-calendar" style="color:#949494;"></i><span style="font-weight:bold;color:#6e6e6e;margin-left:8px;">Metadata Updated:</span> <span itemprop="dateModified" style="color:#7d7d7d;"><a href="#sec-dates">{{ h.render_datetime_datagov(pkg.metadata_modified) }}</a></span>
     <br clear="all" />
     	
     </div>
@@ -36,7 +36,7 @@
 	{# <h4> {{ pkg }}</h4> #}
     {% block package_notes %}
       {% if c.pkg_notes_formatted %}
-        <div class="notes embedded-content">
+        <div itemprop="description" class="notes embedded-content">
           {{ c.pkg_notes_formatted }}
         </div>
       {% endif %}
