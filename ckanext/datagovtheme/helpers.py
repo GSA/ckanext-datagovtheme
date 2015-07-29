@@ -420,3 +420,17 @@ def schema11_frequency_mod(value):
         'R/P1W': 'Weekly',
     }
     return frequency_map.get(value, value)
+
+def convert_top_category_to_list(str_value):
+    import ast
+    list_value = None
+
+    try:
+        list_value = ast.literal_eval(str_value)
+    except:
+        pass
+
+    if type(list_value) is not list:
+        list_value = []
+
+    return list_value

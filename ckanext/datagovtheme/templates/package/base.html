@@ -13,8 +13,8 @@
       <li>{% link_for organization|truncate(30), controller='organization', action='read', id=pkg.organization.name %}</li>
 	  {% for extra in pkg.extras %}
 	     {% if extra.key == 'publisher' and organization != extra.value %}
-	        <li class="active">&nbsp;{% link_for extra.value|truncate(30), controller='package', action='search', publisher=extra.value %}</li>
-		 {% endif %}
+            <li class="active"><a href = "{{h.url_for(controller='package', action='search',  publisher=extra.value)}}{{_('&organization')}}={{pkg.organization.name}}">&nbsp;{{extra.value|truncate(30)}}</a></li>
+         {% endif %}
 	  {% endfor %}
     {% else %}
       <li>{% link_for _('Datasets'), controller='package', action='search' %}</li>
