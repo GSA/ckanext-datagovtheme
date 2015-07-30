@@ -1923,3 +1923,31 @@ margin-top : 2.5em;
 .primary .module-ratings {
   display: none;
 }
+.secondary .module .topics .nav-item > a
+{
+    padding: 5px 15px;
+
+}
+.topics.nav-simple > li{
+    padding: 7px 25px;
+}
+.nav-item > ul > li {
+    padding: 5px;
+}
+.sub_nav .nav-item > a {
+    margin: -7px -15px !important;
+    padding: 5px 15px !important;
+}
+.ie .nav-item > ul > li > a{
+    margin: -7px -15px;
+}
+.ie9 .nav-item > ul > li > a{
+    margin: -7px -15px;
+}
+.ie10 .nav-item > ul > li > a{
+    margin: -7px -15px;
+}
+.sub_nav.nav-simple{
+    margin-top:8px;
+
+}

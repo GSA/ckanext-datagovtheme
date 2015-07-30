@@ -63,22 +63,41 @@
   {% endblock %}
   </div>
 
-  {% block package_groups %}
-    {% if pkg.groups %}
-      <div class="module module-narrow">
-        <h2 class="module-heading"><i class="icon-folder-open"></i> {{ _('Topics') }}</h2>
-        <ul class="nav nav-simple">
-          {% for group in pkg.groups %}
-            <li class="nav-item">
-              <a href="{{ h.url_for(controller='group', action='read', id=group.name) }}">
+
+{% block package_groups %}
+{% if pkg.groups %}
+<div class="module module-narrow">
+    <h2 class="module-heading"><i class="icon-folder-open"></i> {{ _('Topics') }}</h2>
+    <ul class="nav nav-simple topics">
+        {% for group in pkg.groups %}
+        {% set sub_navs = h.get_pkg_dict_extra(c.pkg_dict, '__category_tag_' + group.id) %}
+        <li class="nav-item">
+
+            <a href="{{ h.url_for(controller='group', action='read', id=group.name) }}">
+                {% if sub_navs %}
+                <i class="fa fa-plus-circle"></i>
+                {% endif %}
+                {% if not sub_navs %}<span style="margin-left: 15px;"></span>{% endif %}
                 {{ group.title or group.name }}
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
-  {% endblock %}
+            </a>
+            {% if sub_navs %}
+            {% set subnav = h.convert_top_category_to_list(sub_navs) %}
+            {% set dupe ='' %}
+            <ul style="display: none;" class="sub_nav nav-simple">
+                {% for sub_nav in subnav %}
+                {% if dupe != sub_nav %}
+                <li class="nav-item"><a href = "/group/{{group.id}}?vocab___category_tag_{{group.id}}={{ sub_nav|replace(' ','+') }}">{{sub_nav}}</a></li>
+                {% endif %}
+                {% set dupe = sub_nav %}
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+{% endblock %}
   
   {% block package_publisher %}
     {% if h.get_pkg_dict_extra(c.pkg_dict, 'publisher') and h.get_pkg_dict_extra(c.pkg_dict, 'publisher').strip()|length > 0 %}
