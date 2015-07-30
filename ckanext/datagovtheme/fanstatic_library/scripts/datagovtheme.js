@@ -281,8 +281,20 @@ if (browser.isIE) {
 jQuery(document).ready(function () {
 if((ieDetector.isIE) && (ieDetector.Version <= 9))
 {
-jQuery('.fa-line-chart').replaceWith( '<img src="../fanstatic/datagovtheme/images/bar-chart.png"' );
+$('.fa-line-chart').replaceWith( '<img src="../fanstatic/datagovtheme/images/bar-chart.png"' );
 }
+    $('.topics li.nav-item').hover(function(){
+
+        $(this).children('ul').stop().toggle();
+    });
 });
 
+$(".topics li.nav-item").on({
+    mouseenter : function() {
+        $(this).children().children('i').removeClass( "fa-plus-circle" ).addClass( "fa-minus-circle" );
+    },
+    mouseleave : function() {
+        $(this).children().children('i').removeClass( "fa-minus-circle" ).addClass( "fa-plus-circle" );
+    }
 
+});
