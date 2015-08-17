@@ -377,7 +377,7 @@ def schema11_key_mod(key):
         'Catalog DescribedBy': 'Data Dictionary',
 
         # 'Identifier': 'Unique Identifier',
-        'Modified': 'Date Last Update',
+        'Modified': 'Data Last Modified',
         'Accesslevel': 'Public Access Level',
         'Bureaucode' : 'Bureau Code',
         'Programcode': 'Program Code',
