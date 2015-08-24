@@ -381,7 +381,7 @@ def schema11_key_mod(key):
         'Accesslevel': 'Public Access Level',
         'Bureaucode' : 'Bureau Code',
         'Programcode': 'Program Code',
-        'Accrualperiodicity': 'Date Update Frequency',
+        'Accrualperiodicity': 'Data Update Frequency',
         'Conformsto': 'Data Standard',
         'Dataquality': 'Data Quality',
         'Describedby': 'Data Dictionary',
