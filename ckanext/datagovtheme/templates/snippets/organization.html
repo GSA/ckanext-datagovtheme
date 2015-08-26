@@ -11,6 +11,12 @@ Example:
 
 #}
 
+{% if pkg %}
+  {% for extra in pkg.extras if extra.key == 'bureauCode' %}
+    {% set bureau_info = h.get_bureau_info(extra.value)%}
+  {% endfor %}
+{% endif %}
+
 {% with truncate=truncate or 0, url=h.url_for(controller='organization', action='read', id=organization.name) %}
   <div class="module context-info">
     <section class="module-content">
