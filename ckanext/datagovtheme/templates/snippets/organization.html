@@ -33,7 +33,7 @@ Example:
         </span>
       {% endif %}
         <div class="image">
-            {% if exists %}
+            {% if exists and exists[0] %}
             <a href="{{bureau_url}}">
                 <img src="{{bureau_logo}}" width="200" alt="{{ bureau_title }}" />
             </a>
@@ -44,14 +44,14 @@ Example:
             {% endif %}
         </div>
         <h1 class="heading">
-            {% if exists %}
+            {% if exists and exists[0] %}
                 {{ bureau_title }}
             {% else %}
                 {{ organization.title or organization.name }}
             {% endif %}
         </h1>
 
-        {% if not exists %}
+        {% if not (exists and exists[0]) %}
             {% if organization.description %}
                 <p>
                     {{ h.markdown_extract(organization.description, 180) }}
