@@ -58,7 +58,7 @@
   <div class="org_type">
   {% block package_organization %}
     {% if pkg.organization %}
-      {% snippet "snippets/organization.html", organization=pkg.organization %}
+      {% snippet "snippets/organization.html", organization=pkg.organization, pkg=pkg %}
     {% endif %}
   {% endblock %}
   </div>
