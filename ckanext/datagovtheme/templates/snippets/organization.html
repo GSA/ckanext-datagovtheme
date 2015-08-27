@@ -12,9 +12,15 @@ Example:
 #}
 
 {% if pkg %}
-  {% for extra in pkg.extras if extra.key == 'bureauCode' %}
-    {% set bureau_info = h.get_bureau_info(extra.value)%}
-  {% endfor %}
+    {% set exists = [] %}
+    {% for extra in pkg.extras if extra.key == 'bureauCode' %}
+        {% do exists.append(h.get_bureau_info(extra.value[0])) %}
+    {% endfor %}
+{% endif %}
+{% if exists  %}
+    {% set bureau_title = exists[0]['title']  %}
+    {% set bureau_logo= exists[0]['logo']  %}
+    {% set bureau_url = exists[0]['url'] %}
 {% endif %}
 
 {% with truncate=truncate or 0, url=h.url_for(controller='organization', action='read', id=organization.name) %}
@@ -26,18 +32,33 @@ Example:
           <span>{{ organization_type }}</span>
         </span>
       {% endif %}
-      <div class="image">
-        <a href="{{ url }}">
-          <img src="{{ organization.image_url or h.url_for_static('/base/images/placeholder-organization.png') }}" width="200" alt="{{ organization.name }}" />
-        </a>
-      </div>
-      <h1 class="heading">{{ organization.title or organization.name }}</h1>
-      {% if organization.description %}
-        <p>
-          {{ h.markdown_extract(organization.description, 180) }}
-          {% link_for _('read more'), controller='organization', action='about', id=organization.name %}
-        </p>
-      {% endif %}
+        <div class="image">
+            {% if exists %}
+            <a href="{{bureau_url}}">
+                <img src="{{bureau_logo}}" width="200" alt="{{ bureau_title }}" />
+            </a>
+            {% else %}
+            <a href="{{ url }}">
+                <img src="{{ organization.image_url or h.url_for_static('/base/images/placeholder-organization.png') }}" width="200" alt="{{ organization.name }}" />
+            </a>
+            {% endif %}
+        </div>
+        <h1 class="heading">
+            {% if exists %}
+                {{ bureau_title }}
+            {% else %}
+                {{ organization.title or organization.name }}
+            {% endif %}
+        </h1>
+
+        {% if not exists %}
+            {% if organization.description %}
+                <p>
+                    {{ h.markdown_extract(organization.description, 180) }}
+                    {% link_for _('read more'), controller='organization', action='about', id=organization.name %}
+                </p>
+            {% endif %}
+        {% endif %}
       {% if show_nums %}
         <div class="nums">
           <dl>
