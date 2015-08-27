@@ -14,7 +14,7 @@ Example:
 {% if pkg %}
     {% set exists = [] %}
     {% for extra in pkg.extras if extra.key == 'bureauCode' %}
-        {% do exists.append(h.get_bureau_info(extra.value[0])) %}
+        {% do exists.append(h.get_bureau_info(extra.value)) %}
     {% endfor %}
 {% endif %}
 {% if exists and exists[0] %}

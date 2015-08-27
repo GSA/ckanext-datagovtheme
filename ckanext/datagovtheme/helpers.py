@@ -441,6 +441,11 @@ def convert_top_category_to_list(str_value):
 def get_bureau_info(bureau_code):
     WEB_PATH = '/fanstatic/datagovtheme/images/logos/'
     LOCAL_PATH = 'fanstatic_library/images/logos/'
+
+    # handle both '007:15', or ['007:15', '007:16']
+    if isinstance(bureau_code, list):
+      bureau_code = bureau_code[0]
+
     filepath = os.path.join(os.path.dirname(__file__), 'dynamic_menu/logos/')
     filename = filepath + 'bureau.csv'
     url = config.get('ckanext.geodatagov.bureau_csv.url', '')
@@ -481,7 +486,12 @@ def get_bureau_info(bureau_code):
     file_obj.close()
 
     bureau_info = {}
-    agency, bureau = bureau_code.split(':')
+
+    try:
+        agency, bureau = bureau_code.split(':')
+    except ValueError:
+        return None
+
     # check logo image file exists or not
     for ext in ['png', 'gif', 'jpg']:
         logo = agency + '-' + bureau + '.' + ext
