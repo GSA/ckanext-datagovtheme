@@ -1,6 +1,8 @@
 import urllib, urllib2, json, re, HTMLParser, urlparse
 import os, time
 import logging
+import csv
+import StringIO
 
 from pylons import config, request
 
@@ -377,11 +379,11 @@ def schema11_key_mod(key):
         'Catalog DescribedBy': 'Data Dictionary',
 
         # 'Identifier': 'Unique Identifier',
-        'Modified': 'Date Last Update',
+        'Modified': 'Data Last Modified',
         'Accesslevel': 'Public Access Level',
         'Bureaucode' : 'Bureau Code',
         'Programcode': 'Program Code',
-        'Accrualperiodicity': 'Date Update Frequency',
+        'Accrualperiodicity': 'Data Update Frequency',
         'Conformsto': 'Data Standard',
         'Dataquality': 'Data Quality',
         'Describedby': 'Data Dictionary',
@@ -434,3 +436,77 @@ def convert_top_category_to_list(str_value):
         list_value = []
 
     return list_value
+
+def get_bureau_info(bureau_code):
+    WEB_PATH = '/fanstatic/datagovtheme/images/logos/'
+    LOCAL_PATH = 'fanstatic_library/images/logos/'
+
+    # handle both '007:15', or ['007:15', '007:16']
+    if isinstance(bureau_code, list):
+      bureau_code = bureau_code[0]
+
+    filepath = os.path.join(os.path.dirname(__file__), 'dynamic_menu/logos/')
+    filename = filepath + 'bureau.csv'
+    url = config.get('ckanext.geodatagov.bureau_csv.url', '')
+    if not url:
+        url = config.get('ckanext.geodatagov.bureau_csv.url_default', '')
+
+    time_file = 0
+    time_current = time.time()
+    try:
+        time_file = os.path.getmtime(filename)
+    except:
+        pass
+
+    # check to see if file is older than .5 hour
+    if (time_current - time_file) < 3600/2:
+        file_obj = open(filename)
+        file_conent = file_obj.read()
+    else:
+        # it means file is old, or does not exist
+        # fetch new content
+        if os.path.exists(filename):
+            sec_timeout = 5
+        else:
+            sec_timeout = 20 # longer urlopen timeout if there is no backup file.
+
+        try:
+            resource = urllib2.urlopen(url, timeout=sec_timeout)
+        except:
+            file_obj = open(filename)
+            file_conent = file_obj.read()
+            # touch the file, so that it wont keep re-trying and slow down page loading
+            os.utime(filename, None)
+        else:
+            file_obj = open(filename, 'w+')
+            file_conent = resource.read()
+            file_obj.write(file_conent)
+
+    file_obj.close()
+
+    bureau_info = {}
+
+    try:
+        agency, bureau = bureau_code.split(':')
+    except ValueError:
+        return None
+
+    # check logo image file exists or not
+    for ext in ['png', 'gif', 'jpg']:
+        logo = agency + '-' + bureau + '.' + ext
+        if os.path.isfile(os.path.join(os.path.dirname(__file__), LOCAL_PATH) + logo):
+            bureau_info['logo'] = WEB_PATH + logo
+            break
+    else:
+        return None
+
+    for row in csv.reader(StringIO.StringIO(file_conent)):
+        if agency == row[2].zfill(3) \
+                and bureau == row[3].zfill(2):
+            bureau_info['title'] = row[1]
+            bureau_info['url'] = '/dataset?q=bureauCode:"' + bureau_code + '"'
+            break
+    else:
+       return None
+
+    return bureau_info
