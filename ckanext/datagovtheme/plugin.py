@@ -86,6 +86,7 @@ class DatagovTheme(p.SingletonPlugin):
             'render_datetime_datagov': datagovtheme_helpers.render_datetime_datagov,
             'get_harvest_object_formats': datagovtheme_helpers.get_harvest_object_formats,
             'get_dynamic_menu': datagovtheme_helpers.get_dynamic_menu,
+            'get_bureau_info': datagovtheme_helpers.get_bureau_info,
             'get_harvest_source_link': datagovtheme_helpers.get_harvest_source_link,
             'is_web_format': datagovtheme_helpers.is_web_format,
             'is_map_viewer_format' : datagovtheme_helpers.is_map_viewer_format,
