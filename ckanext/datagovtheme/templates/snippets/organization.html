@@ -17,7 +17,7 @@ Example:
         {% do exists.append(h.get_bureau_info(extra.value[0])) %}
     {% endfor %}
 {% endif %}
-{% if exists  %}
+{% if exists and exists[0] %}
     {% set bureau_title = exists[0]['title']  %}
     {% set bureau_logo= exists[0]['logo']  %}
     {% set bureau_url = exists[0]['url'] %}
