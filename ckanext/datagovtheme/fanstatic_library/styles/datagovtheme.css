@@ -1951,3 +1951,6 @@ margin-top : 2.5em;
     margin-top:8px;
 
 }
+
+.module.prose .module-content .dataset-list.unstyled .dataset-item .dataset-content{padding-bottom:0px;}
+.module.prose .module-content .dataset-list.unstyled .dataset-item .dataset-resources.unstyled{margin-bottom:30px;}
