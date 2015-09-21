@@ -1951,6 +1951,39 @@ margin-top : 2.5em;
     margin-top:8px;
 
 }
-
+#menu-footer2 li {
+    border-left-color: #428bca;
+    border-left-style: solid;
+    border-left-width: 1px;
+    display: inline;
+    float: left;
+    padding-bottom: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 0;
+}
+#menu-footer2 li a {
+    font-size: 13px;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+}
+.footer-logo a.logo-brand {
+    margin-bottom: 1em;
+    margin-top: 0;
+}
+#menu-footer2 li:first-child {
+    border-left-color: -moz-use-text-color;
+    border-left-style: none;
+    border-left-width: medium;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 8px;
+    padding-top: 0;
+}
+.col-md-5 {
+    width: 43%;
+}
 .module.prose .module-content .dataset-list.unstyled .dataset-item .dataset-content{padding-bottom:0px;}
 .module.prose .module-content .dataset-list.unstyled .dataset-item .dataset-resources.unstyled{margin-bottom:30px;}
