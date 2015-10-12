@@ -66,7 +66,6 @@ Example:
       </div>
       {% if package.resources and not hide_resources and (h.get_pkg_dict_extra(package, 'accessLevel') != 'non-public')  %}
         <ul class="dataset-resources unstyled">
-          <h3 style="background-color:LimeGreen;"> {{ h.get_pkg_dict_extra(package, 'accessLevel') }}</h3>
           {% for resource in package.resources %}
             {% set format = resource.format or 'HTML' %}
             {% set is_web_format = h.is_web_format(resource) %}
