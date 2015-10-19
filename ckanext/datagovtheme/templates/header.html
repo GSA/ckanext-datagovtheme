@@ -54,10 +54,10 @@
                             </a>
                         </li>
                         <li class="notifications {% if c.new_activities > 0 %}notifications-important{% endif %}">
-                            {% set notifications_tooltip = ngettext('Dashboard (%(num)d new item)', 'Dashboard (%(num)d new items)', c.new_activities) %}
-                            <a href="{{ h.url_for(controller='user', action='dashboard') }}" title="{{ notifications_tooltip }}">
+                            {% set new_activities = h.new_activities() %}
+                            <li class="notifications {% if new_activities > 0 %}notifications-important{% endif %}">
                                 <i class="icon-dashboard"></i>
-                                <span>{{ c.new_activities }}</span>
+                                <span>{{ new_activities }}</span>
                             </a>
                         </li>
                         <li>
