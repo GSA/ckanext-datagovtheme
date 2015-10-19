@@ -1990,3 +1990,6 @@ margin-top : 2.5em;
 .site-footer .nav > li > a {
     color: #428BCA;
 }
+site-footer .nav > li > a:hover {
+color:#2a6496;
+}
