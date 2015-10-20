@@ -1,12 +1,7 @@
 {% block header %}
 {% set menus = h.get_dynamic_menu() %}
 <a href="#content" class="hide">{{ _('Skip to content') }}</a>
-<!-- <header class="pre-header">
-  <div class="container">
-     <a href="http://whitehouse.gov/"><img src="http://www.data.gov/sites/all/themes/datagov/images/usa-flag.gif" alt="{{ _('WhiteHouse.gov') }}"></a>
-     {{ _('An Official Web Site of the United States Government') }}
-   </div>
- </header>-->
+
 <header class="masthead">
     {% if g.debug and not g.debug_supress_header %}
     <div class="debug">Controller : {{ c.controller }}<br/>Action : {{ c.action }}</div>
@@ -72,32 +67,22 @@
                         </li>
                     </ul>
                 </nav>
-                {% else %}
-                <!---<div class="not-authed">
-                  <a href="{{ h.url_for(controller='user', action='login') }}">
-                    <span>{{ _('Login') }}</span>
-                  </a>
-                </div>-->
+
                 {% endif %}
             </div>
             {% endblock %}
-            <!-- <form class="search-box-new" method="get" action="{% url_for controller='package', action='search' %}">
-              <span class="control-group">
-                <input type="text" class="search-new" name="q" value="{{ c.q }}" autocomplete="off" placeholder="{{ _('Search datasets...') }}" />
-                <button type="submit" value="{{ _('Search') }}">Submit</button>
-               </span>
-            </form>
-            <form class="site-wide-search" action="http://www.data.gov/search/node/" method="get" data-module="datagovtheme-site-wide-search">
-              <label for="field-sitewide-search" class="hide">{{ _('Search Data.gov') }}</label>
-              <input id="field-sitewide-search" type="text" name="q" placeholder="{{ _('Search Data.gov') }}" />
-              <button class="btn-search" type="submit">{{ _('Search') }}</button>
-            </form>-->
+
 
         </hgroup>
         <hgroup class="top-nav">
             <div class="logo">
                 <a href="http://www.data.gov/" class="root"><span>{{ _('data.gov') }}</span></a>
             </div>
+            <button type="button" class="btn btn-navbar collapsed" data-toggle="collapse" data-target=".nav-primary">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
             {% include 'snippets/root_nav.html' %}
             {% block header_site_navigation %}
 
