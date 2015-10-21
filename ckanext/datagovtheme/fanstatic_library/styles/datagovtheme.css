@@ -1996,6 +1996,16 @@ color:#2a6496;
 
     background: #ddd;
 }
+.navbar .btn-navbar .icon-bar {
+    background-color: #ccc;
+    border-radius: 1px;
+    display: block;
+    height: 2px;
+    width: 22px;
+}
+.btn-navbar .icon-bar + .icon-bar {
+    margin-top: 4px;
+}
 /* media Queries */
 /* chrome specific queries*/
 @media screen and (-webkit-min-device-pixel-ratio:0) {
