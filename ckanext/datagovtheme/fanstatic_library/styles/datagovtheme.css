@@ -1999,7 +1999,7 @@ color:#2a6496;
 }
 /* queries specific for smaller devices*/
 
-@media (max-width: 767px) {
+@media (max-width: 979px) {
     .navbar-nav .open .dropdown-menu {
         min-width:160px;
     }
