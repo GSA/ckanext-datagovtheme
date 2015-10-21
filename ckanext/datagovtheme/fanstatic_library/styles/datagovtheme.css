@@ -1987,8 +1987,9 @@ color:#2a6496;
 .navbar .nav > li > .dropdown-menu::after{
     display: none;
 }
-.navbar-default .navbar-toggle {
+.navbar .btn-navbar {
     border-color: #ddd;
+    background: none;
 }
 
 /* media Queries */
