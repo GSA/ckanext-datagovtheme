@@ -1990,6 +1990,7 @@ color:#2a6496;
 .masthead .btn-navbar {
     border:1px solid #ddd;
     background: none;
+    padding: 9px 10px;
 }
 .masthead .btn-navbar:hover {
 
