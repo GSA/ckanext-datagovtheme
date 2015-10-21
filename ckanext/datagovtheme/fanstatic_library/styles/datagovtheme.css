@@ -1506,7 +1506,7 @@ aside.secondary{
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
     border: 0 none;
     float: left;
-    width: 320px;
+    /*width: 320px;*/
     padding-top: 13px;
 }
 .control-group.search-giant {
@@ -1677,12 +1677,6 @@ aside.secondary{
     border-bottom:0px;
 }
 .wrapper .btn-group.actions{top:-39px;}
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-    .page-header_new .toolbar .breadcrumb a{font-weight: lighter;}
-    .btn-primary.question {
-        float:none !important ;
-    }
-}
 
 .navbar-nav > li > .dropdown-menu {
     border-top-left-radius: 0;
@@ -1763,7 +1757,7 @@ header.masthead .container {
 .search-form .input-group {
     width: 458px;
 }
-form.search-form{padding-right:0px;}
+form.search-form{padding-right:0px;border-bottom: 0px;}
 .module-content.page-header {
     padding-top: 20px;
 }
@@ -1900,10 +1894,7 @@ p.module-content{padding-left: 18px !important;}
 }
 .toolbar .btn.question{background-color:transparent;top:10px;right:auto;}
 /* Css targeting chrome for the question mark sign*/
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-    .toolbar .btn.question{background-color:transparent;top:10px;right:-30px;}
 
-}
 #content .toolbar .breadcrumb{
     width:770px;
 }
@@ -1992,4 +1983,45 @@ margin-top : 2.5em;
 }
 site-footer .nav > li > a:hover {
 color:#2a6496;
+}
+
+
+
+/* media Queries */
+/* chrome specific queries*/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .toolbar .btn.question{background-color:transparent;top:10px;right:-30px;}
+    .page-header_new .toolbar .breadcrumb a{font-weight: lighter;}
+    .btn-primary.question {
+        float:none !important ;
+    }
+}
+/* queries specific for smaller devices*/
+
+@media (max-width: 767px) {
+    .navbar-nav .open .dropdown-menu {
+        min-width:160px;
+    }
+    .navbar-nav .open .dropdown-menu {
+        background-color: transparent;
+        border: 0 none;
+        box-shadow: none;
+        float: none;
+        margin-top: 0;
+        position: static;
+        width: auto;
+    }
+    .masthead .container .top-nav nav ul li {
+        float:none;
+    }
+    .masthead .container .logo {
+        float:none;
+        width: auto;
+    }
+    .masthead .container .top-nav .primary {
+        float:none;
+    }
+    .navbar-right {
+        float:none;
+    }
 }
