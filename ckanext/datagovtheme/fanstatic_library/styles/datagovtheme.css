@@ -2002,6 +2002,7 @@ color:#2a6496;
     display: block;
     height: 2px;
     width: 22px;
+    box-shadow: none;
 }
 .btn-navbar .icon-bar + .icon-bar {
     margin-top: 4px;
