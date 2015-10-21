@@ -2025,4 +2025,7 @@ color:#2a6496;
     .navbar-right {
         float:none;
     }
+    .search-form{
+        display:none;
+    }
 }
