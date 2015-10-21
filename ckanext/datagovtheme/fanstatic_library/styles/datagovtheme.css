@@ -1992,8 +1992,8 @@ color:#2a6496;
     background: none;
 }
 .masthead .btn-navbar:hover {
-    border:1px solid #ddd;
-    background: none;
+
+    background: #ddd;
 }
 /* media Queries */
 /* chrome specific queries*/
