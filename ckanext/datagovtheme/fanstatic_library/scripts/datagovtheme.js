@@ -159,9 +159,7 @@ jQuery(window).load(function(){
    
 });
 
-if ($.browser.msie && $.browser.version == 10) {
-    $("html").addClass("ie10");
-}
+
 window.onload=function(){
     if (!jQuery("#menu-community a[href*='catalog']").hasClass('active')) {
          jQuery("#menu-community a[href*='catalog']").addClass('active');
