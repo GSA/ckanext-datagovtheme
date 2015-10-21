@@ -1036,6 +1036,8 @@ input.form-control {
 .masthead{background-color:#fff;}
 ul#menu-primary-navigation.navbar-nav.nav > li > a {
     padding: 8px 10px 9px;
+    background: none;
+    box-shadow: none;
 }
 ul#menu-primary-navigation li, .navbar-header .navbar-brand {
     font-size: 17px;
@@ -1055,7 +1057,7 @@ ul#menu-primary-navigation li, .navbar-header .navbar-brand {
     text-decoration: none;
     background-image:none;
 }
-.dropdown-toggle .caret {
+.navbar .nav .dropdown-toggle .caret {
     margin-top: 0px;
 }
 body .searchbox-row.skip-navigation {
