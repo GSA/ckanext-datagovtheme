@@ -1987,11 +1987,11 @@ color:#2a6496;
 .navbar .nav > li > .dropdown-menu::after{
     display: none;
 }
-.navbar .btn-navbar {
+.masthead .navbar .btn-navbar {
     border:1px solid #ddd;
     background: none;
 }
-.btn-navbar:hover {
+.masthead .btn-navbar:hover {
     border:1px solid #ddd;
     background: none;
 }
