@@ -314,7 +314,7 @@ a {
 
     padding: 0 15px;
     text-transform: uppercase;
-    /*font-weight: bold;*/
+    font-weight: normal;
     font-size: 17px;
     line-height: 33px;
     color:#333;
