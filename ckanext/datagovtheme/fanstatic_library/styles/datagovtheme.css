@@ -980,8 +980,8 @@ body .searchbox-row.skip-navigation {
     position: absolute;
     width: 1px;
 }
-.navbar-right {
-    float: right !important;
+#menu-primary-navigation {
+    float: right;
 }
 .navbar .search-form {
     padding-top: 8px;
@@ -2027,5 +2027,8 @@ color:#2a6496;
     }
     .search-form{
         display:none;
+    }
+    #menu-primary-navigation {
+        float: none;
     }
 }
