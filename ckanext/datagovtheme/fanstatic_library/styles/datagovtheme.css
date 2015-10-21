@@ -1988,10 +1988,13 @@ color:#2a6496;
     display: none;
 }
 .navbar .btn-navbar {
-    border-color: #ddd;
+    border:1px solid #ddd;
     background: none;
 }
-
+.btn-navbar:hover {
+    border:1px solid #ddd;
+    background: none;
+}
 /* media Queries */
 /* chrome specific queries*/
 @media screen and (-webkit-min-device-pixel-ratio:0) {
