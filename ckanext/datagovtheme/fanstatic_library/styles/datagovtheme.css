@@ -2022,7 +2022,7 @@ padding-left:25px;
 /* queries specific for smaller devices*/
 
 @media (max-width: 767px) {
-    .container{
+    body .container{
         width:auto;
     }
     .navbar-nav .open .dropdown-menu {
