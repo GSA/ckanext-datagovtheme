@@ -2007,7 +2007,7 @@ color:#2a6496;
 .span9 div.module-content {
 padding-left:25px;
 }
-.site-footer .nav > li > a {
+.site-footer .nav > li > a:hover {
     color: #428bca;
 }
 /* media Queries */
@@ -2022,6 +2022,9 @@ padding-left:25px;
 /* queries specific for smaller devices*/
 
 @media (max-width: 767px) {
+    .container{
+        width:auto;
+    }
     .navbar-nav .open .dropdown-menu {
         min-width:160px;
     }
