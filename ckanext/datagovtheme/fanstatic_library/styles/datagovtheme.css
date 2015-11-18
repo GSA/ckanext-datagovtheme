@@ -1718,9 +1718,6 @@ aside.secondary{
     margin-top: 3px;
     margin-left: 3px;
 }
-header.masthead .container {
-    width: 946px !important;
-}
 .format-label[data-format="Data-Dictionary"] {
     background-image:url('../images/data-dictionary.png');
     height: 35px;
@@ -2006,6 +2003,12 @@ color:#2a6496;
 }
 .btn-navbar .icon-bar + .icon-bar {
     margin-top: 4px;
+}
+.span9 div.module-content {
+padding-left:25px;
+}
+.site-footer .nav > li > a {
+    color: #428bca;
 }
 /* media Queries */
 /* chrome specific queries*/
