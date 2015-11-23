@@ -48,7 +48,6 @@
                 {% endfor %}
                 {% endif %}
                 {% endfor %}
-		<a class="show-filters btn">{{ _('Filter Results') }}</a>
             </div>
             {% if request.params and c.page.item_count == 0 %}
             {% trans %}
@@ -60,6 +59,7 @@
             {% endif %}
         </div>
     </form></div>
+<a class="show-filters btn">{{ _('Filter Results') }}</a>
 {% endblock %}
 
 
