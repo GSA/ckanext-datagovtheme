@@ -2019,7 +2019,7 @@ padding-left:25px;
     width: 100%;
 }
 .search-giant button {
-    background: transparent url("../../../base/images/icon-search-27x26.png") no-repeat scroll center center;
+    background: transparent url("/../../base/images/icon-search-27x26.png") no-repeat scroll center center;
     border: medium none;
     cursor: pointer;
     display: block;
@@ -2027,7 +2027,7 @@ padding-left:25px;
     margin-top: -17px;
     padding: 0;
     position: absolute;
-    right: 500px;
+    right: 15px;
     text-indent: -900em;
     top: 50%;
     width: 30px;
