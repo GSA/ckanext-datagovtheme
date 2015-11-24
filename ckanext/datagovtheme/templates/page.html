@@ -12,17 +12,3 @@
     </div>
   {% endif %}
 {% endblock %}
-{% block toolbar %}
-    <div class="toolbar">
-    {% block add_action_content %}
-        {% if h.check_access('harvest_source_create') %}
-            <div class="add_action">
-                <a href="{{ h.url_for('{0}_new'.format(c.dataset_type)) }}" class="btn btn-primary">
-                    <i class="icon-plus-sign-alt"></i>
-                    {{ _('Add Harvest Source') }}
-                </a>
-            </div>
-        {% endif %}
-    {% endblock %}
-    </div>
-{% endblock %}
