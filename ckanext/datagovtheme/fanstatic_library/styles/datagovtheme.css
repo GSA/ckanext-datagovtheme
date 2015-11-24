@@ -2032,7 +2032,9 @@ padding-left:25px;
     width: 30px;
 }
 
-
+.navbar .btn, .navbar .btn-group {
+margin-top: 0px;
+}
 /* media Queries */
 /* chrome specific queries*/
 @media screen and (-webkit-min-device-pixel-ratio:0) {
