@@ -1,6 +1,7 @@
 {% ckan_extends %}
 
-{% block add_action_content  %}
+
+{% block breadcrumb %}
 {{ super() }}
 
 
@@ -60,14 +61,6 @@
         </div>
     </form></div>
 <a class="show-filters btn">{{ _('Filter Results') }}</a>
-{% endblock %}
-
-
-
-
-
-
-{% block breadcrumb %}
 {% endblock %}
 {% block primary_content %}
 
