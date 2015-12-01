@@ -2052,8 +2052,8 @@ margin-top: 0px;
 }
 
 @media (max-width: 767px) {
-    body .container{
-        width:100%;
+    .container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+    width:100%;
     }
     .navbar-nav .open .dropdown-menu {
         min-width:160px;
