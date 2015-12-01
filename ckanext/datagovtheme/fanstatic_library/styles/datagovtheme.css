@@ -2034,6 +2034,9 @@ padding-left:25px;
 .navbar .btn, .navbar .btn-group {
 margin-top: 0px;
 }
+.btn.btn-navbar{
+    margin-top:15px;
+}
 /* media Queries */
 /* chrome specific queries*/
 @media screen and (-webkit-min-device-pixel-ratio:0) {
@@ -2056,6 +2059,9 @@ margin-top: 0px;
 @media (max-width: 767px) {
     .container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
     width:100%;
+    }
+    .toolbar .breadcrumb .home {
+        display: inline-block;
     }
     .masthead .container {
     padding:0px;
