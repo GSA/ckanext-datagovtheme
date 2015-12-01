@@ -1474,7 +1474,6 @@ ul.topics li a i:hover {
 .muted.ellipsis{white-space:normal;}
 aside.secondary{
     margin-left: 0;
-    width: 236px !important;
     border-width: 0;
 }
 .wrapper {
@@ -2049,6 +2048,9 @@ margin-top: 0px;
     header.masthead .container {
         width: 946px;
     }
+    aside.secondary{
+        width:236px;
+    }
 }
 
 @media (max-width: 767px) {
@@ -2057,6 +2059,12 @@ margin-top: 0px;
     }
     .masthead .container {
     padding:0px;
+    }
+    [role="main"] .primary {
+        width:100%;
+    }
+    aside.secondary{
+        width:100%;
     }
     .navbar-nav .open .dropdown-menu {
         min-width:160px;
