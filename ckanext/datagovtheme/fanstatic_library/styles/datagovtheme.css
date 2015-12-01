@@ -2100,4 +2100,19 @@ margin-top: 0px;
     #menu-primary-navigation {
         float: none;
     }
+    .control-order-by {
+        bottom: 0;
+        float: left;
+        position: relative;
+    }
+    .control-group.search-giant {
+        width: 100%;
+        float: none;
+    }
+    .search-giant button {
+        position: absolute;
+        right: 4%;
+        top: 18%;
+
+    }
 }
