@@ -2045,10 +2045,15 @@ margin-top: 0px;
     }
 }
 /* queries specific for smaller devices*/
+@media (min-width: 930px) {
+    header.masthead .container {
+        width: 946px;
+    }
+}
 
 @media (max-width: 767px) {
     body .container{
-        width:auto;
+        width:100%;
     }
     .navbar-nav .open .dropdown-menu {
         min-width:160px;
