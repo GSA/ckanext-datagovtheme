@@ -2055,6 +2055,9 @@ margin-top: 0px;
     .container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
     width:100%;
     }
+    .masthead .container {
+    padding:0px;
+    }
     .navbar-nav .open .dropdown-menu {
         min-width:160px;
     }
