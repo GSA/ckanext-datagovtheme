@@ -2066,6 +2066,9 @@ margin-top: 0px;
     aside.secondary{
         width:100%;
     }
+    .wrapper {
+        background:none;
+    }
     .navbar-nav .open .dropdown-menu {
         min-width:160px;
     }
