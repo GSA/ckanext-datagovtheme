@@ -2037,6 +2037,9 @@ margin-top: 0px;
 .btn.btn-navbar{
     margin-top:15px;
 }
+.module-heading .action {
+    float: right;
+}
 /* media Queries */
 /* chrome specific queries*/
 @media screen and (-webkit-min-device-pixel-ratio:0) {
