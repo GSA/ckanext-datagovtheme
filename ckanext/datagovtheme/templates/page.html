@@ -1,5 +1,7 @@
 {% ckan_extends %}
 
+{% block maintag %}<div role="main" class="controller-{{c.controller}} action-{{c.action}}">{% endblock %}
+
 {% block flash %}
   {% set flash_messages = h.flash.pop_messages() | list %}
   {% if flash_messages %}
