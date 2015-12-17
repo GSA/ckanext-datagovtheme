@@ -1749,7 +1749,7 @@ aside.secondary{
 .search-form .input-group {
     width: 458px;
 }
-form.search-form{padding-right:0px;border-bottom: 0px;}
+form.search-form{padding-right:0px;border-bottom: 0px;padding-bottom:0px;}
 .module-content.page-header {
     padding-top: 20px;
 }
@@ -2040,6 +2040,16 @@ margin-top: 0px;
 .module-heading .action {
     float: right;
 }
+.search-form h2 {
+    clear: both;
+}
+
+.controller-organization.action-read .search-form .control-order-by {
+    float: left;
+    margin-left: 15px;
+}
+
+
 /* media Queries */
 /* chrome specific queries*/
 @media screen and (-webkit-min-device-pixel-ratio:0) {
