@@ -1757,6 +1757,12 @@ form.search-form{padding-right:0px;border-bottom: 0px;padding-bottom:0px;}
 [role="main"] .primary {
     width: 732px;
 }
+.controller-organization.action-read .primary {
+    width: 714px;
+}
+.controller-organization.action-index .primary {
+    width: 714px;
+}
 .primary .primary {
 
     width: 479px;
