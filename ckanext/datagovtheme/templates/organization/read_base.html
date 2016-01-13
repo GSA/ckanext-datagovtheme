@@ -1,6 +1,6 @@
 {% ckan_extends %}
 
-{% block actions_content %}
+{% block page_primary_action %}
   {% if h.check_access('organization_update', {'id': c.group_dict.id}) %}
     <li>{% link_for _('Admin'), controller='organization', action='edit', id=c.group_dict.name, class_='btn btn-primary', icon='wrench' %}</li>
   {% endif %}
