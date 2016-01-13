@@ -1,11 +1,6 @@
 {% ckan_extends %}
 
-{% block content_action %}
-  {% if h.check_access('organization_update', {'id': c.group_dict.id}) %}
-    <li>{% link_for _('Admin'), controller='organization', action='edit', id=c.group_dict.name, class_='btn btn-primary', icon='wrench' %}</li>
-  {% endif %}
-  <li>{{ h.follow_button('group', c.group_dict.id) }}</li>
-{% endblock %}
+
 <li>{{ h.follow_button('group', c.group_dict.id) }}</li>
 {% block primary_content %}
   <section class="module">
@@ -13,7 +8,7 @@
       <header class="module-content page-header">
         <ul class="nav nav-tabs">
           {% block page_header_tabs %}
-            {{ h.build_nav_icon('organization_read', _('Dataset'), id=c.group_dict.name) }}
+            {{ h.build_nav_icon('organization_read', _('Datasets'), id=c.group_dict.name) }}
             {{ h.build_nav_icon('organization_about', _('About'), id=c.group_dict.name) }}
           {% endblock %}
         </ul>
