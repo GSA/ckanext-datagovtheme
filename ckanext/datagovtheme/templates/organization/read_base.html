@@ -2,12 +2,14 @@
 
 
 
-
+{% block primary_content %}
 {% block content_action %}
+<div class="btn-group actions">
 {% if h.check_access('organization_update', {'id': c.group_dict.id}) %}
 <li>{% link_for _('Admin'), controller='organization', action='edit', id=c.group_dict.name, class_='btn btn-primary', icon='wrench' %}</li>
 {% endif %}
 <li>{{ h.follow_button('group', c.group_dict.id) }}</li>
+    </div>
 {% endblock %}
   <section class="module">
     {% block page_header %}
@@ -22,3 +24,4 @@
     {% endblock %}
     {% block primary_content_inner %}{% endblock %}
   </section>
+{% endblock %}
