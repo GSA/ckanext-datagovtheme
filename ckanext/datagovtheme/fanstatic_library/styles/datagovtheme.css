@@ -2054,7 +2054,11 @@ margin-top: 0px;
     float: left;
     margin-left: 15px;
 }
-
+.page_primary_action {
+    position: absolute;
+    margin-top: -58px;
+    right: 10px;
+}
 
 /* media Queries */
 /* chrome specific queries*/
