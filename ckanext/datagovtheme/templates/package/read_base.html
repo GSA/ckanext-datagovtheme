@@ -67,7 +67,6 @@
   </div>
 
 
-{% block package_groups %}
 {% if pkg.groups %}
 <div class="module module-narrow">
     <h2 class="module-heading"><i class="icon-folder-open"></i> {{ _('Topics') }}</h2>
@@ -100,8 +99,7 @@
     </ul>
 </div>
 {% endif %}
-{% endblock %}
-  
+
   {% block package_publisher %}
     {% if h.get_pkg_dict_extra(c.pkg_dict, 'publisher') and h.get_pkg_dict_extra(c.pkg_dict, 'publisher').strip()|length > 0 %}
 	<section class="module module-narrow publisher">
