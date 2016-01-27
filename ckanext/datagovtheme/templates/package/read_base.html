@@ -7,17 +7,18 @@
     <link rel="alternate" type="application/rdf+xml" href="{{ h.url_for(controller='package', action='read', id=pkg.id, format='rdf', qualified=True) }}"/>
 {% endblock -%}
 
-{% block actions_content %}
-   <li> <a href="https://www.data.gov/issue/?media_url={{g.site_url}}{{ h.url_for(controller='package', action='read', id=pkg.name) }}" class="btn btn-info"> <i class="icon-bullhorn"></i> Report Data Issue </a> </li>
-  {# NOTE: Not implemented in stage 1 #}
-  {# <li>{% link_for _('History'), controller='package', action='history', id=pkg.name, class_='btn', icon='undo' %}</li> #}
-  {% if h.check_access('package_update', {'id':pkg.id }) %}
-    <li>{% link_for _('Edit'), controller='package', action='edit', id=pkg.name, class_='btn btn-primary', icon='wrench' %}</li>
-  {% endif %}
-  <li>{{ h.follow_button('dataset', pkg.id) }}</li>
-{% endblock %}
 
 {% block primary_content %}
+
+{% block content_action %}
+<li> <a href="https://www.data.gov/issue/?media_url={{g.site_url}}{{ h.url_for(controller='package', action='read', id=pkg.name) }}" class="btn btn-info"> <i class="icon-bullhorn"></i> Report Data Issue </a> </li>
+{# NOTE: Not implemented in stage 1 #}
+{# <li>{% link_for _('History'), controller='package', action='history', id=pkg.name, class_='btn', icon='undo' %}</li> #}
+{% if h.check_access('package_update', {'id':pkg.id }) %}
+<li>{% link_for _('Edit'), controller='package', action='edit', id=pkg.name, class_='btn btn-primary', icon='wrench' %}</li>
+{% endif %}
+<li>{{ h.follow_button('dataset', pkg.id) }}</li>
+{% endblock %}
   {% if h.get_pkg_dict_extra(pkg, 'accessLevel') == 'non-public' %}
   <div class="no-resource disclaimer"><i class="icon-lock"></i><span>This metadata record is available for the public, but the data itself is not public for privacy or security reasons. <a href="#access-use" style="text-decoration:underline;">See details</a></span></div>
   {% endif %}
