@@ -11,6 +11,7 @@ from ckan.lib import helpers as h
 from ckanext.geodatagov.plugins import RESOURCE_MAPPING
 
 log = logging.getLogger(__name__)
+ckan_tmp_path = '/var/tmp/ckan'
 
 def render_datetime_datagov(date_str):
     try:
@@ -63,7 +64,8 @@ def get_harvest_object_formats(harvest_object_id):
            }
 
 def get_dynamic_menu():
-    filename = os.path.join(os.path.dirname(__file__), 'dynamic_menu/menu.json')
+    filepath = ckan_tmp_path + '/dynamic_menu/'
+    filename = filepath + 'menu.json'
     url = config.get('ckanext.geodatagov.dynamic_menu.url', '')
     if not url:
         url = config.get('ckanext.geodatagov.dynamic_menu.url_default', '')
@@ -72,8 +74,9 @@ def get_dynamic_menu():
     time_current = time.time()
     try:
         time_file = os.path.getmtime(filename)
-    except:
-        pass
+    except OSError:
+        if not os.path.exists(filepath):
+            os.makedirs(filepath)
 
     # check to see if file is older than .5 hour
     if (time_current - time_file) < 3600/2:
@@ -445,7 +448,7 @@ def get_bureau_info(bureau_code):
     if isinstance(bureau_code, list):
       bureau_code = bureau_code[0]
 
-    filepath = os.path.join(os.path.dirname(__file__), 'dynamic_menu/logos/')
+    filepath = ckan_tmp_path + '/logos/'
     filename = filepath + 'bureau.csv'
     url = config.get('ckanext.geodatagov.bureau_csv.url', '')
     if not url:
@@ -455,8 +458,9 @@ def get_bureau_info(bureau_code):
     time_current = time.time()
     try:
         time_file = os.path.getmtime(filename)
-    except:
-        pass
+    except OSError:
+        if not os.path.exists(filepath):
+            os.makedirs(filepath)
 
     # check to see if file is older than .5 hour
     if (time_current - time_file) < 3600/2:
