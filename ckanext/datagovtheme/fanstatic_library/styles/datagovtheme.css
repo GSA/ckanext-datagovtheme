@@ -1979,7 +1979,7 @@ margin-top : 2.5em;
 .site-footer .nav > li > a {
     color: #428BCA;
 }
-site-footer .nav > li > a:hover {
+.site-footer .nav > li > a:hover {
 color:#2a6496;
 }
 
@@ -2059,7 +2059,9 @@ margin-top: 0px;
     margin-top: -58px;
     right: 10px;
 }
-
+.toolbar .breadcrumb a, .toolbar .breadcrumb {
+    color: #505050;
+}
 /* media Queries */
 /* chrome specific queries*/
 @media screen and (-webkit-min-device-pixel-ratio:0) {
