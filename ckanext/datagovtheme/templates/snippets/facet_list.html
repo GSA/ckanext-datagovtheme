@@ -35,6 +35,7 @@ hide_empty
 
 #}
 {% set hide_empty = hide_empty or false %}
+<div class="filters">
 {% with items = items or h.get_facet_items_dict(name, 0) %}
   {% if items or not hide_empty %}
     {% if within_tertiary %}
@@ -43,7 +44,7 @@ hide_empty
       {% set wrapper_class = 'nav-facet nav-facet-tertiary' %}
     {% endif %}
 
-<div class="filters">
+
     <section class="{{ wrapper_class or 'module module-narrow module-shallow' }}">
       <h2 class="module-heading" id="sec-{{name}}">
         <i class="icon-medium icon-filter"></i>
@@ -81,6 +82,8 @@ hide_empty
         <p class="module-content empty">{{ _('There are no {facet_type} that match this search').format(facet_type=title) }}</p>
       {% endif %}
     </section>
-</div>
+
   {% endif %}
+
 {% endwith %}
+</div>
