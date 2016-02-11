@@ -43,7 +43,7 @@ hide_empty
       {% set wrapper_class = 'nav-facet nav-facet-tertiary' %}
     {% endif %}
 
-
+<div class="filters">
     <section class="{{ wrapper_class or 'module module-narrow module-shallow' }}">
       <h2 class="module-heading" id="sec-{{name}}">
         <i class="icon-medium icon-filter"></i>
@@ -81,5 +81,6 @@ hide_empty
         <p class="module-content empty">{{ _('There are no {facet_type} that match this search').format(facet_type=title) }}</p>
       {% endif %}
     </section>
+</div>
   {% endif %}
 {% endwith %}
