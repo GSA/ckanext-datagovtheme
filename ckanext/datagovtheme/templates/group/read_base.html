@@ -17,7 +17,7 @@
       {% endif %}
       <div class="nums">
         <dl>
-          <dt>{{ _('Follower') }}</dt>
+          <dt>{{ _('Followers') }}</dt>
           <dd>{{ h.SI_number_span(c.group_dict.num_followers) }}</dd>
         </dl>
         <dl>
@@ -27,9 +27,5 @@
       </div>
     </section>
   </div>
-<div class="filters">
-{% for facet in c.facet_titles %}
-{{ h.snippet('snippets/facet_list.html', title=c.facet_titles[facet], name=facet, extras={'id':c.group_dict.id}) }}
-{% endfor %}
-</div>
+
 {% endblock %}
