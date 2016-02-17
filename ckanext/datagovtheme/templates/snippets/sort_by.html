@@ -11,8 +11,6 @@ Example:
 <span class="form-select control-group control-order-by">
   <label for="field-order-by">{{ _('Order by') }}</label>
   <select id="field-order-by" name="sort">
-	
-    <option value="none">{{ _('Select an option') }}</option>
     <option value="score desc, name asc"{% if sort =='score desc, name asc' %} selected="selected"{% endif %}>{{ _('Relevance') }}</option>
     <option value="title_string asc"{% if sort=='title_string asc' %} selected="selected"{% endif %}>{{ _('Name Ascending') }}</option>
     <option value="title_string desc"{% if sort=='title_string desc' %} selected="selected"{% endif %}>{{ _('Name Descending') }}</option>
