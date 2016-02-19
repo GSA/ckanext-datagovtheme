@@ -2079,6 +2079,9 @@ margin-top: 0px;
     aside.secondary{
         width:236px;
     }
+    .controller-organization.action-read .primary, .controller-package.action-read .primary{
+        width:100%;
+    }
 }
 
 @media (max-width: 767px) {
