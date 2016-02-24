@@ -2169,6 +2169,8 @@ margin-top: 0px;
     }
     .toolbar .breadcrumb .home {
         color: #fff;
-
+    }
+    .search-giant .control-order-by {
+        margin-left: 0px;
     }
 }
