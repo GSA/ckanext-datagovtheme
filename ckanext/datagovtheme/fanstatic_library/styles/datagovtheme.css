@@ -2177,6 +2177,9 @@ margin-top: 0px;
     #dataset-search .control-order-by {
         margin-left: 0px;
     }
+    .search-form .control-order-by {
+        margin-left: 0px;
+    }
     .toolbar{
         border-right:0px;
         border-left:0px;
@@ -2191,6 +2194,10 @@ margin-top: 0px;
     .wrapper .btn-group.actions{
         top:20px;
         position:static;
+    }
+    .module-content.page-header {
+        margin: 0 -20px;
+
     }
 
 }
