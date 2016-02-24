@@ -2160,10 +2160,15 @@ margin-top: 0px;
 
     }
     .page-header_new .toolbar{
-        width:100%
+        width:100%;
+        padding:0px;
     }
     .main-heading {
        clear:both;
         width: 100%;
+    }
+    .toolbar .breadcrumb .home {
+        color: #fff;
+
     }
 }
