@@ -2170,7 +2170,11 @@ margin-top: 0px;
     .toolbar .breadcrumb .home {
         color: #fff;
     }
-    .search-giant .control-order-by {
+    #dataset-search .control-order-by {
         margin-left: 0px;
+    }
+    .toolbar{
+        broder-right:0px;
+        border-left:0px;
     }
 }
