@@ -2159,4 +2159,11 @@ margin-top: 0px;
         top: 18%;
 
     }
+    .page-header_new .toolbar{
+        width:100%
+    }
+    .main-heading {
+       clear:both;
+        width: 100%;
+    }
 }
