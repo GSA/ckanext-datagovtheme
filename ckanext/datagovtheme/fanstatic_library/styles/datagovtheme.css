@@ -2188,8 +2188,9 @@ margin-top: 0px;
     #content .toolbar .breadcrumb{
         width:100%;
     }
-    .actions{
+    .wrapper .btn-group.actions{
         top:20px;
+        position:static;
     }
 
 }
