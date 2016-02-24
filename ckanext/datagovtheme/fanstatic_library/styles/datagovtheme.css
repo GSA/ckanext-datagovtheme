@@ -2181,6 +2181,10 @@ margin-top: 0px;
         border-left:0px;
     }
     .page_primary_action {
-    margin-top:0px;
+        margin-top:0px;
+        position: static;
+    }
+    #content .toolbar .breadcrumb{
+        width:100%;
     }
 }
