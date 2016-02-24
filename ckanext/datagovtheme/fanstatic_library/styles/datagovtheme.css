@@ -2088,6 +2088,9 @@ margin-top: 0px;
     .controller-organization.action-read .primary, .controller-package.action-read .primary{
         width:100%;
     }
+    .controller-organization.action-index .primary {
+        width:100%;
+    }
     #dataset-map {
         display: none;
     }
@@ -2139,7 +2142,7 @@ margin-top: 0px;
         float:none;
     }
     .search-form{
-        display:none;
+
     }
     #menu-primary-navigation {
         float: none;
@@ -2167,14 +2170,17 @@ margin-top: 0px;
        clear:both;
         width: 100%;
     }
-    .toolbar .breadcrumb .home {
+    .page-header_new .toolbar .breadcrumb .home {
         color: #fff;
     }
     #dataset-search .control-order-by {
         margin-left: 0px;
     }
     .toolbar{
-        broder-right:0px;
+        border-right:0px;
         border-left:0px;
+    }
+    .page_primary_action {
+    margin-top:0px;
     }
 }
