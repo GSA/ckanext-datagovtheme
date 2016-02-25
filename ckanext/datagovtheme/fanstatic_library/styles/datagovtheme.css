@@ -2227,3 +2227,146 @@ margin-top: 0px;
     margin:0px;
     }
 }
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+    .container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+        width:100%;
+    }
+    .controller-organization.action-read .primary, .controller-package.action-read .primary{
+        width:100%;
+        padding:0 20px;
+    }
+    .controller-organization.action-index .primary {
+        width:100%;
+    }
+    #dataset-map {
+        display: none;
+    }
+    .masthead .container .top {
+        width:100%;
+    }
+    body .searchbox-row.skip-navigation {
+        display:none;
+    }
+    .toolbar .breadcrumb .home {
+        display: inline-block;
+    }
+    .masthead .container {
+        padding:0px;
+    }
+    [role="main"] .primary {
+        width:100%;
+        background:#fff;
+    }
+    aside.secondary{
+        width:100%;
+    }
+    .wrapper {
+        background:none;
+    }
+    .navbar-nav .open .dropdown-menu {
+        min-width:160px;
+    }
+    .navbar-nav .open .dropdown-menu {
+        background-color: transparent;
+        border: 0 none;
+        box-shadow: none;
+        float: none;
+        margin-top: 0;
+        position: static;
+        width: auto;
+    }
+    .masthead .container .top-nav nav ul li {
+        float:none;
+    }
+    .masthead .container .logo {
+        width: auto;
+    }
+    .masthead .container .top-nav .primary {
+        float:none;
+        width: auto;
+    }
+    .navbar-right {
+        float:none;
+    }
+    .search-form{
+
+    }
+    #menu-primary-navigation {
+        float: none;
+    }
+    .control-order-by {
+        bottom: 0;
+        float: left;
+        position: relative;
+    }
+    .control-group.search-giant {
+        width: 100%;
+        float: none;
+        margint-top:10px;
+    }
+    .search-giant button {
+        position: absolute;
+        right: 4%;
+        top: 18%;
+
+    }
+    .page-header_new .toolbar{
+        width:100%;
+        padding:0px;
+    }
+    .main-heading {
+        clear:both;
+        width: 100%;
+    }
+    .page-header_new .toolbar .breadcrumb .home {
+        color: #fff;
+    }
+    #dataset-search .control-order-by {
+        margin-left: 0px;
+    }
+    .search-form .control-order-by {
+        margin-left: 0px;
+    }
+    .toolbar{
+        border-right:0px;
+        border-left:0px;
+    }
+    .page_primary_action {
+        margin-top:0px;
+        position: static;
+    }
+    #content .toolbar .breadcrumb{
+        width:100%;
+    }
+    .wrapper .btn-group.actions{
+        top:20px;
+        right:20px;
+    }
+    .wrapper .btn-group.actions li{
+        display: block;
+        margin-top: 10px;
+    }
+    .module-content.page-header {
+        margin: 0 -15px;
+    }
+    .search-form .search-input button {
+        background: transparent url("/../../base/images/icon-search-27x26.png") no-repeat scroll center center;
+    }
+    .alert-info.non-federal{
+        width:90%;
+    }
+    .controller-package.action-read .wrapper .btn-group.actions li{
+        display: inline-block;
+
+    }
+    .controller-package.action-read .wrapper .btn-group.actions {
+        float:none;
+        position:static;
+    }
+    .resource-item .description {
+        width: 100%;
+    }
+    .controller-group.action-read .module-content.page-header {
+        margin:0px;
+    }
+}
