@@ -2084,7 +2084,7 @@ margin-top: 0px;
     }
 }
 
-@media only screen and (max-device-width: 767px) {
+@media (max-width: 767px) {
     .container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
     width:100%;
     }
