@@ -2223,4 +2223,7 @@ margin-top: 0px;
     .resource-item .description {
         width: 100%;
     }
+    .controller-group.action-read .module-content.page-header {
+    margin:0px;
+    }
 }
