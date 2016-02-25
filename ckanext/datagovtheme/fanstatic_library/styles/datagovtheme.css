@@ -2062,6 +2062,9 @@ margin-top: 0px;
 .toolbar .breadcrumb a, .toolbar .breadcrumb {
     color: #505050;
 }
+.page-header_new .toolbar .breadcrumb a, .page-header_new .toolbar .breadcrumb {
+    color: #fff;
+}
 /* media Queries */
 /* chrome specific queries*/
 @media screen and (-webkit-min-device-pixel-ratio:0) {
