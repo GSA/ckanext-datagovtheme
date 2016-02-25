@@ -2206,4 +2206,15 @@ margin-top: 0px;
     .search-giant button {
         background: transparent url("/../../base/images/icon-search-27x26.png") no-repeat scroll center center;
     }
+    .alert-info.non-federal{
+        width:100%;
+    }
+    .controller-package.action-read .wrapper .btn-group.actions li{
+        display: inline-block;
+
+    }
+    .controller-package.action-read .wrapper .btn-group.actions {
+        float:none;
+        position:static;
+    }
 }
