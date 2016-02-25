@@ -2220,4 +2220,7 @@ margin-top: 0px;
         float:none;
         position:static;
     }
+    .resource-item .description {
+        width: 100%;
+    }
 }
