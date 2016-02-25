@@ -2156,6 +2156,7 @@ margin-top: 0px;
     .control-group.search-giant {
         width: 100%;
         float: none;
+        margint-top:10px;
     }
     .search-giant button {
         position: absolute;
@@ -2202,5 +2203,7 @@ margin-top: 0px;
     .module-content.page-header {
         margin: 0 -20px;
     }
-
+    .search-giant button {
+        background: transparent url("/../../base/images/icon-search-27x26.png") no-repeat scroll center center;
+    }
 }
