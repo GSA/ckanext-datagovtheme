@@ -2210,7 +2210,7 @@ margin-top: 0px;
         background: transparent url("/../../base/images/icon-search-27x26.png") no-repeat scroll center center;
     }
     .alert-info.non-federal{
-        width:100%;
+        width:90%;
     }
     .controller-package.action-read .wrapper .btn-group.actions li{
         display: inline-block;
