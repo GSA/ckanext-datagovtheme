@@ -2193,10 +2193,14 @@ margin-top: 0px;
     }
     .wrapper .btn-group.actions{
         top:20px;
+        right:20px;
+    }
+    .wrapper .btn-group.actions li{
+        display: block;
+        margin-top: 10px;
     }
     .module-content.page-header {
         margin: 0 -20px;
-
     }
 
 }
