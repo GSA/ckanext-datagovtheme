@@ -2235,4 +2235,15 @@ margin-top: 0px;
     .controller-organization .wrapper{
         margin:0px;
     }
+    .input-append, .input-prepend {
+        white-space: normal;
+    }
+    .control-custom input {
+        border-radius: 0;
+        width: 100%;
+    }
+    .control-custom input {
+        border-radius: 0;
+        width: 100%;
+    }
 }
