@@ -2159,7 +2159,7 @@ margin-top: 0px;
     .control-group.search-giant {
         width: 100%;
         float: none;
-        margint-top:10px;
+        margin-top:10px;
     }
     .search-giant button {
         position: absolute;
@@ -2225,5 +2225,14 @@ margin-top: 0px;
     }
     .controller-group.action-read .module-content.page-header {
     margin:0px;
+    }
+    .controller-group.action-read .search-form .show-filters{
+        display: none;
+    }
+    .controller-organization.action-read .search-form .control-order-by {
+        margin-left: 0px;
+    }
+    .controller-organization .wrapper{
+        margin:0px;
     }
 }
