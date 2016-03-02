@@ -2229,6 +2229,9 @@ margin-top: 0px;
     .controller-group.action-read .search-form .show-filters{
         display: none;
     }
+    .controller-organization.action-read .search-form .show-filters {
+        display: none;
+    }
     .controller-organization.action-read .search-form .control-order-by {
         margin-left: 0px;
     }
