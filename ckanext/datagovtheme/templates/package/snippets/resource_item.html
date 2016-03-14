@@ -91,7 +91,7 @@
 	  {% endif %}
 	</ul>
 	<a href="{{ res.url }}" class="btn btn-primary"{% if is_web_format %} target="_blank"{% endif %} style="border-radius:4px;"
-	   data-format="{{ (res.format or 'HTML')|lower }}" data-organization="'{{ pkg.organization.title }}"
+	   data-format="{{ (res.format or 'HTML')|lower }}" data-organization="{{ pkg.organization.title }}"
 	> <i class="icon-download-alt"></i> {{ _('Download') }} </a>
 
 {% elif is_cartodb_format and is_plotly_format  %}
@@ -104,7 +104,7 @@
 	  <li class="cartodb"><a href="{{ cartodb_url }}?file={{ res.url }}&provider=data.gov"><span>CartoDB</span></a></li>
 	</ul>
 	<a href="{{ resource_url }}"
-	   data-format="{{ (res.format or 'HTML')|lower }}" data-organization="'{{ pkg.organization.title }}"
+	   data-format="{{ (res.format or 'HTML')|lower }}" data-organization="{{ pkg.organization.title }}"
 	   class="btn btn-primary"{% if is_web_format %} target="_blank"{% endif %}> <i class="icon-download-alt"></i> {{ _('Download') }} </a>
 {% elif is_cartodb_format %}
 	<button class="btn btn-primary" data-toggle="dropdown" style="border-top-right-radius:0;border-bottom-right-radius:0">Open With
@@ -115,7 +115,7 @@
 	  <li class="cartodb"><a href="{{ cartodb_url }}?file={{ res.url }}&provider=data.gov"><span>CartoDB</span></a></li>
 	</ul>
 	<a href="{{ resource_url }}" class="btn btn-primary"{% if is_web_format %} target="_blank"{% endif %}
-	   data-format="{{ (res.format or 'HTML')|lower }}" data-organization="'{{ pkg.organization.title }}"
+	   data-format="{{ (res.format or 'HTML')|lower }}" data-organization="{{ pkg.organization.title }}"
 	> <i class="icon-download-alt"></i> {{ _('Download') }} </a>
 {% elif is_plotly_format %}
 	<button class="btn btn-primary" data-toggle="dropdown" style="border-top-right-radius:0;border-bottom-right-radius:0">Open With
@@ -126,11 +126,11 @@
 	  <li class="plotly"><a href="{{ plotly_url }}?url={{ res.url }}"><span>plotly</span></a></li>
 	</ul>
 	<a href="{{ resource_url }}" class="btn btn-primary"{% if is_web_format %} target="_blank"{% endif %}
-	   data-format="{{ (res.format or 'HTML')|lower }}" data-organization="'{{ pkg.organization.title }}"
+	   data-format="{{ (res.format or 'HTML')|lower }}" data-organization="{{ pkg.organization.title }}"
 	> <i class="icon-download-alt"></i> {{ _('Download') }} </a>
 {% else %}
 	<a href="{{ resource_url }}" class="btn btn-primary"{% if is_web_format %} target="_blank"{% endif %}
-	   data-format="{{ (res.format or 'HTML')|lower }}" data-organization="'{{ pkg.organization.title }}"
+	   data-format="{{ (res.format or 'HTML')|lower }}" data-organization="{{ pkg.organization.title }}"
 	> <i class="icon-download-alt"></i> {{ _('Download') }} </a>
 {% endif %}
 </div>
