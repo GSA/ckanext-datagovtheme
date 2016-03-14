@@ -9,7 +9,7 @@
     <li>
       <a class="btn btn-primary resource-url-analytics resource-type-{{ res.resource_type }}"
          href="{{ res.url }}"{% if h.is_web_format(c.resource) %} target="_blank"{% endif %}
-         data-format="{{ (res.format or 'HTML')|lower }}" data-organization="'{{ pkg.organization.title }}">
+         data-format="{{ (res.format or 'HTML')|lower }}" data-organization="{{ pkg.organization.title }}">
         {% if h.is_web_format(c.resource) %}
           <i class="icon-external-link"></i> {{ _('Visit page') }}
         {% else %}
@@ -70,7 +70,7 @@
   {% block resource_read_url %}
     {% if res.url %}
       <p class="muted ellipsis">{{ _('URL:') }} <a id="res_url" href="{{ res.url }}"
-     data-format="{{ (res.format or 'HTML')|lower }}" data-organization="'{{ pkg.organization.title }}">{{ res.url }}</a></p>
+     data-format="{{ (res.format or 'HTML')|lower }}" data-organization="{{ pkg.organization.title }}">{{ res.url }}</a></p>
     {% endif %}
   {% endblock %}
   <div class="prose notes" property="rdfs:label">

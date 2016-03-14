@@ -74,7 +74,7 @@ Example:
               {% set url = h.url_for(controller='package', action='resource_read', id=package.name, resource_id=resource.id) if is_map_format else resource.url %}
               <li>
                 <a href="{{ url }}" class="label" data-format="{{ format|lower }}" {% if is_web_format %} target="_blank"{% endif %}
-                   data-organization="'{{ package.organization.title }}">{{ format }}</a>
+                   data-organization="{{ package.organization.title }}">{{ format }}</a>
               </li>
             {% elif loop.index == resource_limit %}
               {% set more = loop.length - resource_limit + 1 %}
