@@ -34,6 +34,7 @@ class DatagovTheme(p.SingletonPlugin):
                             ('organization_type', 'Organization Types'),
                             ('organization', 'Organizations'),
                             ('publisher', 'Publisher'),
+                            ('bureauCode', 'Bureau'),
                            ## ('extras_progress', 'Progress'),
                            ])
 
@@ -50,6 +51,7 @@ class DatagovTheme(p.SingletonPlugin):
                                 ('capacity', 'Visibility'),
                                 ('dataset_type', 'Resource Type'),
                                 ('publisher', 'Publisher'),
+                                ('bureauCode', 'Bureau'),
                                ])
         else:
             return facets_dict

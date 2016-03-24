@@ -488,20 +488,13 @@ def get_bureau_info(bureau_code):
 
     file_obj.close()
 
-    bureau_info = {}
+    bureau_info = {
+        'code': bureau_code
+    }
 
     try:
         agency, bureau = bureau_code.split(':')
     except ValueError:
-        return None
-
-    # check logo image file exists or not
-    for ext in ['png', 'gif', 'jpg']:
-        logo = agency + '-' + bureau + '.' + ext
-        if os.path.isfile(os.path.join(os.path.dirname(__file__), LOCAL_PATH) + logo):
-            bureau_info['logo'] = WEB_PATH + logo
-            break
-    else:
         return None
 
     for row in csv.reader(StringIO.StringIO(file_conent)):
@@ -511,6 +504,15 @@ def get_bureau_info(bureau_code):
             bureau_info['url'] = '/dataset?q=bureauCode:"' + bureau_code + '"'
             break
     else:
-       return None
+        return None
+
+    # check logo image file exists or not
+    for ext in ['png', 'gif', 'jpg']:
+        logo = agency + '-' + bureau + '.' + ext
+        if os.path.isfile(os.path.join(os.path.dirname(__file__), LOCAL_PATH) + logo):
+            bureau_info['logo'] = WEB_PATH + logo
+            break
+    else:
+        bureau_info['logo'] = None
 
     return bureau_info
