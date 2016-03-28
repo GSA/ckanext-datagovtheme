@@ -40,7 +40,9 @@
                       {{ c.translated_fields[(field,value)] }}
                     {%- else -%}
                       {% set label = h.list_dict_filter(search_facets_items , 'name', 'display_name', value) %}
-                      {% set label = h.get_bureau_info(label)['title'] if field == 'bureauCode' and h.get_bureau_info(label) else 'Code ' + label %}
+                        {% if field == 'bureauCode' %}
+                          {% set label = h.get_bureau_info(label)['title'] if h.get_bureau_info(label) else 'Code ' + label %}
+                        {% endif %}
                       {{ label }}
                     {%- endif %}
                     <a href="{{ c.remove_field(field, value) }}" class="remove" title="{{ _('Remove') }}"><i class="icon-remove"></i></a>
