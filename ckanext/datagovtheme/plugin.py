@@ -33,8 +33,8 @@ class DatagovTheme(p.SingletonPlugin):
                             ('res_format', 'Formats'),
                             ('organization_type', 'Organization Types'),
                             ('organization', 'Organizations'),
-                            ('publisher', 'Publisher'),
-                            ('bureauCode', 'Bureau'),
+                            ('publisher', 'Publishers'),
+                            ('bureauCode', 'Bureaus'),
                            ## ('extras_progress', 'Progress'),
                            ])
 
@@ -50,8 +50,8 @@ class DatagovTheme(p.SingletonPlugin):
                                 ('harvest_source_title', 'Harvest Source'),
                                 ('capacity', 'Visibility'),
                                 ('dataset_type', 'Resource Type'),
-                                ('publisher', 'Publisher'),
-                                ('bureauCode', 'Bureau'),
+                                ('publisher', 'Publishers'),
+                                ('bureauCode', 'Bureaus'),
                                ])
         else:
             return facets_dict
