@@ -190,7 +190,8 @@
       'harvest_source_title' : {'sortType': 'cntSort', 'sort' : 'desc'},
       'frequency' : {'sortType': 'cntSort', 'sort' : 'desc'},
       'source_type' : {'sortType': 'cntSort', 'sort' : 'desc'},
-      'publisher' : {'sortType': 'cntSort', 'sort' : 'desc'}
+      'publisher' : {'sortType': 'cntSort', 'sort' : 'desc'},
+      'bureauCode' : {'sortType': 'cntSort', 'sort' : 'desc'}
  };
  
  var allVars = $.getUrlVars();
