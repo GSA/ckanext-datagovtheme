@@ -2065,6 +2065,9 @@ margin-top: 0px;
 .page-header_new .toolbar .breadcrumb a, .page-header_new .toolbar .breadcrumb {
     color: #fff;
 }
+aside.secondary{
+    width:236px;
+}
 /* media Queries */
 /* chrome specific queries*/
 @media screen and (-webkit-min-device-pixel-ratio:0) {
