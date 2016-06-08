@@ -47,7 +47,7 @@
     {% set dataset = pkg.title or pkg.name %}
         {% if pkg.organization %}
             {% set organization = pkg.organization.title or pkg.organization.name %}
-            <li>{% link_for _('Organizations'), controller='organization', action='index' %}</li>
+            {% snippet 'package/snippets/organization_breadcrumb_item.html' %}
             <li>{% link_for organization|truncate(30), controller='organization', action='read', id=pkg.organization.name %}</li>
             <li>{% trans dataset=c.package.title|truncate(30), url=h.url_for(controller='package', action='read', id=c.package['name']) %}<a href="{{ url }}">{{ dataset }}</a>{% endtrans %}</li>
                 {% for extra in pkg.extras %}
