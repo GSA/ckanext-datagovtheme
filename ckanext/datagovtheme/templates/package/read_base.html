@@ -8,7 +8,8 @@
 {% endblock -%}
 
 {% block actions_content %}
-   <li> <a href="https://www.data.gov/issue/?media_url={{g.site_url}}{{ h.url_for(controller='package', action='read', id=pkg.name) }}" class="btn btn-info"> <i class="icon-bullhorn"></i> Report Data Issue </a> </li>
+   <li> <a href="https://www.data.gov/story/?media_url={{g.site_url}}{{ h.url_for(controller='package', action='read', id=pkg.name) }}" class="btn btn-info"> <i class="icon-book"></i> Submit Data Story </a> </li>
+   <li> <a href="https://www.data.gov/issue/?media_url={{g.site_url}}{{ h.url_for(controller='package', action='read', id=pkg.name) }}" class="btn btn-warning"> <i class="icon-bullhorn"></i> Report Data Issue </a> </li>
   {# NOTE: Not implemented in stage 1 #}
   {# <li>{% link_for _('History'), controller='package', action='history', id=pkg.name, class_='btn', icon='undo' %}</li> #}
   {% if h.check_access('package_update', {'id':pkg.id }) %}
