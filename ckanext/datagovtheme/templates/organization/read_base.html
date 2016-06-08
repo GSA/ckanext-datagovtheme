@@ -1,5 +1,9 @@
 {% ckan_extends %}
 
+{% block breadcrumb_content %}
+  {% snippet 'package/snippets/organization_breadcrumb_item.html' %}
+  <li class="active">{% link_for c.group_dict.display_name|truncate(35), controller='organization', action='read', id=c.group_dict.name %}</li>
+{% endblock %}
 
 
 {% block primary_content %}
