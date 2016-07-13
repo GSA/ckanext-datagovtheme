@@ -75,8 +75,8 @@ this.ckan.module('spatial-query', function ($, _) {
 
       // MapQuest OpenStreetMap base map
       map.addLayer(new L.TileLayer(
-        '//otile{s}-s.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
-         {maxZoom: 18, subdomains: '1234'}
+        '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+         {maxZoom: 18, subdomains: 'abc'}
       ));
 
       // Initialize the draw control
