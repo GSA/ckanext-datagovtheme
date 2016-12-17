@@ -38,7 +38,12 @@
           {% if c.translated_fields and c.translated_fields.has_key((field,value)) %}
             {{ c.translated_fields[(field,value)] }}
           {% else %}
-            {{ value }}
+            {% if field == 'bureauCode' %}
+              {% set label = h.get_bureau_info(value)['title'] if h.get_bureau_info(value) else 'Code ' + value  %}
+            {% else %}
+              {% set label = value %}
+            {% endif %}
+            {{ label }}
           {% endif %}
           <a href="{{c.remove_field(field, value)}}" class="remove" title="{{ _('Remove') }}"><i class="icon-remove"></i></a>
         </span>

@@ -1,5 +1,13 @@
 {% ckan_extends %}
 
+{% block breadcrumb_content %}
+  {% snippet 'package/snippets/organization_breadcrumb_item.html' %}
+  {% block breadcrumb_content_inner %}
+    <li>{% link_for organization.display_name|truncate(35), controller='organization', action='read', id=organization.name %}</li>
+    <li class="active">{% link_for _('Admin'), controller='organization', action='edit', id=organization.name %}</li>
+  {% endblock %}
+{% endblock %}
+
 {% block content_primary_nav %}
   {{ super() }}
   {% set url = h.url_for('harvest_org_list', id=c.group_dict.name) %}

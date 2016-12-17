@@ -39,7 +39,11 @@
                     {%- if c.translated_fields and c.translated_fields.has_key((field,value)) -%}
                       {{ c.translated_fields[(field,value)] }}
                     {%- else -%}
-                      {{ h.list_dict_filter(search_facets_items , 'name', 'display_name', value) }}
+                      {% set label = h.list_dict_filter(search_facets_items , 'name', 'display_name', value) %}
+                        {% if field == 'bureauCode' %}
+                          {% set label = h.get_bureau_info(label)['title'] if h.get_bureau_info(label) else 'Code ' + label %}
+                        {% endif %}
+                      {{ label }}
                     {%- endif %}
                     <a href="{{ c.remove_field(field, value) }}" class="remove" title="{{ _('Remove') }}"><i class="icon-remove"></i></a>
                   </span>
@@ -137,8 +141,7 @@
         <div id="dataset-map-container"></div>
     </div>
     <div id="dataset-map-attribution">
-        <div>Map data CC-BY-SA by <a href="http://openstreetmap.org">OpenStreetMap</a></div>
-        <div>Tiles by <a href="http://www.mapquest.com">MapQuest</a></div>
+        <div>Map tiles &amp; Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY SA</a>.</div>
     </div>
 </section>
 

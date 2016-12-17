@@ -1448,6 +1448,9 @@ ul.topics li a i:hover {
 #menu-primary-navigation .menu-business a i:before{
     content: "\e000";
 }
+#menu-primary-navigation .menu-maritime a i:before{
+    content: "\e018";
+}
 #menu-primary-navigation .menu-counties a i:before{
     content: "\e004";
 }
@@ -1631,6 +1634,9 @@ aside.secondary{
 }
 .topic-business a i:before{
     content: "\e000";
+}
+.topic-maritime a i:before{
+    content: "\e018";
 }
 .topic-counties a i:before{
     content: "\e004";
