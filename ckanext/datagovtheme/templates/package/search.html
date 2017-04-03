@@ -99,7 +99,7 @@
         <p>
             <small>
                 {% set api_link = h.link_to(_('API'), h.url_for(controller='api', action='get_api', ver=3)) %}
-                {% set api_doc_link = h.link_to(_('API Docs'), 'http://docs.ckan.org/{0}/2.3.5/api/'.format(request.environ.CKAN_LANG)) %}
+                {% set api_doc_link = h.link_to(_('API Docs'), 'http://docs.ckan.org/{0}/ckan-2.3.5/api/'.format(request.environ.CKAN_LANG)) %}
                 {% if g.dumps_url -%}
                 {% set dump_link = h.link_to(_('full {format} dump').format(format=g.dumps_format), g.dumps_url) %}
                 {% trans %}
