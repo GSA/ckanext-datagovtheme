@@ -66,7 +66,6 @@
 
 {% block resource_content %}
   {% block resource_read_title %}<h1 class="page-heading">{{ h.resource_display_name(res) | truncate(50) }}</h1>{% endblock %}
-  {% block five_star %} {{ h.qa_stars(c.resource.id) }} {% endblock %}
   {% block resource_read_url %}
     {% if res.url %}
       <p class="muted ellipsis">{{ _('URL:') }} <a id="res_url" href="{{ res.url }}"
@@ -82,6 +81,15 @@
       <blockquote>{{ h.markdown_extract(h.render_markdown(c.package.get('notes'))) }}</blockquote>
     {% endif %}
     <p>{% trans dataset=c.package.title, url=h.url_for(controller='package', action='read', id=c.package['name']) %}Source: <a href="{{ url }}">{{ dataset }}</a>{% endtrans %}</p>
+  <br><hr>
+  {% block five_star %}
+    <br>
+    {% resource 'datagovtheme/qa.js' %}
+    {{ h.qa_stars(c.resource.id) }}
+    {{ h.archiver_is_resource_broken_html(c.resource) }}
+    <br>
+    {{ h.qa_openness_stars_resource_html(c.resource) }}
+  {% endblock %}
 {% endblock %}
 
 {% block resource_additional_information %}
@@ -130,5 +138,16 @@
         </table>
       </div>
     </section>
-  {% endif %}
+ {% endif %} 
+{# {% block fivestar %}
+    {% resource 'datagovtheme/qa.js' %}
+    <link rel="stylesheet" href="/css/qa.css" />
+    <div class="col-sm-12" style="margin-left:3%;">
+    {{ h.archiver_is_resource_broken_html(c.resource) }}
+    <br>
+    {{ h.qa_openness_stars_resource_html(c.resource) }}
+    {{ h.qa_stars_info(5) }}
+   </div>
+ {% endblock %} #}
 {% endblock %}
+
