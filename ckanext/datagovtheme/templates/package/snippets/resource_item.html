@@ -28,7 +28,6 @@
   {% endif %}
 {% endblock %}
 
-
 <p itemprop="description" class="description">
     {% if res.description %}
     {{ h.markdown_extract(res.description, extract_length=80) }}
@@ -41,6 +40,34 @@
 	{% endif %}
 	#}
 </p>
+
+{% if res.archiver %}
+  {% set archiver = res.archiver %}
+  <div class="archiver {% if is_broken %}link-broken{% elif is_broken == None %}link-not-sure{% else %}link-not-broken{% endif %}" style='font-size:.8em; display:inline-block;'>
+    {%- if archiver.is_broken == True -%}
+      <span class="icon icon-exclamation-sign text-error" ></span>
+      {% trans %}<strong>Link is broken</strong>{% endtrans %}<br>
+    {%- elif archiver.is_broken == None -%}
+      {% trans %}<strong><i class="icon-question-sign" style="color:orange;"></i> Link check is not conclusive</strong>{% endtrans %}<br>
+    {%- else-%}
+      {% trans %}<strong><i class="icon-ok-circle" style="color:green;"></i> Link is ok</strong>{% endtrans %}<br>
+    {% endif %}
+  </div>
+{% endif %}
+
+&nbsp; &nbsp;
+
+{% if res.qa %}
+  {% set qa = res.qa %}
+  <div style="display:inline-block; font-size:.8em" class="qa openness-{{ openness_score }}">
+    {% if qa.openness_score != None %}
+      {% snippet "qa/stars.html", stars=qa.openness_score %} {% trans %}<strong style="position:relative; bottom:1px;">Openness score</strong>{% endtrans %}<br/>
+    {% else %}
+      {% trans %}No openness information yet.{% endtrans %}
+    {% endif %}
+  </div>
+{% endif %}
+
 {% block resource_item_explore %}
 {% set resource_url = url if is_map_format or is_preview_format else res.url %}
 <div class="btn-group">

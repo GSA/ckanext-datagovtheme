@@ -38,3 +38,25 @@
   padding-top: 6px;
   padding-bottom: 6px;
 }
+
+.tooltip.in {
+  opacity: .9;
+  width: 50%;
+  padding: 0%;
+}
+
+.tooltip.in ul {
+  padding: 0px;
+}
+
+.tooltip1 li {
+  margin: 5px 0px;
+  padding: 0px;
+  color: rgb(97, 171, 249);
+}
+
+.tooltip2 li {
+  margin: -2px 0px;
+  color: rgb(97, 171, 249);
+}
+
