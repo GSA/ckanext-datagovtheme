@@ -140,9 +140,7 @@
     {% resource 'datagovtheme/qa.js' %}
     <link rel="stylesheet" href="/css/qa.css" />
     <div class="col-sm-12" id="archive_table">
-      <h2 style="margin-left:2%;">{{ _('Link Status') }}</h2>
       {{ h.archiver_resource_info_table(c.resource) }}
-      <h2 style="margin-left:2%;">{{ _('Quality Status') }}</h2>
       {{ h.qa_openness_stars_resource_table(c.resource) }}
     <br>
    </div>
