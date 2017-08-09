@@ -85,8 +85,7 @@
       <blockquote>{{ h.markdown_extract(h.render_markdown(c.package.get('notes'))) }}</blockquote>
     {% endif %}
     <p>{% trans dataset=c.package.title, url=h.url_for(controller='package', action='read', id=c.package['name']) %}Source: <a href="{{ url }}">{{ dataset }}</a>{% endtrans %}</p>
-  {% block five_star %}
-  {% endblock %}
+    <br>
 {% endblock %}
 
 {% block resource_additional_information %}
@@ -135,8 +134,6 @@
         </table>
       </div>
     </section>
- {% endif %} 
- {% block fivestar %}
     {% resource 'datagovtheme/qa.js' %}
     <link rel="stylesheet" href="/css/qa.css" />
     <div class="col-sm-12" id="archive_table">
@@ -144,6 +141,6 @@
       {{ h.qa_openness_stars_resource_table(c.resource) }}
     <br>
    </div>
- {% endblock %} 
+ {% endif %}  
 {% endblock %}
 
