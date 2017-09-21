@@ -7,7 +7,7 @@ $(function (){
   url = url.replace(/\/*$/, '');
   $('a.resource-url-analytics').click(function (e){
     var url = $(e.target).closest('a').attr('href');
-    $.ajax({url : 'https://admin-catalog.data.gov/_tracking',
+    $.ajax({url : '/_tracking',
             data : {url:url, type:'resource'},
             type : 'POST',
             complete : function () {location.href = url;},
@@ -19,7 +19,7 @@ $(function (){
         if($(this).find('i').attr('class') == 'icon-external-link' || $(this).find('i').attr('class') == 'icon-download-alt') {
             $(this).click(function(e){
                 var url = $(this).closest('a').attr('href');
-                $.ajax({url : 'https://admin-catalog.data.gov/_tracking',
+                $.ajax({url : '/_tracking',
                     data : {url:url, type:'resource'},
                     type : 'POST',
                     complete : function () {location.href = url;},
