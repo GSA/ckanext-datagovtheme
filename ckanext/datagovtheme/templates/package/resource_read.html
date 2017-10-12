@@ -1,7 +1,6 @@
 {% ckan_extends %}
 
 {% block resource_actions_inner %}
-  
   {% if h.check_access('package_update', {'id':pkg.id }) %}
     <li>{% link_for _('Edit'), controller='package', action='resource_edit', id=pkg.name, resource_id=res.id, class_='btn', icon='wrench' %}</li>
   {% endif %}
@@ -21,6 +20,11 @@
   {% if 'datastore' in g.plugins %}
     <li>{% snippet 'package/snippets/data_api_button.html', resource=res, datastore_root_url=c.datastore_api %}</li>
   {% endif %}
+  <br><br>
+  {{ h.archiver_is_resource_broken_line(c.resource) }}
+  {{ h.qa_openness_stars_resource_line(c.resource) }}
+  <p style="height:0%; margin:1.5%;"></p>
+  <a onClick="document.getElementById('archive_table').scrollIntoView(false);" style="color:#187794; cursor:pointer;"><strong>More Details</strong></a>
 {% endblock %}
 
 {% block data_preview %}
@@ -33,8 +37,8 @@
       </li>
     </div>
   {% endif %}
-
-  {{ h.resource_preview_custom(c.resource, c.package.id) }}
+  
+    {{ h.resource_preview_custom(c.resource, c.package.id) or "" }}
 
 {% endblock %}
 
@@ -66,7 +70,6 @@
 
 {% block resource_content %}
   {% block resource_read_title %}<h1 class="page-heading">{{ h.resource_display_name(res) | truncate(50) }}</h1>{% endblock %}
-  {% block five_star %} {{ h.qa_stars(c.resource.id) }} {% endblock %}
   {% block resource_read_url %}
     {% if res.url %}
       <p class="muted ellipsis">{{ _('URL:') }} <a id="res_url" href="{{ res.url }}"
@@ -82,18 +85,19 @@
       <blockquote>{{ h.markdown_extract(h.render_markdown(c.package.get('notes'))) }}</blockquote>
     {% endif %}
     <p>{% trans dataset=c.package.title, url=h.url_for(controller='package', action='read', id=c.package['name']) %}Source: <a href="{{ url }}">{{ dataset }}</a>{% endtrans %}</p>
+    <br>
 {% endblock %}
 
 {% block resource_additional_information %}
   {% if res %}
   {% set format = h.convert_resource_format(res.format or res.mimetype or res.mimetype_inner) %}
     <section class="module">
-      <div class="module-content">
+      <div class="module-content" style="margin-bottom:-3%;">
         <h2>{{ _('About this Resource') }}</h2>
         <table class="table table-striped table-bordered table-condensed" data-module="table-toggle-more">
           <tbody>
             <tr>
-              <th scope="row">{{ _('Last updated') }}</th>
+              <th scope="row" style="width:30%;">{{ _('Last updated') }}</th>
               <td>{{ h.render_datetime(res.last_modified) or h.render_datetime(res.revision_timestamp) or h.render_datetime(res.created) or _('unknown') }}</td>
             </tr>
             <tr>
@@ -115,7 +119,7 @@
               <td>{% snippet "snippets/license.html", pkg_dict=pkg, text_only=True %}</td>
             </tr>
             {% for key, value in h.format_resource_items(res.items()) %}
-              {% if key not in ['format', 'no real name'] %}
+              {% if key not in ['format', 'no real name', 'archiver', 'qa'] %}
                 {% if key == 'conformsTo' %}
                   {% set key = 'Data Standard' %}
                 {% elif key == 'describedBy' %}
@@ -130,5 +134,13 @@
         </table>
       </div>
     </section>
-  {% endif %}
+    {% resource 'datagovtheme/qa.js' %}
+    <link rel="stylesheet" href="/css/qa.css" />
+    <div class="col-sm-12" id="archive_table">
+      {{ h.archiver_resource_info_table(c.resource) }}
+      {{ h.qa_openness_stars_resource_table(c.resource) }}
+    <br>
+   </div>
+ {% endif %}  
 {% endblock %}
+
