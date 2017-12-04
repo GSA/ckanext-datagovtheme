@@ -35,9 +35,6 @@ def get_harvest_object_formats(harvest_object_id):
         harvest_source_type = None
         log.info('Harvest source type not found {0}:'.format(obj['source']))
 
-    with open("/tmp/python.log", "a") as mylog:
-        mylog.write("\nharvest_source_type: %s\n" % harvest_source_type)
-    
     def get_extra(obj, key, default=None):
         for k, v in obj['extras'].iteritems():
             if k == key:
@@ -67,14 +64,8 @@ def get_harvest_object_formats(harvest_object_id):
             format_type = ''
         return format_type
 
-    with open("/tmp/python.log", "a") as mylog:
-        mylog.write("\nobj: %s\n" % obj)
     format_name = get_extra(obj, 'format', 'iso')
-    with open("/tmp/python.log", "a") as mylog:
-        mylog.write("\nformat_name: %s\n" % format_name)
     original_format_name = get_extra(obj, 'original_format')
-    with open("/tmp/python.log", "a") as mylog:
-        mylog.write("\noriginal_format_name: %s\n" % original_format_name)
     if harvest_source_type == 'ckan':
         format_name = 'ckan'
 
