@@ -506,11 +506,6 @@ a {
     background-position: 0 0;
     background-image: url("../images/icon-fgdc.png");
 }
-.format-label[data-format="CKAN"],
-.format-label[data-format*="CKAN"] {
-    background-position: 0 0;
-    background-image: url("../images/ckan.png");
-}
 .format-label[data-format="web page"],
 .format-label[data-format*="web page"],
 .format-label[data-format="data"],
