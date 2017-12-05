@@ -27,6 +27,14 @@ def get_harvest_object_formats(harvest_object_id):
         log.info('Harvest object not found {0}:'.format(harvest_object_id))
         return {}
 
+    try:
+        harvest_source = p.toolkit.get_action('harvest_source_show')({}, {'id': obj['source']})
+        harvest_source_type = harvest_source['source_type']
+    except:
+        harvest_source = None
+        harvest_source_type = None
+        log.info('Harvest source type not found {0}:'.format(obj['source']))
+
     def get_extra(obj, key, default=None):
         for k, v in obj['extras'].iteritems():
             if k == key:
@@ -37,7 +45,8 @@ def get_harvest_object_formats(harvest_object_id):
         format_titles = {
             'iso': 'ISO-19139',
             'fgdc': 'FGDC',
-            'arcgis_json': 'ArcGIS JSON'
+            'arcgis_json': 'ArcGIS JSON',
+            'ckan': 'CKAN'
         }
         return format_titles[format_name] if format_name in format_titles else format_name
 
@@ -49,12 +58,16 @@ def get_harvest_object_formats(harvest_object_id):
             format_type = 'xml'
         elif format_name in ('arcgis'):
             format_type = 'json'
+        elif format_name in ('ckan'):
+            format_type = 'ckan'
         else:
             format_type = ''
         return format_type
 
     format_name = get_extra(obj, 'format', 'iso')
     original_format_name = get_extra(obj, 'original_format')
+    if harvest_source_type == 'ckan':
+        format_name = 'ckan'
 
     return {
             'object_format': format_title(format_name),
