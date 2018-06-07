@@ -4,3 +4,4 @@ syntax: glob
 *.egg-info
 *.swo
 *.swp
+.DS_Store
