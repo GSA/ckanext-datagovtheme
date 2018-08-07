@@ -359,7 +359,7 @@ def convert_resource_format(format):
     if format in formats:
         format = RESOURCE_MAPPING[format][1]
     else:
-        format = 'Web Page'
+        format = 'Web Resource'
 
     return format
 
