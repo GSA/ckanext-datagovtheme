@@ -1,6 +1,6 @@
 import urllib
 import ckan.plugins as p
-from pylons import config
+from ckan.plugins.toolkit import config
 import ckan.lib.helpers as h, json
 from ckan.lib.base import BaseController, c, \
                           request, response, abort, redirect
