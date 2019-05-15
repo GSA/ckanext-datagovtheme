@@ -135,7 +135,7 @@ $(document).ready(function () {
 
 // fix for dynamic menu to check current domain and assign menu
 
-jQuery(window).load(function(){
+jQuery(window).on("load", function(){
     if (window.location.hostname==='catalog.data.gov'){
         var linkRewriter = function(a, b) {
             $('a[href*="' + a + '"]').each(function() {
