@@ -4,7 +4,7 @@ import logging
 import csv
 import StringIO
 
-from pylons import config, request
+from ckan.plugins.toolkit import config, request
 
 from ckan import plugins as p
 from ckan.lib import helpers as h
