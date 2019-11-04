@@ -3,9 +3,9 @@
 
 {% block breadcrumb %}
 
-<div class="module" style="margin:0px;">
+<div class="module">
 
-   <div class="faded disclaimer" style="margin-bottom:10px;visibility: hidden;height:0px;">
+   <div class="faded disclaimer">
         Federal datasets are subject to the U.S. Federal Government <a href="//www.data.gov/data-policy"><b>Data Policy</b></a>. Non-federal participants (e.g., universities, organizations, and tribal, state, and local governments) maintain their own data policies. Data policies influence the usefulness of the data. <a href="//www.data.gov/catalog-help"><b>Learn more</b></a> about how to search for data and use this catalog.
     </div>
 
@@ -45,7 +45,7 @@
                         {% endif %}
                       {{ label }}
                     {%- endif %}
-                    <a href="{{ c.remove_field(field, value) }}" class="remove" title="{{ _('Remove') }}"><i class="icon-remove"></i></a>
+                    <a href="{{ c.remove_field(field, value) }}" class="remove" title="{{ _('Remove') }}"><i class="fa fa-times"></i></a>
                   </span>
                 {% endfor %}
                 {% endif %}
@@ -126,7 +126,7 @@
 {% block secondary_content %}
 <section id="dataset-map" class="module module-narrow module-shallow">
     <h2 class="module-heading">
-        <i class="icon-medium icon-globe"></i>
+        <i class="icon-medium fa fa-globe"></i>
         {{ _('Filter by location') }}
         <a href="{{ h.remove_url_param(['ext_bbox','ext_prev_extent', 'ext_location']) }}" class="action">{{ _('Clear') }}</a>
     </h2>

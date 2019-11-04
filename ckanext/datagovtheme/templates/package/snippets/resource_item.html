@@ -45,12 +45,12 @@
   {% set archiver = res.archiver %}
   <div class="archiver {% if is_broken %}link-broken{% elif is_broken == None %}link-not-sure{% else %}link-not-broken{% endif %}" style='font-size:.8em; display:inline-block;'>
     {%- if archiver.is_broken == True -%}
-      <span class="icon icon-exclamation-sign text-error" ></span>
+      <span class="glyphicon glyphicon-exclamation-sign text-danger" ></span>
       {% trans %}<strong>Link is broken</strong>{% endtrans %}<br>
     {%- elif archiver.is_broken == None -%}
-      {% trans %}<strong><i class="icon-question-sign" style="color:orange;"></i> Link check is not conclusive</strong>{% endtrans %}<br>
+      {% trans %}<strong><i class="glyphicon glyphicon-question-sign" style="color:orange;"></i> Link check is not conclusive</strong>{% endtrans %}<br>
     {%- else-%}
-      {% trans %}<strong><i class="icon-ok-circle" style="color:green;"></i> Link is ok</strong>{% endtrans %}<br>
+      {% trans %}<strong><i class="glyphicon glyphicon-ok-circle" style="color:green;"></i> Link is ok</strong>{% endtrans %}<br>
     {% endif %}
   </div>
 {% endif %}
@@ -89,7 +89,7 @@
 	  <li class="arcgis"><a href="{{ arcgis_url }}?{{ arcgis_format_query }}={{ res.url }}"><span>ArcGIS</span></a></li>
 	  {% endif %}	  
 	</ul>
-	<a href="{{ resource_url }}" class="btn btn-primary"{% if is_web_format %} target="_blank"{% endif %} style="border-radius:4px;"> <i class="icon-globe"></i> {{ _('View Map') }} </a>
+	<a href="{{ resource_url }}" class="btn btn-primary"{% if is_web_format %} target="_blank"{% endif %} style="border-radius:4px;"> <i class="fa fa-globe"></i> {{ _('View Map') }} </a>
 
 {% elif is_web_format %}
 	{% if is_arcgis_format %}
@@ -101,7 +101,7 @@
 		  <li class="arcgis"><a href="{{ arcgis_url }}?url={{ res.url }}"><span>ArcGIS</span></a></li>
 		</ul>
 	{% endif %}
-	<a href="{{ resource_url }}" class="btn btn-primary"{% if is_web_format %} target="_blank"{% endif %}> <i class="icon-external-link"></i> {{ _('Visit page') }} </a>
+	<a href="{{ resource_url }}" class="btn btn-primary"{% if is_web_format %} target="_blank"{% endif %}><i class="fa fa-external-link-alt"></i>{{ _('Visit page') }} </a>
 
 {% elif is_preview_format %}
 	<button class="btn btn-primary btn-preview" data-toggle="dropdown" style="border-top-right-radius:0;border-bottom-right-radius:0">Open With
@@ -119,7 +119,7 @@
 	</ul>
 	<a href="{{ res.url }}" class="btn btn-primary"{% if is_web_format %} target="_blank"{% endif %} style="border-radius:4px;"
 	   data-format="{{ (res.format or 'HTML')|lower }}" data-organization="{{ pkg.organization.title }}"
-	> <i class="icon-download-alt"></i> {{ _('Download') }} </a>
+	> <i class="fa fa-download"></i></i> {{ _('Download') }} </a>
 
 {% elif is_cartodb_format and is_plotly_format  %}
 	<button class="btn btn-primary" data-toggle="dropdown" style="border-top-right-radius:0;border-bottom-right-radius:0">Open With
@@ -132,7 +132,7 @@
 	</ul>
 	<a href="{{ resource_url }}"
 	   data-format="{{ (res.format or 'HTML')|lower }}" data-organization="{{ pkg.organization.title }}"
-	   class="btn btn-primary"{% if is_web_format %} target="_blank"{% endif %}> <i class="icon-download-alt"></i> {{ _('Download') }} </a>
+	   class="btn btn-primary"{% if is_web_format %} target="_blank"{% endif %}> <i class="fa fa-download"></i> {{ _('Download') }} </a>
 {% elif is_cartodb_format %}
 	<button class="btn btn-primary" data-toggle="dropdown" style="border-top-right-radius:0;border-bottom-right-radius:0">Open With
 	</button>
@@ -143,7 +143,7 @@
 	</ul>
 	<a href="{{ resource_url }}" class="btn btn-primary"{% if is_web_format %} target="_blank"{% endif %}
 	   data-format="{{ (res.format or 'HTML')|lower }}" data-organization="{{ pkg.organization.title }}"
-	> <i class="icon-download-alt"></i> {{ _('Download') }} </a>
+	> <i class="fa fa-download"></i></i> {{ _('Download') }} </a>
 {% elif is_plotly_format %}
 	<button class="btn btn-primary" data-toggle="dropdown" style="border-top-right-radius:0;border-bottom-right-radius:0">Open With
 	</button>
@@ -154,11 +154,11 @@
 	</ul>
 	<a href="{{ resource_url }}" class="btn btn-primary"{% if is_web_format %} target="_blank"{% endif %}
 	   data-format="{{ (res.format or 'HTML')|lower }}" data-organization="{{ pkg.organization.title }}"
-	> <i class="icon-download-alt"></i> {{ _('Download') }} </a>
+	> <i class="fa fa-download"></i></i> {{ _('Download') }} </a>
 {% else %}
 	<a href="{{ resource_url }}" class="btn btn-primary"{% if is_web_format %} target="_blank"{% endif %}
 	   data-format="{{ (res.format or 'HTML')|lower }}" data-organization="{{ pkg.organization.title }}"
-	> <i class="icon-download-alt"></i> {{ _('Download') }} </a>
+	> <i class="fa fa-download"></i>{{ _('Download') }} </a>
 {% endif %}
 </div>
 {% endblock %}

@@ -10,9 +10,9 @@
          href="{{ res.url }}"{% if h.is_web_format(c.resource) %} target="_blank"{% endif %}
          data-format="{{ (res.format or 'HTML')|lower }}" data-organization="{{ pkg.organization.title }}">
         {% if h.is_web_format(c.resource) %}
-          <i class="icon-external-link"></i> {{ _('Visit page') }}
+          <i class="fa fa-external-link-alt"></i>{{ _('Visit page') }}
         {% else %}
-          <i class="icon-download-alt"></i> {{ _('Download') }}
+          <i class="fa fa-download"></i>{{ _('Download') }}
         {% endif %}
       </a>
     </li>
@@ -32,7 +32,7 @@
     <div class="actions" style="padding-right: 40px">
       <li>
         <a class="btn btn-success" href="/viewer?{{ h.get_map_viewer_params(c.resource) }}">
-            <i class="icon-globe"></i> {{ _('View in Advanced Viewer') }}
+            <i class="fa fa-globe"></i> {{ _('View in Advanced Viewer') }}
         </a>
       </li>
     </div>
@@ -72,7 +72,7 @@
   {% block resource_read_title %}<h1 class="page-heading">{{ h.resource_display_name(res) | truncate(50) }}</h1>{% endblock %}
   {% block resource_read_url %}
     {% if res.url %}
-      <p class="muted ellipsis">{{ _('URL:') }} <a id="res_url" href="{{ res.url }}"
+      <p class="text-muted ellipsis">{{ _('URL:') }} <a id="res_url" href="{{ res.url }}"
      data-format="{{ (res.format or 'HTML')|lower }}" data-organization="{{ pkg.organization.title }}">{{ res.url }}</a></p>
     {% endif %}
   {% endblock %}

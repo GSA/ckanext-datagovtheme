@@ -23,10 +23,10 @@
 </div>
 {% endblock %}
 {% if h.get_pkg_dict_extra(pkg, 'accessLevel') == 'non-public' %}
-<div class="no-resource disclaimer"><i class="icon-lock"></i><span>This metadata record is available for the public, but the data itself is not public for privacy or security reasons. <a href="#access-use" style="text-decoration:underline;">See details</a></span></div>
+<div class="no-resource disclaimer"><i class="fa fa-lock"></i><span>This metadata record is available for the public, but the data itself is not public for privacy or security reasons. <a href="#access-use" style="text-decoration:underline;">See details</a></span></div>
 {% endif %}
 {% if c.pkg_dict.organization.organization_type != 'Federal Government' %}
-<div class="alert-info non-federal"><i class="icon-info-sign"></i><span>This is a Non-Federal dataset covered by different Terms of Use than Data.gov.
+<div class="alert-info non-federal"><i class="fa fa-info-circle"></i><span>This is a Non-Federal dataset covered by different Terms of Use than Data.gov.
      {% if c.pkg_dict.organization.terms_of_use %}
         <a href="{{ c.pkg_dict.organization.terms_of_use }}" style="text-decoration:underline;">See Terms</a>
      {% endif %}
@@ -71,7 +71,7 @@
 {% block package_groups %}
 {% if pkg.groups %}
 <div class="module module-narrow">
-    <h2 class="module-heading"><i class="icon-folder-open"></i> {{ _('Topics') }}</h2>
+    <h2 class="module-heading"><i class="fa fa-folder-open"></i>{{ _('Topics') }}</h2>
     <ul class="nav nav-simple topics">
         {% for group in pkg.groups %}
         {% set sub_navs = h.get_pkg_dict_extra(c.pkg_dict, '__category_tag_' + group.id) %}
@@ -122,7 +122,7 @@
 {% if (c.pkg_dict.maintainer_email and c.pkg_dict.maintainer_email.strip()|length > 0) or (c.pkg_dict.maintainer and c.pkg_dict.maintainer.strip()|length > 0 ) or (h.get_pkg_dict_extra(c.pkg_dict, 'contact-email') and h.get_pkg_dict_extra(c.pkg_dict, 'contact-email').strip()|length > 0 ) %}
 <section class="module module-narrow contact">
     {% block contact_title %}
-    <h2 class="module-heading"><i class="icon-envelope-alt"></i>{{ _('Contact') }}</h2>
+    <h2 class="module-heading"><i class="fa fa-envelope"></i>{{ _('Contact') }}</h2>
     {% endblock %}
     {% block contact_content %}
     <p class="module-content">
