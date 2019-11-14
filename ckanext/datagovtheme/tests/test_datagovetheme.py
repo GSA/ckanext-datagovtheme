@@ -11,6 +11,9 @@ import ckan.tests.helpers as helpers
 
 class TestDatagovthemeServed(helpers.FunctionalTestBase):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
+    
+    def plugin_loaded(self):
+        assert_true(ckan.plugins.plugin_loaded('datagovtheme'))
 
     def test_datagovtheme_css(self):
         app = helpers._get_test_app()
