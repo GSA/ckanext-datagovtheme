@@ -12,7 +12,7 @@ import ckan.tests.helpers as helpers
 class TestDatagovthemeServed(helpers.FunctionalTestBase):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
     
-    def plugin_loaded(self):
+    def test_plugin_loaded(self):
         assert_true(ckan.plugins.test_plugin_loaded('datagovtheme'))
 
     def test_datagovtheme_css(self):
