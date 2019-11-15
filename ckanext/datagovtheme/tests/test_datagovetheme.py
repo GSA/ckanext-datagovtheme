@@ -20,5 +20,4 @@ class TestDatagovthemeServed(helpers.FunctionalTestBase):
 
         index_response = app.get('/')
 
-        assert_true('datagovtheme.js' in index_response)
-        assert_true('datagovtheme.css' in index_response)
+        assert_true('main.min.css' in index_response)
