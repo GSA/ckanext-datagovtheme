@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from nose.tools import assert_true
 
 import ckan.tests.helpers as helpers
+import ckan.plugins
 
 
 class TestDatagovthemeServed(helpers.FunctionalTestBase):
