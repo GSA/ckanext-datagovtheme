@@ -13,9 +13,15 @@ class TestDatagovthemeServed(helpers.FunctionalTestBase):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
     
     def test_plugin_loaded(self):
-        assert_true(ckan.plugins.test_plugin_loaded('datagovtheme'))
+        ckan.plugins.load('geodatagov')
+        assert_true(ckan.plugins.plugin_loaded('geodatagov'))
+
+        ckan.plugins.load('datagovtheme')
+        assert_true(ckan.plugins.plugin_loaded('datagovtheme'))
 
     def test_datagovtheme_css(self):
+        ckan.plugins.load('geodatagov')
+        ckan.plugins.load('datagovtheme')
         app = helpers._get_test_app()
 
         index_response = app.get('/')
