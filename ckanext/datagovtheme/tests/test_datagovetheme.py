@@ -3,14 +3,12 @@
 '''Tests for the ckanext.datagovtheme extension.
 
 '''
-from bs4 import BeautifulSoup
 from nose.tools import assert_true
 
-import ckan.tests.helpers as helpers
 import ckan.plugins
+from ckantoolkit.tests.helpers import _get_test_app, FunctionalTestBase
 
-
-class TestDatagovthemeServed(helpers.FunctionalTestBase):
+class TestDatagovthemeServed(FunctionalTestBase):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
     
     def test_plugin_loaded(self):
@@ -23,7 +21,7 @@ class TestDatagovthemeServed(helpers.FunctionalTestBase):
     def test_datagovtheme_css(self):
         ckan.plugins.load('geodatagov')
         ckan.plugins.load('datagovtheme')
-        app = helpers._get_test_app()
+        app = _get_test_app()
 
         index_response = app.get('/')
 
