@@ -3,26 +3,38 @@
 '''Tests for the ckanext.datagovtheme extension.
 
 '''
-from nose.tools import assert_true
+from nose.tools import assert_true, assert_in
 
-import ckan.plugins
+from ckan import plugins as p
+from ckan.plugins import toolkit
 from ckantoolkit.tests.helpers import _get_test_app, FunctionalTestBase
 
 class TestDatagovthemeServed(FunctionalTestBase):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
     
-    def test_plugin_loaded(self):
-        ckan.plugins.load('geodatagov')
-        assert_true(ckan.plugins.plugin_loaded('geodatagov'))
+    @classmethod
+    def setup_class(cls):
+        super(TestDatagovthemeServed, cls).setup_class()
 
-        ckan.plugins.load('datagovtheme')
-        assert_true(ckan.plugins.plugin_loaded('datagovtheme'))
+        if not p.plugin_loaded('geodatagov'):
+            p.load('geodatagov')
+
+        if not p.plugin_loaded('datagovtheme'):
+            p.load('datagovtheme')
+
+    @classmethod
+    def teardown_class(cls):
+        super(TestDatagovthemeServed, cls).teardown_class()
+        p.unload('geodatagov')
+        p.unload('datagovtheme')
+
+    def test_plugin_loaded(self):
+        assert_true(p.plugin_loaded('datagovtheme'))
+        assert_true(p.plugin_loaded('geodatagov'))
 
     def test_datagovtheme_css(self):
-        ckan.plugins.load('geodatagov')
-        ckan.plugins.load('datagovtheme')
-        app = _get_test_app()
+        app = self._get_test_app()
 
-        index_response = app.get('/')
+        index_response = app.get('/dataset')
 
-        assert_true('main.min.css' in index_response)
+        assert_in('datagovtheme.css', index_response.unicode_body)
