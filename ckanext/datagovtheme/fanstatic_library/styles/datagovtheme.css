@@ -745,7 +745,7 @@ a {
     position: relative;
     bottom: 0;
     float: right;
-    width: 23%;
+    width: 150px;
     margin-top: -5px;
     margin-left: 10px;
 }
@@ -1730,7 +1730,7 @@ aside.secondary{
 }
 #menu-primary-navigation.navbar-right{margin-right:3px;}
 .search-form .input-group {
-    width: 458px;
+    display: inline;
 }
 form.search-form{padding-right:0px;border-bottom: 0px;padding-bottom:0px;}
 .module-content.page-header {
