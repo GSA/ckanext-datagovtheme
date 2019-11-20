@@ -11,4 +11,4 @@ They follow the guidelines for [testing CKAN extensions](https://docs.ckan.org/e
 
 To run the extension tests, cd into the ckanext-datagovtheme directory and run this command:
 
-`nosetests --ckan --with-pylons=test.ini ckanext/datagovthem/tests`
+`nosetests --ckan --with-pylons=test.ini ckanext/datagovtheme/tests`
