@@ -23,4 +23,4 @@ To run the extension tests:
 
 `nosetests --ckan --with-pylons=test.ini ckanext/datagovtheme/tests`
 
-Note: the tests will only run if the environment is installed using the (CKAN Install from Source)[https://docs.ckan.org/en/2.8/maintaining/installing/install-from-source.html#installing-ckan-from-source] installation
+Note: the tests will only run if the environment is installed using the [CKAN Install from Source](https://docs.ckan.org/en/2.8/maintaining/installing/install-from-source.html#installing-ckan-from-source) installation
