@@ -9,6 +9,18 @@ The tests for this extension are located in the [test directory](/ckanext/datago
 
 They follow the guidelines for [testing CKAN extensions](https://docs.ckan.org/en/2.8/extensions/testing-extensions.html#testing-extensions).
 
-To run the extension tests, cd into the ckanext-datagovtheme directory and run this command:
+To run the extension tests:
+
+1. Make sure your virtual environment is activated
+
+`. /usr/lib/ckan/default/bin/activate`
+
+2. cd into the ckanext-datagovtheme directory
+
+`cd /usr/lib/ckan/default/src/ckanext-datagovtheme`
+
+3. Use the nosetests command:
 
 `nosetests --ckan --with-pylons=test.ini ckanext/datagovtheme/tests`
+
+Note: the tests will only run if the environment is installed using the (CKAN Install from Source)[https://docs.ckan.org/en/2.8/maintaining/installing/install-from-source.html#installing-ckan-from-source] installation
