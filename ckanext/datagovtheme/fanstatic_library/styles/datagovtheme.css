@@ -1730,6 +1730,9 @@ aside.secondary{
 }
 #menu-primary-navigation.navbar-right{margin-right:3px;}
 .search-form .input-group {
+    width: 458px;
+}
+.module-content .search-form .input-group {
     display: inline;
 }
 form.search-form{padding-right:0px;border-bottom: 0px;padding-bottom:0px;}
