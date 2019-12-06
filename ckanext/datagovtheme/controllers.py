@@ -1,12 +1,17 @@
+import logging
 import urllib
+
 import ckan.plugins as p
-from ckan.plugins.toolkit import config
+from ckan.plugins.toolkit import check_ckan_version
 import ckan.lib.helpers as h, json
 from ckan.lib.base import BaseController, c, \
                           request, response, abort, redirect
 
+if check_ckan_version(min_version='2.8'):
+    from ckan.plugins.toolkit import config
+else:
+    from pylons import config
 
-import logging
 log = logging.getLogger(__name__)
 
 class ViewController(BaseController):

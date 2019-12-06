@@ -4,11 +4,17 @@ import logging
 import csv
 import StringIO
 
-from ckan.plugins.toolkit import config, request
+from ckan.plugins.toolkit import check_ckan_version, request
 
 from ckan import plugins as p
 from ckan.lib import helpers as h
 from ckanext.geodatagov.plugins import RESOURCE_MAPPING
+
+if check_ckan_version(min_version='2.8'):
+    from ckan.plugins.toolkit import config
+else:
+    from pylons import config
+
 
 log = logging.getLogger(__name__)
 ckan_tmp_path = '/var/tmp/ckan'
