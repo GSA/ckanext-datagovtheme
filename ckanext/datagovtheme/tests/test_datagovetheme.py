@@ -37,4 +37,7 @@ class TestDatagovthemeServed(FunctionalTestBase):
 
         index_response = app.get('/dataset')
 
-        assert_in('datagovtheme.css', index_response.unicode_body)
+        if p.toolkit.check_ckan_version(min_version='2.8'):
+            assert_in('datagovtheme_28.css', index_response.unicode_body)
+        else:
+            assert_in('datagovtheme.css', index_response.unicode_body)
