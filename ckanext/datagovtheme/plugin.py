@@ -18,10 +18,7 @@ class DatagovTheme(p.SingletonPlugin):
         # that CKAN will use this plugin's custom templates.
         p.toolkit.add_template_directory(config, 'templates')
         p.toolkit.add_public_directory(config, 'public')
-        if p.toolkit.check_ckan_version(min_version='2.8'):
-            p.toolkit.add_resource('fanstatic_library', 'datagovtheme')
-        else:
-            p.toolkit.add_resource('fanstatic_library', 'datagovtheme')
+        p.toolkit.add_resource('fanstatic_library', 'datagovtheme')
 
     
     ## IFacets
@@ -109,4 +106,5 @@ class DatagovTheme(p.SingletonPlugin):
             'schema11_key_mod':datagovtheme_helpers.schema11_key_mod,
             'schema11_frequency_mod':datagovtheme_helpers.schema11_frequency_mod,
             'convert_top_category_to_list':datagovtheme_helpers.convert_top_category_to_list,
+            'ckan_version_28':datagovtheme_helpers.ckan_version_28,
         }
