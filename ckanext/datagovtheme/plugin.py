@@ -19,7 +19,6 @@ class DatagovTheme(p.SingletonPlugin):
         p.toolkit.add_template_directory(config, 'templates')
         p.toolkit.add_public_directory(config, 'public')
         p.toolkit.add_resource('fanstatic_library', 'datagovtheme')
-
     
     ## IFacets
     def dataset_facets(self, facets_dict, package_type):
