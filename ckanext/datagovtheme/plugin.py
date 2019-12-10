@@ -18,7 +18,11 @@ class DatagovTheme(p.SingletonPlugin):
         # that CKAN will use this plugin's custom templates.
         p.toolkit.add_template_directory(config, 'templates')
         p.toolkit.add_public_directory(config, 'public')
-        p.toolkit.add_resource('fanstatic_library', 'datagovtheme')
+        if p.toolkit.check_ckan_version(min_version='2.8'):
+            p.toolkit.add_resource('fanstatic_library', 'datagovtheme')
+        else:
+            p.toolkit.add_resource('fanstatic_library', 'datagovtheme')
+
     
     ## IFacets
     def dataset_facets(self, facets_dict, package_type):
