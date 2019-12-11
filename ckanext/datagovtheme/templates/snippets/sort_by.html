@@ -8,7 +8,7 @@ Example:
   {% snippet 'snippets/sort_by.html', sort=c.sort_by_selected %}
 
 #}
-{% ckan_version_28 = h.ckan_version_28() %}
+{% set ckan_version_28 = h.ckan_version_28() %}
 <span class="form-select {{ 'form-group' if ckan_version_28 else 'control-group' }} control-order-by">
   <label for="field-order-by">{{ _('Order by') }}</label>
   <select id="field-order-by" name="sort" class="{{ 'form-control' if ckan_version_28 else None }}">
