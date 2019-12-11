@@ -11,7 +11,7 @@ Example:
 {% set ckan_version_28 = h.ckan_version_28() %}
 <span class="form-select {{ 'form-group' if ckan_version_28 else 'control-group' }} control-order-by">
   <label for="field-order-by">{{ _('Order by') }}</label>
-  <select id="field-order-by" name="sort" class="{{ 'form-control' if ckan_version_28 else None }}">
+  <select id="field-order-by" name="sort" class="{{ 'form-control' if ckan_version_28 }}">
     <option value="score desc, name asc"{% if sort =='score desc, name asc' %} selected="selected"{% endif %}>{{ _('Relevance') }}</option>
     <option value="title_string asc"{% if sort=='title_string asc' %} selected="selected"{% endif %}>{{ _('Name Ascending') }}</option>
     <option value="title_string desc"{% if sort=='title_string desc' %} selected="selected"{% endif %}>{{ _('Name Descending') }}</option>

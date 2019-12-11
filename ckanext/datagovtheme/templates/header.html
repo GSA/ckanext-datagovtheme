@@ -13,7 +13,7 @@
                 <a href="#">Jump to Content</a>
             </div>
             <div>
-                <form action="/dataset" class="search-form form-inline navbar-right navbar-nav {{ 'col-sm-6 col-md-6 col-lg-6' unless ckan_version_28 }}" method="get" role="search">
+                <form action="/dataset" class="search-form form-inline navbar-right navbar-nav {{ 'col-sm-6 col-md-6 col-lg-6' if not ckan_version_28 }}" method="get" role="search">
                     <div class="input-group">
                         <label class="hide" for="search-header">Search for:</label>
                         <input type="search" placeholder="Search Data.Gov" class="search-field form-control" name="q" value="Search Data.Gov" id="search-header" onblur="if(value=='') value = 'Search Data.Gov'" onfocus="if(value=='Search Data.Gov') value = ''">      <span class="input-group-btn">
