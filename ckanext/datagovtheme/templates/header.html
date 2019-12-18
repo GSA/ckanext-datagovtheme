@@ -43,12 +43,17 @@
                         </li>
                         {% endif %}
                         <li>
-                            <a href="{{ h.url_for('user.read', id=c.userobj.name) }}" class="image"
-                                title="{{ _('View profile') }}">
+                            <a href="{{ h.url_for(controller='user', action='read', id=c.userobj.name) }}" class="image" title="{{ _('View profile') }}">
+                                {% if ckan_version_28 %}
                                 {{ h.gravatar((c.userobj.email_hash if c and c.userobj else ''), size=22) }}
                                 <span class="username">{{ c.userobj.display_name }}</span>
+                                {% else %}
+                                {{ h.gravatar((c.userobj.email_hash if c and c.userobj else ''), size=16) }}
+                                {{ c.userobj.display_name }}
+                                {% end %}
                             </a>
                         </li>
+                        {% if ckan_version_28 %}
                         {% set new_activities = h.new_activities() %}
                         <li class="notifications {% if new_activities > 0 %}notifications-important{% endif %}">
                             {% set notifications_tooltip = ngettext('Dashboard (%(num)d new item)', 'Dashboard (%(num)d new items)', new_activities) %}
@@ -57,6 +62,15 @@
                                 <span>{{ new_activities }}</span>
                             </a>
                         </li>
+                        {% else %}
+                        <li class="notifications {% if c.new_activities > 0 %}notifications-important{% endif %}">
+                            {% set new_activities = h.new_activities() %}
+                            <li class="notifications {% if new_activities > 0 %}notifications-important{% endif %}">
+                                <i class="icon-dashboard"></i>
+                                <span>{{ new_activities }}</span>
+                            </a>
+                        </li>
+                        {% end %}
                         <li>
                             <a href="{{ h.saml2_user_edit_url() }}" title="{{ _('Edit settings') }}">
                                 <i class="fa fa-cog" aria-hidden="true"></i>
