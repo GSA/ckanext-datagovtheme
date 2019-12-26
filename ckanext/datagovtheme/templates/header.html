@@ -51,6 +51,7 @@
                                 {{ h.gravatar((c.userobj.email_hash if c and c.userobj else ''), size=16) }}
                                 {{ c.userobj.display_name }}
                                 {% endif %}
+
                             </a>
                         </li>
                         {% if ckan_version_28 %}

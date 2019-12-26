@@ -526,3 +526,6 @@ def get_bureau_info(bureau_code):
         bureau_info['logo'] = None
 
     return bureau_info
+
+def ckan_version_28():
+    return p.toolkit.check_ckan_version(min_version='2.8')
