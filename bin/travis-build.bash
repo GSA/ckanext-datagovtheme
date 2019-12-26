@@ -21,6 +21,11 @@ then
 	git clone https://github.com/ckan/ckan
 	cd ckan
 	git checkout 2.8
+elif [ $CKANVERSION == '2.3' ]
+then
+	git clone https://github.com/GSA/ckan
+	cd ckan
+	git checkout datagov
 fi
 
 echo "-----------------------------------------------------------------"
@@ -91,7 +96,15 @@ pip install -r pip-requirements.txt
 cd ..
 echo "-----------------------------------------------------------------"
 echo "Installing ckanext-datagovtheme and its requirements..."
-cd ckanext-datagovtheme
+if [ $CKANVERSION == '2.3' ]
+then
+	git clone https://github.com/thejuliekramer/ckanext-datagovtheme
+	cd ckanext-datagovtheme
+	git checkout 2.3_build
+else
+	cd ckanext-datagovtheme
+fi
+
 python setup.py develop
 
 echo "travis-build.bash is done."
