@@ -3,15 +3,15 @@
 '''Tests for the ckanext.datagovtheme extension.
 
 '''
-from nose.tools import assert_true, assert_in
+from ckantoolkit.tests.helpers import FunctionalTestBase
+from nose.tools import assert_in, assert_true, assert_not_in
 
 from ckan import plugins as p
-from ckan.plugins import toolkit
-from ckantoolkit.tests.helpers import _get_test_app, FunctionalTestBase
+
 
 class TestDatagovthemeServed(FunctionalTestBase):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
-    
+
     @classmethod
     def setup_class(cls):
         super(TestDatagovthemeServed, cls).setup_class()
@@ -37,7 +37,5 @@ class TestDatagovthemeServed(FunctionalTestBase):
 
         index_response = app.get('/dataset')
 
-        if p.toolkit.check_ckan_version(min_version='2.8'):
-            assert_in('datagovtheme_28.css', index_response.unicode_body)
-        else:
-            assert_in('datagovtheme.css', index_response.unicode_body)
+        assert_in('datagovtheme_28.css', index_response.unicode_body)
+        assert_not_in('datagovtheme.css', index_response.unicode_body)
