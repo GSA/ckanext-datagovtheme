@@ -4,7 +4,6 @@ jobs:
     working_directory: ~/ckanext-datagovtheme
     machine:
       image: circleci/classic:201708-01
-      # image: circleci/postgres:9.6-alpine
     environment:
       CKANVERSION=2.8
     steps:
@@ -23,7 +22,6 @@ jobs:
     working_directory: ~/ckanext-datajson
     machine:
       image: circleci/classic:201708-01
-      # image: circleci/postgres:9.6-alpine
     environment:
       CKANVERSION=2.3
     steps:
