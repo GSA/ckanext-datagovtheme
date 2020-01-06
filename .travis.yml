@@ -1,8 +1,0 @@
-language: python
-python:
-    - "2.7"
-env:
-    - CKANVERSION=inventory
-install:
-    - bash bin/travis-build.bash
-script: sh bin/travis-run.sh
