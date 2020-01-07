@@ -96,13 +96,8 @@ pip install -r pip-requirements.txt
 cd ..
 echo "-----------------------------------------------------------------"
 echo "Installing ckanext-datagovtheme and its requirements..."
-
-if [ $CKANVERSION == '2.3' ]
-then
-	git clone https://github.com/thejuliekramer/ckanext-datagovtheme
-fi
-
 cd ckanext-datagovtheme
+
 python setup.py develop
 
 echo "travis-build.bash is done."

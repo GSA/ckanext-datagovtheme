@@ -16,10 +16,10 @@ jobs:
           command: bin/travis-build.bash
       - run:
           name: test
-          command: bin/travis-run28.sh
+          command: bin/travis-run-tests.sh
 
   build_ckan_23:
-    working_directory: ~/ckanext-datajson
+    working_directory: ~/ckanext-datagovtheme
     machine:
       image: circleci/classic:201708-01
     environment:
@@ -34,7 +34,7 @@ jobs:
           command: bin/travis-build.bash
       - run:
           name: test
-          command: bin/travis-run23.sh
+          command: bin/travis-run-tests-bootstrap2.sh
 
 workflows:
   version: 2

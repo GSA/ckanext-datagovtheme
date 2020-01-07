@@ -21,7 +21,7 @@ Example:
 {% set title = package.title or package.name %}
 {% set notes = h.markdown_extract(package.notes | striptags, extract_length=truncate) %}
 {% set resource_limit = resource_limit or 7 %}
-{% set ckan_version_28 = h.ckan_version_28() %}
+{% set is_bootstrap2 = h.is_bootstrap2() %}
 
 <li class="{{ item_class or "dataset-item" }}{% if organization %} has-organization{% endif %}">
   {% block package_item_content %}
@@ -45,7 +45,7 @@ Example:
         {% endif %}
 
         {% if h.get_pkg_dict_extra(package, 'collection_metadata', '') %}
-            <span class="dataset-collection label {{ if ckan_version_28 label-default }}">
+            <span class="dataset-collection label {{ 'label-default' if not is_bootstrap2 }}">
                 <i class="icon-collection"></i>
                 {{ _('Collection') }}
             </span>
@@ -55,7 +55,7 @@ Example:
         {% if package.get('state', '').startswith('draft') %}
           <span class="label label-info">{{ _('Draft') }}</span>
         {% elif package.get('state', '').startswith('deleted') %}
-          <span class="label {{ if ckan_version_28 label-danger else label-important }}">{{ _('Deleted') }}</span>
+          <span class="label {{ 'label-important' if is_bootstrap2 else 'label-danger' }}">{{ _('Deleted') }}</span>
         {% endif %}
         {{ h.popular('recent views', package.tracking_summary.recent, min=10) if package.tracking_summary }}
       </h3>
@@ -76,7 +76,7 @@ Example:
             {% if loop.index < resource_limit %}
               {% set url = h.url_for(controller='package', action='resource_read', id=package.name, resource_id=resource.id) if is_map_format else resource.url %}
               <li>
-                <a href="{{ url }}" class="label {{ if ckan_version_28 label-default }}" data-format="{{ format|lower }}" {% if is_web_format %} target="_blank"{% endif %}
+                <a href="{{ url }}" class="label {{ 'label-default' if not is_bootstrap2 }}" data-format="{{ format|lower }}" {% if is_web_format %} target="_blank"{% endif %}
                    data-organization="{{ package.organization.title }}">{{ format }}</a>
               </li>
             {% elif loop.index == resource_limit %}

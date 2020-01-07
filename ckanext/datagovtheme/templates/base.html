@@ -7,8 +7,8 @@
 
 {% block styles %}
   {{ super() }}
-  {% if h.ckan_version_28() %} 
-  {% resource 'datagovtheme/styles/datagovtheme_28.css' %}
+  {% if h.is_bootstrap2() %} 
+  {% resource 'datagovtheme/styles/datagovtheme_bootstrap2.css' %}
   {% else %}
   {% resource 'datagovtheme/styles/datagovtheme.css' %}
   {% endif %}

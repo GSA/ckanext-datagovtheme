@@ -1,6 +1,6 @@
 # ckanext-datagovtheme
 
-[![CircleCI](https://circleci.com/gh/thejuliekramer/ckanext-datagovtheme.svg?style=svg)](https://circleci.com/gh/thejuliekramer/ckanext-datagovtheme)
+[![CircleCI](https://circleci.com/gh/GSA/ckanext-datagovtheme.svg?style=svg)](https://circleci.com/gh/GSA/ckanext-datagovtheme)
 
 This repository is front end code sepration for catalog.data.gov. This contains all the template files, Javascripts and stylesheets.
 

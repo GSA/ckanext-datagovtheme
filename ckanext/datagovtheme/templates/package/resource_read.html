@@ -1,5 +1,5 @@
 {% ckan_extends %}
-{% set ckan_version_28 = h.ckan_version_28() %}
+{% set is_bootstrap2 = h.is_bootstrap2() %}
 
 {% block resource_actions_inner %}
   {% if h.check_access('package_update', {'id':pkg.id }) %}
@@ -73,7 +73,7 @@
   {% block resource_read_title %}<h1 class="page-heading">{{ h.resource_display_name(res) | truncate(50) }}</h1>{% endblock %}
   {% block resource_read_url %}
     {% if res.url %}
-      <p class="{{ if ckan_version_28 text-muted else muted }} ellipsis">{{ _('URL:') }} <a id="res_url" href="{{ res.url }}"
+      <p class="{{ 'muted' if is_bootstrap2 else 'text-muted' }} ellipsis">{{ _('URL:') }} <a id="res_url" href="{{ res.url }}"
      data-format="{{ (res.format or 'HTML')|lower }}" data-organization="{{ pkg.organization.title }}">{{ res.url }}</a></p>
     {% endif %}
   {% endblock %}

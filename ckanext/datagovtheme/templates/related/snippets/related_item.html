@@ -13,7 +13,7 @@ Example:
 {% set placeholder_map = {
 'application':'/base/images/placeholder-application.png'
 } %}
-{% set ckan_version_28 = h.ckan_version_28() %}
+{% set is_bootstrap2 = h.is_bootstrap2() %}
 <li class="related-item media-item media media-vertical{% if first %} first{% endif %}{% if last %} last{% endif %}" data-module="related-item">
   <a class="media-image" href="{{ related.url }}">
     <img src="{{ related.image_url or placeholder_map[related.type] or '/base/images/placeholder-image.png' }}" alt="{{ related.title }}" />
@@ -36,9 +36,9 @@ Example:
     {% if related.description %}
       <div class="prose">{{ h.render_markdown(related.description) }}</div>
     {% endif %}
-    <a class="btn {{ if ckan_version_28 btn-sm else btn-small }} btn-primary" href="{{ related.url }}" target="_blank">{{ _('Go to {type}').format(type=related.type|replace('_', ' ')|title) }}</a>
+    <a class="btn {{ 'btn-small' if is_bootstrap2 else 'btn-sm' }} btn-primary" href="{{ related.url }}" target="_blank">{{ _('Go to {type}').format(type=related.type|replace('_', ' ')|title) }}</a>
     {% if pkg_id %}
-      {{ h.nav_link(_('Edit'), controller='related', action='edit', id=pkg_id, related_id=related.id, class_='btn {{ if ckan_version_28 btn-sm else btn-small }}) }}
+      {{ h.nav_link(_('Edit'), controller='related', action='edit', id=pkg_id, related_id=related.id, class_='btn {{ 'btn-small' if is_bootstrap2 else 'btn-sm' }}) }}
     {% endif %}
   </div>
 </li>

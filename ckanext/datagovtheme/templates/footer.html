@@ -2,15 +2,15 @@
 
 {% block footer_content %}
 
-{% set ckan_version_28 = h.ckan_version_28() %}
+{% set is_bootstrap2 = h.is_bootstrap2() %}
         <div class="fluid-row">
-            <div class="{{ 'col-md-6' if ckan_version_28 else 'span6' }} clearfix">
+            <div class="{{ 'span6' if is_bootstrap2 else 'col-md-6' }} clearfix">
                 <div class="footer-logo"> <a href="http://www.data.gov/" class="logo-brand">Data.Gov 2.0</a> </div>
                 <ul class="nav" id="menu-footer2">
                     {% snippet "snippets/footer2_menu.html" %}
                 </ul>
             </div>
-            <nav role="navigation" class="{{ 'col-md-3' if ckan_version_28 else 'span3' }}">
+            <nav role="navigation" class="{{ 'span3' if is_bootstrap2 else 'col-md-3' }}">
                 <ul class="nav" id="menu-footer">
                     {% snippet "snippets/footer_menu.html" %}
                     {% if c.userobj%}
@@ -20,7 +20,7 @@
                     {% endif  %}
                 </ul>
             </nav>
-            <div class="{{ 'col-md-3' if ckan_version_28 else 'span3' }} social-nav">
+            <div class="{{ 'span3' if is_bootstrap2 else 'col-md-3' }} social-nav">
                 <nav role="navigation">
                     <ul class="nav" id="menu-social_navigation">
                         <li><a href="https://twitter.com/usdatagov"><i class="fa fa-twitter"></i><span>Twitter</span></a></li>

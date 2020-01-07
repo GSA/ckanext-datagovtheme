@@ -8,10 +8,10 @@ Example:
   {% snippet 'snippets/sort_by.html', sort=c.sort_by_selected %}
 
 #}
-{% set ckan_version_28 = h.ckan_version_28() %}
-<span class="form-select {{ 'form-group' if ckan_version_28 else 'control-group' }} control-order-by">
+{% set is_bootstrap2 = h.is_bootstrap2() %}
+<span class="form-select {{ 'control-group' if is_bootstrap2 else 'form-group' }} control-order-by">
   <label for="field-order-by">{{ _('Order by') }}</label>
-  <select id="field-order-by" name="sort" class="{{ 'form-control' if ckan_version_28 }}">
+  <select id="field-order-by" name="sort" class="{{ 'form-control' if not is_bootstrap2 }}">
     <option value="score desc, name asc"{% if sort =='score desc, name asc' %} selected="selected"{% endif %}>{{ _('Relevance') }}</option>
     <option value="title_string asc"{% if sort=='title_string asc' %} selected="selected"{% endif %}>{{ _('Name Ascending') }}</option>
     <option value="title_string desc"{% if sort=='title_string desc' %} selected="selected"{% endif %}>{{ _('Name Descending') }}</option>

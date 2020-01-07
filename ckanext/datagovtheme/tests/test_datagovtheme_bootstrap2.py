@@ -39,5 +39,5 @@ class TestDatagovthemeServed(object):
 
         index_response = app.get('/dataset')
 
-        assert 'datagovtheme.css' in index_response
-        assert 'datagovtheme_28.css' not in index_response
+        assert 'datagovtheme_bootstrap2.css' in index_response, index_response
+        assert 'datagovtheme.css' not in index_response

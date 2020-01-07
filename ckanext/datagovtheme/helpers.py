@@ -527,5 +527,5 @@ def get_bureau_info(bureau_code):
 
     return bureau_info
 
-def ckan_version_28():
-    return p.toolkit.check_ckan_version(min_version='2.8')
+def is_bootstrap2():
+    return not p.toolkit.check_ckan_version(min_version='2.8')

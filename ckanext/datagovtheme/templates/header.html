@@ -1,6 +1,6 @@
 {% block header %}
 {% set menus = h.get_dynamic_menu() %}
-{% set ckan_version_28 = h.ckan_version_28() %}
+{% set is_bootstrap2 = h.is_bootstrap2() %}
 <a href="#content" class="hide">{{ _('Skip to content') }}</a>
 
 <header class="navbar navbar-static-top masthead">
@@ -14,7 +14,7 @@
                 <a href="#">Jump to Content</a>
             </div>
             <div>
-                <form action="/dataset" class="search-form form-inline navbar-right navbar-nav {{ 'col-sm-6 col-md-6 col-lg-6' if not ckan_version_28 }}" method="get" role="search">
+                <form action="/dataset" class="search-form form-inline navbar-right navbar-nav {{ 'col-sm-6 col-md-6 col-lg-6' if is_bootstrap2 }}" method="get" role="search">
                     <div class="input-group">
                         <label class="hide" for="search-header">Search for:</label>
                         <input type="search" placeholder="Search Data.Gov" class="search-field form-control" name="q" value="Search Data.Gov" id="search-header" onblur="if(value=='') value = 'Search Data.Gov'" onfocus="if(value=='Search Data.Gov') value = ''">      <span class="input-group-btn">
@@ -44,30 +44,30 @@
                         {% endif %}
                         <li>
                             <a href="{{ h.url_for(controller='user', action='read', id=c.userobj.name) }}" class="image" title="{{ _('View profile') }}">
-                                {% if ckan_version_28 %}
-                                {{ h.gravatar((c.userobj.email_hash if c and c.userobj else ''), size=22) }}
-                                <span class="username">{{ c.userobj.display_name }}</span>
-                                {% else %}
+                                {% if is_bootstrap2 %}
                                 {{ h.gravatar((c.userobj.email_hash if c and c.userobj else ''), size=16) }}
                                 {{ c.userobj.display_name }}
+                                {% else %}
+                                {{ h.gravatar((c.userobj.email_hash if c and c.userobj else ''), size=22) }}
+                                <span class="username">{{ c.userobj.display_name }}</span>
                                 {% endif %}
 
                             </a>
                         </li>
-                        {% if ckan_version_28 %}
+                        {% if is_bootstrap2 %}
+                        <li class="notifications {% if c.new_activities > 0 %}notifications-important{% endif %}">
+                            {% set new_activities = h.new_activities() %}
+                            <li class="notifications {% if new_activities > 0 %}notifications-important{% endif %}">
+                                <i class="icon-dashboard"></i>
+                                <span>{{ new_activities }}</span>
+                            </a>
+                        </li>
+                        {% else %}
                         {% set new_activities = h.new_activities() %}
                         <li class="notifications {% if new_activities > 0 %}notifications-important{% endif %}">
                             {% set notifications_tooltip = ngettext('Dashboard (%(num)d new item)', 'Dashboard (%(num)d new items)', new_activities) %}
                             <a href="{{ h.url_for('dashboard.index') }}" title="{{ notifications_tooltip }}">
                                 <i class="fa fa-tachometer" aria-hidden="true"></i>
-                                <span>{{ new_activities }}</span>
-                            </a>
-                        </li>
-                        {% else %}
-                        <li class="notifications {% if c.new_activities > 0 %}notifications-important{% endif %}">
-                            {% set new_activities = h.new_activities() %}
-                            <li class="notifications {% if new_activities > 0 %}notifications-important{% endif %}">
-                                <i class="icon-dashboard"></i>
                                 <span>{{ new_activities }}</span>
                             </a>
                         </li>

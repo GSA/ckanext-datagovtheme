@@ -37,5 +37,5 @@ class TestDatagovthemeServed(FunctionalTestBase):
 
         index_response = app.get('/dataset')
 
-        assert_in('datagovtheme_28.css', index_response.unicode_body)
-        assert_not_in('datagovtheme.css', index_response.unicode_body)
+        assert_in('datagovtheme.css', index_response.unicode_body)
+        assert_not_in('datagovtheme_bootstrap2.css', index_response.unicode_body)

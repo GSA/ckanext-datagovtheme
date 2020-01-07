@@ -1,11 +1,11 @@
 {% set menus = h.get_dynamic_menu() %}
-{% set ckan_version_28 = h.ckan_version_28() %}
+{% set is_bootstrap2 = h.is_bootstrap2() %}
 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-primary" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   <span class="icon-bar"></span>
   <span class="icon-bar"></span>
   <span class="icon-bar"></span>
 </button>
-<div class="nav-primary {{ 'navbar-collapse' if ckan_version_28 else 'nav-collapse' }} collapse" id="nav-primary">
+<div class="nav-primary {{ 'nav-collapse' if is_bootstrap2 else 'navbar-collapse' }} collapse" id="nav-primary">
     <nav class="primary">
     <ul class="nav navbar-nav navbar-right" id="menu-primary-navigation">
       {% for menu_1 in menus['primary_navigation'] if not menu_1['parent_id'] %}
