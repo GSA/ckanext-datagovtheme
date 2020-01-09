@@ -5,6 +5,7 @@
 {% set dataset_extent = h.get_pkg_dict_extra(c.pkg_dict, 'spatial', '') %}
 {% set dataset_is_datajson = h.get_pkg_dict_extra(c.pkg_dict, 'source_datajson_identifier', False) %}
 {% set dataset_is_schema11 = h.get_pkg_dict_extra(c.pkg_dict, 'source_schema_version', '') == '1.1' %}
+{% set is_bootstrap2 = h.is_bootstrap2() %}
 
 {% block package_description %}
 <section class="module-content" style="padding-top:0px;">
@@ -337,7 +338,12 @@
              {% set maintainer_email = pkg_dict.maintainer_email %}
              {% set name = pkg_dict.maintainer_email %}
               {% if maintainer_email %}
-              {{ h.mail_to(email_address=pkg_dict.maintainer_email, name=pkg_dict.maintainer) }}
+              {% if is_bootstrap2 %}
+                {{ h.mail_to(email_address=pkg_dict.maintainer_email) }}
+              {% else %}
+                {{ h.mail_to(email_address=pkg_dict.maintainer_email, name=pkg_dict.maintainer) }}
+              {% endif %}
+
              {% else %}
               {{ maintainer_email }} 	
              {% endif %}
@@ -363,7 +369,11 @@
              {% if contact_email == 'Unknown'%}
               {{contact_email}}
              {% else %}
-              {{ h.mail_to(email_address=contact_email, name=name) }}
+             {% if is_bootstrap2 %}
+               {{ h.mail_to(email_address=contact_email) }}
+             {% else %}
+               {{ h.mail_to(email_address=contact_email, name=name) }}
+             {% endif %}
              {% endif %}
              </span></div>
             </td>
