@@ -4,7 +4,7 @@ import logging
 import csv
 import StringIO
 
-from pylons import config
+from ckan.plugins.toolkit import config, request
 
 from ckan import plugins as p
 from ckan.lib import helpers as h
@@ -131,7 +131,7 @@ def get_dynamic_menu():
         except:
             pass
 
-    query = os.environ.get('QUERY_STRING', '');
+    query = request.environ.get('QUERY_STRING', '')
     submenu_key = None
     category_1 = None
     category_2 = None
