@@ -34,6 +34,7 @@ echo "Installing Python dependencies..."
 pip install setuptools -U
 
 python setup.py develop
+# TODO remove after upgrading to CKAN 2.8
 cp ./ckan/public/base/css/main.css ./ckan/public/base/css/main.debug.css
 pip install wheel
 pip install -r requirements.txt

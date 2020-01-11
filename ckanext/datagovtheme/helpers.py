@@ -4,11 +4,14 @@ import logging
 import csv
 import StringIO
 
-from pylons import config
-
 from ckan import plugins as p
 from ckan.lib import helpers as h
 from ckanext.geodatagov.plugins import RESOURCE_MAPPING
+
+if p.toolkit.check_ckan_version(max_version='2.3'):
+  from pylons import config
+else:
+  from ckan.plugins.toolkit import config, request
 
 log = logging.getLogger(__name__)
 ckan_tmp_path = '/var/tmp/ckan'
@@ -130,8 +133,10 @@ def get_dynamic_menu():
             menus = json.loads(json_menu_clean)
         except:
             pass
-
-    query = os.environ.get('QUERY_STRING', '');
+    if p.toolkit.check_ckan_version(max_version='2.3'):
+        query = p.toolkit.c.environ.get('QUERY_STRING', '')
+    else:
+        query = request.environ.get('QUERY_STRING', '')
     submenu_key = None
     category_1 = None
     category_2 = None
