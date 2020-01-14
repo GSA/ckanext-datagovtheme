@@ -8,7 +8,7 @@ from nose.tools import assert_in, assert_true, assert_not_in, assert_false
 
 from ckan import plugins as p
 import mock
-import ckanext
+from ckanext.datagovtheme.helpers import is_bootstrap2
 
 
 class TestDatagovthemeServed(FunctionalTestBase):
@@ -34,15 +34,23 @@ class TestDatagovthemeServed(FunctionalTestBase):
         assert_true(p.plugin_loaded('datagovtheme'))
         assert_true(p.plugin_loaded('geodatagov'))
 
+    @mock.patch(is_bootstrap2, True)
+    def test_datagovtheme_css_is_bootstrap2(self):
+        app = self._get_test_app()
+
+        index_response = app.get('/dataset')
+        
+        if is_bootstrap2():
+            assert_in('datagovtheme_bootstrap2.css', index_response.unicode_body)
+            assert_not_in('datagovtheme.css', index_response.unicode_body) 
+    
+    @mock.patch(is_bootstrap2, False)
     def test_datagovtheme_css(self):
         app = self._get_test_app()
 
         index_response = app.get('/dataset')
         
-        if ckanext.datagovtheme.helpers.is_bootstrap2():
-            assert_in('datagovtheme_bootstrap2.css', index_response.unicode_body)
-            assert_not_in('datagovtheme.css', index_response.unicode_body) 
-        else:
+        if not is_bootstrap2():
             assert_in('datagovtheme.css', index_response.unicode_body)
             assert_not_in('datagovtheme_bootstrap2.css', index_response.unicode_body)
 
