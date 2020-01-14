@@ -4,9 +4,11 @@
 
 '''
 from ckantoolkit.tests.helpers import FunctionalTestBase
-from nose.tools import assert_in, assert_true, assert_not_in
+from nose.tools import assert_in, assert_true, assert_not_in, assert_false
 
 from ckan import plugins as p
+import mock
+import ckanext
 
 
 class TestDatagovthemeServed(FunctionalTestBase):
@@ -36,6 +38,12 @@ class TestDatagovthemeServed(FunctionalTestBase):
         app = self._get_test_app()
 
         index_response = app.get('/dataset')
+        
+        if ckanext.datagovtheme.helpers.is_bootstrap2():
+            assert_in('datagovtheme_bootstrap2.css', index_response.unicode_body)
+            assert_not_in('datagovtheme.css', index_response.unicode_body) 
+        else:
+            assert_in('datagovtheme.css', index_response.unicode_body)
+            assert_not_in('datagovtheme_bootstrap2.css', index_response.unicode_body)
 
-        assert_in('datagovtheme.css', index_response.unicode_body)
-        assert_not_in('datagovtheme_bootstrap2.css', index_response.unicode_body)
+

@@ -34,7 +34,7 @@ jobs:
           command: bin/travis-build.bash
       - run:
           name: test
-          command: bin/travis-run-tests-bootstrap2.sh
+          command: bin/travis-run-tests.sh
 
 workflows:
   version: 2
