@@ -87,5 +87,13 @@ class TestDatagovthemeServed(FunctionalTestBase):
         assert_in('<li class="menu-public-safety">', index_response.unicode_body)
         assert_in('<li class="menu-science-research">', index_response.unicode_body)
         
+    def test_datagovtheme_organizations(self):
+        app = self._get_test_app()
+
+        index_response = app.get('/organization')
+
+        assert_in("No organizations found", index_response.unicode_body)
+        assert_in("Search organizations...", index_response.unicode_body)
+        assert_in("What are organizations?", index_response.unicode_body)
 
 
