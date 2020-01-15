@@ -61,7 +61,7 @@ class TestDatagovthemeServed(FunctionalTestBase):
         index_response = app.get('/dataset')
 
         assert_in('<li class="active"><a href="/dataset">Data</a></li>', index_response.unicode_body)
-        assert_in('<a class="dropdown-toggle" data-toggle="dropdown">Topics<b class="caret"></b></a>', index_response.unicode_body)
+        assert_in('<a class="dropdown-toggle" data-toggle="dropdown">Topics<b\n            class="caret"></b></a>', index_response.unicode_body)
         assert_in('<li><a href="//www.data.gov/impact/">Impact</a></li>', index_response.unicode_body)
         assert_in('<li><a href="//www.data.gov/applications">Applications</a></li>', index_response.unicode_body)
         assert_in('<li><a href="//www.data.gov/developers/">Developers</a></li>', index_response.unicode_body)
