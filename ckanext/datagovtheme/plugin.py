@@ -105,4 +105,5 @@ class DatagovTheme(p.SingletonPlugin):
             'schema11_key_mod':datagovtheme_helpers.schema11_key_mod,
             'schema11_frequency_mod':datagovtheme_helpers.schema11_frequency_mod,
             'convert_top_category_to_list':datagovtheme_helpers.convert_top_category_to_list,
+            'is_bootstrap2':datagovtheme_helpers.is_bootstrap2,
         }

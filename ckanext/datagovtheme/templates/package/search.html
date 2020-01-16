@@ -45,7 +45,7 @@
                         {% endif %}
                       {{ label }}
                     {%- endif %}
-                    <a href="{{ c.remove_field(field, value) }}" class="remove" title="{{ _('Remove') }}"><i class="icon-remove"></i></a>
+                    <a href="{{ c.remove_field(field, value) }}" class="remove" title="{{ _('Remove') }}"><i class="fa fa-times"></i></a>
                   </span>
                 {% endfor %}
                 {% endif %}
@@ -126,7 +126,7 @@
 {% block secondary_content %}
 <section id="dataset-map" class="module module-narrow module-shallow">
     <h2 class="module-heading">
-        <i class="icon-medium icon-globe"></i>
+        <i class="icon-medium fa fa-globe"></i>
         {{ _('Filter by location') }}
         <a href="{{ h.remove_url_param(['ext_bbox','ext_prev_extent', 'ext_location']) }}" class="action">{{ _('Clear') }}</a>
     </h2>
