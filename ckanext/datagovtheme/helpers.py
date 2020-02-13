@@ -81,7 +81,7 @@ def get_dynamic_menu():
     filename = filepath + 'menu.json'
     url = config.get('ckanext.geodatagov.dynamic_menu.url', '')
     if not url:
-        url = config.get('ckanext.geodatagov.dynamic_menu.url_default', '')
+        url = 'https://www.data.gov/app/plugins/datagov-custom/wp_download_links.php'
 
     time_file = 0
     time_current = time.time()
