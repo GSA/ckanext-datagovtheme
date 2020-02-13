@@ -29,3 +29,25 @@ To run the extension tests:
 `nosetests --ckan --with-pylons=test.ini ckanext/datagovtheme/tests`
 
 Note: the tests will only run if the environment is installed using the [CKAN Install from Source](https://docs.ckan.org/en/2.8/maintaining/installing/install-from-source.html#installing-ckan-from-source) installation
+
+## Using the Docker Dev Environment
+
+### Build Environment
+
+To start environment, run:
+```docker-compose build```
+```docker-compose up```
+
+CKAN will start at localhost:5000
+
+To shut down environment, run:
+
+```docker-compose down```
+
+To docker exec into the CKAN image, run:
+
+```docker-compose exec ckan /bin/bash```
+
+### Run Tests with Docker
+
+```docker-compose exec ckan /bin/bash -c "nosetests --ckan --with-pylons=src_extensions/datagovtheme/docker_test.ini src_extensions/datagovtheme/"```
