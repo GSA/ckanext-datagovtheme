@@ -79,9 +79,7 @@ def get_harvest_object_formats(harvest_object_id):
 def get_dynamic_menu():
     filepath = ckan_tmp_path + '/dynamic_menu/'
     filename = filepath + 'menu.json'
-    url = config.get('ckanext.geodatagov.dynamic_menu.url', '')
-    if not url:
-        url = 'https://www.data.gov/app/plugins/datagov-custom/wp_download_links.php'
+    url = config.get('ckanext.geodatagov.dynamic_menu.url', 'https://www.data.gov/app/plugins/datagov-custom/wp_download_links.php')
 
     time_file = 0
     time_current = time.time()
