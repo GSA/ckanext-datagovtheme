@@ -456,16 +456,15 @@ def convert_top_category_to_list(str_value):
 def get_bureau_info(bureau_code):
     WEB_PATH = '/fanstatic/datagovtheme/images/logos/'
     LOCAL_PATH = 'fanstatic_library/images/logos/'
+    BUREAU_CODE_URL = 'https://project-open-data.cio.gov/data/omb_bureau_codes.csv'
 
     # handle both '007:15', or ['007:15', '007:16']
     if isinstance(bureau_code, list):
       bureau_code = bureau_code[0]
 
     filepath = ckan_tmp_path + '/logos/'
-    filename = filepath + 'bureau.csv'
-    url = config.get('ckanext.geodatagov.bureau_csv.url', '')
-    if not url:
-        url = config.get('ckanext.geodatagov.bureau_csv.url_default', '')
+    filename = filepath + 'bureau-sample.csv'
+    url = BUREAU_CODE_URL
 
     time_file = 0
     time_current = time.time()
