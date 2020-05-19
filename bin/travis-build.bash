@@ -31,7 +31,8 @@ fi
 echo "-----------------------------------------------------------------"
 echo "Installing Python dependencies..."
 
-pip install setuptools<45 -U
+pip install --upgrade pip
+pip install setuptools -U
 
 python setup.py develop
 # TODO remove after upgrading to CKAN 2.8
