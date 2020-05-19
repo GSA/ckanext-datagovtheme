@@ -463,7 +463,9 @@ def get_bureau_info(bureau_code):
 
     filepath = ckan_tmp_path + '/logos/'
     filename = filepath + 'bureau-sample.csv'
-    url = BUREAU_CODE_URL
+    url = config.get('ckanext.geodatagov.bureau_csv.url', '')
+    if not url:
+        url = config.get('ckanext.geodatagov.bureau_csv.url_default', BUREAU_CODE_URL)
 
     time_file = 0
     time_current = time.time()
