@@ -34,6 +34,8 @@ echo "Installing Python dependencies..."
 pip install --upgrade pip
 pip install setuptools -U
 
+pip install py-cryptography
+
 python setup.py develop
 # TODO remove after upgrading to CKAN 2.8
 cp ./ckan/public/base/css/main.css ./ckan/public/base/css/main.debug.css
