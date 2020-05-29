@@ -2,10 +2,7 @@ FROM openknowledge/ckan-dev:2.8
 
 MAINTAINER Your Name Here <you@example.com>
 
-RUN apk add py-cryptography
-
-ADD http://download.osgeo.org/geos/geos-3.7.0.tar.bz2 /geos/geos.tar.bz2
-RUN tar xf /geos/geos.tar.bz2 -C /geos --strip-components=1
+RUN apk add libressl-dev musl-dev libffi-dev
 
 # Install any extensions needed by your CKAN instance
 # (Make sure to add the plugins to CKAN__PLUGINS in the .env file)
