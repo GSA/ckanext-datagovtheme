@@ -22,8 +22,6 @@
     <li>{% snippet 'package/snippets/data_api_button.html', resource=res, datastore_root_url=c.datastore_api %}</li>
   {% endif %}
   <br><br>
-  {{ h.archiver_is_resource_broken_line(c.resource) }}
-  {{ h.qa_openness_stars_resource_line(c.resource) }}
   <p style="height:0%; margin:1.5%;"></p>
   <a onClick="document.getElementById('archive_table').scrollIntoView(false);" style="color:#187794; cursor:pointer;"><strong>More Details</strong></a>
 {% endblock %}
@@ -137,11 +135,6 @@
     </section>
     {% resource 'datagovtheme/qa.js' %}
     <link rel="stylesheet" href="/css/qa.css" />
-    <div class="col-sm-12" id="archive_table">
-      {{ h.archiver_resource_info_table(c.resource) }}
-      {{ h.qa_openness_stars_resource_table(c.resource) }}
-    <br>
-   </div>
  {% endif %}  
 {% endblock %}
 
