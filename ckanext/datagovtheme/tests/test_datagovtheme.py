@@ -62,10 +62,10 @@ class TestDatagovthemeServed(FunctionalTestBase):
 
         assert_in('<li class="active"><a href="/dataset">Data</a></li>', index_response.unicode_body)
         assert_in('<a class="dropdown-toggle" data-toggle="dropdown">Topics<b\n            class="caret"></b></a>', index_response.unicode_body)
-        assert_in('<li><a href="//resources.data.gov/">Resources</a></li>', index_response.unicode_body)
-        assert_in('<li><a href="//strategy.data.gov">Strategy</a></li>', index_response.unicode_body)
-        assert_in('<li><a href="//www.data.gov/developers/">Developers</a></li>', index_response.unicode_body)
-        assert_in('<li><a href="//www.data.gov/contact">Contact</a></li>', index_response.unicode_body)
+        assert_in('<li class="menu-resources"><a href="https://resources.data.gov" class="local-link">Resources</a></li>', index_response.unicode_body)
+        assert_in('<li class="menu-strategy"><a href="https://strategy.data.gov" class="local-link">Strategy</a></li>', index_response.unicode_body)
+        assert_in('<li class="menu-developers"><a href="https://www.data.gov/developers/" class="local-link">Developers</a></li>', index_response.unicode_body)
+        assert_in('<li class="menu-contact"><a href="https://www.data.gov/contact" class="local-link">Contact</a></li>', index_response.unicode_body)
 
     def test_datagovtheme_topics(self):
         app = self._get_test_app()
