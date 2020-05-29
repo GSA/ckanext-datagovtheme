@@ -31,6 +31,7 @@ fi
 echo "-----------------------------------------------------------------"
 echo "Installing Python dependencies..."
 
+pip install --upgrade pip
 pip install setuptools -U
 
 python setup.py develop

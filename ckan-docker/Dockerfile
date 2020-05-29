@@ -2,6 +2,8 @@ FROM openknowledge/ckan-dev:2.8
 
 MAINTAINER Your Name Here <you@example.com>
 
+# add dependencies for cryptography
+
 RUN apk add libressl-dev musl-dev libffi-dev
 
 # Install any extensions needed by your CKAN instance
