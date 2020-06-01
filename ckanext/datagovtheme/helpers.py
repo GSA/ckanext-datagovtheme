@@ -3,6 +3,7 @@ import os, time
 import logging
 import csv
 import StringIO
+import six
 
 from ckan import plugins as p
 from ckan.lib import helpers as h
@@ -533,9 +534,24 @@ def get_bureau_info(bureau_code):
 def is_bootstrap2():
     return not p.toolkit.check_ckan_version(min_version='2.8')
 
+def asbool(obj):
+    # fails (?) from ckan import common as asbool
+    truthy = frozenset([u'true', u'yes', u'on', u'y', u't', u'1'])
+    falsy = frozenset([u'false', u'no', u'off', u'n', u'f', u'0'])
+
+    if isinstance(obj, six.string_types):
+        obj = obj.strip().lower()
+        if obj in truthy:
+            return True
+        elif obj in falsy:
+            return False
+        else:
+            raise ValueError(u"String is not true/false: {}".format(obj))
+    return bool(obj)
+
 def use_extension(ext_name, default=True):
     """ to use or not an extension in UI 
         (Not used for all cases, just to avoid errors while CKAN 2.8 migration) """
-    use = config.get('ckanext.geodatagov.use.{}', default)
-    
-    return use
+    use = config.get('ckanext.datagovtheme.use.{}'.format(ext_name), default)
+
+    return asbool(use)
