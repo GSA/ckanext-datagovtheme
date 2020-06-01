@@ -532,3 +532,10 @@ def get_bureau_info(bureau_code):
 
 def is_bootstrap2():
     return not p.toolkit.check_ckan_version(min_version='2.8')
+
+def use_extension(ext_name, default=True):
+    """ to use or not an extension in UI 
+        (Not used for all cases, just to avoid errors while CKAN 2.8 migration) """
+    use = config.get('ckanext.geodatagov.use.{}', default)
+    
+    return use
