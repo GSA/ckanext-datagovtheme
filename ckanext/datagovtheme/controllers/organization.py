@@ -67,6 +67,7 @@ class OrganizationController(GroupController):
         else:
             q += ' groups: "%s"' % c.group_dict.get('name')
 
+        q += ' (type:{})'.format(dataset_type)
         try:
             description_formatted = ckan.misc.MarkdownFormat().to_html(
             c.group_dict.get('description', ''))
@@ -166,7 +167,7 @@ class OrganizationController(GroupController):
                 else:
                     facets[facet] = facet
             if dataset_type:
-                fq = fq + 'dataset_type:"{dataset_type}"'.format(dataset_type=dataset_type)
+                fq = fq + 'dataset_type:{dataset_type}'.format(dataset_type=dataset_type)
 
             # Facet titles
             for plugin in p.PluginImplementations(p.IFacets):
@@ -192,6 +193,7 @@ class OrganizationController(GroupController):
                 'extras': search_extras
             }
 
+            log.info('OrganizationController Searching harvest source: {}'.format(data_dict))
             query = p.toolkit.get_action('package_search')(context, data_dict)
 
             c.page = h.Page(
