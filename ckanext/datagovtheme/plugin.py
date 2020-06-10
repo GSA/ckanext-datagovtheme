@@ -77,9 +77,10 @@ class DatagovTheme(p.SingletonPlugin):
     ## IRoutes
     def before_map(self, map):
         
-        org_controller = 'ckanext.datagovtheme.controllers.organization:OrganizationController'
-        map.connect('harvest_org_list', '/organization/harvest/' + '{id}',
-                    controller=org_controller, action='source_list')
+        if p.toolkit.check_ckan_version(min_version='2.8'):
+            org_controller = 'ckanext.datagovtheme.controllers.organization:OrganizationController'
+            map.connect('harvest_org_list', '/organization/harvest/' + '{id}',
+                        controller=org_controller, action='source_list')
         
         controller = 'ckanext.datagovtheme.controllers:ViewController'
         map.connect('map_viewer', '/viewer',controller=controller, action='show')
