@@ -3,11 +3,11 @@ import genshi
 from urllib import urlencode
 
 from ckan import plugins as p
-from ckan.lib.base import c, model, request, render, h, g
+from ckan.lib.base import c, model, request, render, h
 from ckan.lib.base import abort
 import ckan.lib.maintain as maintain
 import ckan.lib.search as search
-import ckan.new_authz
+import ckan.authz
 
 from ckan.controllers.group import GroupController
 
@@ -35,11 +35,13 @@ class OrganizationController(GroupController):
         q = c.q = request.params.get('q', '')
 
         try:
-            c.group_dict = self._action('group_show')(context, data_dict)
+            c.group_dict = self._action('organization_show')(context, data_dict)
             c.group = context['group']
         except p.toolkit.ObjectNotFound:
+            log.error('OrganizationController: Group not found {}'.format(id))
             abort(404, p.toolkit._('Group not found'))
         except p.toolkit.NotAuthorized:
+            log.error('OrganizationController: Unauthorized to read group {}'.format(id))
             abort(401, p.toolkit._('Unauthorized to read group %s') % id)
 
         try:
@@ -78,7 +80,7 @@ class OrganizationController(GroupController):
 
         # c.group_admins is used by CKAN's legacy (Genshi) templates only,
         # if we drop support for those then we can delete this line.
-        c.group_admins = ckan.new_authz.get_group_or_org_admin_ids(c.group.id)
+        c.group_admins = ckan.authz.get_group_or_org_admin_ids(c.group.id)
 
         try:
             page = int(request.params.get('page', 1))
@@ -158,7 +160,7 @@ class OrganizationController(GroupController):
                               'res_format': p.toolkit._('Formats'),
                               'license': p.toolkit._('Licence'), }
 
-            for facet in g.facets:
+            for facet in h.facets():
                 if facet in default_facet_titles:
                     facets[facet] = default_facet_titles[facet]
                 else:
@@ -201,9 +203,9 @@ class OrganizationController(GroupController):
             )
 
             c.facets = query['facets']
-            maintain.deprecate_context_item(
-              'facets',
-              'Use `c.search_facets` instead.')
+
+            # deprecate_context_item not exists at ckan.lib.maintain
+            # maintain.deprecate_context_item('facets', 'Use `c.search_facets` instead.')
 
             c.search_facets = query['search_facets']
             c.search_facets_limits = {}
