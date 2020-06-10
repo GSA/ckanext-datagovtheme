@@ -35,7 +35,7 @@ class OrganizationController(GroupController):
         q = c.q = request.params.get('q', '')
 
         try:
-            c.group_dict = self._action('group_show')(context, data_dict)
+            c.group_dict = self._action('organization_show')(context, data_dict)
             c.group = context['group']
         except p.toolkit.ObjectNotFound:
             log.error('OrganizationController: Group not found {}'.format(id))
