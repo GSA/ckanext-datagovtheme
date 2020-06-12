@@ -50,7 +50,7 @@ class OrganizationController(GroupController):
             abort(401, p.toolkit._('User %r not authorized to edit %s') % (c.user, id))
 
         self._read(id, limit, dataset_type=DATASET_TYPE_NAME)
-        return render('source/org_source_list.html')
+        return render('source/organization_source_list.html')
 
     def _read(self, id, limit, dataset_type=None):
         ''' This is common code used by both read and bulk_process'''
