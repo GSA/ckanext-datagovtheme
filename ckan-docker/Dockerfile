@@ -1,7 +1,7 @@
 FROM openknowledge/ckan-dev:2.8
 MAINTAINER Your Name Here <you@example.com>
 
-RUN apk add py-cryptography
+RUN apk add py-cryptography libressl-dev musl-dev libffi-dev vim
 
 # Fix shapely lib error. Install geos
 # TODO consider moving to Alpine>=3.11 or to Bionic
