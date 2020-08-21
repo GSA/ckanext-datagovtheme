@@ -102,4 +102,6 @@ cd ckanext-datagovtheme
 
 python setup.py develop
 
+pip install -r pip-requirements.txt
+
 echo "travis-build.bash is done."
