@@ -33,15 +33,12 @@
     {% endif %}
     <br clear="all" />
 		
-	{# <h4> {{ pkg }}</h4> #}
-    {% block package_notes %}
-      {% if c.pkg_notes_formatted %}
-        <div itemprop="description" class="notes embedded-content">
-          {{ c.pkg_notes_formatted }}
+	  {% block package_notes %}
+      <div itemprop="description" class="notes embedded-content">
+          {{ h.render_markdown(h.get_translated(pkg, 'notes')) }}
         </div>
-      {% endif %}
     {% endblock %}
-    {# FIXME why is this here? seems wrong #}
+  
     <span class="insert-comment-thread"></span>
 </section>
 {% endblock %}
