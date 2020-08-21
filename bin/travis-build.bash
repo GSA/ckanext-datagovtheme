@@ -58,32 +58,15 @@ sudo -u postgres psql -c "CREATE USER ckan_default WITH PASSWORD 'pass';"
 sudo -u postgres psql -c 'CREATE DATABASE ckan_test WITH OWNER ckan_default;'
 sudo -u postgres psql -c 'CREATE DATABASE datastore_test WITH OWNER ckan_default;'
 
+echo "Setting up PostGIS on the database..."
+sudo -u postgres psql -d ckan_test -c 'CREATE EXTENSION postgis;'
+sudo -u postgres psql -d ckan_test -c 'ALTER VIEW geometry_columns OWNER TO ckan_default;'
+sudo -u postgres psql -d ckan_test -c 'ALTER TABLE spatial_ref_sys OWNER TO ckan_default;'
+
 echo "-----------------------------------------------------------------"
 echo "Initialising the database..."
 cd ckan
 paster db init -c test-core.ini
-
-cd ..
-echo "-----------------------------------------------------------------"
-echo "Installing Harvester"
-git clone https://github.com/ckan/ckanext-harvest
-cd ckanext-harvest
-git checkout master
-
-python setup.py develop
-pip install -r pip-requirements.txt
-
-paster harvester initdb -c ../ckan/test-core.ini
-
-cd ..
-echo "-----------------------------------------------------------------"
-echo "Installing Geodatagov"
-git clone https://github.com/GSA/ckanext-geodatagov
-cd ckanext-geodatagov
-git checkout master
-
-python setup.py develop
-pip install -r pip-requirements.txt
 
 cd ..
 echo "-----------------------------------------------------------------"
@@ -97,11 +80,33 @@ pip install -r pip-requirements.txt
 
 cd ..
 echo "-----------------------------------------------------------------"
-echo "Installing ckanext-datagovtheme and its requirements..."
-cd ckanext-datagovtheme
+echo "Installing Geodatagov"
+git clone https://github.com/GSA/ckanext-geodatagov
+cd ckanext-geodatagov
+git checkout master
 
 python setup.py develop
-
 pip install -r pip-requirements.txt
+
+cd ..
+echo "-----------------------------------------------------------------"
+echo "Installing ckanext-datagovtheme and its requirements..."
+cd ckanext-datagovtheme
+git checkout master
+
+python setup.py develop
+pip install -r pip-requirements.txt
+
+cd ..
+echo "-----------------------------------------------------------------"
+echo "Installing Harvester"
+git clone https://github.com/ckan/ckanext-harvest
+cd ckanext-harvest
+git checkout master
+
+python setup.py develop
+pip install -r pip-requirements.txt
+
+paster harvester initdb -c ../ckan/test-core.ini
 
 echo "travis-build.bash is done."
