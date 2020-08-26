@@ -45,12 +45,12 @@
   {% set archiver = res.archiver %}
   <div class="archiver {% if is_broken %}link-broken{% elif is_broken == None %}link-not-sure{% else %}link-not-broken{% endif %}" style='font-size:.8em; display:inline-block;'>
     {%- if archiver.is_broken == True -%}
-      <span class="glyphicon glyphicon-exclamation-sign text-danger" ></span>
+      <span class="fa fa-exclamation-circle text-danger" ></span>
       {% trans %}<strong>Link is broken</strong>{% endtrans %}<br>
     {%- elif archiver.is_broken == None -%}
-      {% trans %}<strong><i class="glyphicon glyphicon-question-sign" style="color:orange;"></i> Link check is not conclusive</strong>{% endtrans %}<br>
+      {% trans %}<strong><i class="fa fa-question-circle" style="color:orange;"></i> Link check is not conclusive</strong>{% endtrans %}<br>
     {%- else-%}
-      {% trans %}<strong><i class="glyphicon glyphicon-ok-circle" style="color:green;"></i> Link is ok</strong>{% endtrans %}<br>
+      {% trans %}<strong><i class="fa fa-ok-circle" style="color:green;"></i> Link is ok</strong>{% endtrans %}<br>
     {% endif %}
   </div>
 {% endif %}
