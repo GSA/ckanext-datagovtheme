@@ -111,6 +111,28 @@ a {
 .btn-primary:hover {
     background: #1b3354 !important;
 }
+
+.btn-collection {
+    display: inline-block;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    color: #333333;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.75);
+    background-color: #f7f7f7;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+    font-weight: bold;
+    background-image: linear-gradient(to bottom,#ffffff,#eaeaea);
+    background-repeat: repeat-x;
+    border: 1px solid #cccccc;
+    border-bottom-color: #b3b3b3;
+    border-color: rgb(0,0,0,0.5) rgba(0,0,0,0.5) rgba(0,0,0,0. 5);
+}
+
 .faded {
     color: #777;
 }
