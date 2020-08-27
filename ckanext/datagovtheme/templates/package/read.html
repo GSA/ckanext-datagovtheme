@@ -324,29 +324,22 @@
             <th scope="row" class="dataset-label">Maintainer</th>
             <td>
               <div itemprop="provider" itemscope itemtype="http://schema.org/Person">
-                <span itemprop="name" property="dcat:contactPoint">{{ pkg_dict.maintainer }}</span>
+
+              {% if pkg_dict.maintainer_email.strip()|length > 0 %}
+                {% if is_bootstrap2 %} {# preserve compatibility with old CKAN versions #}
+                  {% set a_mail = h.mail_to(email_address=pkg_dict.maintainer_email) %}
+                {% else %}
+                  {% set a_mail = h.mail_to(email_address=pkg_dict.maintainer_email, name=pkg_dict.maintainer) %}
+                {% endif %}
+                <span itemprop="email" property="foaf:mbox">{{ a_mail }}</span> 
+              {% else %}
+                  <span itemprop="name" property="dcat:contactPoint">{{ pkg_dict.maintainer }}</span>
+              {% endif %}
+                
               </div>
             </td>
           </tr>
-          <tr>
-            <th scope="row" class="dataset-label">Maintainer Email</th>
-            <td><div itemprop="provider" itemscope itemtype="http://schema.org/Person" typeof="foaf:Person">
-              <span itemprop="email" property="foaf:mbox">
-             {% set maintainer_email = pkg_dict.maintainer_email %}
-             {% set name = pkg_dict.maintainer_email %}
-              {% if maintainer_email %}
-              {% if is_bootstrap2 %}
-                {{ h.mail_to(email_address=pkg_dict.maintainer_email) }}
-              {% else %}
-                {{ h.mail_to(email_address=pkg_dict.maintainer_email, name=pkg_dict.maintainer) }}
-              {% endif %}
-
-             {% else %}
-              {{ maintainer_email }} 	
-             {% endif %}
-              </span></div>
-            </td>
-          </tr>
+          
         {% else %}
           {% set exclude_list = ['metadata-date', 'dataset-reference-date', 'responsible-party', 'contact-email', 'resource-type', 'spatial'] %}
           <tr>
