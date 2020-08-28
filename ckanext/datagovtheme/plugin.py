@@ -107,4 +107,5 @@ class DatagovTheme(p.SingletonPlugin):
             'convert_top_category_to_list':datagovtheme_helpers.convert_top_category_to_list,
             'is_bootstrap2':datagovtheme_helpers.is_bootstrap2,
             'use_extension':datagovtheme_helpers.use_extension,
+            'get_pkg_dict_extra': datagovtheme_helpers.get_pkg_dict_extra,
         }
