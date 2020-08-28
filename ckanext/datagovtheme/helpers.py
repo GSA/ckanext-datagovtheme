@@ -582,7 +582,7 @@ def get_pkg_dict_extra(pkg_dict, key, default=None):
             rolledup_extras = json.loads(extra.get('value'))
             for k, value in rolledup_extras.iteritems():
                 if k == key: 
-                    return v
+                    return value
     
     # Also include harvest information if exists
     if key in ['harvest_object_id', 'harvest_source_id', 'harvest_source_title']:
