@@ -1,3 +1,4 @@
+import json
 import urllib, urllib2, json, re, HTMLParser, urlparse
 import os, time
 import logging
@@ -7,6 +8,8 @@ import six
 
 from ckan import plugins as p
 from ckan.lib import helpers as h
+from ckan import model
+from ckanext.harvest.model import HarvestObject
 from ckanext.geodatagov.plugins import RESOURCE_MAPPING
 
 if p.toolkit.check_ckan_version(max_version='2.3'):
@@ -243,8 +246,8 @@ def get_dynamic_menu():
     return menus
 
 def get_harvest_source_link(package_dict):
-    harvest_source_id = h.get_pkg_dict_extra(package_dict, 'harvest_source_id', None)
-    harvest_source_title = h.get_pkg_dict_extra(package_dict, 'harvest_source_title', None)
+    harvest_source_id = get_pkg_dict_extra(package_dict, 'harvest_source_id', None)
+    harvest_source_title = get_pkg_dict_extra(package_dict, 'harvest_source_title', None)
 
     if harvest_source_id and harvest_source_title:
        msg = p.toolkit._('Harvested from')
@@ -555,3 +558,45 @@ def use_extension(ext_name, default=True):
     use = config.get('ckanext.datagovtheme.use.{}'.format(ext_name), default)
 
     return asbool(use)
+
+def get_pkg_dict_extra(pkg_dict, key, default=None):
+    ''' Ovberride the CKAN core helper to add rolled up extras
+    Returns the value for the dataset extra with the provided key.
+
+    If the key is not found, it returns a default value, which is None by
+    default.
+
+    :param pkg_dict: dictized dataset
+    :key: extra key to lookup
+    :default: default value returned if not found
+    '''
+    extras = pkg_dict['extras'] if 'extras' in pkg_dict else []
+    
+    for extra in extras:
+        if extra['key'] == key:
+            return extra['value']
+
+    ## also include the rolled up extras
+    for extra in extras:
+        if 'extras_rollup' == extra.get('key'):
+            rolledup_extras = json.loads(extra.get('value'))
+            for k, value in rolledup_extras.iteritems():
+                if k == key: 
+                    return v
+    
+    # Also include harvest information if exists
+    if key in ['harvest_object_id', 'harvest_source_id', 'harvest_source_title']:
+
+        harvest_object = model.Session.query(HarvestObject) \
+                .filter(HarvestObject.package_id == pkg_dict['id']) \
+                .filter(HarvestObject.current==True).first() # noqa
+
+        if harvest_object:
+            if key == 'harvest_object_id':
+                return harvest_object.id
+            elif key == 'harvest_source_id':
+                return harvest_object.source.id
+            elif key == 'harvest_source_title':
+                return harvest_object.source.title
+
+    return default
