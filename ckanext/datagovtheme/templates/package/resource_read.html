@@ -1,6 +1,6 @@
 {% ckan_extends %}
 {% set is_bootstrap2 = h.is_bootstrap2() %}
-
+BEFORE resource_actions_inner
 {% block resource_actions_inner %}
   {% if h.check_access('package_update', {'id':pkg.id }) %}
     <li>{% link_for _('Edit'), controller='package', action='resource_edit', id=pkg.name, resource_id=res.id, class_='btn', icon='wrench' %}</li>
@@ -22,8 +22,9 @@
     <li>{% snippet 'package/snippets/data_api_button.html', resource=res, datastore_root_url=c.datastore_api %}</li>
   {% endif %}
   <br><br>
-  {% if h.use_extension('archiver') %}{{ h.archiver_is_resource_broken_line(c.resource) }}{% endif %}
-  {% if h.use_extension('qa') %}{{ h.qa_openness_stars_resource_line(c.resource) }}{% endif %}
+  {{ h.archiver_is_resource_broken_line(c.resource) }}
+  {{ h.qa_openness_stars_resource_line(c.resource) }}
+  
   <p style="height:0%; margin:1.5%;"></p>
   <a onClick="document.getElementById('archive_table').scrollIntoView(false);" style="color:#187794; cursor:pointer;"><strong>More Details</strong></a>
 {% endblock %}
@@ -138,8 +139,8 @@
     {% resource 'datagovtheme/qa.js' %}
     <link rel="stylesheet" href="/css/qa.css" />
     <div class="col-sm-12" id="archive_table">
-      {% if h.use_extension('archiver') %} {{ h.archiver_resource_info_table(c.resource) }} {% endif %}
-      {% if h.use_extension('qa') %}{{ h.qa_openness_stars_resource_table(c.resource) }} {% endif %}
+      {{ h.archiver_resource_info_table(c.resource) }}
+      {{ h.qa_openness_stars_resource_table(c.resource) }}
     <br>
    </div>
  {% endif %}  
