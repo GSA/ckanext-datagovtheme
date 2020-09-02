@@ -106,6 +106,9 @@ class DatagovTheme(p.SingletonPlugin):
             'schema11_frequency_mod':datagovtheme_helpers.schema11_frequency_mod,
             'convert_top_category_to_list':datagovtheme_helpers.convert_top_category_to_list,
             'is_bootstrap2':datagovtheme_helpers.is_bootstrap2,
-            'use_extension':datagovtheme_helpers.use_extension,
             'get_pkg_dict_extra': datagovtheme_helpers.get_pkg_dict_extra,
+            'archiver_resource_info_table': datagovtheme_helpers.archiver_resource_info_table,
+            'archiver_is_resource_broken_line': datagovtheme_helpers.archiver_is_resource_broken_line,
+            'qa_openness_stars_resource_line': datagovtheme_helpers.qa_openness_stars_resource_line,
+            'qa_openness_stars_resource_table': datagovtheme_helpers.qa_openness_stars_resource_table,
         }

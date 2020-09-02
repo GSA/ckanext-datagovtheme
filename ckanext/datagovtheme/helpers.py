@@ -2,6 +2,7 @@ import json
 import urllib, urllib2, json, re, HTMLParser, urlparse
 import os, time
 import logging
+import copy
 import csv
 import StringIO
 import six
@@ -534,30 +535,10 @@ def get_bureau_info(bureau_code):
 
     return bureau_info
 
+
 def is_bootstrap2():
     return not p.toolkit.check_ckan_version(min_version='2.8')
 
-def asbool(obj):
-    # fails (?) from ckan import common as asbool
-    truthy = frozenset([u'true', u'yes', u'on', u'y', u't', u'1'])
-    falsy = frozenset([u'false', u'no', u'off', u'n', u'f', u'0'])
-
-    if isinstance(obj, six.string_types):
-        obj = obj.strip().lower()
-        if obj in truthy:
-            return True
-        elif obj in falsy:
-            return False
-        else:
-            raise ValueError(u"String is not true/false: {}".format(obj))
-    return bool(obj)
-
-def use_extension(ext_name, default=True):
-    """ to use or not an extension in UI 
-        (Not used for all cases, just to avoid errors while CKAN 2.8 migration) """
-    use = config.get('ckanext.datagovtheme.use.{}'.format(ext_name), default)
-
-    return asbool(use)
 
 def get_pkg_dict_extra(pkg_dict, key, default=None):
     ''' Ovberride the CKAN core helper to add rolled up extras
@@ -600,3 +581,52 @@ def get_pkg_dict_extra(pkg_dict, key, default=None):
                 return harvest_object.source.title
 
     return default
+
+# from GSA/ckanext-archiver
+def archiver_resource_info_table(resource):
+    archival = resource.get('archiver')
+    if not archival:
+        return p.toolkit.literal('<!-- No archival info for this resource -->')
+    extra_vars = {'resource': resource}
+    extra_vars.update(archival)
+    res = p.toolkit.literal(
+            p.toolkit.render('archiver/resource_info_table.html',
+            extra_vars=extra_vars)
+            )
+    return res
+
+
+def archiver_is_resource_broken_line(resource):
+    archival = resource.get('archiver')
+    if not archival:
+        return p.toolkit.literal('<!-- No archival info for this resource -->')
+    extra_vars = {'resource': resource}
+    extra_vars.update(archival)
+    res = p.toolkit.literal(
+            p.toolkit.render('archiver/is_resource_broken_line.html',
+            extra_vars=extra_vars))
+    return res
+
+# from GSA/ckanext-qa
+def qa_openness_stars_resource_line(resource):
+    qa = resource.get('qa')
+    if not qa:
+        return p.toolkit.literal('<!-- No qa info for this resource -->')
+    if not isinstance(qa, dict):
+        return p.toolkit.literal('<!-- QA info was of the wrong type -->')
+    extra_vars = copy.deepcopy(qa)
+    return p.toolkit.literal(
+        p.toolkit.render('qa/openness_stars_line.html',
+                  extra_vars=extra_vars))
+
+
+def qa_openness_stars_resource_table(resource):
+    qa = resource.get('qa')
+    if not qa:
+        return p.toolkit.literal('<!-- No qa info for this resource -->')
+    if not isinstance(qa, dict):
+        return p.toolkit.literal('<!-- QA info was of the wrong type -->')
+    extra_vars = copy.deepcopy(qa)
+    return p.toolkit.literal(
+        p.toolkit.render('qa/openness_stars_table.html',
+                  extra_vars=extra_vars))
