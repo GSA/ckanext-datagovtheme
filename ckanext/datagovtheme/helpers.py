@@ -607,7 +607,7 @@ def archiver_is_resource_broken_line(resource):
             extra_vars=extra_vars))
     return res
 
-
+# from GSA/ckanext-qa
 def qa_openness_stars_resource_line(resource):
     qa = resource.get('qa')
     if not qa:
