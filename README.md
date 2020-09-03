@@ -51,3 +51,21 @@ To docker exec into the CKAN image, run:
 ### Run Tests with Docker
 
 ```docker-compose exec ckan /bin/bash -c "nosetests --ckan --with-pylons=src_extensions/datagovtheme/docker_test.ini src_extensions/datagovtheme/"```
+
+#### Test for CKAN 2.3 with catalog-app
+
+Get inside the container
+```
+docker-compose exec app bash
+```
+
+Run the tests
+```
+source /usr/lib/ckan/bin/activate
+cd /usr/lib/ckan/src/ckan
+cp ckan/public/base/css/main.css ckan/public/base/css/main.debug.css
+cd /usr/lib/ckan/src/ckanext-datagovtheme
+pip install -r dev-requirements.txt
+nosetests --ckan --with-pylons=test-catalog-2.3.ini ckanext.datagovtheme.tests.test_old_ckan
+```
+
