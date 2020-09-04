@@ -40,18 +40,15 @@ jobs:
   build_ckan_23:
     working_directory: ~/ckanext-datagovtheme
     machine:
-      image: circleci/classic:201707-01
+      image: circleci/classic:201708-01
     environment:
       CKANVERSION=2.3
     steps:
       - checkout
       - run:
-          name: install
+          name: install_and_test
           command: bin/travis-build-CKAN-2.3.bash
-      - run:
-          name: test
-          command: bin/travis-run-tests-CKAN-2.3.sh
-
+      
 workflows:
   version: 2
   build_and_test:
