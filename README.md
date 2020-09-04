@@ -66,6 +66,6 @@ cd /usr/lib/ckan/src/ckan
 cp ckan/public/base/css/main.css ckan/public/base/css/main.debug.css
 cd /usr/lib/ckan/src/ckanext-datagovtheme
 pip install -r dev-requirements.txt
-nosetests --ckan --with-pylons=test-catalog-2.3.ini ckanext.datagovtheme.tests.test_old_ckan
+nosetests --ckan --with-pylons=test-catalog-2.3-local-catalog-app.ini ckanext.datagovtheme.tests.test_old_ckan
 ```
 

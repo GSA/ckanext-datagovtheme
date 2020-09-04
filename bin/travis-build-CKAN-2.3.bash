@@ -6,7 +6,7 @@ echo "This is travis-build.bash..."
 echo "-----------------------------------------------------------------"
 echo "Installing the packages that CKAN requires..."
 sudo apt-get update -qq
-sudo apt-get install solr-jetty libcommons-fileupload-java libpq-dev postgresql postgresql-contrib
+sudo apt-get install solr-jetty libcommons-fileupload-java libpq-dev postgresql postgresql-contrib swig libgeos-dev
 
 echo "-----------------------------------------------------------------"
 echo "Installing CKAN and its dependencies..."
@@ -29,8 +29,9 @@ python setup.py develop
 # TODO remove after upgrading to CKAN 2.8
 cp ./ckan/public/base/css/main.css ./ckan/public/base/css/main.debug.css
 pip install wheel
-pip install -r requirements.txt
-pip install -r dev-requirements.txt
+
+# install all from catalog-app repo
+pip install -r https://raw.githubusercontent.com/GSA/catalog-app/master/requirements-freeze.txt
 
 cd ..
 echo "-----------------------------------------------------------------"
@@ -53,76 +54,23 @@ echo "-----------------------------------------------------------------"
 echo "Initialising the database..."
 cd ckan
 paster db init -c test-core.ini
-
-cd ..
 echo "-----------------------------------------------------------------"
-echo "Installing Report"
-git clone https://github.com/GSA/ckanext-report
-cd ckanext-report
-git checkout datagov
-
-python setup.py develop
+echo "Initialising the report ..."
 paster --plugin=ckanext-report report initdb -c ../ckan/test-core.ini
-
-cd ..
 echo "-----------------------------------------------------------------"
-echo "Installing Archiver"
-git clone https://github.com/GSA/ckanext-archiver
-cd ckanext-archiver
-git checkout datagov
-
-pip install -r requirements.txt
-python setup.py develop
+echo "Initialising the archiver ..."
 paster --plugin=ckanext-archiver archiver init -c ../ckan/test-core.ini
-
-cd ..
 echo "-----------------------------------------------------------------"
-echo "Installing Harvester"
-git clone https://github.com/ckan/ckanext-harvest
-cd ckanext-harvest
-git checkout master
-
-python setup.py develop
-pip install -r pip-requirements.txt
-
-paster harvester initdb -c ../ckan/test-core.ini
-
-cd ..
+echo "Initialising the harvester ..."
+paster --plugin=ckanext-harvest harvester initdb -c ../ckan/test-core.ini
 echo "-----------------------------------------------------------------"
-echo "Installing Geodatagov"
-git clone https://github.com/GSA/ckanext-geodatagov
-cd ckanext-geodatagov
-git checkout master
-
-python setup.py develop
-pip install -r pip-requirements.txt
-
-cd ..
-echo "-----------------------------------------------------------------"
-echo "Installing Spatial"
-git clone https://github.com/ckan/ckanext-spatial
-cd ckanext-spatial
-git checkout master
-
-python setup.py develop
-pip install -r pip-requirements.txt
-
-cd ..
-echo "-----------------------------------------------------------------"
-echo "Installing QA"
-git clone https://github.com/GSA/ckanext-qa
-cd ckanext-qa
-git checkout datagov
-
-python setup.py develop
-pip install -r requirements.txt
+echo "Initialising the qa ..."
 paster --plugin=ckanext-qa qa init -c ../ckan/test-core.ini
 
 cd ..
 echo "-----------------------------------------------------------------"
 echo "Installing ckanext-datagovtheme and its requirements..."
 cd ckanext-datagovtheme
-pip install -r dev-requirements.txt
 python setup.py develop
 
 echo "travis-build.bash is done."

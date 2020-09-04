@@ -40,7 +40,7 @@ jobs:
   build_ckan_23:
     working_directory: ~/ckanext-datagovtheme
     machine:
-      image: circleci/classic:201708-01
+      image: circleci/classic:201707-01
     environment:
       CKANVERSION=2.3
     steps:
