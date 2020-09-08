@@ -31,9 +31,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: where am I
-          command: pwd && ls -la
-      - run:
           name: install
           command: bin/travis-build.bash
       - run:
@@ -49,15 +46,9 @@ jobs:
     steps:
       - checkout
       - run:
-          name: where am I
-          command: pwd && ls -la
-      - run:
-          name: install
-          command: bin/travis-build.bash
-      - run:
-          name: test
-          command: bin/travis-run-tests.sh
-
+          name: install_and_test
+          command: bin/travis-build-CKAN-2.3.bash
+      
 workflows:
   version: 2
   build_and_test:
