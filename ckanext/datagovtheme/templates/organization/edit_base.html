@@ -10,7 +10,7 @@
 
 {% block content_primary_nav %}
   {{ super() }}
-  {% set url = h.url_for('harvest_org_list', id=c.group_dict.name) %}
+  {% set url = h.url_for('/harvest', organization=organization.name) %}
   <li class="{{ 'active' if c.action == 'source_list' }}">
   	<a href="{{ url }}">
   		<i class="icon-refresh"></i>
