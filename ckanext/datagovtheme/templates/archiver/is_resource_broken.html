@@ -34,7 +34,7 @@ and all the Archival.as_dict() info from the package_show's resource['archiver']
 #}
 <div class="archiver {% if is_broken %}link-broken{% elif is_broken == None %}link-not-sure{% else %}link-not-broken{% endif %}">
   {%- if is_broken == True -%}
-    <span class="icon icon-exclamation-sign text-error"></span>
+    <span class="fa fa-exclamation-circle text-error"></span>
     {% trans %}Link is broken{% endtrans %}<br>
     {% if reason %}
       - {{ reason }}<br>

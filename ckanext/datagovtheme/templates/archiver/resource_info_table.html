@@ -39,11 +39,11 @@ and all the Archival.as_dict() info from the package_show's resource['archiver']
       <tr>
         <td style="width:30%;"><strong>Broken Link Status</strong></td>
         {% if is_broken == True %}
-	<td><span class="icon icon-exclamation-sign text-error"></span> {% trans %}Link is broken{% endtrans %}<br></td>
+	<td><span class="fa fa-exclamation-circle text-error"></span> {% trans %}Link is broken{% endtrans %}<br></td>
 	{% elif is_broken == None %}
-	<td>{% trans %}<i class="icon-question-sign" style="color:orange;"></i> Link check is not conclusive{% endtrans %}<br></td>
+	<td>{% trans %}<i class="fa fa-question-circle" style="color:orange;"></i> Link check is not conclusive{% endtrans %}<br></td>
 	{% else %}
-	<td>{% trans %}<i class="icon-ok-circle" style="color:green;"></i> Link is ok{% endtrans %}<br></td>
+	<td>{% trans %}<i class="fa fa-ok-circle" style="color:green;"></i> Link is ok{% endtrans %}<br></td>
 	{% endif %}
       </tr>
       {% if reason %}

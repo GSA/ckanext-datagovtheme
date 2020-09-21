@@ -34,12 +34,12 @@ and all the Archival.as_dict() info from the package_show's resource['archiver']
 #}
 <div class="archiver {% if is_broken %}link-broken{% elif is_broken == None %}link-not-sure{% else %}link-not-broken{% endif %}">
   {%- if is_broken == True -%}
-    <span class="icon icon-exclamation-sign text-error"></span>
+    <span class="fa fa-exclamation-circle text-error"></span>
     {% trans %}<strong>Link is broken</strong>{% endtrans %}<br>
   {%- elif is_broken == None -%}
-    {% trans %}<strong><i class="icon-question-sign" style="color:orange;"></i> Link check is not conclusive</strong>{% endtrans %}<br>
+    {% trans %}<strong><i class="fa fa-question-circle" style="color:orange;"></i> Link check is not conclusive</strong>{% endtrans %}<br>
   {%- else-%}
-    {% trans %}<strong><i class="icon-ok-circle" style="color:green;"></i> Link is ok</strong>{% endtrans %}<br>
+    {% trans %}<strong><i class="fa fa-ok-circle" style="color:green;"></i> Link is ok</strong>{% endtrans %}<br>
   {% endif %}
   <span style="font-size:.8em;">{% trans updated=h.render_datetime(updated) %}Link checked: {{ updated }}{% endtrans %}</span><br>
 </div>

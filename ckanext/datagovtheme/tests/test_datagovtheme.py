@@ -74,11 +74,11 @@ class TestDatagovthemeServed(FunctionalTestBase):
 
         assert_in('<li class="menu-agriculture">', index_response.unicode_body)
         assert_in('<li class="menu-climate">', index_response.unicode_body)
-        assert_in('<li class="menu-ecosystems">', index_response.unicode_body)
         assert_in('<li class="menu-energy">', index_response.unicode_body)
         assert_in('<li class="menu-local-government">', index_response.unicode_body)
         assert_in('<li class="menu-maritime">', index_response.unicode_body)
         assert_in('<li class="menu-ocean">', index_response.unicode_body)
+        assert_in('<li class="menu-older-adults-health">', index_response.unicode_body)
         
     def test_datagovtheme_organizations(self):
         app = self._get_test_app()
