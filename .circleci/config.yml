@@ -20,6 +20,7 @@ jobs:
           command: |
             docker-compose build
             docker-compose up -d
+            sleep 40
       - run:
           name: Run ckanext-datajson Tests
           command: |
