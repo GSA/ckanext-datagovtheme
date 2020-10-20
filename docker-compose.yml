@@ -1,11 +1,10 @@
 version: "3.2"
 services:
   ckan:
-    build: 
-      context: ckan-docker
+    image: datagov/catalog-next:latest
     env_file:
       - .env
-    links:
+    depends_on:
       - db
       - solr
       - redis
