@@ -34,7 +34,7 @@ hide_empty
 
 
 #}
-{% set hide_empty = hide_empty or false %}
+{% set hide_empty = hide_empty or true %}
 {% with items = items or h.get_facet_items_dict(name, 0) %}
   {% if items or not hide_empty %}
     {% if within_tertiary %}
