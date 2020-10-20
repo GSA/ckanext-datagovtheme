@@ -13,4 +13,4 @@ echo "Update ckanext-datagovtheme"
 python setup.py develop
 
 echo "TESTING ckanext-datagovtheme"
-nosetests --ckan --with-pylons=test-catalog-next.ini ckanext/geodatagov --debug=ckanext
+nosetests --ckan --with-pylons=test-catalog-next.ini ckanext/datagovtheme --debug=ckanext
