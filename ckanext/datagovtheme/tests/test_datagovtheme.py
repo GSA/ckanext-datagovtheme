@@ -3,11 +3,14 @@
 '''Tests for the ckanext.datagovtheme extension.
 
 '''
-from ckantoolkit.tests.helpers import FunctionalTestBase
 from nose.tools import assert_in, assert_true, assert_not_in, assert_false
 
+try:
+    from ckan.tests.helpers import FunctionalTestBase
+except ImportError:
+    from ckan.new_tests.helpers import FunctionalTestBase
+    
 from ckan import plugins as p
-import mock
 import ckanext
 
 

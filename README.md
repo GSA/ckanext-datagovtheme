@@ -50,7 +50,12 @@ To docker exec into the CKAN image, run:
 
 ### Run Tests with Docker
 
-```docker-compose exec ckan /bin/bash -c "nosetests --ckan --with-pylons=src_extensions/datagovtheme/docker_test.ini src_extensions/datagovtheme/"```
+Test using full environment from [catalog-next](https://github.com/GSA/catalog.data.gov) (CKAN 2.8) repo
+
+```
+docker-compose exec ckan /bin/bash -c "cd src/ckan/ && \
+    wget https://raw.githubusercontent.com/GSA/catalog.data.gov/master/tools/ci-scripts/test-catalog-next.ini && \ nosetests --ckan --with-pylons=test-catalog-next.ini ../../src_extensions/datagovtheme/"
+```
 
 #### Test for CKAN 2.3 with catalog-app
 

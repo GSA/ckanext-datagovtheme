@@ -12,5 +12,8 @@ source circleci-build-catalog-next.bash
 echo "Update ckanext-datagovtheme"
 python setup.py develop
 
+echo "Install dev.requirements"
+pip install -r dev-requirements.txt
+
 echo "TESTING ckanext-datagovtheme"
 nosetests --ckan --with-pylons=test-catalog-next.ini ckanext/datagovtheme --debug=ckanext
