@@ -1,3 +1,4 @@
 ckantoolkit
 mock
 beautifulsoup4
+factory-boy
