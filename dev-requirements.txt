@@ -1,2 +1,3 @@
 ckantoolkit
 mock
+beautifulsoup4
