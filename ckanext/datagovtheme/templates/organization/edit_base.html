@@ -6,14 +6,15 @@
     <li>{% link_for organization.display_name|truncate(35), controller='organization', action='read', id=organization.name %}</li>
     <li class="active">{% link_for _('Admin'), controller='organization', action='edit', id=organization.name %}</li>
   {% endblock %}
+  
 {% endblock %}
 
 {% block content_primary_nav %}
   {{ super() }}
-  {% set url = h.url_for('harvest_org_list', id=c.group_dict.name) %}
+  {% set url = h.url_for('/harvest', organization=organization.name) %}
   <li class="{{ 'active' if c.action == 'source_list' }}">
   	<a href="{{ url }}">
-  		<i class="icon-refresh"></i>
+  		<i class="fa fa-refresh"></i>
   		{{ _('Harvest Sources') }}
   	</a>
   </li>

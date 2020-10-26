@@ -1,14 +1,22 @@
+import json
 import urllib, urllib2, json, re, HTMLParser, urlparse
 import os, time
 import logging
+import copy
 import csv
 import StringIO
-
-from ckan.plugins.toolkit import config, request
+import six
 
 from ckan import plugins as p
 from ckan.lib import helpers as h
+from ckan import model
+from ckanext.harvest.model import HarvestObject
 from ckanext.geodatagov.plugins import RESOURCE_MAPPING
+
+if p.toolkit.check_ckan_version(max_version='2.3'):
+  from pylons import config
+else:
+  from ckan.plugins.toolkit import config, request
 
 log = logging.getLogger(__name__)
 ckan_tmp_path = '/var/tmp/ckan'
@@ -76,9 +84,7 @@ def get_harvest_object_formats(harvest_object_id):
 def get_dynamic_menu():
     filepath = ckan_tmp_path + '/dynamic_menu/'
     filename = filepath + 'menu.json'
-    url = config.get('ckanext.geodatagov.dynamic_menu.url', '')
-    if not url:
-        url = config.get('ckanext.geodatagov.dynamic_menu.url_default', '')
+    url = config.get('ckanext.geodatagov.dynamic_menu.url', 'https://www.data.gov/app/plugins/datagov-custom/wp_download_links.php')
 
     time_file = 0
     time_current = time.time()
@@ -130,8 +136,10 @@ def get_dynamic_menu():
             menus = json.loads(json_menu_clean)
         except:
             pass
-
-    query = request.environ.get('QUERY_STRING', '');
+    if p.toolkit.check_ckan_version(max_version='2.3'):
+        query = p.toolkit.c.environ.get('QUERY_STRING', '')
+    else:
+        query = request.environ.get('QUERY_STRING', '')
     submenu_key = None
     category_1 = None
     category_2 = None
@@ -239,8 +247,8 @@ def get_dynamic_menu():
     return menus
 
 def get_harvest_source_link(package_dict):
-    harvest_source_id = h.get_pkg_dict_extra(package_dict, 'harvest_source_id', None)
-    harvest_source_title = h.get_pkg_dict_extra(package_dict, 'harvest_source_title', None)
+    harvest_source_id = get_pkg_dict_extra(package_dict, 'harvest_source_id', None)
+    harvest_source_title = get_pkg_dict_extra(package_dict, 'harvest_source_title', None)
 
     if harvest_source_id and harvest_source_title:
        msg = p.toolkit._('Harvested from')
@@ -526,3 +534,99 @@ def get_bureau_info(bureau_code):
         bureau_info['logo'] = None
 
     return bureau_info
+
+
+def is_bootstrap2():
+    return not p.toolkit.check_ckan_version(min_version='2.8')
+
+
+def get_pkg_dict_extra(pkg_dict, key, default=None):
+    ''' Ovberride the CKAN core helper to add rolled up extras
+    Returns the value for the dataset extra with the provided key.
+
+    If the key is not found, it returns a default value, which is None by
+    default.
+
+    :param pkg_dict: dictized dataset
+    :key: extra key to lookup
+    :default: default value returned if not found
+    '''
+    extras = pkg_dict['extras'] if 'extras' in pkg_dict else []
+    
+    for extra in extras:
+        if extra['key'] == key:
+            return extra['value']
+
+    ## also include the rolled up extras
+    for extra in extras:
+        if 'extras_rollup' == extra.get('key'):
+            rolledup_extras = json.loads(extra.get('value'))
+            for k, value in rolledup_extras.iteritems():
+                if k == key: 
+                    return value
+    
+    # Also include harvest information if exists
+    if key in ['harvest_object_id', 'harvest_source_id', 'harvest_source_title']:
+
+        harvest_object = model.Session.query(HarvestObject) \
+                .filter(HarvestObject.package_id == pkg_dict['id']) \
+                .filter(HarvestObject.current==True).first() # noqa
+
+        if harvest_object:
+            if key == 'harvest_object_id':
+                return harvest_object.id
+            elif key == 'harvest_source_id':
+                return harvest_object.source.id
+            elif key == 'harvest_source_title':
+                return harvest_object.source.title
+
+    return default
+
+# from GSA/ckanext-archiver
+def archiver_resource_info_table(resource):
+    archival = resource.get('archiver')
+    if not archival:
+        return p.toolkit.literal('<!-- No archival info for this resource -->')
+    extra_vars = {'resource': resource}
+    extra_vars.update(archival)
+    res = p.toolkit.literal(
+            p.toolkit.render('archiver/resource_info_table.html',
+            extra_vars=extra_vars)
+            )
+    return res
+
+
+def archiver_is_resource_broken_line(resource):
+    archival = resource.get('archiver')
+    if not archival:
+        return p.toolkit.literal('<!-- No archival info for this resource -->')
+    extra_vars = {'resource': resource}
+    extra_vars.update(archival)
+    res = p.toolkit.literal(
+            p.toolkit.render('archiver/is_resource_broken_line.html',
+            extra_vars=extra_vars))
+    return res
+
+# from GSA/ckanext-qa
+def qa_openness_stars_resource_line(resource):
+    qa = resource.get('qa')
+    if not qa:
+        return p.toolkit.literal('<!-- No qa info for this resource -->')
+    if not isinstance(qa, dict):
+        return p.toolkit.literal('<!-- QA info was of the wrong type -->')
+    extra_vars = copy.deepcopy(qa)
+    return p.toolkit.literal(
+        p.toolkit.render('qa/openness_stars_line.html',
+                  extra_vars=extra_vars))
+
+
+def qa_openness_stars_resource_table(resource):
+    qa = resource.get('qa')
+    if not qa:
+        return p.toolkit.literal('<!-- No qa info for this resource -->')
+    if not isinstance(qa, dict):
+        return p.toolkit.literal('<!-- QA info was of the wrong type -->')
+    extra_vars = copy.deepcopy(qa)
+    return p.toolkit.literal(
+        p.toolkit.render('qa/openness_stars_table.html',
+                  extra_vars=extra_vars))

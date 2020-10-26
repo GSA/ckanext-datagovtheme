@@ -30,10 +30,10 @@ Example:
       <br/>
       <!-- display new msg for all non-public datasets -->
       {% if (h.get_pkg_dict_extra(pkg, 'accessLevel') == 'non-public') %}
-        <div class="no-resource"><i class="icon-exclamation-sign"></i>No file downloads are available because this is not a public dataset. See Access &amp; Use Information for details.</div>
+        <div class="no-resource"><i class="fa fa-exclamation-circle"></i> No file downloads are available because this is not a public dataset. See Access &amp; Use Information for details.</div>
       <!--  for datasets that are NOT non-public, only display old message when there are no resources-->
       {% elif not resources %}
-        <div class="no-resource"><i class="icon-exclamation-sign"></i>No file downloads have been provided. The publisher may provide downloads in the future or they may be available from their other links.</div>
+        <div class="no-resource"><i class="fa fa-exclamation-circle"></i> No file downloads have been provided. The publisher may provide downloads in the future or they may be available from their other links.</div>
       <!--  so we are dealing with a dataset that is either public/restricted... and it has resources.. display the resources -->
       {% else %}
         {% for resource in resources %}
@@ -54,9 +54,9 @@ Example:
   <section id="dataset-resources" class="resources module-content">
     <h3>{{ _('Downloads & Resources') }}</h3>
     {% if (h.get_pkg_dict_extra(pkg, 'accessLevel') == 'non-public') %}
-      <div class="no-resource"><i class="icon-exclamation-sign"></i>No file downloads are available because this is not a public dataset. See Access &amp; Use Information for details.</div>
+      <div class="no-resource"><i class="fa fa-exclamation-circle"></i> No file downloads are available because this is not a public dataset. See Access &amp; Use Information for details.</div>
     {% else %}
-      <div class="no-resource"><i class="icon-exclamation-sign"></i>No file downloads have been provided. The publisher may provide downloads in the future or they may be available from their other links.</div>
+      <div class="no-resource"><i class="fa fa-exclamation-circle"></i> No file downloads have been provided. The publisher may provide downloads in the future or they may be available from their other links.</div>
     {% endif %}
   </section>
 {% endif %}

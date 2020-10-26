@@ -1,5 +1,6 @@
 {% block header %}
 {% set menus = h.get_dynamic_menu() %}
+{% set is_bootstrap2 = h.is_bootstrap2() %}
 <a href="#content" class="hide">{{ _('Skip to content') }}</a>
 
 <header class="navbar navbar-static-top masthead">
@@ -13,19 +14,17 @@
                 <a href="#">Jump to Content</a>
             </div>
             <div>
-                <form action="/dataset" class="search-form form-inline navbar-right navbar-nav  col-sm-6 col-md-6 col-lg-6" method="get" role="search">
+                <form action="/dataset" class="search-form form-inline navbar-right navbar-nav {{ 'col-sm-6 col-md-6 col-lg-6' if is_bootstrap2 }}" method="get" role="search">
                     <div class="input-group">
                         <label class="hide" for="search-header">Search for:</label>
-
                         <input type="search" placeholder="Search Data.Gov" class="search-field form-control" name="q" value="Search Data.Gov" id="search-header" onblur="if(value=='') value = 'Search Data.Gov'" onfocus="if(value=='Search Data.Gov') value = ''">      <span class="input-group-btn">
-      <button class="search-submit btn_new btn-default" type="submit">
-          <i class="fa fa-search"></i>
-          <span class="sr-only">Search</span>
-      </button>
-    </span>
+                            <button class="search-submit btn_new btn-default" type="submit">
+                                <i class="fa fa-search"></i>
+                                <span class="sr-only">Search</span>
+                            </button>
+                        </span>
                     </div>
                 </form>
-
             </div>
         </div>
         <hgroup class="top">
@@ -37,17 +36,25 @@
                     <ul class="unstyled">
                         {% if c.userobj.sysadmin %}
                         <li>
-                            <a href="{{ h.url_for(controller='admin', action='index') }}" title="{{ _('Sysadmin settings') }}">
-                                <i class="icon-legal"></i>
+                            <a href="{{ h.url_for(controller='admin', action='index') }}"
+                                title="{{ _('Sysadmin settings') }}">
+                                <i class="fa fa-gavel" aria-hidden="true"></i>
                             </a>
                         </li>
                         {% endif %}
                         <li>
                             <a href="{{ h.url_for(controller='user', action='read', id=c.userobj.name) }}" class="image" title="{{ _('View profile') }}">
+                                {% if is_bootstrap2 %}
                                 {{ h.gravatar((c.userobj.email_hash if c and c.userobj else ''), size=16) }}
                                 {{ c.userobj.display_name }}
+                                {% else %}
+                                {{ h.gravatar((c.userobj.email_hash if c and c.userobj else ''), size=22) }}
+                                <span class="username">{{ c.userobj.display_name }}</span>
+                                {% endif %}
+
                             </a>
                         </li>
+                        {% if is_bootstrap2 %}
                         <li class="notifications {% if c.new_activities > 0 %}notifications-important{% endif %}">
                             {% set new_activities = h.new_activities() %}
                             <li class="notifications {% if new_activities > 0 %}notifications-important{% endif %}">
@@ -55,14 +62,24 @@
                                 <span>{{ new_activities }}</span>
                             </a>
                         </li>
+                        {% else %}
+                        {% set new_activities = h.new_activities() %}
+                        <li class="notifications {% if new_activities > 0 %}notifications-important{% endif %}">
+                            {% set notifications_tooltip = ngettext('Dashboard (%(num)d new item)', 'Dashboard (%(num)d new items)', new_activities) %}
+                            <a href="{{ h.url_for('dashboard.index') }}" title="{{ notifications_tooltip }}">
+                                <i class="fa fa-tachometer" aria-hidden="true"></i>
+                                <span>{{ new_activities }}</span>
+                            </a>
+                        </li>
+                        {% endif %}
                         <li>
                             <a href="{{ h.saml2_user_edit_url() }}" title="{{ _('Edit settings') }}">
-                                <i class="icon-cog"></i>
+                                <i class="fa fa-cog" aria-hidden="true"></i>
                             </a>
                         </li>
                         <li>
                             <a href="{{ h.url_for('/user/_logout') }}" title="{{ _('Log out') }}">
-                                <i class="icon-signout"></i>
+                                <i class="fa fa-sign-out" aria-hidden="true"></i>
                             </a>
                         </li>
                     </ul>
@@ -105,17 +122,16 @@
                 </div>
 
                 <div class="toolbar">
+                        {% block breadcrumb %}
+                        <ol class="breadcrumb">
+                            <li class="home"><a href="{{ h.url(controller='package', action='search') }}"><i class="fa fa-home"></i><span> {{ _('Home') }}</span></a></li>
+                            <li class="active">{{ h.nav_link(_('Datasets'), controller='package', action='search', highlight_actions = 'new index') }}</li>
+                        </ol>
+                        {% endblock %}
                     <div class="add_action">
                         <a href="{{ h.url_for('organizations_index') }}" class="btn btn_new">{{ _('Organizations') }}</a>
-                        <a href="http://www.data.gov/catalog-help/" class="btn btn-primary question"><i class="icon-question-sign"></i></a>
+                        <a href="https://www.data.gov/catalog-help/" class="btn btn-primary question"><i class="fa fa-question-circle"></i></a>
                     </div>
-                    {% block breadcrumb %}
-                    <ol class="breadcrumb">
-                        <li class="home"><a href="{{ h.url(controller='package', action='search') }}"><i class="icon-home"></i><span> {{ _('Home') }}</span></a></li>
-                        <li class="active">{{ h.nav_link(_('Datasets'), controller='package', action='search', highlight_actions = 'new index') }}</li>
-                    </ol>
-                    {% endblock %}
-
                 </div>
             </div>
         </div>

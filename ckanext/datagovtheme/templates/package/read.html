@@ -1,16 +1,17 @@
 {% ckan_extends %}
 
-
+{% set is_bootstrap2 = h.is_bootstrap2() %}
 {% set pkg_dict = c.pkg_dict %}
 {% set dataset_extent = h.get_pkg_dict_extra(c.pkg_dict, 'spatial', '') %}
 {% set dataset_is_datajson = h.get_pkg_dict_extra(c.pkg_dict, 'source_datajson_identifier', False) %}
 {% set dataset_is_schema11 = h.get_pkg_dict_extra(c.pkg_dict, 'source_schema_version', '') == '1.1' %}
+{% set is_bootstrap2 = h.is_bootstrap2() %}
 
 {% block package_description %}
 <section class="module-content" style="padding-top:0px;">
     {% if pkg.private %}
       <span class="dataset-private label label-inverse pull-right">
-        <i class="icon-lock"></i>
+        <i class="fa fa-lock"></i>
         {{ _('Private') }}
       </span>
     {% endif %}
@@ -32,15 +33,12 @@
     {% endif %}
     <br clear="all" />
 		
-	{# <h4> {{ pkg }}</h4> #}
-    {% block package_notes %}
-      {% if c.pkg_notes_formatted %}
-        <div itemprop="description" class="notes embedded-content">
-          {{ c.pkg_notes_formatted }}
+	  {% block package_notes %}
+      <div itemprop="description" class="notes embedded-content">
+          {{ h.render_markdown(h.get_translated(pkg, 'notes')) }}
         </div>
-      {% endif %}
     {% endblock %}
-    {# FIXME why is this here? seems wrong #}
+  
     <span class="insert-comment-thread"></span>
 </section>
 {% endblock %}
@@ -55,18 +53,19 @@
 
 
 {% block package_resources %}
+{% set accessLevel = "https://resources.data.gov/schemas/dcat-us/v1.1/#accessLevel" %}
 <section class="information module-content" id="access-use">
   <h3>Access &amp; Use Information</h3>
   <div class="access-use-main">
   {% if h.get_pkg_dict_extra(pkg, 'accessLevel') == 'non-public' %}
-  <span class="access-non-public"><i class="icon-lock"></i><strong><a href="https://project-open-data.cio.gov/v1.1/schema/#accessLevel">Non-public:</a></strong> This dataset is not for public access or use. Specific details are provided below.</span>
+  <span class="access-non-public"><i class="fa fa-lock"></i><strong><a href={{accessLevel}}>Non-public:</a></strong> This dataset is not for public access or use. Specific details are provided below.</span>
   {% elif h.get_pkg_dict_extra(pkg, 'accessLevel') == 'public' %}
-  <span class="access-public"><i class="icon-globe"></i><strong><a href="https://project-open-data.cio.gov/v1.1/schema/#accessLevel">Public:</a></strong> This dataset is intended for public access and use.</span>
+  <span class="access-public"><i class="fa fa-globe"></i><strong><a href="{{accessLevel}}">Public:</a></strong> This dataset is intended for public access and use.</span>
   {% elif h.get_pkg_dict_extra(pkg, 'accessLevel') == 'restricted public' %}
-  <span class="access-restricted"><i class="icon-key"></i><strong><a href="https://project-open-data.cio.gov/v1.1/schema/#accessLevel">Restricted:</a></strong> This dataset can only be accessed or used under certain conditions. </span>
+  <span class="access-restricted"><i class="icon-key"></i><strong><a href="{{accessLevel}}">Restricted:</a></strong> This dataset can only be accessed or used under certain conditions. </span>
   {% endif %}
   {% if pkg_dict.organization.organization_type != 'Federal Government' %}
-    <span><i class="icon-info-sign"></i><strong>Non-Federal:</strong> This dataset is covered by different Terms of Use than Data.gov.
+    <span><i class="fa fa-info-circle"></i><strong>Non-Federal:</strong> This dataset is covered by different Terms of Use than Data.gov.
     {% if pkg_dict.organization.terms_of_use %}
         <a href="{{ pkg_dict.organization.terms_of_use }}" style="text-decoration:underline;">See Terms</a>
      {% endif %}
@@ -271,7 +270,7 @@
             </li>
           {% endif %}
         </ul>
-        <p class="muted">{{ h.get_harvest_source_link(pkg) }}</p>
+        <p class="{{ 'muted' if is_bootstrap2 else 'text-muted' }}">{{ h.get_harvest_source_link(pkg) }}</p>
       </section>
     {% endif %}
   {% endif %}
@@ -325,23 +324,22 @@
             <th scope="row" class="dataset-label">Maintainer</th>
             <td>
               <div itemprop="provider" itemscope itemtype="http://schema.org/Person">
-                <span itemprop="name" property="dcat:contactPoint">{{ pkg_dict.maintainer }}</span>
+
+              {% if pkg_dict.maintainer_email.strip()|length > 0 %}
+                {% if is_bootstrap2 %} {# preserve compatibility with old CKAN versions #}
+                  {% set a_mail = h.mail_to(email_address=pkg_dict.maintainer_email) %}
+                {% else %}
+                  {% set a_mail = h.mail_to(email_address=pkg_dict.maintainer_email, name=pkg_dict.maintainer) %}
+                {% endif %}
+                <span itemprop="email" property="foaf:mbox">{{ a_mail }}</span> 
+              {% else %}
+                  <span itemprop="name" property="dcat:contactPoint">{{ pkg_dict.maintainer }}</span>
+              {% endif %}
+                
               </div>
             </td>
           </tr>
-          <tr>
-            <th scope="row" class="dataset-label">Maintainer Email</th>
-            <td><div itemprop="provider" itemscope itemtype="http://schema.org/Person" typeof="foaf:Person">
-              <span itemprop="email" property="foaf:mbox">
-             {% set maintainer_email = pkg_dict.maintainer_email %}
-              {% if maintainer_email %}
-              {{ h.mail_to(email_address=pkg_dict.maintainer_email) }}
-             {% else %}
-              {{ maintainer_email }} 	
-             {% endif %}
-              </span></div>
-            </td>
-          </tr>
+          
         {% else %}
           {% set exclude_list = ['metadata-date', 'dataset-reference-date', 'responsible-party', 'contact-email', 'resource-type', 'spatial'] %}
           <tr>
@@ -357,10 +355,15 @@
             <td><div typeof="foaf:Person">
               <span property="foaf:mbox">
              {% set contact_email = h.get_pkg_dict_extra(c.pkg_dict, 'contact-email', 'Unknown') %}
+             {% set name = h.get_pkg_dict_extra(c.pkg_dict, 'name', 'Unknown') %}
              {% if contact_email == 'Unknown'%}
               {{contact_email}}
              {% else %}
-              {{ h.mail_to(email_address=contact_email) }}	
+             {% if is_bootstrap2 %}
+               {{ h.mail_to(email_address=contact_email) }}
+             {% else %}
+               {{ h.mail_to(email_address=contact_email, name=name) }}
+             {% endif %}
              {% endif %}
              </span></div>
             </td>
@@ -416,7 +419,7 @@
     </table>
 	<p>
        <small>
-        Didn't find what you're looking for? Suggest a dataset <a href="http://www.data.gov/nominate">here</a>.
+        Didn't find what you're looking for? Suggest a dataset <a href="https://www.data.gov/contact">here</a>.
        </small>
       </p>
   </section>

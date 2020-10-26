@@ -45,7 +45,7 @@
                         {% endif %}
                       {{ label }}
                     {%- endif %}
-                    <a href="{{ c.remove_field(field, value) }}" class="remove" title="{{ _('Remove') }}"><i class="icon-remove"></i></a>
+                    <a href="{{ c.remove_field(field, value) }}" class="remove" title="{{ _('Remove') }}"><i class="fa fa-times"></i></a>
                   </span>
                 {% endfor %}
                 {% endif %}
@@ -99,7 +99,7 @@
         <p>
             <small>
                 {% set api_link = h.link_to(_('API'), h.url_for(controller='api', action='get_api', ver=3)) %}
-                {% set api_doc_link = h.link_to(_('API Docs'), 'http://docs.ckan.org/{0}/ckan-2.3.5/api/'.format(request.environ.CKAN_LANG)) %}
+                {% set api_doc_link = h.link_to(_('API Docs'), 'https://docs.ckan.org/{0}/2.8/api/index.html'.format(request.environ.CKAN_LANG)) %}
                 {% if g.dumps_url -%}
                 {% set dump_link = h.link_to(_('full {format} dump').format(format=g.dumps_format), g.dumps_url) %}
                 {% trans %}
@@ -114,7 +114,7 @@
         </p>
         <p>
             <small>
-                Didn't find what you're looking for? Suggest a dataset <a href="http://data.gov/nominate">here</a>.
+                Didn't find what you're looking for? Suggest a dataset <a href="https://www.data.gov/contact">here</a>.
             </small>
         </p>
     </div>
@@ -126,7 +126,7 @@
 {% block secondary_content %}
 <section id="dataset-map" class="module module-narrow module-shallow">
     <h2 class="module-heading">
-        <i class="icon-medium icon-globe"></i>
+        <i class="icon-medium fa fa-globe"></i>
         {{ _('Filter by location') }}
         <a href="{{ h.remove_url_param(['ext_bbox','ext_prev_extent', 'ext_location']) }}" class="action">{{ _('Clear') }}</a>
     </h2>
