@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import logging
 import json
 from nose.tools import assert_equal, assert_in
+import urllib2
 from ckan import plugins as p
 try:
     from ckan.tests.helpers import reset_db, FunctionalTestBase
@@ -9,6 +10,11 @@ try:
 except ImportError:
     from ckan.new_tests.helpers import reset_db, FunctionalTestBase
     from ckan.new_tests import factories
+
+if p.toolkit.check_ckan_version(max_version='2.3'):
+    from pylons import config
+else:
+    from ckan.plugins.toolkit import config
 
 log = logging.getLogger(__name__)
 
@@ -52,4 +58,29 @@ class TestUIData(FunctionalTestBase):
             assert len(lis) > 0
             for li in lis:
                 log.info('Elements found: {}'.format(li))
-            
+    
+    def test_links(self):
+        
+        app = self._get_test_app()
+        index_response = app.get('/dataset')
+        
+        html = BeautifulSoup(index_response.unicode_body, 'html.parser')
+
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
+        # Test link to api docs in CKAN 2.8
+        element = html.find('a', string='API Docs')
+        log.info('Test URL: {}'.format(element['href']))
+        assert_in('2.8', element['href'])
+        req = urllib2.Request(element['href'], headers=headers)
+        result = urllib2.urlopen(req)
+        assert_equal(200, result.getcode())
+        
+        # Test API URL
+        element = html.find('a', string='API')
+        if element['href'].startswith('/'):
+            element['href'] = config['ckan.site_url'] + element['href']
+        log.info('Test URL: {}'.format(element['href']))
+        req = urllib2.Request(element['href'], headers=headers)
+        result = urllib2.urlopen(req)
+        assert_equal(200, result.getcode())
+        
