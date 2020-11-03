@@ -1808,16 +1808,6 @@ article .module-content {
 
 p.module-content{padding-left: 18px !important;}
 
-.publisher p.module-content {
-    margin-top: 10px;
-    padding: 0 15px;
-}
-
-.contact p.module-content {
-    margin-top: 10px;
-    padding: 0 15px;
-}
-
 .no-resource {
     background: none repeat scroll 0 0 #fef9df;
     font-size: 16px;
@@ -1842,9 +1832,13 @@ p.module-content{padding-left: 18px !important;}
 
 .topic-aapi a i:before{content:"\e600";}
 
+.dataset-collection {
+    margin-right: 5px;
+}
+
 .dataset-collection .icon-collection{
     background: transparent url('../images/collection.png') no-repeat;
-    height:13px;
+    height:12px;
 }
 
 .topic-ecosystems a i:before{
