@@ -2059,6 +2059,13 @@ color:#2a6496;
 .btn-navbar .icon-bar + .icon-bar {
     margin-top: 4px;
 }
+
+@media only screen and (min-width: 768px) {
+    .btn-navbar {
+        display: none;
+    }
+}
+
 .site-footer .nav > li > a:hover {
     color: #428bca;
 }
