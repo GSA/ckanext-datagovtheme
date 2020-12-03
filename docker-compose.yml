@@ -14,13 +14,13 @@ services:
       - ckan_storage:/var/lib/ckan
       - .:/srv/app/src_extensions/datagovtheme
   db:
-    image: ckan/postgresql
+    image: datagov/catalog.data.gov.db
     ports:
       - "5432:5432"
     expose:
       - "5432"
   solr:
-    image: ckan/solr
+    image: datagov/catalog.data.gov.solr
     restart: always
     expose:
       - "8983"
