@@ -21,11 +21,6 @@ log = logging.getLogger(__name__)
 
 class TestUIData(FunctionalTestBase):
 
-    @classmethod
-    def setup(cls):
-        super(TestUIData, cls).setup_class()
-        reset_db()
-        
     def create_datasets(self):
         organization = factories.Organization()
         self.group1 = factories.Group()
