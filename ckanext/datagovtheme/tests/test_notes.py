@@ -1,11 +1,11 @@
 # encoding: utf-8
-from nose.tools import assert_in, assert_true, assert_not_in, assert_false
+from nose.tools import assert_in
 
 try:
-    from ckan.tests.helpers import FunctionalTestBase, reset_db
+    from ckan.tests.helpers import FunctionalTestBase
     from ckan.tests import factories
 except ImportError:
-    from ckan.new_tests.helpers import FunctionalTestBase, reset_db
+    from ckan.new_tests.helpers import FunctionalTestBase
     from ckan.new_tests import factories
 
 
