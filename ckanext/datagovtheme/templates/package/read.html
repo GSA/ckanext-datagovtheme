@@ -35,11 +35,16 @@
 		
 	{# <h4> {{ pkg }}</h4> #}
     {% block package_notes %}
-      {% if c.pkg_notes_formatted %}
-        <div itemprop="description" class="notes embedded-content">
-          {{ c.pkg_notes_formatted }}
-        </div>
+
+      <div itemprop="description" class="notes embedded-content">
+      {% if h.is_bootstrap2 %} 
+          {% if c.pkg_notes_formatted %}
+              {{ c.pkg_notes_formatted }}
+          {% endif %}
+      {% else %}
+          {{ h.render_markdown(h.get_translated(pkg, 'notes')) }}
       {% endif %}
+      </div>
     {% endblock %}
     {# FIXME why is this here? seems wrong #}
     <span class="insert-comment-thread"></span>

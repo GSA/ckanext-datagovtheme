@@ -3,7 +3,7 @@
 '''Tests for the ckanext.datagovtheme extension.
 
 '''
-from nose.tools import assert_in, assert_true, assert_not_in, assert_false
+from nose.tools import assert_in, assert_true, assert_not_in
 
 try:
     from ckan.tests.helpers import FunctionalTestBase
@@ -16,26 +16,6 @@ import ckanext
 
 class TestDatagovthemeServed(FunctionalTestBase):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
-
-    @classmethod
-    def setup_class(cls):
-        super(TestDatagovthemeServed, cls).setup_class()
-
-        if not p.plugin_loaded('geodatagov'):
-            p.load('geodatagov')
-
-        if not p.plugin_loaded('datagovtheme'):
-            p.load('datagovtheme')
-
-    @classmethod
-    def teardown_class(cls):
-        super(TestDatagovthemeServed, cls).teardown_class()
-        p.unload('geodatagov')
-        p.unload('datagovtheme')
-
-    def test_plugin_loaded(self):
-        assert_true(p.plugin_loaded('datagovtheme'))
-        assert_true(p.plugin_loaded('geodatagov'))
 
     def test_datagovtheme_css_file(self):
         app = self._get_test_app()

@@ -1,31 +1,23 @@
 from bs4 import BeautifulSoup
 import logging
-import json
 from nose.tools import assert_equal, assert_in
 import urllib2
-from ckan import plugins as p
+
 try:
-    from ckan.tests.helpers import reset_db, FunctionalTestBase
+    from ckan.plugins.toolkit import config
+    from ckan.tests.helpers import FunctionalTestBase
     from ckan.tests import factories
 except ImportError:
-    from ckan.new_tests.helpers import reset_db, FunctionalTestBase
+    from pylons import config
+    from ckan.new_tests.helpers import FunctionalTestBase
     from ckan.new_tests import factories
 
-if p.toolkit.check_ckan_version(max_version='2.3'):
-    from pylons import config
-else:
-    from ckan.plugins.toolkit import config
 
 log = logging.getLogger(__name__)
 
 
 class TestUIData(FunctionalTestBase):
 
-    @classmethod
-    def setup(cls):
-        super(TestUIData, cls).setup_class()
-        reset_db()
-        
     def create_datasets(self):
         organization = factories.Organization()
         self.group1 = factories.Group()
