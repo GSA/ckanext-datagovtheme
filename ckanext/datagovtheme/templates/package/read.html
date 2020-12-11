@@ -37,7 +37,7 @@
     {% block package_notes %}
 
       <div itemprop="description" class="notes embedded-content">
-      {% if h.is_bootstrap2 %} 
+      {% if h.is_bootstrap2() %} 
           {% if c.pkg_notes_formatted %}
               {{ c.pkg_notes_formatted }}
           {% endif %}
