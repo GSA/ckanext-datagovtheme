@@ -16,4 +16,3 @@ def test_helpers_collition():
             if helper in extra_helpers:
                 raise Exception('overwritting extra helper %s' % helper)
             extra_helpers.append(helper)
-            

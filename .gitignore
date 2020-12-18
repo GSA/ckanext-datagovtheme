@@ -5,3 +5,4 @@ syntax: glob
 *.swo
 *.swp
 .DS_Store
+.vscode

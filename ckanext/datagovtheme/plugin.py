@@ -1,6 +1,6 @@
 import ckan.plugins as p
-import ckan.plugins.toolkit as toolkit
 from sqlalchemy.util import OrderedDict
+
 
 class DatagovTheme(p.SingletonPlugin):
     '''An example theme plugin.
@@ -19,8 +19,8 @@ class DatagovTheme(p.SingletonPlugin):
         p.toolkit.add_template_directory(config, 'templates')
         p.toolkit.add_public_directory(config, 'public')
         p.toolkit.add_resource('fanstatic_library', 'datagovtheme')
-    
-    ## IFacets
+
+    # IFacets
     def dataset_facets(self, facets_dict, package_type):
 
         if package_type != 'dataset':
@@ -28,23 +28,23 @@ class DatagovTheme(p.SingletonPlugin):
 
         return OrderedDict([('groups', 'Topics'),
                             ('vocab_category_all', 'Topic Categories'),
-                            ('metadata_type','Dataset Type'),
-                            ('tags','Tags'),
+                            ('metadata_type', 'Dataset Type'),
+                            ('tags', 'Tags'),
                             ('res_format', 'Formats'),
                             ('organization_type', 'Organization Types'),
                             ('organization', 'Organizations'),
                             ('publisher', 'Publishers'),
                             ('bureauCode', 'Bureaus'),
-                           ## ('extras_progress', 'Progress'),
-                           ])
+                            # ('extras_progress', 'Progress'),
+                            ])
 
     def organization_facets(self, facets_dict, organization_type, package_type):
 
         if not package_type:
             return OrderedDict([('groups', 'Topics'),
                                 ('vocab_category_all', 'Topic Categories'),
-                                ('metadata_type','Dataset Type'),
-                                ('tags','Tags'),
+                                ('metadata_type', 'Dataset Type'),
+                                ('tags', 'Tags'),
                                 ('res_format', 'Formats'),
                                 ('groups', 'Topics'),
                                 ('harvest_source_title', 'Harvest Source'),
@@ -52,10 +52,10 @@ class DatagovTheme(p.SingletonPlugin):
                                 ('dataset_type', 'Resource Type'),
                                 ('publisher', 'Publishers'),
                                 ('bureauCode', 'Bureaus'),
-                               ])
+                                ])
         else:
             return facets_dict
-    
+
     def group_facets(self, facets_dict, organization_type, package_type):
 
         # get the categories key
@@ -63,25 +63,25 @@ class DatagovTheme(p.SingletonPlugin):
         key = 'vocab___category_tag_%s' % group_id
         if not package_type:
             return OrderedDict([(key, 'Categories'),
-                                ('metadata_type','Dataset Type'),
+                                ('metadata_type', 'Dataset Type'),
                                 ('organization_type', 'Organization Types'),
-                                ('tags','Tags'),
+                                ('tags', 'Tags'),
                                 ('res_format', 'Formats'),
                                 ('organization', 'Organizations'),
                                 (key, 'Categories'),
-                                #('publisher', 'Publisher'),
-                               ])
+                                # ('publisher', 'Publisher'),
+                                ])
         else:
             return facets_dict
-        
-    ## IRoutes
+
+    # IRoutes
     def before_map(self, map):
         controller = 'ckanext.datagovtheme.controllers:ViewController'
-        map.connect('map_viewer', '/viewer',controller=controller, action='show')
+        map.connect('map_viewer', '/viewer', controller=controller, action='show')
         map.redirect('/', '/dataset')
         return map
 
-    ## ITemplateHelpers
+    # ITemplateHelpers
     def get_helpers(self):
         from ckanext.datagovtheme import helpers as datagovtheme_helpers
         helpers = {
@@ -91,7 +91,7 @@ class DatagovTheme(p.SingletonPlugin):
             'get_bureau_info': datagovtheme_helpers.get_bureau_info,
             'get_harvest_source_link': datagovtheme_helpers.get_harvest_source_link,
             'is_web_format': datagovtheme_helpers.is_web_format,
-            'is_map_viewer_format' : datagovtheme_helpers.is_map_viewer_format,
+            'is_map_viewer_format': datagovtheme_helpers.is_map_viewer_format,
             'get_map_viewer_params': datagovtheme_helpers.get_map_viewer_params,
             'resource_preview_custom': datagovtheme_helpers.resource_preview_custom,
             'is_preview_format': datagovtheme_helpers.is_preview_format,
@@ -100,12 +100,12 @@ class DatagovTheme(p.SingletonPlugin):
             'is_cartodb_format': datagovtheme_helpers.is_cartodb_format,
             'is_arcgis_format': datagovtheme_helpers.is_arcgis_format,
             'arcgis_format_query': datagovtheme_helpers.arcgis_format_query,
-            'convert_resource_format':datagovtheme_helpers.convert_resource_format,
-            'remove_extra_chars':datagovtheme_helpers.remove_extra_chars,
-            'schema11_key_mod':datagovtheme_helpers.schema11_key_mod,
-            'schema11_frequency_mod':datagovtheme_helpers.schema11_frequency_mod,
-            'convert_top_category_to_list':datagovtheme_helpers.convert_top_category_to_list,
-            'is_bootstrap2':datagovtheme_helpers.is_bootstrap2,
+            'convert_resource_format': datagovtheme_helpers.convert_resource_format,
+            'remove_extra_chars': datagovtheme_helpers.remove_extra_chars,
+            'schema11_key_mod': datagovtheme_helpers.schema11_key_mod,
+            'schema11_frequency_mod': datagovtheme_helpers.schema11_frequency_mod,
+            'convert_top_category_to_list': datagovtheme_helpers.convert_top_category_to_list,
+            'is_bootstrap2': datagovtheme_helpers.is_bootstrap2,
             'get_pkg_dict_extra': datagovtheme_helpers.get_pkg_dict_extra,
         }
         if p.toolkit.check_ckan_version(min_version='2.8'):
@@ -119,5 +119,5 @@ class DatagovTheme(p.SingletonPlugin):
             }
 
             helpers.update(override_helpers)
-        
+
         return helpers
