@@ -107,6 +107,7 @@ class DatagovTheme(p.SingletonPlugin):
             'convert_top_category_to_list':datagovtheme_helpers.convert_top_category_to_list,
             'is_bootstrap2':datagovtheme_helpers.is_bootstrap2,
             'get_pkg_dict_extra': datagovtheme_helpers.get_pkg_dict_extra,
+            'get_login_url': datagovtheme_helpers.get_login_url,
         }
         if p.toolkit.check_ckan_version(min_version='2.8'):
             # old CKAN don't allow to override helpers
