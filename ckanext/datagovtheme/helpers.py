@@ -16,6 +16,7 @@ from ckan.lib import helpers as h
 from ckan import model
 from ckanext.harvest.model import HarvestObject
 from ckanext.geodatagov.plugins import RESOURCE_MAPPING
+from ckan.plugins.toolkit import asbool
 
 if p.toolkit.check_ckan_version(max_version='2.3'):
     from pylons import config
@@ -657,3 +658,15 @@ def qa_openness_stars_resource_table(resource):
     return p.toolkit.literal(
         p.toolkit.render('qa/openness_stars_table.html',
                          extra_vars=extra_vars))
+
+
+def get_login_url():
+    log.info('get login URL')
+    if p.plugin_loaded('saml2auth'):
+        enable_ckan_internal_login = config.get('ckanext.saml2auth.enable_ckan_internal_login', 'false')
+        log.info('SAML2 enabled: {}'.format(enable_ckan_internal_login))
+        if not asbool(enable_ckan_internal_login):
+            log.info('SAML2 OK')
+            return '/user/saml2login'
+
+    return h.url_for(controller='user', action='login')
