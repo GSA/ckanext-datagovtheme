@@ -534,7 +534,7 @@ a {
     padding:15px;
 }
 .module-content .image {
-    max-width: 205px;
+    max-width: 375px;
 }
 .module-content.collection-package {
     padding-bottom: 0;
@@ -1211,6 +1211,7 @@ a.logo-brand {
 }
 .container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
     width: 100%;
+    max-width: 970px;
 }
 .row .nav .dropdown-toggle .caret {
     margin-top: 0px;
