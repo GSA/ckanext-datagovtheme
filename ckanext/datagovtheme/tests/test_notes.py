@@ -19,6 +19,6 @@ class TestNotes(FunctionalTestBase):
         app = self._get_test_app()
 
         dataset_response = app.get('/dataset/{}'.format(dataset['name']))
-    
+
         assert_in('<div itemprop="description" class="notes embedded-content">', dataset_response.unicode_body)
         assert_in(notes, dataset_response.unicode_body)

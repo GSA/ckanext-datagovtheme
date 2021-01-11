@@ -26,14 +26,14 @@ class TestUIData(FunctionalTestBase):
         self.dataset2 = factories.Dataset(owner_org=organization['id'], groups=[{"name": self.group2["name"]}])
         sysadmin = factories.Sysadmin(name='testUpdate')
         self.user_name = sysadmin['name'].encode('ascii')
-       
+
     def test_not_empty_sections(self):
-        
+
         self.create_datasets()
-        
+
         app = self._get_test_app()
         index_response = app.get('/dataset')
-        
+
         html = BeautifulSoup(index_response.unicode_body, 'html.parser')
 
         # get the main section where filters are included
@@ -41,7 +41,7 @@ class TestUIData(FunctionalTestBase):
         log.info('FILTERS: {}'.format(filters))
 
         # we expect "groups", "tags" and "organization"
-        
+
         uls = filters.find_all('ul', attrs={"name": "facet"})
         assert len(uls) > 0
         for ul in uls:
@@ -50,12 +50,12 @@ class TestUIData(FunctionalTestBase):
             assert len(lis) > 0
             for li in lis:
                 log.info('Elements found: {}'.format(li))
-    
+
     def test_links(self):
-        
+
         app = self._get_test_app()
         index_response = app.get('/dataset')
-        
+
         html = BeautifulSoup(index_response.unicode_body, 'html.parser')
 
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
@@ -66,7 +66,7 @@ class TestUIData(FunctionalTestBase):
         req = urllib2.Request(element['href'], headers=headers)
         result = urllib2.urlopen(req)
         assert_equal(200, result.getcode())
-        
+
         # Test API URL
         element = html.find('a', string='API')
         if element['href'].startswith('/'):
@@ -75,4 +75,3 @@ class TestUIData(FunctionalTestBase):
         req = urllib2.Request(element['href'], headers=headers)
         result = urllib2.urlopen(req)
         assert_equal(200, result.getcode())
-        

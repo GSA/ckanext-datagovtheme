@@ -3,14 +3,13 @@
 '''Tests for the ckanext.datagovtheme extension.
 
 '''
-from nose.tools import assert_in, assert_true, assert_not_in
+from nose.tools import assert_in, assert_not_in
 
 try:
     from ckan.tests.helpers import FunctionalTestBase
 except ImportError:
     from ckan.new_tests.helpers import FunctionalTestBase
-    
-from ckan import plugins as p
+
 import ckanext
 
 
@@ -21,19 +20,19 @@ class TestDatagovthemeServed(FunctionalTestBase):
         app = self._get_test_app()
 
         index_response = app.get('/dataset')
-        
+
         if ckanext.datagovtheme.helpers.is_bootstrap2():
             assert_in('datagovtheme_bootstrap2.css', index_response.unicode_body)
-            assert_not_in('datagovtheme.css', index_response.unicode_body) 
+            assert_not_in('datagovtheme.css', index_response.unicode_body)
         else:
             assert_in('datagovtheme.css', index_response.unicode_body)
             assert_not_in('datagovtheme_bootstrap2.css', index_response.unicode_body)
-    
+
     def test_datagovtheme_html_loads(self):
         app = self._get_test_app()
 
         index_response = app.get('/dataset')
-    
+
         assert_in("Search Data.Gov", index_response.unicode_body)
         assert_in("Search datasets...", index_response.unicode_body)
         assert_in("No datasets found", index_response.unicode_body)
@@ -62,7 +61,7 @@ class TestDatagovthemeServed(FunctionalTestBase):
         assert_in('<li class="menu-maritime">', index_response.unicode_body)
         assert_in('<li class="menu-ocean">', index_response.unicode_body)
         assert_in('<li class="menu-older-adults-health">', index_response.unicode_body)
-        
+
     def test_datagovtheme_organizations(self):
         app = self._get_test_app()
 
@@ -71,5 +70,3 @@ class TestDatagovthemeServed(FunctionalTestBase):
         assert_in("No organizations found", index_response.unicode_body)
         assert_in("Search organizations...", index_response.unicode_body)
         assert_in("What are organizations?", index_response.unicode_body)
-
-

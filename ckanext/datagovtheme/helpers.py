@@ -1,11 +1,15 @@
 import json
-import urllib, urllib2, json, re, HTMLParser, urlparse
-import os, time
+import urllib
+import urllib2
+import re
+import HTMLParser
+import urlparse
+import os
+import time
 import logging
 import copy
 import csv
 import StringIO
-import six
 
 from ckan import plugins as p
 from ckan.lib import helpers as h
@@ -15,12 +19,13 @@ from ckanext.geodatagov.plugins import RESOURCE_MAPPING
 from ckan.plugins.toolkit import asbool
 
 if p.toolkit.check_ckan_version(max_version='2.3'):
-  from pylons import config
+    from pylons import config
 else:
-  from ckan.plugins.toolkit import config, request
+    from ckan.plugins.toolkit import config, request
 
 log = logging.getLogger(__name__)
 ckan_tmp_path = '/var/tmp/ckan'
+
 
 def render_datetime_datagov(date_str):
     try:
@@ -28,6 +33,7 @@ def render_datetime_datagov(date_str):
     except (ValueError, TypeError):
         return date_str
     return value
+
 
 def get_harvest_object_formats(harvest_object_id):
     try:
@@ -68,19 +74,20 @@ def get_harvest_object_formats(harvest_object_id):
     format_name = get_extra(obj, 'format', 'iso')
     original_format_name = get_extra(obj, 'original_format')
 
-    #check if harvest_object holds a ckan_url key
+    # check if harvest_object holds a ckan_url key
     try:
         json.loads(obj['content'])['ckan_url']
         format_name = 'ckan'
-    except:
+    except Exception:
         pass
- 
+
     return {
-            'object_format': format_title(format_name),
-            'object_format_type': format_type(format_name),
-            'original_format': format_title(original_format_name),
-            'original_format_type': format_type(original_format_name),
-           }
+        'object_format': format_title(format_name),
+        'object_format_type': format_type(format_name),
+        'original_format': format_title(original_format_name),
+        'original_format_type': format_type(original_format_name),
+    }
+
 
 def get_dynamic_menu():
     filepath = ckan_tmp_path + '/dynamic_menu/'
@@ -96,7 +103,7 @@ def get_dynamic_menu():
             os.makedirs(filepath)
 
     # check to see if file is older than .5 hour
-    if (time_current - time_file) < 3600/2:
+    if (time_current - time_file) < 3600 / 2:
         file_obj = open(filename)
         file_conent = file_obj.read()
     else:
@@ -105,11 +112,11 @@ def get_dynamic_menu():
         if os.path.exists(filename):
             sec_timeout = 5
         else:
-            sec_timeout = 20 # longer urlopen timeout if there is no backup file.
+            sec_timeout = 20  # longer urlopen timeout if there is no backup file.
 
         try:
             resource = urllib2.urlopen(url, timeout=sec_timeout)
-        except:
+        except Exception:
             file_obj = open(filename)
             file_conent = file_obj.read()
             # touch the file, so that it wont keep re-trying and slow down page loading
@@ -124,18 +131,18 @@ def get_dynamic_menu():
     re_obj = re.compile(r"^jsonCallback\((.*)\);$", re.DOTALL)
     json_menu = re_obj.sub(r"\1", file_conent)
     # unescape &amp; or alike
-    html_parser =  HTMLParser.HTMLParser()
+    html_parser = HTMLParser.HTMLParser()
     json_menu_clean = None
     try:
         json_menu_clean = html_parser.unescape(json_menu)
-    except:
+    except Exception:
         pass
 
     menus = ''
     if json_menu_clean:
         try:
             menus = json.loads(json_menu_clean)
-        except:
+        except Exception:
             pass
     if p.toolkit.check_ckan_version(max_version='2.3'):
         query = p.toolkit.c.environ.get('QUERY_STRING', '')
@@ -153,11 +160,11 @@ def get_dynamic_menu():
         organizations = query_dict.get('organization', [])
         groups = query_dict.get('groups', [])
         if (not groups or groups == ['local']) and organization_types in [
-                    ['State Government'],
-                    ['City Government'],
-                    ['County Government'],
-                    ['Local Government'],
-                ]:
+            ['State Government'],
+            ['City Government'],
+            ['County Government'],
+            ['Local Government'],
+        ]:
             # State/County/Cities and Local are merged into 'local' group.
             organization_types = []
             groups = ['local']
@@ -208,7 +215,6 @@ def get_dynamic_menu():
         else:
             navigations = menus.get(submenu_key + '_navigation')
 
-
         if navigations:
             submenus = []
             for submenu in navigations:
@@ -218,12 +224,12 @@ def get_dynamic_menu():
             menus['submenus'] = submenus
 
             name_pair = {
-            'jobs-and-skills': 'Jobs & Skills',
-            'development': 'Global Development',
-            'research': 'Science & Research',
-            'food': 'Agriculture',
-            'coastalflooding': ['Climate', 'Coastal Flooding'],
-            'foodresilience': ['Climate', 'Food Resilience'],
+                'jobs-and-skills': 'Jobs & Skills',
+                'development': 'Global Development',
+                'research': 'Science & Research',
+                'food': 'Agriculture',
+                'coastalflooding': ['Climate', 'Coastal Flooding'],
+                'foodresilience': ['Climate', 'Food Resilience'],
             }
             if climate_generic_category:
                 if category_1:
@@ -234,7 +240,7 @@ def get_dynamic_menu():
             parent = {}
             name = name_pair.get(submenu_key, submenu_key.capitalize())
             if type(name) is list:
-                parent['key'] = name[0].lower() # hope nothing breaks here
+                parent['key'] = name[0].lower()  # hope nothing breaks here
                 parent['url'] = '//www.data.gov/' + parent['key']
                 parent['class'] = 'topic-' + parent['key']
 
@@ -247,17 +253,19 @@ def get_dynamic_menu():
 
     return menus
 
+
 def get_harvest_source_link(package_dict):
     harvest_source_id = get_pkg_dict_extra(package_dict, 'harvest_source_id', None)
     harvest_source_title = get_pkg_dict_extra(package_dict, 'harvest_source_title', None)
 
     if harvest_source_id and harvest_source_title:
-       msg = p.toolkit._('Harvested from')
-       url = h.url_for('harvest_read', id=harvest_source_id)
-       link = '{msg} <a href="{url}">{title}</a>'.format(url=url, msg=msg, title=harvest_source_title)
-       return p.toolkit.literal(link)
+        msg = p.toolkit._('Harvested from')
+        url = h.url_for('harvest_read', id=harvest_source_id)
+        link = '{msg} <a href="{url}">{title}</a>'.format(url=url, msg=msg, title=harvest_source_title)
+        return p.toolkit.literal(link)
 
     return ''
+
 
 def is_map_viewer_format(resource):
     viewer_url = config.get('ckanext.geodatagov.spatial_preview.url')
@@ -265,9 +273,10 @@ def is_map_viewer_format(resource):
 
     return viewer_url and resource.get('url') and resource.get('format', '').lower() in viewer_formats
 
+
 def get_map_viewer_params(resource, advanced=False):
 
-    params= {
+    params = {
         'url': resource['url'],
         'serviceType': resource.get('format'),
     }
@@ -279,33 +288,34 @@ def get_map_viewer_params(resource, advanced=False):
 
     return urllib.urlencode(params)
 
+
 def resource_preview_custom(resource, pkg_id):
 
     resource_format = resource.get('format', '').lower()
-
 
     if is_map_viewer_format(resource):
         viewer_url = config.get('ckanext.geodatagov.spatial_preview.url')
 
         url = '{viewer_url}?{params}'.format(
-                viewer_url=viewer_url,
-                params=get_map_viewer_params(resource))
+            viewer_url=viewer_url,
+            params=get_map_viewer_params(resource))
 
         return p.toolkit.render_snippet("dataviewer/snippets/data_preview.html",
-               data={'embed': False,
-               'resource_url': url,
-               'raw_resource_url': resource['url']})
+                                        data={'embed': False,
+                                              'resource_url': url,
+                                              'raw_resource_url': resource['url']})
 
     elif resource_format in ('web map application', 'arcgis online map') \
-         and ('webmap=' in resource.get('url') or 'services=' in resource.get('url')):
+            and ('webmap=' in resource.get('url') or 'services=' in resource.get('url')):
         url = resource['url'].replace('viewer.html', 'embedViewer.html')
 
         return p.toolkit.render_snippet("dataviewer/snippets/data_preview.html",
-               data={'embed': False,
-               'resource_url': url,
-               'raw_resource_url': resource['url']})
+                                        data={'embed': False,
+                                              'resource_url': url,
+                                              'raw_resource_url': resource['url']})
 
     return h.resource_preview(resource, pkg_id)
+
 
 types = {
     'web': ('html', 'data', 'esri rest', 'gov', 'org', ''),
@@ -313,16 +323,17 @@ types = {
     # "web map application" is deprecated in favour of "arcgis online map"
     'map': ('wms', 'kml', 'kmz', 'georss', 'web map application', 'arcgis online map'),
     'plotly': ('csv', 'xls', 'excel', 'openxml', 'access', 'application/vnd.ms-excel',
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        'text/csv','text/tab-separated-values',
-        'application/matlab-mattext/x-matlab', 'application/x-msaccess',
-        'application/msaccess', 'application/x-hdf', 'application/x-bag'),
+               'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+               'text/csv', 'text/tab-separated-values',
+               'application/matlab-mattext/x-matlab', 'application/x-msaccess',
+               'application/msaccess', 'application/x-hdf', 'application/x-bag'),
     'cartodb': ('csv', 'xls', 'excel', 'openxml', 'kml', 'geojson', 'application/vnd.ms-excel',
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        'text/csv', 'application/vnd.google-earth.kml+xml',
-        'application/vnd.geo+json'),
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'text/csv', 'application/vnd.google-earth.kml+xml',
+                'application/vnd.geo+json'),
     'arcgis': ('esri rest', 'wms', 'kml', 'kmz', 'application/vnd.google-earth.kml+xml', 'georss')
 }
+
 
 def is_type_format(type, resource):
     if resource and type in types:
@@ -335,35 +346,44 @@ def is_type_format(type, resource):
             return True
     return False
 
+
 def is_web_format(resource):
     return is_type_format('web', resource)
+
 
 def is_preview_format(resource):
     return is_type_format('preview', resource)
 
+
 def is_map_format(resource):
     return is_type_format('map', resource)
+
 
 def is_plotly_format(resource):
     return is_type_format('plotly', resource)
 
+
 def is_cartodb_format(resource):
     return is_type_format('cartodb', resource)
+
 
 def is_arcgis_format(resource):
     return is_type_format('arcgis', resource)
 
+
 def arcgis_format_query(resource):
     mimetype = resource.get('mimetype', None)
-    kmlstring = re.compile('(kml|kmz)');
+    kmlstring = re.compile('(kml|kmz)')
     if kmlstring.match(str(mimetype)):
         return 'kml'
     else:
         # wms, georss
         return mimetype
 
+
 def convert_resource_format(format):
-    if format: format = format.lower()
+    if format:
+        format = format.lower()
     formats = RESOURCE_MAPPING.keys()
     if format in formats:
         format = RESOURCE_MAPPING[format][1]
@@ -372,6 +392,7 @@ def convert_resource_format(format):
 
     return format
 
+
 def remove_extra_chars(str_value):
     # this will remove brackets for list and dict values.
     import ast
@@ -379,7 +400,7 @@ def remove_extra_chars(str_value):
 
     try:
         new_value = ast.literal_eval(str_value)
-    except:
+    except Exception:
         pass
 
     if type(new_value) is list:
@@ -403,7 +424,7 @@ def schema11_key_mod(key):
         # 'Identifier': 'Unique Identifier',
         'Modified': 'Data Last Modified',
         'Accesslevel': 'Public Access Level',
-        'Bureaucode' : 'Bureau Code',
+        'Bureaucode': 'Bureau Code',
         'Programcode': 'Program Code',
         'Accrualperiodicity': 'Data Update Frequency',
         'Conformsto': 'Data Standard',
@@ -419,6 +440,7 @@ def schema11_key_mod(key):
     }
 
     return key_map.get(key, key)
+
 
 def schema11_frequency_mod(value):
     frequency_map = {
@@ -439,11 +461,11 @@ def schema11_frequency_mod(value):
         'R/PT1S': 'Continuously updated',
         'R/P1M': 'Monthly',
         'R/P3M': 'Quarterly',
-        'R/P0.5M': 'Semimonthly',
         'R/P4M': 'Three times a year',
         'R/P1W': 'Weekly',
     }
     return frequency_map.get(value, value)
+
 
 def convert_top_category_to_list(str_value):
     import ast
@@ -451,7 +473,7 @@ def convert_top_category_to_list(str_value):
 
     try:
         list_value = ast.literal_eval(str_value)
-    except:
+    except Exception:
         pass
 
     if type(list_value) is not list:
@@ -459,13 +481,14 @@ def convert_top_category_to_list(str_value):
 
     return list_value
 
+
 def get_bureau_info(bureau_code):
     WEB_PATH = '/fanstatic/datagovtheme/images/logos/'
     LOCAL_PATH = 'fanstatic_library/images/logos/'
 
     # handle both '007:15', or ['007:15', '007:16']
     if isinstance(bureau_code, list):
-      bureau_code = bureau_code[0]
+        bureau_code = bureau_code[0]
 
     filepath = ckan_tmp_path + '/logos/'
     filename = filepath + 'bureau.csv'
@@ -482,7 +505,7 @@ def get_bureau_info(bureau_code):
             os.makedirs(filepath)
 
     # check to see if file is older than .5 hour
-    if (time_current - time_file) < 3600/2:
+    if (time_current - time_file) < 3600 / 2:
         file_obj = open(filename)
         file_conent = file_obj.read()
     else:
@@ -491,11 +514,11 @@ def get_bureau_info(bureau_code):
         if os.path.exists(filename):
             sec_timeout = 5
         else:
-            sec_timeout = 20 # longer urlopen timeout if there is no backup file.
+            sec_timeout = 20  # longer urlopen timeout if there is no backup file.
 
         try:
             resource = urllib2.urlopen(url, timeout=sec_timeout)
-        except:
+        except Exception:
             file_obj = open(filename)
             file_conent = file_obj.read()
             # touch the file, so that it wont keep re-trying and slow down page loading
@@ -553,25 +576,25 @@ def get_pkg_dict_extra(pkg_dict, key, default=None):
     :default: default value returned if not found
     '''
     extras = pkg_dict['extras'] if 'extras' in pkg_dict else []
-    
+
     for extra in extras:
         if extra['key'] == key:
             return extra['value']
 
-    ## also include the rolled up extras
+    # also include the rolled up extras
     for extra in extras:
         if 'extras_rollup' == extra.get('key'):
             rolledup_extras = json.loads(extra.get('value'))
             for k, value in rolledup_extras.iteritems():
-                if k == key: 
+                if k == key:
                     return value
-    
+
     # Also include harvest information if exists
     if key in ['harvest_object_id', 'harvest_source_id', 'harvest_source_title']:
 
         harvest_object = model.Session.query(HarvestObject) \
                 .filter(HarvestObject.package_id == pkg_dict['id']) \
-                .filter(HarvestObject.current==True).first() # noqa
+                .filter(HarvestObject.current == True).first()  # noqa
 
         if harvest_object:
             if key == 'harvest_object_id':
@@ -584,6 +607,8 @@ def get_pkg_dict_extra(pkg_dict, key, default=None):
     return default
 
 # from GSA/ckanext-archiver
+
+
 def archiver_resource_info_table(resource):
     archival = resource.get('archiver')
     if not archival:
@@ -591,9 +616,9 @@ def archiver_resource_info_table(resource):
     extra_vars = {'resource': resource}
     extra_vars.update(archival)
     res = p.toolkit.literal(
-            p.toolkit.render('archiver/resource_info_table.html',
-            extra_vars=extra_vars)
-            )
+        p.toolkit.render('archiver/resource_info_table.html',
+                         extra_vars=extra_vars)
+    )
     return res
 
 
@@ -604,11 +629,13 @@ def archiver_is_resource_broken_line(resource):
     extra_vars = {'resource': resource}
     extra_vars.update(archival)
     res = p.toolkit.literal(
-            p.toolkit.render('archiver/is_resource_broken_line.html',
-            extra_vars=extra_vars))
+        p.toolkit.render('archiver/is_resource_broken_line.html',
+                         extra_vars=extra_vars))
     return res
 
 # from GSA/ckanext-qa
+
+
 def qa_openness_stars_resource_line(resource):
     qa = resource.get('qa')
     if not qa:
@@ -618,7 +645,7 @@ def qa_openness_stars_resource_line(resource):
     extra_vars = copy.deepcopy(qa)
     return p.toolkit.literal(
         p.toolkit.render('qa/openness_stars_line.html',
-                  extra_vars=extra_vars))
+                         extra_vars=extra_vars))
 
 
 def qa_openness_stars_resource_table(resource):
@@ -630,7 +657,7 @@ def qa_openness_stars_resource_table(resource):
     extra_vars = copy.deepcopy(qa)
     return p.toolkit.literal(
         p.toolkit.render('qa/openness_stars_table.html',
-                  extra_vars=extra_vars))
+                         extra_vars=extra_vars))
 
 
 def get_login_url():

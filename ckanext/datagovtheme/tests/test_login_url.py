@@ -26,7 +26,7 @@ class TestLoginURL(FunctionalTestBase):
                 p.load('saml2auth')
 
             config['ckanext.saml2auth.enable_ckan_internal_login'] = 'false'
-            
+
             app = self._get_test_app()
             index_response = app.get('/dataset')
 
