@@ -530,6 +530,12 @@ a {
 .select2-helper i {
     line-height: 32px;
 }
+.resources.module-content{
+    padding:15px;
+}
+.module-content .image {
+    max-width: 375px;
+}
 .module-content.collection-package {
     padding-bottom: 0;
 }
@@ -1204,7 +1210,8 @@ a.logo-brand {
     font-size:16px;
 }
 .container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
-    width: 970px;
+    width: 100%;
+    max-width: 970px;
 }
 .row .nav .dropdown-toggle .caret {
     margin-top: 0px;
@@ -1501,6 +1508,7 @@ aside.secondary{
     align-items: center;
     border: 0 none;
     padding-top: 13px;
+    min-width: 350px;
 }
 .control-group.search-giant {
     float: left;
@@ -1763,10 +1771,6 @@ form.search-form{padding-right:0px;border-bottom: 0px;padding-bottom:0px;}
     padding-top: 20px;
 }
 
-.controller-organization.action-read .primary,.controller-package.action-read .primary {
-    width: 703px;
-}
-
 .search-form.no-bottom-border {
     display: flex;
     flex-wrap: wrap;
@@ -1904,7 +1908,6 @@ p.module-content{padding-left: 18px !important;}
     font-size: 16px;
     margin: 10px auto 0;
     padding: 15px;
-    width: 660px;
     color:#444;
 }
 .non-federal .fa-info-sign
@@ -1933,7 +1936,7 @@ article.module.prose li .dataset-content h3 {
   margin-top: 0;
 }
 article.module.prose h3 {
-margin-top : 2.5em;
+    margin-top : 0px;
 }
 
 .primary .module-ratings {
@@ -2121,15 +2124,6 @@ margin-top: 0px;
     .page-header_new .toolbar .breadcrumb a{font-weight: lighter;}
     .btn-primary.question {
         float:none !important ;
-    }
-}
-/* queries specific for smaller devices*/
-@media (min-width: 769px) and (max-width: 980px)  {
-    header.masthead .container {
-        width: 946px;
-    }
-    aside.secondary{
-        width:236px;
     }
 }
 
