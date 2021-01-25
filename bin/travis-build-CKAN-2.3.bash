@@ -34,12 +34,12 @@ python -V
 echo 'Getting Python path:'
 which python
 
-curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
-sudo python get-pip.py
+curl "https://bootstrap.pypa.io/2.7/get-pip.py" -o "get-pip.py"
+sudo python get-pip.py 'pip==20.3.3'
 
 echo 'Preparing PIP ...'
-sudo -H python -m pip install --upgrade pip
-sudo -H python -m pip install setuptools -U
+sudo -H python -m pip install pip==20.3.3
+sudo -H python -m pip install setuptools==44.1.1
 sudo -H python -m pip install wheel
 
 echo "nosetests"
