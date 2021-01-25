@@ -38,7 +38,7 @@ curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
 sudo python get-pip.py
 
 echo 'Preparing PIP ...'
-sudo -H python -m pip install --upgrade pip
+sudo -H python -m pip install pip==20.3.3
 sudo -H python -m pip install setuptools -U
 sudo -H python -m pip install wheel
 
