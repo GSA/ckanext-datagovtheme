@@ -39,7 +39,7 @@ sudo python get-pip.py
 
 echo 'Preparing PIP ...'
 sudo -H python -m pip install pip==20.3.3
-sudo -H python -m pip install setuptools -U
+sudo -H python -m pip install setuptools==44.1.1
 sudo -H python -m pip install wheel
 
 echo "nosetests"
