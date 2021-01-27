@@ -2093,6 +2093,7 @@ margin-top: 0px;
 }
 .btn.btn-navbar{
     margin-top:15px;
+    float: right;
 }
 .module-heading .action {
     float: right;
@@ -2128,6 +2129,12 @@ margin-top: 0px;
 }
 
 @media screen and (max-width: 768px) {
+    #content {
+        padding: 0px;
+    }
+    .navbar-nav{
+        margin: auto;
+    }
     .container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
     width:100%;
     }
@@ -2151,7 +2158,7 @@ margin-top: 0px;
         display: inline-block;
     }
     .masthead .container {
-    padding:0px;
+        padding-bottom: 15px;
     }
     [role="main"] .primary {
         width:100%;
@@ -2193,7 +2200,7 @@ margin-top: 0px;
         float: none;
     }
     .control-order-by {
-        bottom: 0;
+        margin-bottom: 15px;
         float: left;
         position: relative;
     }
@@ -2205,7 +2212,7 @@ margin-top: 0px;
     .search-giant button {
         position: absolute;
         right: 4%;
-        top: 18%;
+        top: 15%;
 
     }
     .page-header_new .toolbar{
@@ -2221,6 +2228,12 @@ margin-top: 0px;
     }
     #dataset-search .control-order-by {
         margin-left: 0px;
+        margin-top: 0px
+    }
+    #dataset-search .control-order-by label{
+        padding-top: 15px;
+        padding-bottom: 15px;
+        margin-bottom: 0px;
     }
     .search-form .control-order-by {
         margin-left: 0px;
@@ -2228,6 +2241,7 @@ margin-top: 0px;
     .toolbar{
         border-right:0px;
         border-left:0px;
+        padding: 15px;
     }
     .page_primary_action {
         margin-top:0px;
