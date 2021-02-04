@@ -333,7 +333,7 @@
             <td>
               <div itemprop="provider" itemscope itemtype="http://schema.org/Person">
 
-              {% if pkg_dict.maintainer_email.strip()|length > 0 %}
+              {% if pkg_dict.maintainer_email and pkg_dict.maintainer_email.strip()|length > 0 %}
                 {% if is_bootstrap2 %} {# preserve compatibility with old CKAN versions #}
                   {% set a_mail = h.mail_to(email_address=pkg_dict.maintainer_email) %}
                 {% else %}
