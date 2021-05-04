@@ -97,7 +97,9 @@ def get_harvest_object_formats(harvest_object_id):
 def get_dynamic_menu():
     filepath = ckan_tmp_path + '/dynamic_menu/'
     filename = filepath + 'menu.json'
-    url = config.get('ckanext.geodatagov.dynamic_menu.url', 'https://www.data.gov/app/plugins/datagov-custom/wp_download_links.php')
+    url = config.get(
+            'ckanext.geodatagov.dynamic_menu.url',
+            'https://www.data.gov/app/plugins/datagov-custom/wp_download_links.php')
 
     time_file = 0
     time_current = time.time()
@@ -183,7 +185,13 @@ def get_dynamic_menu():
                     categories = query_dict.get('vocab_category_all', [])
                     # some special topic categories got their own sub menus.
                     if submenu_key == 'climate' and categories:
-                        cat_food_list = ['Food Resilience', 'Food Production', 'Food Distribution', 'Food Safety and Nutrition', 'Food Security']
+                        cat_food_list = [
+                            'Food Resilience',
+                            'Food Production',
+                            'Food Distribution',
+                            'Food Safety and Nutrition',
+                            'Food Security'
+                        ]
                         cat_coastal_list = ['Coastal Flooding']
                         if set(cat_food_list).issuperset(categories):
                             category = 'foodresilience'

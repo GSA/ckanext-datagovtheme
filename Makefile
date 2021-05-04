@@ -8,7 +8,7 @@ clean: ## Clean workspace and containers
 lint: ## Lint the code
 	pip install pip==20.3.3
 	pip install flake8
-	flake8 . --count --ignore E501 --show-source --statistics
+	flake8 . --count --show-source --statistics --exclude ckan
 
 test: ## Run tests in an existing container
 	@# TODO wait for CKAN to be up; use docker-compose run instead
