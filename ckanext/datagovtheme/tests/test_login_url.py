@@ -1,6 +1,7 @@
 # encoding: utf-8
 from nose.tools import assert_in
 from mock import patch
+import pytest
 
 try:
     from ckan.tests.helpers import FunctionalTestBase
