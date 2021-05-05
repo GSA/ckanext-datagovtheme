@@ -64,3 +64,8 @@ jobs:
         paster --plugin=ckan db init -c test.ini
     - name: Run tests
       run: pytest --ckan-ini=test.ini --cov=ckanext.datagovtheme --disable-warnings ckanext/datagovtheme/tests
+    - name: Setup tmate session
+      if: ${{ failure() }}
+      uses: mxschmitt/action-tmate@v3
+      with:
+        limit-access-to-actor: true
