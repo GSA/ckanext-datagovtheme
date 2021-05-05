@@ -1,15 +1,20 @@
+from __future__ import division
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from past.utils import old_div
 import json
-import urllib
-import urllib2
+import urllib.request, urllib.parse, urllib.error
+import urllib.request, urllib.error, urllib.parse
 import re
-import HTMLParser
-import urlparse
+import html.parser
+import urllib.parse
 import os
 import time
 import logging
 import copy
 import csv
-import StringIO
+import io
 
 from ckan import plugins as p
 from ckan.lib import helpers as h
@@ -267,7 +272,7 @@ def get_harvest_object_formats(harvest_object_id):
         return {}
 
     def get_extra(obj, key, default=None):
-        for k, v in obj['extras'].iteritems():
+        for k, v in obj['extras'].items():
             if k == key:
                 return v
         return default
@@ -330,7 +335,7 @@ def get_dynamic_menu():
             os.makedirs(filepath)
 
     # check to see if file is older than .5 hour
-    if (time_current - time_file) < 3600 / 2:
+    if (time_current - time_file) < old_div(3600, 2):
         file_obj = open(filename)
         file_conent = file_obj.read()
     else:
@@ -342,7 +347,7 @@ def get_dynamic_menu():
             sec_timeout = 20  # longer urlopen timeout if there is no backup file.
 
         try:
-            resource = urllib2.urlopen(url, timeout=sec_timeout)
+            resource = urllib.request.urlopen(url, timeout=sec_timeout)
         except Exception:
             file_obj = open(filename)
             file_conent = file_obj.read()
@@ -358,7 +363,7 @@ def get_dynamic_menu():
     re_obj = re.compile(r"^jsonCallback\((.*)\);$", re.DOTALL)
     json_menu = re_obj.sub(r"\1", file_conent)
     # unescape &amp; or alike
-    html_parser = HTMLParser.HTMLParser()
+    html_parser = html.parser.HTMLParser()
     json_menu_clean = None
     try:
         json_menu_clean = html_parser.unescape(json_menu)
@@ -382,7 +387,7 @@ def get_dynamic_menu():
     climate_generic_category = None
 
     if menus and query:
-        query_dict = urlparse.parse_qs(query)
+        query_dict = urllib.parse.parse_qs(query)
         organization_types = query_dict.get('organization_type', [])
         organizations = query_dict.get('organization', [])
         groups = query_dict.get('groups', [])
@@ -520,7 +525,7 @@ def get_map_viewer_params(resource, advanced=False):
     if advanced:
         params['mode'] == 'advanced'
 
-    return urllib.urlencode(params)
+    return urllib.parse.urlencode(params)
 
 
 def resource_preview_custom(resource, pkg_id):
@@ -619,7 +624,7 @@ def arcgis_format_query(resource):
 def convert_resource_format(format):
     if format:
         format = format.lower()
-    formats = RESOURCE_MAPPING.keys()
+    formats = list(RESOURCE_MAPPING.keys())
     if format in formats:
         format = RESOURCE_MAPPING[format][1]
     else:
@@ -642,7 +647,7 @@ def remove_extra_chars(str_value):
         new_value = [i.strip() for i in new_value]
         ret = ', '.join(new_value)
     elif type(new_value) is dict:
-        ret = ', '.join('{0}:{1}'.format(key, val) for key, val in new_value.items())
+        ret = ', '.join('{0}:{1}'.format(key, val) for key, val in list(new_value.items()))
     else:
         ret = str_value
 
@@ -742,7 +747,7 @@ def get_bureau_info(bureau_code):
             os.makedirs(filepath)
 
     # check to see if file is older than .5 hour
-    if (time_current - time_file) < 3600 / 2:
+    if (time_current - time_file) < old_div(3600, 2):
         file_obj = open(filename)
         file_conent = file_obj.read()
     else:
@@ -754,7 +759,7 @@ def get_bureau_info(bureau_code):
             sec_timeout = 20  # longer urlopen timeout if there is no backup file.
 
         try:
-            resource = urllib2.urlopen(url, timeout=sec_timeout)
+            resource = urllib.request.urlopen(url, timeout=sec_timeout)
         except Exception:
             file_obj = open(filename)
             file_conent = file_obj.read()
@@ -776,7 +781,7 @@ def get_bureau_info(bureau_code):
     except ValueError:
         return None
 
-    for row in csv.reader(StringIO.StringIO(file_conent)):
+    for row in csv.reader(io.StringIO(file_conent)):
         if agency == row[2].zfill(3) \
                 and bureau == row[3].zfill(2):
             bureau_info['title'] = row[1]
@@ -822,7 +827,7 @@ def get_pkg_dict_extra(pkg_dict, key, default=None):
     for extra in extras:
         if 'extras_rollup' == extra.get('key'):
             rolledup_extras = json.loads(extra.get('value'))
-            for k, value in rolledup_extras.iteritems():
+            for k, value in rolledup_extras.items():
                 if k == key:
                     return value
 

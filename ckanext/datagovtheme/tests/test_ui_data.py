@@ -1,7 +1,9 @@
+from future import standard_library
+standard_library.install_aliases()
 from bs4 import BeautifulSoup
 import logging
 from nose.tools import assert_equal, assert_in
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
 try:
     from ckan.plugins.toolkit import config
@@ -66,8 +68,8 @@ class TestUIData(FunctionalTestBase):
         element = html.find('a', string='API Docs')
         log.info('Test URL: {}'.format(element['href']))
         assert_in('2.8', element['href'])
-        req = urllib2.Request(element['href'], headers=headers)
-        result = urllib2.urlopen(req)
+        req = urllib.request.Request(element['href'], headers=headers)
+        result = urllib.request.urlopen(req)
         assert_equal(200, result.getcode())
 
         # Test API URL
@@ -75,6 +77,6 @@ class TestUIData(FunctionalTestBase):
         if element['href'].startswith('/'):
             element['href'] = config['ckan.site_url'] + element['href']
         log.info('Test URL: {}'.format(element['href']))
-        req = urllib2.Request(element['href'], headers=headers)
-        result = urllib2.urlopen(req)
+        req = urllib.request.Request(element['href'], headers=headers)
+        result = urllib.request.urlopen(req)
         assert_equal(200, result.getcode())
