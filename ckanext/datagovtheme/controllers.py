@@ -1,6 +1,10 @@
 from future import standard_library
 standard_library.install_aliases()
-import urllib.request, urllib.parse, urllib.error
+
+import urllib.error
+import urllib.parse
+import urllib.request
+
 import ckan.plugins as p
 from ckan.plugins.toolkit import config
 from ckan.lib.base import BaseController, c, request, abort

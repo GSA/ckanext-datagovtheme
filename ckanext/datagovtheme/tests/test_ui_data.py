@@ -1,9 +1,13 @@
 from future import standard_library
 standard_library.install_aliases()
-from bs4 import BeautifulSoup
+
 import logging
+import urllib.error
+import urllib.parse
+import urllib.request
+
+from bs4 import BeautifulSoup
 from nose.tools import assert_equal, assert_in
-import urllib.request, urllib.error, urllib.parse
 
 try:
     from ckan.plugins.toolkit import config
