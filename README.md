@@ -2,15 +2,10 @@
 
 [![CircleCI](https://circleci.com/gh/GSA/ckanext-datagovtheme.svg?style=svg)](https://circleci.com/gh/GSA/ckanext-datagovtheme)
 
-This repository is front end code sepration for catalog.data.gov. This contains all the template files, Javascripts and stylesheets.
+This repository is front end code separation for catalog.data.gov. This contains all the template files, Javascripts and stylesheets.
 
 
 ## Usage
-
-### Requirements
-
-- [ckanext-spatial](https://github.com/ckan/ckanext-spatial)
-
 
 ### Setup
 
