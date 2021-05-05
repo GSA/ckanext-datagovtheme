@@ -26,7 +26,7 @@ class TestLoginURL(FunctionalTestBase):
     def test_saml2_login_url(self, mock_plugins):
         """ test saml2 URL on Catalog-next """
         if p.toolkit.check_ckan_version(min_version='2.8'):
-            mock_plugins.loaded.return_value = True
+            mock_plugins.plugin_loaded.return_value = True
             app = self._get_test_app()
             index_response = app.get('/dataset')
 
