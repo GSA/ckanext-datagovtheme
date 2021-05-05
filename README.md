@@ -7,6 +7,13 @@ Data.gov theme, branding, and UI customizations for
 extension.
 
 
+## Features
+
+_TODO document these better._
+
+- Provides a new spatial query view (overrides [ckanext-spatial](https://github.com/ckan/ckanext-spatial) some front end)
+
+
 ## Usage
 
 
@@ -17,7 +24,6 @@ _TODO: document how ckanext-datagovtheme interacts with third-party extensions._
 These extensions are required.
 
 - [ckanext-harvest](https://github.com/ckan/ckanext-harvest)
-- [ckanext-spatial](https://github.com/ckan/ckanext-spatial)
 
 Additionally, ckanext-datagovtheme has "weak" dependencies on these extensions.
 The dependency might be on templates, template helpers, or other functionality.
