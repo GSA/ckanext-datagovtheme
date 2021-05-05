@@ -1,5 +1,6 @@
 # encoding: utf-8
 from nose.tools import assert_in
+from mock import patch
 
 try:
     from ckan.tests.helpers import FunctionalTestBase
@@ -19,26 +20,21 @@ class TestLoginURL(FunctionalTestBase):
         index_response = app.get('/dataset')
         assert_in('/user/login', index_response.unicode_body)
 
-    def test_saml2_login_url(self):
+    @pytest.mark.ckan_config('ckanext.saml2auth.enable_ckan_internal_login', 'true')
+    @patch('ckan.plugins')
+    def test_saml2_login_url(self, mock_plugins):
         """ test saml2 URL on Catalog-next """
         if p.toolkit.check_ckan_version(min_version='2.8'):
-            if not p.plugin_loaded('saml2auth'):
-                p.load('saml2auth')
-
-            config['ckanext.saml2auth.enable_ckan_internal_login'] = 'false'
-
+            mock_plugins.loaded.return_value = True
             app = self._get_test_app()
             index_response = app.get('/dataset')
 
             assert_in('/user/saml2login', index_response.unicode_body)
 
+    @pytest.mark.ckan_config('ckanext.saml2auth.enable_ckan_internal_login', 'false')
     def test_login_url(self):
         """ test saml2 URL on Catalog-next """
         if p.toolkit.check_ckan_version(min_version='2.8'):
-            config['ckanext.saml2auth.enable_ckan_internal_login'] = 'false'
-            if p.plugin_loaded('saml2auth'):
-                p.unload('saml2auth')
-
             app = self._get_test_app()
             index_response = app.get('/dataset')
 
