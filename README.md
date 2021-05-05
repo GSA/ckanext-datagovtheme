@@ -16,7 +16,7 @@ _TODO: document how ckanext-datagovtheme interacts with third-party extensions._
 
 These extensions are required.
 
-- [ckanext-geodatagov](https://github.com/GSA/ckanext-geodatagov)
+- [ckanext-harvest](https://github.com/ckan/ckanext-harvest)
 - [ckanext-spatial](https://github.com/ckan/ckanext-spatial)
 
 Additionally, ckanext-datagovtheme has "weak" dependencies on these extensions.

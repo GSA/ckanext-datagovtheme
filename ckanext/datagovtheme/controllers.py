@@ -11,7 +11,7 @@ log = logging.getLogger(__name__)
 class ViewController(BaseController):
 
     def show(self):
-
+        # TODO rename config option to ckanext.datagovtheme
         viewer_url = config.get('ckanext.geodatagov.spatial_preview.url')
         if not viewer_url:
             abort(500, 'Viewer URL not defined')
