@@ -65,7 +65,7 @@ jobs:
         paster --plugin=ckan db init -c test.ini
     - name: Run tests
       run: pytest --ckan-ini=test.ini --cov=ckanext.datagovtheme --cov-fail-under=40 --disable-warnings ckanext/datagovtheme/tests
-    - name: pytest-coverage-commentator
+    - name: Report test coverage
       if: ${{ always() }}
       uses: coroo/pytest-coverage-commentator@v1.0.2
     - name: Setup tmate session
