@@ -4,7 +4,15 @@
 
 This repository is front end code sepration for catalog.data.gov. This contains all the template files, Javascripts and stylesheets.
 
-The [ckanext-geodatagov](https://github.com/GSA/ckanext-geodatagov) and [ckanext-spatial](https://github.com/ckan/ckanext-spatial) extensions must be [installed and enabled](https://docs.ckan.org/en/2.8/extensions/tutorial.html#installing-the-extension) as plugins before this extension can be installed and enabled.
+
+## Usage
+
+### Requirements
+
+- [ckanext-spatial](https://github.com/ckan/ckanext-spatial)
+
+
+### Setup
 
 This extension is compatible with versions of CKAN using Bootstrap 2 and Bootstrap 3. If CKAN is using version 2.8 or higher this extension will use Bootstrap 3.
 
