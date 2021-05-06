@@ -3,35 +3,25 @@
 '''Tests for the ckanext.datagovtheme extension.
 
 '''
-try:
-    from ckan.tests.helpers import FunctionalTestBase
-except ImportError:
-    from ckan.new_tests.helpers import FunctionalTestBase
 
 
-class TestDatagovthemeServed(FunctionalTestBase):
+class TestDatagovthemeServed(object):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
 
-    def test_datagovtheme_css_file(self):
-        app = self._get_test_app()
-
+    def test_datagovtheme_css_file(self, app):
         index_response = app.get('/dataset')
 
         assert 'datagovtheme.css' in index_response.unicode_body
         assert 'datagovtheme_bootstrap2.css' not in index_response.unicode_body
 
-    def test_datagovtheme_html_loads(self):
-        app = self._get_test_app()
-
+    def test_datagovtheme_html_loads(self, app):
         index_response = app.get('/dataset')
 
         assert "Search Data.Gov" in index_response.unicode_body
         assert "Search datasets..." in index_response.unicode_body
         assert "No datasets found" in index_response.unicode_body
 
-    def test_datagovtheme_navigation(self):
-        app = self._get_test_app()
-
+    def test_datagovtheme_navigation(self, app):
         index_response = app.get('/dataset')
 
         assert '<li class="active"><a href="/dataset">Data</a></li>' in index_response.unicode_body
@@ -42,9 +32,7 @@ class TestDatagovthemeServed(FunctionalTestBase):
         assert '<li><a href="//www.data.gov/developers/">Developers</a></li>' in index_response.unicode_body
         assert '<li><a href="//www.data.gov/contact">Contact</a></li>' in index_response.unicode_body
 
-    def test_datagovtheme_topics(self):
-        app = self._get_test_app()
-
+    def test_datagovtheme_topics(self, app):
         index_response = app.get('/dataset')
 
         assert '<li class="menu-agriculture">' in index_response.unicode_body
@@ -55,9 +43,7 @@ class TestDatagovthemeServed(FunctionalTestBase):
         assert '<li class="menu-ocean">' in index_response.unicode_body
         assert '<li class="menu-older-adults-health">' in index_response.unicode_body
 
-    def test_datagovtheme_organizations(self):
-        app = self._get_test_app()
-
+    def test_datagovtheme_organizations(self, app):
         index_response = app.get('/organization')
 
         assert "No organizations found" in index_response.unicode_body

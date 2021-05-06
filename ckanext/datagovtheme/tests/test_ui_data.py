@@ -1,21 +1,15 @@
-from bs4 import BeautifulSoup
 import logging
 
-try:
-    from ckan.tests.helpers import FunctionalTestBase, reset_db
-    from ckan.tests import factories
-except ImportError:
-    from ckan.new_tests.helpers import FunctionalTestBase, reset_db
-    from ckan.new_tests import factories
+from bs4 import BeautifulSoup
+from ckantoolkit.tests import factories
+import pytest
 
 
 log = logging.getLogger(__name__)
 
 
-class TestUIData(FunctionalTestBase):
-
-    def tearDown(self):
-        reset_db()
+@pytest.mark.usefixtures('clean_db', 'clean_index')
+class TestUIData(object):
 
     def create_datasets(self):
         organization = factories.Organization()
@@ -26,11 +20,10 @@ class TestUIData(FunctionalTestBase):
         sysadmin = factories.Sysadmin(name='testUpdate')
         self.user_name = sysadmin['name'].encode('ascii')
 
-    def test_not_empty_sections(self):
+    def test_not_empty_sections(self, app):
 
         self.create_datasets()
 
-        app = self._get_test_app()
         index_response = app.get('/dataset')
 
         html = BeautifulSoup(index_response.unicode_body, 'html.parser')
@@ -50,14 +43,13 @@ class TestUIData(FunctionalTestBase):
             for li in lis:
                 log.info('Elements found: {}'.format(li))
 
-    def test_api_doc_link(self):
+    def test_api_doc_link(self, app):
         """Assert CKAN major/minor version matches API docs URL."""
         # TODO mock helpers.api_doc_url and then assert the mock was called
         # after the request. Is this possible in CKAN?
         from ckan.lib.helpers import ckan_version
         expected_version = '.'.join(ckan_version().split('.')[0:2])
 
-        app = self._get_test_app()
         index_response = app.get('/dataset')
         html = BeautifulSoup(index_response.unicode_body, 'html.parser')
 
@@ -65,9 +57,8 @@ class TestUIData(FunctionalTestBase):
         api_doc_href = html.find('a', string='API Docs')['href']
         assert expected_version in api_doc_href
 
-    def test_api_url(self):
+    def test_api_url(self, app):
         """Assert API link on dataset page."""
-        app = self._get_test_app()
         index_response = app.get('/dataset')
 
         html = BeautifulSoup(index_response.unicode_body, 'html.parser')
