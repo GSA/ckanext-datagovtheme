@@ -5,20 +5,13 @@
 '''
 from nose.tools import assert_in, assert_not_in
 
-try:
-    from ckan.tests.helpers import FunctionalTestBase
-except ImportError:
-    from ckan.new_tests.helpers import FunctionalTestBase
-
 import ckanext
 
 
-class TestDatagovthemeServed(FunctionalTestBase):
+class TestDatagovthemeServed(object):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
 
-    def test_datagovtheme_css_file(self):
-        app = self._get_test_app()
-
+    def test_datagovtheme_css_file(self, app):
         index_response = app.get('/dataset')
 
         if ckanext.datagovtheme.helpers.is_bootstrap2():
@@ -28,18 +21,14 @@ class TestDatagovthemeServed(FunctionalTestBase):
             assert_in('datagovtheme.css', index_response.unicode_body)
             assert_not_in('datagovtheme_bootstrap2.css', index_response.unicode_body)
 
-    def test_datagovtheme_html_loads(self):
-        app = self._get_test_app()
-
+    def test_datagovtheme_html_loads(self, app):
         index_response = app.get('/dataset')
 
         assert_in("Search Data.Gov", index_response.unicode_body)
         assert_in("Search datasets...", index_response.unicode_body)
         assert_in("No datasets found", index_response.unicode_body)
 
-    def test_datagovtheme_navigation(self):
-        app = self._get_test_app()
-
+    def test_datagovtheme_navigation(self, app):
         index_response = app.get('/dataset')
 
         assert_in('<li class="active"><a href="/dataset">Data</a></li>', index_response.unicode_body)
@@ -50,9 +39,7 @@ class TestDatagovthemeServed(FunctionalTestBase):
         assert_in('<li><a href="//www.data.gov/developers/">Developers</a></li>', index_response.unicode_body)
         assert_in('<li><a href="//www.data.gov/contact">Contact</a></li>', index_response.unicode_body)
 
-    def test_datagovtheme_topics(self):
-        app = self._get_test_app()
-
+    def test_datagovtheme_topics(self, app):
         index_response = app.get('/dataset')
 
         assert_in('<li class="menu-agriculture">', index_response.unicode_body)
@@ -63,9 +50,7 @@ class TestDatagovthemeServed(FunctionalTestBase):
         assert_in('<li class="menu-ocean">', index_response.unicode_body)
         assert_in('<li class="menu-older-adults-health">', index_response.unicode_body)
 
-    def test_datagovtheme_organizations(self):
-        app = self._get_test_app()
-
+    def test_datagovtheme_organizations(self, app):
         index_response = app.get('/organization')
 
         assert_in("No organizations found", index_response.unicode_body)

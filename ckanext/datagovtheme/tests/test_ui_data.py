@@ -11,18 +11,16 @@ from nose.tools import assert_equal, assert_in
 
 try:
     from ckan.plugins.toolkit import config
-    from ckan.tests.helpers import FunctionalTestBase
     from ckan.tests import factories
 except ImportError:
     from pylons import config
-    from ckan.new_tests.helpers import FunctionalTestBase
     from ckan.new_tests import factories
 
 
 log = logging.getLogger(__name__)
 
 
-class TestUIData(FunctionalTestBase):
+class TestUIData(object):
 
     def create_datasets(self):
         organization = factories.Organization()
@@ -33,11 +31,10 @@ class TestUIData(FunctionalTestBase):
         sysadmin = factories.Sysadmin(name='testUpdate')
         self.user_name = sysadmin['name'].encode('ascii')
 
-    def test_not_empty_sections(self):
+    def test_not_empty_sections(self, app):
 
         self.create_datasets()
 
-        app = self._get_test_app()
         index_response = app.get('/dataset')
 
         html = BeautifulSoup(index_response.unicode_body, 'html.parser')
@@ -57,9 +54,8 @@ class TestUIData(FunctionalTestBase):
             for li in lis:
                 log.info('Elements found: {}'.format(li))
 
-    def test_links(self):
+    def test_links(self, app):
 
-        app = self._get_test_app()
         index_response = app.get('/dataset')
 
         html = BeautifulSoup(index_response.unicode_body, 'html.parser')
