@@ -37,7 +37,7 @@ CKAN version | Compatibility
 ------------ | -------------
 <=2.7        | no
 2.8          | yes
-2.9          | in progress
+2.9          | [in progress](https://github.com/GSA/datagov-ckan-multi/issues/567)
 
 
 ### Configuration
@@ -55,7 +55,8 @@ _TODO: what configuraiton options exist?_
 
 ### Setup
 
-Build the docker containers.
+Build the docker containers. You'll want to do this anytime the dependencies
+change (requirements.txt, dev-requirements.txt).
 
     $ make build
 
@@ -93,3 +94,34 @@ To run the extension tests, start the containers with `make up`, then:
 Lint your code.
 
     $ make lint
+
+
+### Matrix builds
+
+The existing development environment assumes a full catalog.data.gov test setup. This makes
+it difficult to develop and test against new versions of CKAN (or really any
+dependency) because everything is tightly coupled and would require us to
+upgrade everything at once which doesn't really work. A new make target
+`test-new` is introduced with a new docker-compose file.
+
+The "new" development environment drops as many dependencies as possible. It is
+not meant to have feature parity with
+[GSA/catalog.data.gov](https://github.com/GSA/catalog.data.gov/). Tests should
+mock external dependencies where possible.
+
+In order to support multiple versions of CKAN, or even upgrade to new versions
+of CKAN, we support development and testing through the `CKAN_VERSION`
+environment variable.
+
+    $ CKAN_VERSION=2.8 make test-new
+    $ CKAN_VERSION=2.9 make test-new
+
+
+Other docker-compose make targets work in both new and old environments through
+the `COMPOSE_FILE` make variable.
+
+    $ make COMPOSE_FILE=docker-compose.ckan.yml clean
+
+Variable | Description | Default
+-------- | ----------- | -------
+COMPOSE_FILE | docker-compose service description file. | docker-compose.yml

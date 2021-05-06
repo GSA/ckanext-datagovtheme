@@ -1,9 +1,11 @@
+COMPOSE_FILE ?= docker-compose.yml
+
 build: ## Build the  docker containers
-	docker-compose build
+	docker-compose -f $(COMPOSE_FILE) build
 
 clean: ## Clean workspace and containers
 	find . -name *.pyc -delete
-	docker-compose down -v --remove-orphan
+	docker-compose -f $(COMPOSE_FILE) down -v --remove-orphan
 
 lint: ## Lint the code
 	pip install pip==20.3.3
@@ -14,8 +16,11 @@ test: ## Run tests in an existing container
 	@# TODO wait for CKAN to be up; use docker-compose run instead
 	docker-compose exec ckan /bin/bash -c "nosetests --ckan --with-pylons=src/ckan/test-catalog-next.ini src_extensions/datagovtheme/ckanext/datagovtheme/tests"
 
+test-new:
+	docker-compose -f docker-compose.ckan.yml run --rm app ./test.sh
+
 up: ## Start the containers
-	docker-compose up
+	docker-compose -f $(COMPOSE_FILE) up
 
 
 .DEFAULT_GOAL := help
