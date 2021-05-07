@@ -86,6 +86,7 @@ class DatagovTheme(p.SingletonPlugin):
         from ckanext.datagovtheme import helpers as datagovtheme_helpers
         # TODO prefix these helper names with datagovtheme_
         helpers = {
+            'datagovtheme_api_doc_url': datagovtheme_helpers.api_doc_url,
             'render_datetime_datagov': datagovtheme_helpers.render_datetime_datagov,
             'get_harvest_object_formats': datagovtheme_helpers.get_harvest_object_formats,
             'get_dynamic_menu': datagovtheme_helpers.get_dynamic_menu,

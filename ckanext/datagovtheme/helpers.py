@@ -24,6 +24,14 @@ log = logging.getLogger(__name__)
 ckan_tmp_path = '/var/tmp/ckan'
 
 
+def api_doc_url():
+    lang = h.lang()
+    ckan_major_minor_version = '.'.join(h.ckan_version().split('.')[0:2])
+
+    return 'https://docs.ckan.org/{lang}/{version}/api/index.html'.format(
+           lang=lang, version=ckan_major_minor_version)
+
+
 def render_datetime_datagov(date_str):
     try:
         value = h.render_datetime(date_str)
