@@ -7,9 +7,5 @@
 
 {% block styles %}
   {{ super() }}
-  {% if h.is_bootstrap2() %} 
-  {% resource 'datagovtheme/styles/datagovtheme_bootstrap2.css' %}
-  {% else %}
   {% resource 'datagovtheme/styles/datagovtheme.css' %}
-  {% endif %}
 {% endblock %}

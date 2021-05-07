@@ -1,11 +1,9 @@
 {% ckan_extends %}
 
-{% set is_bootstrap2 = h.is_bootstrap2() %}
 {% set pkg_dict = c.pkg_dict %}
 {% set dataset_extent = h.get_pkg_dict_extra(c.pkg_dict, 'spatial', '') %}
 {% set dataset_is_datajson = h.get_pkg_dict_extra(c.pkg_dict, 'source_datajson_identifier', False) %}
 {% set dataset_is_schema11 = h.get_pkg_dict_extra(c.pkg_dict, 'source_schema_version', '') == '1.1' %}
-{% set is_bootstrap2 = h.is_bootstrap2() %}
 
 {% block package_description %}
 <section class="module-content" style="padding-top:0px;">
@@ -37,13 +35,7 @@
     {% block package_notes %}
 
       <div itemprop="description" class="notes embedded-content">
-      {% if h.is_bootstrap2() %} 
-          {% if c.pkg_notes_formatted %}
-              {{ c.pkg_notes_formatted }}
-          {% endif %}
-      {% else %}
           {{ h.render_markdown(h.get_translated(pkg, 'notes')) }}
-      {% endif %}
       </div>
     {% endblock %}
     {# FIXME why is this here? seems wrong #}
@@ -278,7 +270,7 @@
             </li>
           {% endif %}
         </ul>
-        <p class="{{ 'muted' if is_bootstrap2 else 'text-muted' }}">{{ h.get_harvest_source_link(pkg) }}</p>
+        <p class="{{ 'text-muted' }}">{{ h.get_harvest_source_link(pkg) }}</p>
       </section>
     {% endif %}
   {% endif %}
@@ -334,11 +326,7 @@
               <div itemprop="provider" itemscope itemtype="http://schema.org/Person">
 
               {% if pkg_dict.maintainer_email and pkg_dict.maintainer_email.strip()|length > 0 %}
-                {% if is_bootstrap2 %} {# preserve compatibility with old CKAN versions #}
-                  {% set a_mail = h.mail_to(email_address=pkg_dict.maintainer_email) %}
-                {% else %}
                   {% set a_mail = h.mail_to(email_address=pkg_dict.maintainer_email, name=pkg_dict.maintainer) %}
-                {% endif %}
                 <span itemprop="email" property="foaf:mbox">{{ a_mail }}</span> 
               {% else %}
                   <span itemprop="name" property="dcat:contactPoint">{{ pkg_dict.maintainer }}</span>
@@ -367,11 +355,7 @@
              {% if contact_email == 'Unknown'%}
               {{contact_email}}
              {% else %}
-             {% if is_bootstrap2 %}
-               {{ h.mail_to(email_address=contact_email) }}
-             {% else %}
                {{ h.mail_to(email_address=contact_email, name=name) }}
-             {% endif %}
              {% endif %}
              </span></div>
             </td>

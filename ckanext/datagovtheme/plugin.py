@@ -84,6 +84,7 @@ class DatagovTheme(p.SingletonPlugin):
     # ITemplateHelpers
     def get_helpers(self):
         from ckanext.datagovtheme import helpers as datagovtheme_helpers
+        # TODO prefix these helper names with datagovtheme_
         helpers = {
             'render_datetime_datagov': datagovtheme_helpers.render_datetime_datagov,
             'get_harvest_object_formats': datagovtheme_helpers.get_harvest_object_formats,
@@ -105,20 +106,19 @@ class DatagovTheme(p.SingletonPlugin):
             'schema11_key_mod': datagovtheme_helpers.schema11_key_mod,
             'schema11_frequency_mod': datagovtheme_helpers.schema11_frequency_mod,
             'convert_top_category_to_list': datagovtheme_helpers.convert_top_category_to_list,
-            'is_bootstrap2': datagovtheme_helpers.is_bootstrap2,
             'get_pkg_dict_extra': datagovtheme_helpers.get_pkg_dict_extra,
             'get_login_url': datagovtheme_helpers.get_login_url,
         }
-        if p.toolkit.check_ckan_version(min_version='2.8'):
-            # old CKAN don't allow to override helpers
-            # https://github.com/GSA/ckan/blob/datagov/ckan/config/environment.py#L70:L70
-            override_helpers = {
-                'archiver_resource_info_table': datagovtheme_helpers.archiver_resource_info_table,
-                'archiver_is_resource_broken_line': datagovtheme_helpers.archiver_is_resource_broken_line,
-                'qa_openness_stars_resource_line': datagovtheme_helpers.qa_openness_stars_resource_line,
-                'qa_openness_stars_resource_table': datagovtheme_helpers.qa_openness_stars_resource_table,
-            }
 
-            helpers.update(override_helpers)
+        # https://github.com/GSA/ckan/blob/datagov/ckan/config/environment.py#L70:L70
+        # Override ckanext-qa and ckanext-archiver template helpers. Is this best practice?
+        override_helpers = {
+            'archiver_resource_info_table': datagovtheme_helpers.archiver_resource_info_table,
+            'archiver_is_resource_broken_line': datagovtheme_helpers.archiver_is_resource_broken_line,
+            'qa_openness_stars_resource_line': datagovtheme_helpers.qa_openness_stars_resource_line,
+            'qa_openness_stars_resource_table': datagovtheme_helpers.qa_openness_stars_resource_table,
+        }
+
+        helpers.update(override_helpers)
 
         return helpers

@@ -21,25 +21,23 @@ class TestLoginURL(FunctionalTestBase):
 
     def test_saml2_login_url(self):
         """ test saml2 URL on Catalog-next """
-        if p.toolkit.check_ckan_version(min_version='2.8'):
-            if not p.plugin_loaded('saml2auth'):
-                p.load('saml2auth')
+        if not p.plugin_loaded('saml2auth'):
+            p.load('saml2auth')
 
-            config['ckanext.saml2auth.enable_ckan_internal_login'] = 'false'
+        config['ckanext.saml2auth.enable_ckan_internal_login'] = 'false'
 
-            app = self._get_test_app()
-            index_response = app.get('/dataset')
+        app = self._get_test_app()
+        index_response = app.get('/dataset')
 
-            assert_in('/user/saml2login', index_response.unicode_body)
+        assert_in('/user/saml2login', index_response.unicode_body)
 
     def test_login_url(self):
         """ test saml2 URL on Catalog-next """
-        if p.toolkit.check_ckan_version(min_version='2.8'):
-            config['ckanext.saml2auth.enable_ckan_internal_login'] = 'false'
-            if p.plugin_loaded('saml2auth'):
-                p.unload('saml2auth')
+        config['ckanext.saml2auth.enable_ckan_internal_login'] = 'false'
+        if p.plugin_loaded('saml2auth'):
+            p.unload('saml2auth')
 
-            app = self._get_test_app()
-            index_response = app.get('/dataset')
+        app = self._get_test_app()
+        index_response = app.get('/dataset')
 
-            assert_in('/user/login', index_response.unicode_body)
+        assert_in('/user/login', index_response.unicode_body)

@@ -18,10 +18,7 @@ from ckanext.harvest.model import HarvestObject
 from ckanext.geodatagov.plugins import RESOURCE_MAPPING
 from ckan.plugins.toolkit import asbool
 
-if p.toolkit.check_ckan_version(max_version='2.3'):
-    from pylons import config
-else:
-    from ckan.plugins.toolkit import config, request
+from ckan.plugins.toolkit import config, request
 
 log = logging.getLogger(__name__)
 ckan_tmp_path = '/var/tmp/ckan'
@@ -144,10 +141,7 @@ def get_dynamic_menu():
             menus = json.loads(json_menu_clean)
         except Exception:
             pass
-    if p.toolkit.check_ckan_version(max_version='2.3'):
-        query = p.toolkit.c.environ.get('QUERY_STRING', '')
-    else:
-        query = request.environ.get('QUERY_STRING', '')
+    query = request.environ.get('QUERY_STRING', '')
     submenu_key = None
     category_1 = None
     category_2 = None
@@ -558,10 +552,6 @@ def get_bureau_info(bureau_code):
         bureau_info['logo'] = None
 
     return bureau_info
-
-
-def is_bootstrap2():
-    return not p.toolkit.check_ckan_version(min_version='2.8')
 
 
 def get_pkg_dict_extra(pkg_dict, key, default=None):
