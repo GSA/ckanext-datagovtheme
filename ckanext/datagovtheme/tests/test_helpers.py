@@ -1,6 +1,4 @@
 # encoding: utf-8
-from nose.tools import assert_in
-
 try:
     from ckan.tests.helpers import FunctionalTestBase
     from ckan.plugins.toolkit import config
@@ -9,15 +7,15 @@ except ImportError:
     from pylons import config
 
 from ckan import plugins as p
+from ckanext.datagovtheme import helpers
 
 
-class TestLoginURL(FunctionalTestBase):
+class TestGetLoginUrl(FunctionalTestBase):
 
     def test_base_login(self):
         config['ckanext.saml2auth.enable_ckan_internal_login'] = 'true'
-        app = self._get_test_app()
-        index_response = app.get('/dataset')
-        assert_in('/user/login', index_response.unicode_body)
+        actual_login_url = helpers.get_login_url()
+        assert '/user/login' == actual_login_url
 
     def test_saml2_login_url(self):
         """ test saml2 URL on Catalog-next """
@@ -26,10 +24,8 @@ class TestLoginURL(FunctionalTestBase):
 
         config['ckanext.saml2auth.enable_ckan_internal_login'] = 'false'
 
-        app = self._get_test_app()
-        index_response = app.get('/dataset')
-
-        assert_in('/user/saml2login', index_response.unicode_body)
+        actual_login_url = helpers.get_login_url()
+        assert '/user/saml2login' == actual_login_url
 
     def test_login_url(self):
         """ test saml2 URL on Catalog-next """
@@ -37,7 +33,5 @@ class TestLoginURL(FunctionalTestBase):
         if p.plugin_loaded('saml2auth'):
             p.unload('saml2auth')
 
-        app = self._get_test_app()
-        index_response = app.get('/dataset')
-
-        assert_in('/user/login', index_response.unicode_body)
+        actual_login_url = helpers.get_login_url()
+        assert '/user/login' == actual_login_url

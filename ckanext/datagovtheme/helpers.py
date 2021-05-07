@@ -651,12 +651,12 @@ def qa_openness_stars_resource_table(resource):
 
 
 def get_login_url():
-    log.info('get login URL')
+    log.debug('get login URL')
     if p.plugin_loaded('saml2auth'):
         enable_ckan_internal_login = config.get('ckanext.saml2auth.enable_ckan_internal_login', 'false')
-        log.info('SAML2 enabled: {}'.format(enable_ckan_internal_login))
+        log.debug('SAML2 enabled: {}'.format(enable_ckan_internal_login))
         if not asbool(enable_ckan_internal_login):
-            log.info('SAML2 OK')
+            log.debug('SAML2 OK')
             return '/user/saml2login'
 
     return h.url_for(controller='user', action='login')
