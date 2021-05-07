@@ -13,6 +13,10 @@ services:
       CKAN_DATASTORE_READ_URL: postgresql://datastore_read:pass@db/datastore_test
       CKAN_SOLR_URL: http://solr:8983/solr/ckan
       CKAN_REDIS_URL: redis://redis:6379/1
+      CKAN_DATAPUSHER_URL: ${CKAN_DATAPUSHER_URL}
+      CKAN__PLUGINS: ${CKAN__PLUGINS}
+    ports:
+      - "5000:5000"
     working_dir: /app
     depends_on:
       - db

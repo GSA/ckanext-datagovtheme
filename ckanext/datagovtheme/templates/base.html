@@ -2,14 +2,20 @@
 
 {% block scripts %}
   {{ super() }}
-  {% resource 'datagovtheme/js' %}
+  {% if h.ckan_version().split('.')[1] | int >= 9 %}
+  {% else %}
+    {% resource 'datagovtheme/js' %}
+  {% endif %}
 {% endblock %}
 
 {% block styles %}
   {{ super() }}
-  {% if h.is_bootstrap2() %} 
-  {% resource 'datagovtheme/styles/datagovtheme_bootstrap2.css' %}
+  {% if h.ckan_version().split('.')[1] | int >= 9 %}
   {% else %}
-  {% resource 'datagovtheme/styles/datagovtheme.css' %}
+    {% if h.is_bootstrap2() %}
+    {% resource 'datagovtheme/styles/datagovtheme_bootstrap2.css' %}
+    {% else %}
+    {% resource 'datagovtheme/styles/datagovtheme.css' %}
+    {% endif %}
   {% endif %}
 {% endblock %}

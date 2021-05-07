@@ -1,0 +1,9 @@
+datagovtheme_scripts:  # name of the asset
+  filters: rjsmin # preprocessor for files. Optional
+  output: ckanext-datagovtheme/extension.js  # actual path, where the generated file will be stored
+  contents: # list of files that are included in the asset
+    - script.js
+datagovtheme_styles:  # name of asset
+  output: ckanext-datagovtheme/extension.css  # actual path, where generated file will be stored
+  contents: # list of files that are included into asset
+    - style.css

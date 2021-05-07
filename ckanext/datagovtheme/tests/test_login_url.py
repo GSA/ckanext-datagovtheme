@@ -18,17 +18,17 @@ class TestLoginURL(object):
         index_response = app.get('/dataset')
         assert_in('/user/login', index_response.unicode_body)
 
-    @pytest.mark.ckan_config('ckanext.saml2auth.enable_ckan_internal_login', 'true')
-    @patch('ckan.plugins')
-    def test_saml2_login_url(self, app, mock_plugins):
+    @pytest.mark.ckan_config('ckanext.saml2auth.enable_ckan_internal_login', 'false')
+    @patch('ckan.plugins.plugin_loaded')
+    def test_saml2_login_url(self, app, mock_plugin_loaded):
         """ test saml2 URL on Catalog-next """
         if p.toolkit.check_ckan_version(min_version='2.8'):
-            mock_plugins.plugin_loaded.return_value = True
+            mock_plugin_loaded.return_value = True
             index_response = app.get('/dataset')
 
             assert_in('/user/saml2login', index_response.unicode_body)
 
-    @pytest.mark.ckan_config('ckanext.saml2auth.enable_ckan_internal_login', 'false')
+    @pytest.mark.ckan_config('ckanext.saml2auth.enable_ckan_internal_login', 'true')
     def test_login_url(self, app):
         """ test saml2 URL on Catalog-next """
         if p.toolkit.check_ckan_version(min_version='2.8'):
