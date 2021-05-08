@@ -2,7 +2,7 @@
 BEFORE resource_actions_inner
 {% block resource_actions_inner %}
   {% if h.check_access('package_update', {'id':pkg.id }) %}
-    <li>{% link_for _('Edit'), controller='package', action='resource_edit', id=pkg.name, resource_id=res.id, class_='btn', icon='wrench' %}</li>
+    <li>{% link_for _('Edit'), controller='resource', action='edit', id=pkg.name, resource_id=res.id, class_='btn', icon='wrench' %}</li>
   {% endif %}
   {% if res.url %}
     <li>
@@ -54,17 +54,17 @@ BEFORE resource_actions_inner
             {% set organization = pkg.organization.title or pkg.organization.name %}
             {% snippet 'package/snippets/organization_breadcrumb_item.html' %}
             <li>{% link_for organization|truncate(30), controller='organization', action='read', id=pkg.organization.name %}</li>
-            <li>{% trans dataset=c.package.title|truncate(30), url=h.url_for(controller='package', action='read', id=c.package['name']) %}<a href="{{ url }}">{{ dataset }}</a>{% endtrans %}</li>
+            <li>{% trans dataset=c.package.title|truncate(30), url=h.url_for(controller='dataset', action='read', id=c.package['name']) %}<a href="{{ url }}">{{ dataset }}</a>{% endtrans %}</li>
                 {% for extra in pkg.extras %}
                     {% if extra.key == 'publisher' and organization != extra.value %}
-                        <li class="active"><a href = "{{h.url_for(controller='package', action='search',  publisher=extra.value)}}{{_('&organization')}}={{pkg.organization.name}}">&nbsp;{{extra.value|truncate(30)}}</a></li>
+                        <li class="active"><a href = "{{h.url_for(controller='dataset', action='search',  publisher=extra.value)}}{{_('&organization')}}={{pkg.organization.name}}">&nbsp;{{extra.value|truncate(30)}}</a></li>
                     {% endif %}
                 {% endfor %}
         {% else %}
-            <li>{% link_for _('Datasets'), controller='package', action='search' %}</li>
+            <li>{% link_for _('Datasets'), controller='dataset', action='search' %}</li>
         {% endif %}
     {% else %}
-            <li>{% link_for _('Datasets'), controller='package', action='search' %}</li>
+            <li>{% link_for _('Datasets'), controller='dataset', action='search' %}</li>
             <li class="active"><a href="">{{ _('Create Dataset') }}</a></li>
     {% endif %}
 {% endblock %}
@@ -85,7 +85,7 @@ BEFORE resource_actions_inner
       <h4>{{ _('From the dataset abstract') }}</h4>
       <blockquote>{{ h.markdown_extract(h.render_markdown(c.package.get('notes'))) }}</blockquote>
     {% endif %}
-    <p>{% trans dataset=c.package.title, url=h.url_for(controller='package', action='read', id=c.package['name']) %}Source: <a href="{{ url }}">{{ dataset }}</a>{% endtrans %}</p>
+    <p>{% trans dataset=c.package.title, url=h.url_for(controller='dataset', action='read', id=c.package['name']) %}Source: <a href="{{ url }}">{{ dataset }}</a>{% endtrans %}</p>
     <br>
 {% endblock %}
 

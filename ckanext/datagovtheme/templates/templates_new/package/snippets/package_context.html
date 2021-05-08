@@ -4,7 +4,7 @@
     {% if pkg.notes %}
       <p>
         {{ h.markdown_extract(pkg.notes, 180) }}
-        {% link_for _('read more'), controller='package', action='about', id=pkg.name %}
+        {% link_for _('read more'), controller='dataset', action='about', id=pkg.name %}
       </p>
     {% endif %}
     <div class="nums">
