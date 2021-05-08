@@ -1,3 +1,5 @@
+future
+
 # ckanext-harvest
 -e git+https://github.com/ckan/ckanext-harvest.git#egg=ckanext-harvest
 ckantoolkit==0.0.3

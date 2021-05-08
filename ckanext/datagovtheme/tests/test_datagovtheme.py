@@ -3,6 +3,7 @@
 '''Tests for the ckanext.datagovtheme extension.
 
 '''
+from builtins import object
 
 
 class TestDatagovthemeServed(object):

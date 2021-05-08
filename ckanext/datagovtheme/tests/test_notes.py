@@ -1,4 +1,5 @@
 # encoding: utf-8
+from builtins import object
 import pytest
 
 from ckantoolkit.tests import factories
