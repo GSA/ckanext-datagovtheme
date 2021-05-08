@@ -341,7 +341,7 @@ def get_dynamic_menu():
     # check to see if file is older than .5 hour
     if (time_current - time_file) < old_div(3600, 2):
         file_obj = open(filename)
-        file_conent = file_obj.read()
+        file_conent = str(file_obj.read())
     else:
         # it means file is old, or does not exist
         # fetch new content
@@ -354,12 +354,12 @@ def get_dynamic_menu():
             resource = urllib.request.urlopen(url, timeout=sec_timeout)
         except Exception:
             file_obj = open(filename)
-            file_conent = file_obj.read()
+            file_conent = str(file_obj.read())
             # touch the file, so that it wont keep re-trying and slow down page loading
             os.utime(filename, None)
         else:
             file_obj = open(filename, 'w+')
-            file_conent = resource.read()
+            file_conent = str(resource.read())
             file_obj.write(file_conent)
 
     file_obj.close()
