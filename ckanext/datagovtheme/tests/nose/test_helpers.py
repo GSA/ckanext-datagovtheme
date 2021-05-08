@@ -30,15 +30,6 @@ class TestGetLoginUrl(FunctionalTestBase):
         actual_login_url = helpers.get_login_url()
         assert_equal('/user/saml2login', actual_login_url)
 
-    def test_login_url(self):
-        """ test saml2 URL on Catalog-next """
-        config['ckanext.saml2auth.enable_ckan_internal_login'] = 'false'
-        if p.plugin_loaded('saml2auth'):
-            p.unload('saml2auth')
-
-        actual_login_url = helpers.get_login_url()
-        assert_equal('/user/login', actual_login_url)
-
 
 class TestApiDocUrl(FunctionalTestBase):
 

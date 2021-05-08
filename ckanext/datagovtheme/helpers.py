@@ -920,12 +920,11 @@ def qa_openness_stars_resource_table(resource):
 
 
 def get_login_url():
-    log.debug('get login URL')
-    if p.plugin_loaded('saml2auth'):
-        enable_ckan_internal_login = config.get('ckanext.saml2auth.enable_ckan_internal_login', 'false')
-        log.debug('SAML2 enabled: {}'.format(enable_ckan_internal_login))
-        if not asbool(enable_ckan_internal_login):
-            log.debug('SAML2 OK')
-            return '/user/saml2login'
+    # TODO maybe make this a configuration option for ckanext.saml2auth instead of the implicit dependency
+    # TODO push this upstream to ckanext.saml2auth, we should be able to use url_for
+    # TODO if we have to rely on a config option, it should be in the ckanext.datagovtheme namespace
+    enable_ckan_internal_login = asbool(config.get('ckanext.saml2auth.enable_ckan_internal_login', 'true'))
+    if enable_ckan_internal_login:
+        return h.url_for(controller='user', action='login')
 
-    return h.url_for(controller='user', action='login')
+    return '/user/saml2login'
