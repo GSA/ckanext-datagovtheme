@@ -135,13 +135,13 @@ BEFORE resource_actions_inner
         </table>
       </div>
     </section>
-    {% resource 'datagovtheme/qa.js' %}
-    <link rel="stylesheet" href="/css/qa.css" />
+    {% asset 'datagovtheme/qa' %}
+    {% asset 'datagovtheme/qa_styles' %}
     <div class="col-sm-12" id="archive_table">
       {{ h.archiver_resource_info_table(c.resource) }}
       {{ h.qa_openness_stars_resource_table(c.resource) }}
     <br>
    </div>
- {% endif %}  
+ {% endif %}
 {% endblock %}
 
