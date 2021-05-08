@@ -2,56 +2,79 @@
 
 [![CircleCI](https://circleci.com/gh/GSA/ckanext-datagovtheme.svg?style=svg)](https://circleci.com/gh/GSA/ckanext-datagovtheme)
 
-This repository is front end code sepration for catalog.data.gov. This contains all the template files, Javascripts and stylesheets.
+Data.gov theme, branding, and UI customizations for
+[catalog.data.gov](https://catalog.data.gov/) as a [CKAN](https://ckan.org/)
+extension.
 
-The [ckanext-geodatagov](https://github.com/GSA/ckanext-geodatagov) and [ckanext-spatial](https://github.com/ckan/ckanext-spatial) extensions must be [installed and enabled](https://docs.ckan.org/en/2.8/extensions/tutorial.html#installing-the-extension) as plugins before this extension can be installed and enabled.
 
-This extension is compatible with versions of CKAN using Bootstrap 2 and Bootstrap 3. If CKAN is using version 2.8 or higher this extension will use Bootstrap 3.
+## Usage
 
-This extension as well as the dependent extensions above must be installed properly with CKAN before running the tests for this extension.
 
-The tests for this extension are located in the [test directory](/ckanext/datagovtheme/tests/test_datagovetheme.py).
+### Requirements
+
+These extensions are required.
+
+- [ckanext-geodatagov](https://github.com/GSA/ckanext-geodatagov)
+- [ckanext-spatial](https://github.com/ckan/ckanext-spatial)
+
+
+CKAN version | Compatibility
+------------ | -------------
+<=2.7        | no
+2.8          | yes
+2.9          | in progress
+
+
+### Configuration
+
+_TODO: what configuraiton options exist?_
+
+
+## Development
+
+### Requirements
+
+- GNU Make
+- Docker Compose
+
+
+### Setup
+
+Build the docker containers.
+
+    $ make build
+
+Start the containers.
+
+    $ make up
+
+CKAN will start at [localhost:5000](http://localhost:5000).
+
+Clean up the environment.
+
+    $ make down
+
+Open a shell to run commands in the container.
+
+    $ docker-compose exec ckan bash
+
+If you're unfamiliar with docker-compose, see our
+[cheatsheet](https://github.com/GSA/datagov-deploy/wiki/Docker-Best-Practices#cheatsheet)
+and the [official docs](https://docs.docker.com/compose/reference/).
+
+For additional make targets, see the help.
+
+    $ make help
+
+
+### Testing
 
 They follow the guidelines for [testing CKAN extensions](https://docs.ckan.org/en/2.8/extensions/testing-extensions.html#testing-extensions).
 
-To run the extension tests:
+To run the extension tests, start the containers with `make up`, then:
 
-1. Make sure your virtual environment is activated
+    $ make test
 
-`. /usr/lib/ckan/default/bin/activate`
+Lint your code.
 
-2. cd into the ckanext-datagovtheme directory
-
-`cd /usr/lib/ckan/default/src/ckanext-datagovtheme`
-
-3. Use the nosetests command:
-
-`nosetests --ckan --with-pylons=test.ini ckanext/datagovtheme/tests`
-
-Note: the tests will only run if the environment is installed using the [CKAN Install from Source](https://docs.ckan.org/en/2.8/maintaining/installing/install-from-source.html#installing-ckan-from-source) installation
-
-## Using the Docker Dev Environment
-
-### Build Environment
-
-To start environment, run:
-```docker-compose build```
-```docker-compose up```
-
-CKAN will start at localhost:5000
-
-To shut down environment, run:
-
-```docker-compose down```
-
-To docker exec into the CKAN image, run:
-
-```docker-compose exec ckan /bin/bash```
-
-### Run Tests with Docker
-
-Test using full environment from [catalog-next](https://github.com/GSA/catalog.data.gov) (CKAN 2.8) repo
-
-```
-docker-compose exec ckan /bin/bash -c "nosetests --ckan --with-pylons=src/ckan/test-catalog-next.ini src_extensions/datagovtheme/"
-```
+    $ make lint
