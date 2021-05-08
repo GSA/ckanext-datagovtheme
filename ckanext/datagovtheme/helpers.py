@@ -501,6 +501,30 @@ def get_harvest_source_link(package_dict):
     return ''
 
 
+# https://github.com/ckan/ckanext-spatial/blob/011008b9c5c4bf58ddd401c805328a9928bbe4ea/ckanext/spatial/helpers.py
+def get_reference_date(date_str):
+    '''
+        Gets a reference date extra created by the harvesters and formats it
+        nicely for the UI.
+        Examples:
+            [{"type": "creation", "value": "1977"}, {"type": "revision", "value": "1981-05-15"}]
+            [{"type": "publication", "value": "1977"}]
+            [{"type": "publication", "value": "NaN-NaN-NaN"}]
+        Results
+            1977 (creation), May 15, 1981 (revision)
+            1977 (publication)
+            NaN-NaN-NaN (publication)
+    '''
+    try:
+        out = []
+        for date in h.json.loads(date_str):
+            value = h.render_datetime(date['value']) or date['value']
+            out.append('{0} ({1})'.format(value, date['type']))
+        return ', '.join(out)
+    except (ValueError, TypeError):
+        return date_str
+
+
 def is_map_viewer_format(resource):
     # TODO rename config option to ckanext.datagovtheme
     viewer_url = config.get('ckanext.geodatagov.spatial_preview.url')
@@ -798,9 +822,9 @@ def get_bureau_info(bureau_code):
     return bureau_info
 
 
-# TODO can we drop this dependency on ckanext-harvest? Can this be moved to ckanext-harvest?
+# TODO can we drop this dependency on ckanext-harvest? Can this be moved to ckanext-harvest? geodatagov?
 def get_pkg_dict_extra(pkg_dict, key, default=None):
-    ''' Ovberride the CKAN core helper to add rolled up extras
+    '''Override the CKAN core helper to add rolled up extras
     Returns the value for the dataset extra with the provided key.
 
     If the key is not found, it returns a default value, which is None by

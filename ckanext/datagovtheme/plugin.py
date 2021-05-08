@@ -87,6 +87,7 @@ class DatagovTheme(p.SingletonPlugin):
         # TODO prefix these helper names with datagovtheme_
         helpers = {
             'datagovtheme_api_doc_url': datagovtheme_helpers.api_doc_url,
+            'datagovtheme_get_reference_date': datagovtheme_helpers.get_reference_date,
             'render_datetime_datagov': datagovtheme_helpers.render_datetime_datagov,
             'get_harvest_object_formats': datagovtheme_helpers.get_harvest_object_formats,
             'get_dynamic_menu': datagovtheme_helpers.get_dynamic_menu,
