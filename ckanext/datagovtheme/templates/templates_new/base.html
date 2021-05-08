@@ -1,0 +1,11 @@
+{% ckan_extends %}
+
+{% block scripts %}
+  {{ super() }}
+  {% resource 'datagovtheme/js' %}
+{% endblock %}
+
+{% block styles %}
+  {{ super() }}
+  {% resource 'datagovtheme/styles/datagovtheme.css' %}
+{% endblock %}

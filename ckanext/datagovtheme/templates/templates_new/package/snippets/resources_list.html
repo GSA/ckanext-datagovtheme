@@ -1,0 +1,62 @@
+{#
+Renders a list of resources with icons and view links.
+
+resources - A list of resources to render
+pkg - A package object that the resources belong to.
+
+Example:
+
+  {% snippet "package/snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
+
+#}
+
+{% set exists = [] %}
+{% for extra in pkg.extras %}
+   {% if extra.key == 'data-dictiionary' or extra.key == 'dataDictionary' or extra.key == 'landingPage' or extra.key == 'webService' %}
+       {% do exists.append(1) %}
+   {% endif %}
+{% endfor %}
+
+{% if resources or exists|length > 0  %}
+  <section id="dataset-resources" class="resources module-content">
+    <h3>{{ _('Downloads & Resources') }}</h3>
+    {% block resource_list %}
+    <ul class="{% block resource_list_class %}resource-list{% endblock %}">
+      {% block resource_list_inner %}
+
+      <!-- non-public display new message, else if no resources display old msg, and then resources
+          at the end display the extra item, maybe a landing pg        -->
+
+      <br/>
+      <!-- display new msg for all non-public datasets -->
+      {% if (h.get_pkg_dict_extra(pkg, 'accessLevel') == 'non-public') %}
+        <div class="no-resource"><i class="fa fa-exclamation-circle"></i> No file downloads are available because this is not a public dataset. See Access &amp; Use Information for details.</div>
+      <!--  for datasets that are NOT non-public, only display old message when there are no resources-->
+      {% elif not resources %}
+        <div class="no-resource"><i class="fa fa-exclamation-circle"></i> No file downloads have been provided. The publisher may provide downloads in the future or they may be available from their other links.</div>
+      <!--  so we are dealing with a dataset that is either public/restricted... and it has resources.. display the resources -->
+      {% else %}
+        {% for resource in resources %}
+          {% if resource %}
+            {% snippet 'package/snippets/resource_item.html', pkg=pkg, res=resource %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      <br/>
+      {% snippet 'package/snippets/resource_extra_item.html', pkg=pkg %}
+
+
+      {% endblock %}
+    </ul>
+    {% endblock %} </section>
+<!-- for datasets that dont have resources or a landing page.. -->
+{% else %}
+  <section id="dataset-resources" class="resources module-content">
+    <h3>{{ _('Downloads & Resources') }}</h3>
+    {% if (h.get_pkg_dict_extra(pkg, 'accessLevel') == 'non-public') %}
+      <div class="no-resource"><i class="fa fa-exclamation-circle"></i> No file downloads are available because this is not a public dataset. See Access &amp; Use Information for details.</div>
+    {% else %}
+      <div class="no-resource"><i class="fa fa-exclamation-circle"></i> No file downloads have been provided. The publisher may provide downloads in the future or they may be available from their other links.</div>
+    {% endif %}
+  </section>
+{% endif %}

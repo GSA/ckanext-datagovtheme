@@ -1,0 +1,127 @@
+{% block header %}
+{% set menus = h.get_dynamic_menu() %}
+<a href="#content" class="hide">{{ _('Skip to content') }}</a>
+
+<header class="navbar navbar-static-top masthead">
+    {% if g.debug and not g.debug_supress_header %}
+    <div class="debug">Controller : {{ c.controller }}<br/>Action : {{ c.action }}</div>
+    {% endif %}
+
+    <div class="container">
+        <div class="searchbox-row skip-navigation">
+            <div class="skip-link">
+                <a href="#">Jump to Content</a>
+            </div>
+            <div>
+                <form action="/dataset" class="search-form form-inline navbar-right navbar-nav  col-sm-6 col-md-6 col-lg-6" method="get" role="search">
+                    <div class="input-group">
+                        <label class="hide" for="search-header">Search for:</label>
+
+                        <input type="search" placeholder="Search Data.Gov" class="search-field form-control" name="q" value="Search Data.Gov" id="search-header" onblur="if(value=='') value = 'Search Data.Gov'" onfocus="if(value=='Search Data.Gov') value = ''">      <span class="input-group-btn">
+      <button class="search-submit btn_new btn-default" type="submit">
+          <i class="fa fa-search"></i>
+          <span class="sr-only">Search</span>
+      </button>
+    </span>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <hgroup class="top">
+
+            {% block header_account %}
+            <div class="account-wrapper">
+                {% if c.userobj %}
+                <nav class="account avatar authed" data-module="me" data-me="{{ c.userobj.id }}">
+                    <ul class="unstyled">
+                        <li>
+                            <a href="{{ h.url_for(controller='user', action='read', id=c.userobj.name) }}" class="image" title="{{ _('View profile') }}">
+                                {{ h.gravatar((c.userobj.email_hash if c and c.userobj else ''), size=16) }}
+                                {{ c.userobj.display_name }}
+                            </a>
+                        </li>
+                        <li class="notifications {% if c.new_activities > 0 %}notifications-important{% endif %}">
+                            {% set new_activities = h.new_activities() %}
+                            <li class="notifications {% if new_activities > 0 %}notifications-important{% endif %}">
+                                <i class="icon-dashboard"></i>
+                                <span>{{ new_activities }}</span>
+                            </a>
+                        </li>
+                        {% if c.userobj.sysadmin %}
+                        <li>
+                            <a href="{{ h.url_for(controller='admin', action='index') }}" title="{{ _('Sysadmin settings') }}">
+                                <i class="icon-legal"></i>
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li>
+                            <a href="{{ h.url_for('/user/_logout') }}" title="{{ _('Log out') }}">
+                                <i class="icon-signout"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                {% endif %}
+            </div>
+            {% endblock %}
+
+
+        </hgroup>
+        <hgroup class="top-nav">
+            <div class="logo">
+                <a href="http://www.data.gov/" class="root"><span>{{ _('data.gov') }}</span></a>
+            </div>
+
+            {% include 'snippets/root_nav.html' %}
+            {% block header_site_navigation %}
+
+            {% endblock %}
+
+        </hgroup>
+    </div>
+    <div class="header_new banner_new page-heading_new">
+        <div class="container">
+            <div class="page-header_new">
+                <div class="main-heading">
+                    <h1>Metrics - Site Usage Statistics</h1>
+                </div>
+
+                <div class="toolbar">
+                    <div class="add_action">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+    {% if menus['submenus'] %}
+<div class="sub-nav banner-nav">
+    <div class="container">
+        <nav role="navigation" class="topic-subnav">
+            <ul class="nav navbar-nav" id="menu-community">
+                {% for submenu in menus['submenus'] if not submenu['parent_id'] %}
+                    {% if submenu['has_children'] %}
+                        {% set parent_id = submenu['id'] %}
+            <li><a href="{{ submenu['link'] }}" class="dropdown-toggle{% if submenu['name']=='Data' %} active{% endif %}" data-toggle="dropdown">{{ submenu['name'] }}<b class="caret"></b></a>
+                <ul class="dropdown-menu topics{% if menus['topic_header'] %} {{ menus['topic_header']['class'] }} {% endif %}">
+                        {% for sub_submenu in menus['submenus'] if sub_submenu['parent_id'] == parent_id %}
+                    <li><a href="{{ sub_submenu['link'] }}">{{ sub_submenu['name'] }}</a></li>
+                        {% endfor %}
+                </ul>
+            </li>
+                    {% elif not submenu['parent_id'] %}
+                        {% if submenu['name'] == 'Data' %}
+            <li><a href="{{ submenu['link'] }}" class="active">{{ submenu['name'] }}</a></li>
+                        {% else %}
+            <li><a href="{{ submenu['link'] }}">{{ submenu['name'] }}</a></li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+</div>
+    {% endif %}
+{% endblock %}

@@ -18,14 +18,6 @@ class DatagovTheme(MixinPlugin, p.SingletonPlugin):
     p.implements(p.IRoutes, inherit=True)
     p.implements(p.ITemplateHelpers)
 
-    def update_config(self, config):
-
-        # Add this plugin's templates dir to CKAN's extra_template_paths, so
-        # that CKAN will use this plugin's custom templates.
-        p.toolkit.add_template_directory(config, '../templates')
-        p.toolkit.add_public_directory(config, '../public')
-        p.toolkit.add_resource('../fanstatic_library', 'datagovtheme')
-
     # IFacets
     def dataset_facets(self, facets_dict, package_type):
 
