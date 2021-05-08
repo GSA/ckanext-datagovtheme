@@ -16,5 +16,5 @@ class TestNotes(object):
 
         dataset_response = app.get('/dataset/{}'.format(dataset['name']))
 
-        assert '<div itemprop="description" class="notes embedded-content">' in dataset_response.unicode_body
-        assert notes in dataset_response.unicode_body
+        assert '<div itemprop="description" class="notes embedded-content">' in dataset_response.body
+        assert notes in dataset_response.body

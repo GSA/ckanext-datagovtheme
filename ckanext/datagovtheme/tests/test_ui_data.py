@@ -27,7 +27,7 @@ class TestUIData(object):
 
         index_response = app.get('/dataset')
 
-        html = BeautifulSoup(index_response.unicode_body, 'html.parser')
+        html = BeautifulSoup(index_response.body, 'html.parser')
 
         # get the main section where filters are included
         filters = html.find('div', attrs={'class': 'filters'})
@@ -52,7 +52,7 @@ class TestUIData(object):
         expected_version = '.'.join(ckan_version().split('.')[0:2])
 
         index_response = app.get('/dataset')
-        html = BeautifulSoup(index_response.unicode_body, 'html.parser')
+        html = BeautifulSoup(index_response.body, 'html.parser')
 
         # Test link to api docs matches CKAN version
         api_doc_href = html.find('a', string='API Docs')['href']
@@ -62,6 +62,6 @@ class TestUIData(object):
         """Assert API link on dataset page."""
         index_response = app.get('/dataset')
 
-        html = BeautifulSoup(index_response.unicode_body, 'html.parser')
+        html = BeautifulSoup(index_response.body, 'html.parser')
         api_href = html.find('a', string='API')['href']
         assert '/api/3' == api_href
