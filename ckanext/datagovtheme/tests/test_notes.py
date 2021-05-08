@@ -1,6 +1,4 @@
 # encoding: utf-8
-from nose.tools import assert_in
-
 try:
     from ckan.tests.helpers import FunctionalTestBase
     from ckan.tests import factories
@@ -20,5 +18,5 @@ class TestNotes(FunctionalTestBase):
 
         dataset_response = app.get('/dataset/{}'.format(dataset['name']))
 
-        assert_in('<div itemprop="description" class="notes embedded-content">', dataset_response.unicode_body)
-        assert_in(notes, dataset_response.unicode_body)
+        assert '<div itemprop="description" class="notes embedded-content">' in dataset_response.unicode_body
+        assert notes in dataset_response.unicode_body

@@ -1,6 +1,5 @@
 # encoding: utf-8
 import mock
-from nose.tools import assert_equal
 
 try:
     from ckan.tests.helpers import FunctionalTestBase
@@ -38,4 +37,4 @@ class TestApiDocUrl(FunctionalTestBase):
 
         api_doc_url = helpers.api_doc_url()
 
-        assert_equal('https://docs.ckan.org/en/2.8/api/index.html', api_doc_url)
+        assert 'https://docs.ckan.org/en/2.8/api/index.html' == api_doc_url

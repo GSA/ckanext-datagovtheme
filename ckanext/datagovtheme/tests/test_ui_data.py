@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 import logging
-from nose.tools import assert_equal, assert_in
 
 try:
     from ckan.tests.helpers import FunctionalTestBase, reset_db
@@ -64,7 +63,7 @@ class TestUIData(FunctionalTestBase):
 
         # Test link to api docs matches CKAN version
         api_doc_href = html.find('a', string='API Docs')['href']
-        assert_in(expected_version, api_doc_href)
+        assert expected_version in api_doc_href
 
     def test_api_url(self):
         """Assert API link on dataset page."""
@@ -73,4 +72,4 @@ class TestUIData(FunctionalTestBase):
 
         html = BeautifulSoup(index_response.unicode_body, 'html.parser')
         api_href = html.find('a', string='API')['href']
-        assert_equal('/api/3', api_href)
+        assert '/api/3' == api_href
