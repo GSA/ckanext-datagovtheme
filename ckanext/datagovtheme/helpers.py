@@ -525,6 +525,39 @@ def get_reference_date(date_str):
         return date_str
 
 
+# https://github.com/ckan/ckanext-spatial/blob/011008b9c5c4bf58ddd401c805328a9928bbe4ea/ckanext/spatial/helpers.py#L35
+def get_responsible_party(value):
+    '''
+        Gets a responsible party extra created by the harvesters and formats it
+        nicely for the UI.
+        Examples:
+            [{"name": "Complex Systems Research Center", "roles": ["pointOfContact"]}]
+            [
+                {"name": "British Geological Survey", "roles": ["custodian", "pointOfContact"]},
+                {"name": "Natural England", "roles": ["publisher"]}
+            ]
+        Results
+            Complex Systems Research Center (pointOfContact)
+            British Geological Survey (custodian, pointOfContact); Natural England (publisher)
+    '''
+    formatted = {
+        'resourceProvider': p.toolkit._('Resource Provider'),
+        'pointOfContact': p.toolkit._('Point of Contact'),
+        'principalInvestigator': p.toolkit._('Principal Investigator'),
+    }
+
+    try:
+        out = []
+        parties = h.json.loads(value)
+        for party in parties:
+            roles = [formatted[role] if role in formatted.keys() else p.toolkit._(role.capitalize()) for role in
+                     party['roles']]
+            out.append('{0} ({1})'.format(party['name'], ', '.join(roles)))
+        return '; '.join(out)
+    except (ValueError, TypeError):
+        return value
+
+
 def is_map_viewer_format(resource):
     # TODO rename config option to ckanext.datagovtheme
     viewer_url = config.get('ckanext.geodatagov.spatial_preview.url')
