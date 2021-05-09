@@ -34,22 +34,21 @@ class TestUIData(FunctionalTestBase):
         app = self._get_test_app()
         index_response = app.get('/dataset')
 
-        html = BeautifulSoup(index_response.unicode_body, 'html.parser')
+        html = BeautifulSoup(index_response.body, 'html.parser')
 
         # get the main section where filters are included
-        filters = html.find('div', attrs={'class': 'filters'})
-        log.info('FILTERS: {}'.format(filters))
+        filters = html.select_one('div.filters')
+        assert filters, "Could not find div.filters"
 
-        # we expect "groups", "tags" and "organization"
+        # Get the section "names"
+        filter_names = [' '.join(filter_header.stripped_strings)
+                        for filter_header in filters.select('section.module .module-heading')]
+        assert len(filter_names) > 0, "Could not find section.module .module-heading"
 
-        uls = filters.find_all('ul', attrs={"name": "facet"})
-        assert len(uls) > 0
-        for ul in uls:
-            lis = ul.find_all('li', attrs={"class": "nav-item"})
-            log.info('UL found {}. Elements: {}'.format(ul['id'], len(lis)))
-            assert len(lis) > 0
-            for li in lis:
-                log.info('Elements found: {}'.format(li))
+        assert 'Organizations' in filter_names
+        assert 'Tags' in filter_names
+        assert 'Bureaus' in filter_names
+        assert 'Publishers' in filter_names
 
     def test_api_doc_link(self):
         """Assert CKAN major/minor version matches API docs URL."""

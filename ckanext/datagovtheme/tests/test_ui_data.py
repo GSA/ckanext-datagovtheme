@@ -1,49 +1,42 @@
 from builtins import object
-import logging
 
 from bs4 import BeautifulSoup
 from ckantoolkit.tests import factories
 import pytest
 
 
-log = logging.getLogger(__name__)
-
-
 @pytest.mark.usefixtures('clean_db', 'clean_index')
-class TestUIData(object):
+class TestSearchFilters():
 
-    def create_datasets(self):
+    @pytest.fixture(autouse=True)
+    def set_up(self):
         organization = factories.Organization()
         self.group1 = factories.Group()
         self.group2 = factories.Group()
         self.dataset1 = factories.Dataset(owner_org=organization['id'], groups=[{"name": self.group1["name"]}])
         self.dataset2 = factories.Dataset(owner_org=organization['id'], groups=[{"name": self.group2["name"]}])
-        sysadmin = factories.Sysadmin(name='testUpdate')
-        self.user_name = sysadmin['name'].encode('ascii')
 
     def test_not_empty_sections(self, app):
-
-        self.create_datasets()
-
         index_response = app.get('/dataset')
 
         html = BeautifulSoup(index_response.body, 'html.parser')
 
         # get the main section where filters are included
-        filters = html.find('div', attrs={'class': 'filters'})
-        log.info('FILTERS: {}'.format(filters))
+        filters = html.select_one('div.filters')
+        assert filters, "Could not find div.filters"
 
-        # we expect "groups", "tags" and "organization"
+        # Get the section "names"
+        filter_names = [' '.join(filter_header.stripped_strings)
+                        for filter_header in filters.select('section.module .module-heading')]
+        assert len(filter_names) > 0, "Could not find section.module .module-heading"
 
-        uls = filters.find_all('ul', attrs={"name": "facet"})
-        assert len(uls) > 0
-        for ul in uls:
-            lis = ul.find_all('li', attrs={"class": "nav-item"})
-            log.info('UL found {}. Elements: {}'.format(ul['id'], len(lis)))
-            assert len(lis) > 0
-            for li in lis:
-                log.info('Elements found: {}'.format(li))
+        assert 'Organizations' in filter_names
+        assert 'Tags' in filter_names
+        assert 'Bureaus' in filter_names
+        assert 'Publishers' in filter_names
 
+
+class TestApiLinks(object):
     def test_api_doc_link(self, app):
         """Assert CKAN major/minor version matches API docs URL."""
         # TODO mock helpers.api_doc_url and then assert the mock was called
