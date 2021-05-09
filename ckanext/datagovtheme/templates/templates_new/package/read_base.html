@@ -2,10 +2,15 @@
 
 {% block subtitle %}{{ pkg.title or pkg.name }}{% endblock %}
 
+{#
+
+# TODO this should be inserted by ckanext-dcat
 {% block links -%}
 {{ super() }}
 <link rel="alternate" type="application/rdf+xml" href="{{ h.url_for(controller='ckanext.dcat.controllers:DCATController', action='read_dataset', _id=pkg.id, _format='rdf', qualified=True) }}"/>
 {% endblock -%}
+
+#}
 
 
 {% block primary_content %}
