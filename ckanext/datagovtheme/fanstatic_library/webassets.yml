@@ -12,7 +12,8 @@ js:
     - scripts/sorting.js
 
 styles:
-  output: datagovtheme/extension.css
+  # This name is used in development/debug mode, must match the css file in test_datagovtheme.py
+  output: datagovtheme/datagovtheme.css
   contents: # list of files that are included into asset
     - scripts/vendor/leaflet/leaflet.css
     - scripts/vendor/leaflet/leaflet.ie.css

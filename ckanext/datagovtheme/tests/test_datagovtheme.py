@@ -10,10 +10,13 @@ class TestDatagovthemeServed(object):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
 
     def test_datagovtheme_css_file(self, app):
+        """Assert the correct version of CSS is served."""
         index_response = app.get('/dataset')
 
+        # Note: in development/debug mode, this asset uses the output filename
+        # in webassets.yml. In production mode, it is compiled to a different
+        # name and may have addtional filters (e.g. minification) applied.
         assert 'datagovtheme.css' in index_response.body
-        assert 'datagovtheme_bootstrap2.css' not in index_response.body
 
     def test_datagovtheme_html_loads(self, app):
         index_response = app.get('/dataset')
