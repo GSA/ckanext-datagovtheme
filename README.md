@@ -12,11 +12,20 @@ extension.
 
 ### Requirements
 
+_TODO: document how ckanext-datagovtheme interacts with third-party extensions._
+
 These extensions are required.
 
 - [ckanext-geodatagov](https://github.com/GSA/ckanext-geodatagov)
 - [ckanext-spatial](https://github.com/ckan/ckanext-spatial)
 
+Additionally, ckanext-datagovtheme has "weak" dependencies on these extensions.
+The dependency might be on templates, template helpers, or other functionality.
+
+- [ckanext-archiver](https://github.com/ckan/ckanext-archiver)
+- [ckanext-qa](https://github.com/ckan/ckanext-qa)
+
+This extension is compatible with these versions of CKAN.
 
 CKAN version | Compatibility
 ------------ | -------------
