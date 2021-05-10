@@ -6,7 +6,6 @@ from builtins import str
 from past.utils import old_div
 import copy
 import csv
-import html.parser
 import io
 import json
 import logging
@@ -15,6 +14,8 @@ import re
 import time
 import urllib.parse
 import urllib.request
+
+import pkg_resources
 
 from ckan import plugins as p
 from ckan.lib import helpers as h
@@ -322,64 +323,18 @@ def get_harvest_object_formats(harvest_object_id):
     }
 
 
+# TODO can we simply this function more? There's a lot of json processing
+# happening (and a lack of test coverage).
 def get_dynamic_menu():
-    filepath = ckan_tmp_path + '/dynamic_menu/'
-    filename = filepath + 'menu.json'
-    # TODO rename config option to ckanext.datagovtheme
-    url = config.get(
-        'ckanext.geodatagov.dynamic_menu.url',
-        'https://www.data.gov/app/plugins/datagov-custom/wp_download_links.php')
-
-    time_file = 0
-    time_current = time.time()
+    menus = {}
     try:
-        time_file = os.path.getmtime(filename)
-    except OSError:
-        if not os.path.exists(filepath):
-            os.makedirs(filepath)
-
-    # check to see if file is older than .5 hour
-    if (time_current - time_file) < old_div(3600, 2):
-        file_obj = open(filename)
-        file_conent = str(file_obj.read())
-    else:
-        # it means file is old, or does not exist
-        # fetch new content
-        if os.path.exists(filename):
-            sec_timeout = 5
-        else:
-            sec_timeout = 20  # longer urlopen timeout if there is no backup file.
-
-        try:
-            resource = urllib.request.urlopen(url, timeout=sec_timeout)
-        except Exception:
-            file_obj = open(filename)
-            file_conent = str(file_obj.read())
-            # touch the file, so that it wont keep re-trying and slow down page loading
-            os.utime(filename, None)
-        else:
-            file_obj = open(filename, 'w+')
-            file_conent = str(resource.read())
-            file_obj.write(file_conent)
-
-    file_obj.close()
-    # remove jsonp wrapper "jsonCallback(JSON);"
-    re_obj = re.compile(r"^jsonCallback\((.*)\);$", re.DOTALL)
-    json_menu = re_obj.sub(r"\1", file_conent)
-    # unescape &amp; or alike
-    html_parser = html.parser.HTMLParser()
-    json_menu_clean = None
-    try:
-        json_menu_clean = html_parser.unescape(json_menu)
+        # TODO in python 3, replace pkg_resources with [importlib-resources](https://pypi.org/project/importlib-resources/)
+        content = pkg_resources.resource_string('ckanext.datagovtheme.dynamic_menu', 'menu.json')
+        menus = json.loads(content)
     except Exception:
-        pass
+        log.exception('Could not open %s', 'ckanext.datagovtheme.dynamic_menu:menu.json')
+        return menus
 
-    menus = ''
-    if json_menu_clean:
-        try:
-            menus = json.loads(json_menu_clean)
-        except Exception:
-            pass
     query = request.environ.get('QUERY_STRING', '')
     submenu_key = None
     category_1 = None
