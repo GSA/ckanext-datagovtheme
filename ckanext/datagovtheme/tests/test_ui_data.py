@@ -1,15 +1,12 @@
 from bs4 import BeautifulSoup
 import logging
 from nose.tools import assert_equal, assert_in
-import urllib2
 
 try:
-    from ckan.plugins.toolkit import config
-    from ckan.tests.helpers import FunctionalTestBase
+    from ckan.tests.helpers import FunctionalTestBase, reset_db
     from ckan.tests import factories
 except ImportError:
-    from pylons import config
-    from ckan.new_tests.helpers import FunctionalTestBase
+    from ckan.new_tests.helpers import FunctionalTestBase, reset_db
     from ckan.new_tests import factories
 
 
@@ -17,6 +14,9 @@ log = logging.getLogger(__name__)
 
 
 class TestUIData(FunctionalTestBase):
+
+    def tearDown(self):
+        reset_db()
 
     def create_datasets(self):
         organization = factories.Organization()
@@ -51,27 +51,26 @@ class TestUIData(FunctionalTestBase):
             for li in lis:
                 log.info('Elements found: {}'.format(li))
 
-    def test_links(self):
+    def test_api_doc_link(self):
+        """Assert CKAN major/minor version matches API docs URL."""
+        # TODO mock helpers.api_doc_url and then assert the mock was called
+        # after the request. Is this possible in CKAN?
+        from ckan.lib.helpers import ckan_version
+        expected_version = '.'.join(ckan_version().split('.')[0:2])
 
+        app = self._get_test_app()
+        index_response = app.get('/dataset')
+        html = BeautifulSoup(index_response.unicode_body, 'html.parser')
+
+        # Test link to api docs matches CKAN version
+        api_doc_href = html.find('a', string='API Docs')['href']
+        assert_in(expected_version, api_doc_href)
+
+    def test_api_url(self):
+        """Assert API link on dataset page."""
         app = self._get_test_app()
         index_response = app.get('/dataset')
 
         html = BeautifulSoup(index_response.unicode_body, 'html.parser')
-
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
-        # Test link to api docs in CKAN 2.8
-        element = html.find('a', string='API Docs')
-        log.info('Test URL: {}'.format(element['href']))
-        assert_in('2.8', element['href'])
-        req = urllib2.Request(element['href'], headers=headers)
-        result = urllib2.urlopen(req)
-        assert_equal(200, result.getcode())
-
-        # Test API URL
-        element = html.find('a', string='API')
-        if element['href'].startswith('/'):
-            element['href'] = config['ckan.site_url'] + element['href']
-        log.info('Test URL: {}'.format(element['href']))
-        req = urllib2.Request(element['href'], headers=headers)
-        result = urllib2.urlopen(req)
-        assert_equal(200, result.getcode())
+        api_href = html.find('a', string='API')['href']
+        assert_equal('/api/3', api_href)

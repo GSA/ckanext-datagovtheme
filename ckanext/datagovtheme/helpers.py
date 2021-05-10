@@ -18,13 +18,18 @@ from ckanext.harvest.model import HarvestObject
 from ckanext.geodatagov.plugins import RESOURCE_MAPPING
 from ckan.plugins.toolkit import asbool
 
-if p.toolkit.check_ckan_version(max_version='2.3'):
-    from pylons import config
-else:
-    from ckan.plugins.toolkit import config, request
+from ckan.plugins.toolkit import config, request
 
 log = logging.getLogger(__name__)
 ckan_tmp_path = '/var/tmp/ckan'
+
+
+def api_doc_url():
+    lang = h.lang()
+    ckan_major_minor_version = '.'.join(h.ckan_version().split('.')[0:2])
+
+    return 'https://docs.ckan.org/{lang}/{version}/api/index.html'.format(
+           lang=lang, version=ckan_major_minor_version)
 
 
 def render_datetime_datagov(date_str):
@@ -144,10 +149,7 @@ def get_dynamic_menu():
             menus = json.loads(json_menu_clean)
         except Exception:
             pass
-    if p.toolkit.check_ckan_version(max_version='2.3'):
-        query = p.toolkit.c.environ.get('QUERY_STRING', '')
-    else:
-        query = request.environ.get('QUERY_STRING', '')
+    query = request.environ.get('QUERY_STRING', '')
     submenu_key = None
     category_1 = None
     category_2 = None
@@ -560,10 +562,6 @@ def get_bureau_info(bureau_code):
     return bureau_info
 
 
-def is_bootstrap2():
-    return not p.toolkit.check_ckan_version(min_version='2.8')
-
-
 def get_pkg_dict_extra(pkg_dict, key, default=None):
     ''' Ovberride the CKAN core helper to add rolled up extras
     Returns the value for the dataset extra with the provided key.
@@ -661,12 +659,12 @@ def qa_openness_stars_resource_table(resource):
 
 
 def get_login_url():
-    log.info('get login URL')
+    log.debug('get login URL')
     if p.plugin_loaded('saml2auth'):
         enable_ckan_internal_login = config.get('ckanext.saml2auth.enable_ckan_internal_login', 'false')
-        log.info('SAML2 enabled: {}'.format(enable_ckan_internal_login))
+        log.debug('SAML2 enabled: {}'.format(enable_ckan_internal_login))
         if not asbool(enable_ckan_internal_login):
-            log.info('SAML2 OK')
+            log.debug('SAML2 OK')
             return '/user/saml2login'
 
     return h.url_for(controller='user', action='login')

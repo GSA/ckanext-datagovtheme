@@ -10,8 +10,6 @@ try:
 except ImportError:
     from ckan.new_tests.helpers import FunctionalTestBase
 
-import ckanext
-
 
 class TestDatagovthemeServed(FunctionalTestBase):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
@@ -21,12 +19,8 @@ class TestDatagovthemeServed(FunctionalTestBase):
 
         index_response = app.get('/dataset')
 
-        if ckanext.datagovtheme.helpers.is_bootstrap2():
-            assert_in('datagovtheme_bootstrap2.css', index_response.unicode_body)
-            assert_not_in('datagovtheme.css', index_response.unicode_body)
-        else:
-            assert_in('datagovtheme.css', index_response.unicode_body)
-            assert_not_in('datagovtheme_bootstrap2.css', index_response.unicode_body)
+        assert_in('datagovtheme.css', index_response.unicode_body)
+        assert_not_in('datagovtheme_bootstrap2.css', index_response.unicode_body)
 
     def test_datagovtheme_html_loads(self):
         app = self._get_test_app()
