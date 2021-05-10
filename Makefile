@@ -17,7 +17,7 @@ test: ## Run tests in an existing container
 	docker-compose exec ckan /bin/bash -c "nosetests --ckan --with-pylons=src/ckan/test-catalog-next.ini src_extensions/datagovtheme/ckanext/datagovtheme/tests/nose"
 
 test-new:
-	docker-compose -f docker-compose.ckan.yml run --rm app ./test.sh
+	docker-compose -f docker-compose.new.yml run --rm app ./test.sh
 
 up: ## Start the containers
 	docker-compose -f $(COMPOSE_FILE) up

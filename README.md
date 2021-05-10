@@ -120,7 +120,7 @@ environment variable.
 Other docker-compose make targets work in both new and old environments through
 the `COMPOSE_FILE` make variable.
 
-    $ make COMPOSE_FILE=docker-compose.ckan.yml clean
+    $ make COMPOSE_FILE=docker-compose.new.yml clean
 
 Variable | Description | Default
 -------- | ----------- | -------
