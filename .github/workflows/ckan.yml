@@ -3,7 +3,7 @@
 name: Tests
 on: [push, pull_request]
 env:
-  CODE_COVERAGE_THRESHOLD_REQUIRED: 20
+  CODE_COVERAGE_THRESHOLD_REQUIRED: 40
 
 jobs:
   lint:
