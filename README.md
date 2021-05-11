@@ -113,8 +113,8 @@ In order to support multiple versions of CKAN, or even upgrade to new versions
 of CKAN, we support development and testing through the `CKAN_VERSION`
 environment variable.
 
-    $ CKAN_VERSION=2.8 make test-new
-    $ CKAN_VERSION=2.9 make test-new
+    $ make CKAN_VERSION=2.8 test-new
+    $ make CKAN_VERSION=2.9 test-new
 
 
 Other docker-compose make targets work in both new and old environments through
@@ -124,4 +124,5 @@ the `COMPOSE_FILE` make variable.
 
 Variable | Description | Default
 -------- | ----------- | -------
+CKAN_VERSION | Version of CKAN to use. | 2.8
 COMPOSE_FILE | docker-compose service description file. | docker-compose.yml
