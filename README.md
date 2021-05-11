@@ -19,7 +19,8 @@ _TODO document these better._
 
 ### Requirements
 
-_TODO: document how ckanext-datagovtheme interacts with third-party extensions._
+_TODO: document how ckanext-datagovtheme interacts with third-party extensions, maybe
+in the context of Features above._
 
 These extensions are required.
 
@@ -29,6 +30,7 @@ Additionally, ckanext-datagovtheme has "weak" dependencies on these extensions.
 The dependency might be on templates, template helpers, or other functionality.
 
 - [ckanext-archiver](https://github.com/ckan/ckanext-archiver)
+- [ckanext-dcat](https://github.com/ckan/ckanext-dcat)
 - [ckanext-qa](https://github.com/ckan/ckanext-qa)
 
 This extension is compatible with these versions of CKAN.
