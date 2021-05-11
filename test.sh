@@ -35,4 +35,4 @@ function ckan_wrapper () {
 ckan_wrapper --plugin=ckan db init
 ckan_wrapper --plugin=ckanext-harvest harvester initdb
 
-pytest --ckan-ini=test.ini --cov=ckanext.datagovtheme --cov-fail-under=40 --disable-warnings ckanext/datagovtheme/tests
+pytest --ckan-ini=test.ini --cov=ckanext.datagovtheme --disable-warnings ckanext/datagovtheme/tests
