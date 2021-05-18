@@ -45,37 +45,8 @@ this.ckan.module('datagovtheme-search-helper-message', function($, _) {
   };
 });
 
-function GetURLParameter(sParam) {
-    var sPageURL = window.location.search.substring(1);
-    var sURLVariables = sPageURL.split('&');
-    for (var i = 0; i < sURLVariables.length; i++)  {
-        var sParameterName = sURLVariables[i].split('=');
-        if (sParameterName[0] == sParam) 
-            return sParameterName[1];        		
-    }
-	
-    return 0;
-}
-
 
 $(document).ready(function () {
-
-    var sort = GetURLParameter('sort');	
-    var q = GetURLParameter('q');	
-	
-	if(sort == 0 && q == 0)
-	   $("#sort_option").html("Datasets ordered by Popular");
-	else if(sort == 'none') {
-	   $("#sort_option").html("Datasets ordered by Relevance");
-	   $("#field-order-by").val('score desc, name asc');
-	}
-	else {
-	$("#field-order-by option[value='none']").remove();
-	   var sortVal = decodeURIComponent(sort).replace(/\+/g, ' ');	   
-	   var sortTxt = $("#field-order-by option[value='" + sortVal + "']").text();
-	   $("#sort_option").html("Datasets ordered by " + sortTxt);
-	}
-	
     // let's check if we just came from data.gov community
     if ('' !== document.referrer) {
         var parts = document.referrer.split( '/' );
