@@ -1,3 +1,4 @@
+// TODO remove this after CKAN 2.8 templates are dropped
 this.jQuery(function (jQuery) {
   jQuery('[data-toggle="ratings"]').on({
     click: function (event) {

@@ -1,24 +1,22 @@
 import ckan.plugins as p
 from sqlalchemy.util import OrderedDict
 
+try:
+    p.toolkit.requires_ckan_version("2.9")
+except p.toolkit.CkanVersionException:
+    from ckanext.datagovtheme.plugin.pylons_plugin import MixinPlugin
+else:
+    from ckanext.datagovtheme.plugin.flask_plugin import MixinPlugin
 
-class DatagovTheme(p.SingletonPlugin):
-    '''An example theme plugin.
 
-    '''
-    # Declare that this class implements IConfigurer.
+class DatagovTheme(MixinPlugin, p.SingletonPlugin):
+    '''Theme plugin for catalog.data.gov.'''
+
+    # Declare the iterfaces this class implements
     p.implements(p.IConfigurer)
     p.implements(p.IFacets, inherit=True)
     p.implements(p.IRoutes, inherit=True)
     p.implements(p.ITemplateHelpers)
-
-    def update_config(self, config):
-
-        # Add this plugin's templates dir to CKAN's extra_template_paths, so
-        # that CKAN will use this plugin's custom templates.
-        p.toolkit.add_template_directory(config, 'templates')
-        p.toolkit.add_public_directory(config, 'public')
-        p.toolkit.add_resource('fanstatic_library', 'datagovtheme')
 
     # IFacets
     def dataset_facets(self, facets_dict, package_type):
@@ -87,6 +85,8 @@ class DatagovTheme(p.SingletonPlugin):
         # TODO prefix these helper names with datagovtheme_
         helpers = {
             'datagovtheme_api_doc_url': datagovtheme_helpers.api_doc_url,
+            'datagovtheme_get_reference_date': datagovtheme_helpers.get_reference_date,
+            'datagovtheme_get_responsible_party': datagovtheme_helpers.get_responsible_party,
             'render_datetime_datagov': datagovtheme_helpers.render_datetime_datagov,
             'get_harvest_object_formats': datagovtheme_helpers.get_harvest_object_formats,
             'get_dynamic_menu': datagovtheme_helpers.get_dynamic_menu,

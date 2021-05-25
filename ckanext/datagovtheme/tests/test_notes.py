@@ -1,24 +1,20 @@
 # encoding: utf-8
-from nose.tools import assert_in
+from builtins import object
+import pytest
 
-try:
-    from ckan.tests.helpers import FunctionalTestBase
-    from ckan.tests import factories
-except ImportError:
-    from ckan.new_tests.helpers import FunctionalTestBase
-    from ckan.new_tests import factories
+from ckantoolkit.tests import factories
 
 
-class TestNotes(FunctionalTestBase):
+@pytest.mark.usefixtures('clean_db', 'clean_index')
+class TestNotes(object):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
 
-    def test_datagovtheme_html_loads(self):
+    def test_datagovtheme_html_loads(self, app):
 
         notes = 'Notes for a test dataset'
         dataset = factories.Dataset(notes=notes)
-        app = self._get_test_app()
 
         dataset_response = app.get('/dataset/{}'.format(dataset['name']))
 
-        assert_in('<div itemprop="description" class="notes embedded-content">', dataset_response.unicode_body)
-        assert_in(notes, dataset_response.unicode_body)
+        assert '<div itemprop="description" class="notes embedded-content">' in dataset_response.body
+        assert notes in dataset_response.body

@@ -31,7 +31,7 @@ jobs:
           command: |
             docker-compose logs db
             docker-compose logs ckan
-            docker-compose exec ckan /bin/bash -c "nosetests --ckan --with-pylons=src/ckan/test-catalog-next.ini src_extensions/datagovtheme/"
+            docker-compose exec ckan /bin/bash -c "nosetests --ckan --with-pylons=src/ckan/test-catalog-next.ini src_extensions/datagovtheme/ckanext/datagovtheme/tests/nose"
   build_ckan_28:
     working_directory: ~/ckanext-datagovtheme
     machine:

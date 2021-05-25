@@ -1,46 +1,28 @@
 # encoding: utf-8
+from builtins import object
 import mock
-from nose.tools import assert_equal
+import pytest
 
-try:
-    from ckan.tests.helpers import FunctionalTestBase
-    from ckan.plugins.toolkit import config
-except ImportError:
-    from ckan.new_tests.helpers import FunctionalTestBase
-    from pylons import config
 
-from ckan import plugins as p
 from ckanext.datagovtheme import helpers
 
 
-class TestGetLoginUrl(FunctionalTestBase):
+class TestGetLoginUrl(object):
 
-    def test_base_login(self):
-        config['ckanext.saml2auth.enable_ckan_internal_login'] = 'true'
-        actual_login_url = helpers.get_login_url()
-        assert_equal('/user/login', actual_login_url)
-
+    @pytest.mark.ckan_config('ckanext.saml2auth.enable_ckan_internal_login', 'false')
     def test_saml2_login_url(self):
         """ test saml2 URL on Catalog-next """
-        if not p.plugin_loaded('saml2auth'):
-            p.load('saml2auth')
-
-        config['ckanext.saml2auth.enable_ckan_internal_login'] = 'false'
-
         actual_login_url = helpers.get_login_url()
-        assert_equal('/user/saml2login', actual_login_url)
+        assert '/user/saml2login' == actual_login_url
 
+    @pytest.mark.ckan_config('ckanext.saml2auth.enable_ckan_internal_login', 'true')
     def test_login_url(self):
         """ test saml2 URL on Catalog-next """
-        config['ckanext.saml2auth.enable_ckan_internal_login'] = 'false'
-        if p.plugin_loaded('saml2auth'):
-            p.unload('saml2auth')
-
         actual_login_url = helpers.get_login_url()
-        assert_equal('/user/login', actual_login_url)
+        assert '/user/login' == actual_login_url
 
 
-class TestApiDocUrl(FunctionalTestBase):
+class TestApiDocUrl(object):
 
     @mock.patch('ckanext.datagovtheme.helpers.h')
     def test_api_doc_url(self, mock_ckan_lib_helpers):
@@ -49,4 +31,4 @@ class TestApiDocUrl(FunctionalTestBase):
 
         api_doc_url = helpers.api_doc_url()
 
-        assert_equal('https://docs.ckan.org/en/2.8/api/index.html', api_doc_url)
+        assert 'https://docs.ckan.org/en/2.8/api/index.html' == api_doc_url

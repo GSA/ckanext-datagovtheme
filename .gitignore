@@ -1,4 +1,6 @@
+.coverage
 .idea
+__pycache__
 syntax: glob
 *.pyc
 *.egg-info

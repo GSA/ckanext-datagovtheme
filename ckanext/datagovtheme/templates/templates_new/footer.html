@@ -1,0 +1,53 @@
+{% ckan_extends %}
+
+{% block footer_content %}
+
+        <div class="fluid-row">
+            <div class="{{ 'col-md-6' }} clearfix">
+                <div class="footer-logo"> <a href="http://www.data.gov/" class="logo-brand">Data.Gov 2.0</a> </div>
+                <ul class="nav" id="menu-footer2">
+                    {% snippet "snippets/footer2_menu.html" %}
+                </ul>
+            </div>
+            <nav role="navigation" class="{{ 'col-md-3' }}">
+                <ul class="nav" id="menu-footer">
+                    {% snippet "snippets/footer_menu.html" %}
+            {% if c.userobj%}
+                <li class="local-link"> <a href="{{ h.url_for('/user/_logout') }}" title="{{ _('Log out') }}"></a> </li>
+            {% else %}
+                <li><a href="{{ h.get_login_url() }}" class="local-link"> {{ _('Login') }}</a></li>
+            {% endif %}
+                </ul>
+            </nav>
+            <div class="{{ 'col-md-3' }} social-nav">
+                <nav role="navigation">
+                    <ul class="nav" id="menu-social_navigation">
+                        <li><a href="https://twitter.com/usdatagov"><i class="fa fa-twitter"></i><span>Twitter</span></a></li>
+                        <li><a href="http://github.com/GSA/data.gov/"><i class="fa fa-github"></i><span>Github</span></a></li>
+                    </ul>
+                </nav>
+         </div>
+
+
+     </div>
+
+
+    {#
+    {% block footer_lang %}
+    {% snippet "snippets/language_selector.html" %}
+    {% endblock %}
+    #}
+
+
+	{#
+    {% if not g.debug %}
+    {% snippet "snippets/webtrends.html" %}
+    {% endif %}
+    #}
+
+    {#
+    {% snippet "snippets/federated_analytics.html" %}
+    {% snippet "snippets/google_analytics_additional.html" %}
+    #}
+
+    {% endblock %}
