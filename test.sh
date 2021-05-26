@@ -8,13 +8,6 @@
 set -o errexit
 set -o pipefail
 
-# configure environment for tests
-export CKAN_SQLALCHEMY_URL=postgresql://ckan_default:pass@db/ckan_test
-export CKAN_DATASTORE_WRITE_URL=postgresql://datastore_write:pass@db/datastore_test
-export CKAN_DATASTORE_READ_URL=postgresql://datastore_read:pass@db/datastore_test
-export CKAN_SOLR_URL=http://solr:8983/solr/ckan
-export CKAN_REDIS_URL=redis://redis:6379/1
-
 # Wrapper for paster/ckan.
 # CKAN 2.9 replaces paster with ckan CLI. This wrapper abstracts which comand
 # is called.

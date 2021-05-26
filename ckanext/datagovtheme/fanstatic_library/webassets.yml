@@ -39,4 +39,6 @@ spatial_query:
     - scripts/vendor/leaflet/leaflet.js
     - scripts/vendor/leaflet.draw/leaflet.draw.js
     - scripts/spatial_query.js
+    # TODO can this custom location search be replaced by ckanext-spatial? Can
+    # this be pushed upstream to ckanext-spatial as an enhancement?
     - scripts/location_autocomplete.js

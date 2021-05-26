@@ -29,6 +29,10 @@ log = logging.getLogger(__name__)
 ckan_tmp_path = '/var/tmp/ckan'
 
 # TODO figure out where this belongs
+# This is used in multiple extensions, including ckanext-geodatagov. It seems
+# like it's just data and could be exposed differently. We could also provide a
+# fallback, so if ckanext-geodatagov is available, use the data from that,
+# otherwise fallback to an alternative.
 RESOURCE_MAPPING = {
     # ArcGIS File Types
     'esri rest': ('Esri REST', 'Esri REST API Endpoint'),
@@ -486,6 +490,7 @@ def get_reference_date(date_str):
 
 
 # https://github.com/ckan/ckanext-spatial/blob/011008b9c5c4bf58ddd401c805328a9928bbe4ea/ckanext/spatial/helpers.py#L35
+# This doesn't seem specific to ckanext-spatial. Maybe this should move into ckanext-harvest or ckan proper?
 def get_responsible_party(value):
     '''
         Gets a responsible party extra created by the harvesters and formats it
