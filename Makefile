@@ -8,24 +8,24 @@ clean: ## Clean workspace and containers
 	find . -name *.pyc -delete
 	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) down -v --remove-orphan
 
-lint: ## Lint the code
+lint: ## Lint the code (python 3 only)
 	pip install pip==20.3.3
 	pip install flake8
 	flake8 . --count --show-source --statistics --exclude ckan
 
-test: ## Run tests in an existing container
+test-legacy: ## Run legacy tests in an existing container
 	@# TODO wait for CKAN to be up; use docker-compose run instead
-	docker-compose exec ckan /bin/bash -c "nosetests --ckan --with-pylons=src/ckan/test-catalog-next.ini src_extensions/datagovtheme/ckanext/datagovtheme/tests/nose"
+	docker-compose -f $(COMPOSE_FILE) exec ckan /bin/bash -c "nosetests --ckan --with-pylons=src/ckan/test-catalog-next.ini src_extensions/datagovtheme/ckanext/datagovtheme/tests/nose"
 
-test-new: ## Run "new" style tests
-	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f docker-compose.new.yml run --rm app ./test.sh
+test: ## Run extension tests
+	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) run --rm app ./test.sh
 
 up: ## Start the containers
 	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) up
 
 
 .DEFAULT_GOAL := help
-.PHONY: clean help lint test up
+.PHONY: clean help lint test test-legacy up
 
 # Output documentation for top-level targets
 # Thanks to https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
