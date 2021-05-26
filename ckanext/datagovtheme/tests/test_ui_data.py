@@ -5,7 +5,10 @@ from ckantoolkit.tests import factories
 import pytest
 
 
-@pytest.mark.usefixtures('clean_db', 'clean_index')
+# The /dataset page uses get_pkg_dict_extra which depends on HarvestObject,
+# hence the harvest extension. Include it for these tests.
+@pytest.mark.ckan_config('ckan.plugins', 'harvest datagovtheme')
+@pytest.mark.use_fixtures('with_plugins', 'clean_db', 'clean_index')
 class TestSearchFilters():
 
     @pytest.fixture(autouse=True)
