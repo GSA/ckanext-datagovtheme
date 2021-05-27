@@ -14,6 +14,7 @@ import re
 import time
 import urllib.parse
 import urllib.request
+import sys
 
 import pkg_resources
 
@@ -802,7 +803,10 @@ def get_bureau_info(bureau_code):
     except ValueError:
         return None
 
-    for row in csv.reader(io.StringIO(file_content)):
+    csv_content = io.BytesIO(file_content)
+    if sys.version_info >= (3, 0):
+        csv_content = io.StringIO(file_content)
+    for row in csv.reader(csv_content):
         if agency == row[2].zfill(3) \
                 and bureau == row[3].zfill(2):
             bureau_info['title'] = row[1]
