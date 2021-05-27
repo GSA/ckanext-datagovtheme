@@ -1,3 +1,4 @@
+// TODO this looks unused, #field-sitewid-search does not appear on /dataset
 this.ckan.module('datagovtheme-site-wide-search', function($, _) {
   return {
     options: {
@@ -17,6 +18,7 @@ this.ckan.module('datagovtheme-site-wide-search', function($, _) {
   }
 });
 
+// TODO this looks unused, #search-helper-message does not appear on /dataset
 this.ckan.module('datagovtheme-search-helper-message', function($, _) {
   return {
     options: {},
