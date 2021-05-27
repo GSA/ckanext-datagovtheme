@@ -787,6 +787,7 @@ def get_bureau_info(bureau_code):
         else:
             file_obj = open(filename, 'w+')
             file_content = resource.read()
+            # Handle differences between py2 and py3. Should use else statement for py3.
             if isinstance(file_content, bytes):
                 file_obj.write(file_content.decode('utf-8'))
             else:
@@ -803,6 +804,7 @@ def get_bureau_info(bureau_code):
     except ValueError:
         return None
 
+    # sent to csv as byte if python 2, else parse as string
     csv_content = io.BytesIO(file_content)
     if sys.version_info >= (3, 0):
         csv_content = io.StringIO(file_content.decode('utf-8'))
