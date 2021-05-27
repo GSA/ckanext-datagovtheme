@@ -32,3 +32,13 @@ class TestApiDocUrl(object):
         api_doc_url = helpers.api_doc_url()
 
         assert 'https://docs.ckan.org/en/2.8/api/index.html' == api_doc_url
+
+
+class TestBureauCodeTransform(object):
+
+    @mock.patch('ckanext.datagovtheme.helpers.h')
+    def test_get_bureau_info(self, mock_ckan_lib_helpers):
+
+        bureau_info = helpers.get_bureau_info("010:04")
+
+        assert bureau_info.title == "Bureau of Land Management"
