@@ -5,7 +5,13 @@
 '''
 from builtins import object
 
+import pytest
 
+
+# The /dataset page uses get_pkg_dict_extra which depends on HarvestObject,
+# hence the harvest extension. Include it for these tests.
+@pytest.mark.ckan_config('ckan.plugins', 'harvest datagovtheme')
+@pytest.mark.use_fixtures('with_plugins')
 class TestDatagovthemeServed(object):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
 
