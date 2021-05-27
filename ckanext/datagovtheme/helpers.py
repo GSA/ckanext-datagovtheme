@@ -787,8 +787,9 @@ def get_bureau_info(bureau_code):
             file_obj = open(filename, 'w+')
             file_content = resource.read()
             if isinstance(file_content, bytes):
-                file_content = file_content.decode('utf-8')
-            file_obj.write(file_content)
+                file_obj.write(file_content.decode('utf-8'))
+            else:
+                file_obj.write(file_content)
 
     file_obj.close()
 
