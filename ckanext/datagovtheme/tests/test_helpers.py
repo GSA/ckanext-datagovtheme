@@ -41,4 +41,4 @@ class TestBureauCodeTransform(object):
 
         bureau_info = helpers.get_bureau_info("010:04")
 
-        assert bureau_info.title == "Bureau of Land Management"
+        assert bureau_info['title'] == "Bureau of Land Management"
