@@ -800,10 +800,10 @@ def get_bureau_info(bureau_code):
         return None
 
     # Translate to unicode if value is a string
-    if isinstance(file_content, str):
-        file_content = unicode(file_content, "utf-8")
+    # if isinstance(file_content, str):
+    #     file_content = unicode(file_content, "utf-8")
     
-    for row in csv.reader(io.StringIO(file_content)):
+    for row in csv.reader(io.BytesIO(file_content)):
         if agency == row[2].zfill(3) \
                 and bureau == row[3].zfill(2):
             bureau_info['title'] = row[1]
