@@ -767,7 +767,7 @@ def get_bureau_info(bureau_code):
     # check to see if file is older than .5 hour
     if (time_current - time_file) < old_div(3600, 2):
         file_obj = open(filename)
-        file_conent = file_obj.read()
+        file_content = file_obj.read()
     else:
         # it means file is old, or does not exist
         # fetch new content
@@ -780,13 +780,13 @@ def get_bureau_info(bureau_code):
             resource = urllib.request.urlopen(url, timeout=sec_timeout)
         except Exception:
             file_obj = open(filename)
-            file_conent = file_obj.read()
+            file_content = file_obj.read()
             # touch the file, so that it wont keep re-trying and slow down page loading
             os.utime(filename, None)
         else:
             file_obj = open(filename, 'w+')
-            file_conent = resource.read()
-            file_obj.write(file_conent)
+            file_content = resource.read()
+            file_obj.write(file_content)
 
     file_obj.close()
 
@@ -799,7 +799,11 @@ def get_bureau_info(bureau_code):
     except ValueError:
         return None
 
-    for row in csv.reader(io.StringIO(file_conent)):
+    # Translate to unicode if value is a string
+    if isinstance(file_content, str):
+        file_content = unicode(file_content, "utf-8")
+    
+    for row in csv.reader(io.StringIO(file_content)):
         if agency == row[2].zfill(3) \
                 and bureau == row[3].zfill(2):
             bureau_info['title'] = row[1]
