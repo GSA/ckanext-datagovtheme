@@ -333,10 +333,10 @@ def get_dynamic_menu():
     menus = {}
     try:
         # TODO in python 3, replace pkg_resources with [importlib-resources](https://pypi.org/project/importlib-resources/)
-        content = pkg_resources.resource_string('ckanext.datagovtheme.dynamic_menu', 'menu.json')
+        content = pkg_resources.resource_string('ckanext.datagovtheme.data.dynamic_menu', 'menu.json')
         menus = json.loads(content)
     except Exception:
-        log.exception('Could not open %s', 'ckanext.datagovtheme.dynamic_menu:menu.json')
+        log.exception('Could not open %s', 'ckanext.datagovtheme.data.dynamic_menu:menu.json')
         return menus
 
     query = request.environ.get('QUERY_STRING', '')

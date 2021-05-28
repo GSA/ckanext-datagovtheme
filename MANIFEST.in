@@ -1,4 +1,4 @@
-graft ckanext/datagovtheme/dynamic_menu
+graft ckanext/datagovtheme/data
 graft ckanext/datagovtheme/fanstatic_library
 graft ckanext/datagovtheme/public
 graft ckanext/datagovtheme/templates
