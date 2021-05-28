@@ -5,11 +5,11 @@ standard_library.install_aliases()
 from builtins import str
 import copy
 import csv
-import io
 import json
 import logging
 import os
 import re
+import sys
 import urllib.parse
 import urllib.request
 
@@ -767,11 +767,17 @@ def get_bureau_info(bureau_code):
         # TODO remove this after CKAN 2.8 support is dropped
         controller = 'package'
 
-    # Should this be cached in memory as an index to speed things up?
     # TODO in python 3, replace pkg_resources with [importlib-resources](https://pypi.org/project/importlib-resources/)
-    # csv.reader expects text data from file objects
-    bureau_table = csv.reader(io.TextIOWrapper(pkg_resources.resource_stream('ckanext.datagovtheme.data',
-                                                                             'omb_bureau_codes.csv')))
+    bureau_filename = pkg_resources.resource_filename('ckanext.datagovtheme.data', 'omb_bureau_codes.csv')
+    if sys.version_info >= (3, 0):
+        # Python 3 csv.reader wants text data
+        bureau_file = open(bureau_filename, 'r', newline='', encoding='utf8')
+    else:
+        # Python 2 csv.reader wants binary data
+        bureau_file = open(bureau_filename, 'rb')
+
+    # Should this be cached in memory as an index to speed things up?
+    bureau_table = csv.reader(bureau_file)
     for row in bureau_table:
         # We're doing the zfill to pad for 000 every lookup, more reason to
         # cache this or do a transform when the file is imported into the
