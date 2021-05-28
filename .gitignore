@@ -1,4 +1,5 @@
 .coverage
+htmlcov
 .idea
 __pycache__
 syntax: glob
