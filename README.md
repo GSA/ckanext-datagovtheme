@@ -89,7 +89,7 @@ For additional make targets, see the help.
 
 They follow the guidelines for [testing CKAN extensions](https://docs.ckan.org/en/2.8/extensions/testing-extensions.html#testing-extensions).
 
-To run the extension tests, start the containers with `make up`, then:
+To run the extension tests:
 
     $ make test
 
@@ -97,6 +97,10 @@ Lint your code.
 
     $ make lint
 
+#### Common issues
+
+We have seen issues with `datagovtheme not installed`.
+If this is the case, run `python setup.py develop` in the container.
 
 ### Matrix builds
 
@@ -117,8 +121,8 @@ In order to support multiple versions of CKAN, or even upgrade to new versions
 of CKAN, we support development and testing through the `CKAN_VERSION`
 environment variable.
 
-    $ make CKAN_VERSION=2.8 test-new
-    $ make CKAN_VERSION=2.9 test-new
+    $ make CKAN_VERSION=2.8 test
+    $ make CKAN_VERSION=2.9 test
 
 
 Other docker-compose make targets work in both new and legacy environments through
