@@ -9,9 +9,7 @@ clean: ## Clean workspace and containers
 	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) down -v --remove-orphan
 
 lint: ## Lint the code (python 3 only)
-	pip install pip==20.3.3
-	pip install flake8
-	flake8 . --count --show-source --statistics --exclude ckan
+	docker-compose -f $(COMPOSE_FILE) run --rm app flake8 . --count --show-source --statistics --exclude ckan
 
 test-legacy: ## Run legacy tests in an existing container
 	@# TODO wait for CKAN to be up; use docker-compose run instead
