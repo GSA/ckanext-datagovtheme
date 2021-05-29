@@ -790,6 +790,9 @@ def get_bureau_info(bureau_code):
         log.warning('omb_bureau_codes.csv is empty')
         return None
 
+    # TODO in python 3, use a context manager since we won't need the conditional `open`
+    bureau_file.close()
+
     # check logo image file exists or not
     # should this be cached as in index to speed this up?
     bureau_logo = None
