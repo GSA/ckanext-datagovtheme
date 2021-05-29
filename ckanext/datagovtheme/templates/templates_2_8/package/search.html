@@ -25,10 +25,6 @@
         <br clear="both" />
         <div id="dataset-search-ext">{% block dataset_search_ext %}{% endblock %}</div>
         <div class="results">
-
-            <div id="sort_option">
-
-            </div>
             <div class="filter-list">
                 {% for field in c.fields_grouped %}
                 {% if field != 'collection_package_id' %}
