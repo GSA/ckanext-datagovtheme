@@ -2,8 +2,6 @@
 # https://github.com/ckan/ckanext-harvest/blob/3c83f41131c99042e7a44da858515c5563faba01/.github/workflows/test.yml
 name: Tests
 on: [pull_request]
-env:
-  CODE_COVERAGE_THRESHOLD_REQUIRED: 28
 
 jobs:
   lint:
@@ -66,7 +64,7 @@ jobs:
     - name: Run tests
       run: |
         set -o pipefail
-        pytest --ckan-ini=test.ini --cov=ckanext.datagovtheme --cov-fail-under=${CODE_COVERAGE_THRESHOLD_REQUIRED} --disable-warnings ckanext/datagovtheme/tests | tee pytest-coverage.txt
+        pytest --ckan-ini=test.ini --cov=ckanext.datagovtheme --disable-warnings ckanext/datagovtheme/tests | tee pytest-coverage.txt
     - name: Report test coverage
       if: ${{ always() }}
       uses: coroo/pytest-coverage-commentator@v1.0.2

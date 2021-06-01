@@ -3,15 +3,13 @@ from future import standard_library
 standard_library.install_aliases()
 
 from builtins import str
-from past.utils import old_div
 import copy
 import csv
-import io
 import json
 import logging
 import os
 import re
-import time
+import sys
 import urllib.parse
 import urllib.request
 
@@ -26,7 +24,6 @@ from ckan.plugins.toolkit import asbool
 from ckan.plugins.toolkit import config, request
 
 log = logging.getLogger(__name__)
-ckan_tmp_path = '/var/tmp/ckan'
 
 # TODO figure out where this belongs
 # This is used in multiple extensions, including ckanext-geodatagov. It seems
@@ -333,10 +330,10 @@ def get_dynamic_menu():
     menus = {}
     try:
         # TODO in python 3, replace pkg_resources with [importlib-resources](https://pypi.org/project/importlib-resources/)
-        content = pkg_resources.resource_string('ckanext.datagovtheme.dynamic_menu', 'menu.json')
+        content = pkg_resources.resource_string('ckanext.datagovtheme.data.dynamic_menu', 'menu.json')
         menus = json.loads(content)
     except Exception:
-        log.exception('Could not open %s', 'ckanext.datagovtheme.dynamic_menu:menu.json')
+        log.exception('Could not open %s', 'ckanext.datagovtheme.data.dynamic_menu:menu.json')
         return menus
 
     query = request.environ.get('QUERY_STRING', '')
@@ -741,6 +738,17 @@ def convert_top_category_to_list(str_value):
 
 
 def get_bureau_info(bureau_code):
+    """
+    Maps Bureau Codes to a title, logo, and dataset URL.
+
+    bureau_code: bureau code string or a list of bureau code strings.
+
+    returns dict(title, url, code, logo) or None if there was an error or the bureau code does not exist in our list.
+    """
+
+    if not bureau_code:
+        return None
+
     WEB_PATH = '/fanstatic/datagovtheme/images/logos/'
     LOCAL_PATH = 'fanstatic_library/images/logos/'
 
@@ -748,76 +756,61 @@ def get_bureau_info(bureau_code):
     if isinstance(bureau_code, list):
         bureau_code = bureau_code[0]
 
-    filepath = ckan_tmp_path + '/logos/'
-    filename = filepath + 'bureau.csv'
-    # TODO rename config option to ckanext.datagovtheme
-    url = config.get('ckanext.geodatagov.bureau_csv.url', '')
-    if not url:
-        # TODO rename config option to ckanext.datagovtheme
-        url = config.get('ckanext.geodatagov.bureau_csv.url_default', '')
-
-    time_file = 0
-    time_current = time.time()
     try:
-        time_file = os.path.getmtime(filename)
-    except OSError:
-        if not os.path.exists(filepath):
-            os.makedirs(filepath)
-
-    # check to see if file is older than .5 hour
-    if (time_current - time_file) < old_div(3600, 2):
-        file_obj = open(filename)
-        file_conent = file_obj.read()
-    else:
-        # it means file is old, or does not exist
-        # fetch new content
-        if os.path.exists(filename):
-            sec_timeout = 5
-        else:
-            sec_timeout = 20  # longer urlopen timeout if there is no backup file.
-
-        try:
-            resource = urllib.request.urlopen(url, timeout=sec_timeout)
-        except Exception:
-            file_obj = open(filename)
-            file_conent = file_obj.read()
-            # touch the file, so that it wont keep re-trying and slow down page loading
-            os.utime(filename, None)
-        else:
-            file_obj = open(filename, 'w+')
-            file_conent = resource.read()
-            file_obj.write(file_conent)
-
-    file_obj.close()
-
-    bureau_info = {
-        'code': bureau_code
-    }
-
-    try:
-        agency, bureau = bureau_code.split(':')
+        agency_part, bureau_part = bureau_code.split(':')
     except ValueError:
+        log.warning('bureau code is invalid code=%s' % bureau_code)
         return None
 
-    for row in csv.reader(io.StringIO(file_conent)):
-        if agency == row[2].zfill(3) \
-                and bureau == row[3].zfill(2):
-            bureau_info['title'] = row[1]
-            bureau_info['url'] = '/dataset?q=bureauCode:"' + bureau_code + '"'
+    controller = 'dataset'
+    if not p.toolkit.check_ckan_version(min_version='2.9'):
+        # TODO remove this after CKAN 2.8 support is dropped
+        controller = 'package'
+
+    # TODO in python 3, replace pkg_resources with [importlib-resources](https://pypi.org/project/importlib-resources/)
+    bureau_filename = pkg_resources.resource_filename('ckanext.datagovtheme.data', 'omb_bureau_codes.csv')
+    if sys.version_info >= (3, 0):
+        # Python 3 csv.reader wants text data
+        bureau_file = open(bureau_filename, 'r', newline='', encoding='utf8')
+    else:
+        # Python 2 csv.reader wants binary data
+        bureau_file = open(bureau_filename, 'rb')
+
+    # Should this be cached in memory as an index to speed things up?
+    bureau_table = csv.reader(bureau_file)
+    for row in bureau_table:
+        # We're doing the zfill to pad for 000 every lookup, more reason to
+        # cache this or do a transform when the file is imported into the
+        # repository.
+        if agency_part == row[2].zfill(3) and bureau_part == row[3].zfill(2):
+            bureau_title = row[1]
+            bureau_url = h.url_for(controller=controller, action='search', q='bureauCode:"%s"' % bureau_code)
             break
     else:
+        log.warning('omb_bureau_codes.csv is empty')
         return None
+
+    # TODO in python 3, use a context manager since we won't need the conditional `open`
+    bureau_file.close()
 
     # check logo image file exists or not
+    # should this be cached as in index to speed this up?
+    bureau_logo = None
     for ext in ['png', 'gif', 'jpg']:
-        logo = agency + '-' + bureau + '.' + ext
-        if os.path.isfile(os.path.join(os.path.dirname(__file__), LOCAL_PATH) + logo):
-            bureau_info['logo'] = WEB_PATH + logo
+        logo_filename = '%s-%s.%s' % (agency_part, bureau_part, ext)
+        # We should probably be using pre_resources here, too, but we also need
+        # to add the logos as assets. That seems to be magically working right
+        # now?
+        if os.path.isfile(os.path.join(os.path.dirname(__file__), LOCAL_PATH) + logo_filename):
+            bureau_logo = h.url_for_static(WEB_PATH + logo_filename)
             break
-    else:
-        bureau_info['logo'] = None
 
-    return bureau_info
+    return {
+        'title': bureau_title,
+        'code': bureau_code,
+        'logo': bureau_logo,
+        'url': bureau_url,
+    }
 
 
 # TODO can we drop this dependency on ckanext-harvest? Can this be moved to ckanext-harvest? geodatagov?
