@@ -1523,11 +1523,6 @@ aside.secondary{
 .filter-list .facet {
     display: block;
 }
-#sort_option {
-    clear:both;
-    margin-bottom: 10px;
-    font-size: 14px;
-}
 .page-header_new .toolbar .add_action{position:static;float:right;}
 .page-header_new .toolbar .breadcrumb{float:right;margin-right:15px;margin-top:5px;}
 .new-results {
