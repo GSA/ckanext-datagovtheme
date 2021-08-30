@@ -19,7 +19,7 @@ styles:
     - scripts/vendor/leaflet/leaflet.ie.css
     - scripts/vendor/leaflet.draw/leaflet.draw.css
     - scripts/vendor/leaflet.draw/leaflet.draw.ie.css
-    - styles/datagovtheme.css
+    - ../public/styles/datagovtheme.css
 
 qa:
   filters: rjsmin

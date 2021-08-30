@@ -749,7 +749,7 @@ def get_bureau_info(bureau_code):
     if not bureau_code:
         return None
 
-    WEB_PATH = '/fanstatic/datagovtheme/images/logos/'
+    WEB_PATH = '/images/logos/'
     LOCAL_PATH = 'fanstatic_library/images/logos/'
 
     # handle both '007:15', or ['007:15', '007:16']
