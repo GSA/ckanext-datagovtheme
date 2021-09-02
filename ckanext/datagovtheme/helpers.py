@@ -12,6 +12,7 @@ import re
 import sys
 import urllib.parse
 import urllib.request
+import six
 
 import pkg_resources
 
@@ -748,8 +749,11 @@ def get_bureau_info(bureau_code):
 
     if not bureau_code:
         return None
+    if six.PY3:
+        WEB_PATH = '/images/logos/'
+    else:
+        WEB_PATH = '/fanstatic/datagovtheme/images/logos/'
 
-    WEB_PATH = '/images/logos/'
     LOCAL_PATH = 'fanstatic_library/images/logos/'
 
     # handle both '007:15', or ['007:15', '007:16']
