@@ -4,6 +4,7 @@ import re
 
 import mock
 import pytest
+import six
 
 from ckanext.datagovtheme import helpers
 
@@ -65,7 +66,10 @@ def test_get_bureau_info_blm():
 
     assert bureau_info['title'] == 'Bureau of Land Management'
     assert bureau_info['code'] == bureau_code
-    assert bureau_info['logo'] == '/fanstatic/datagovtheme/images/logos/010-04.png'
+    if six.PY3:
+        assert bureau_info['logo'] == '/images/logos/010-04.png'
+    else:
+        assert bureau_info['logo'] == '/fanstatic/datagovtheme/images/logos/010-04.png'
     assert_url(bureau_info['url'], bureau_code)
 
 
@@ -76,7 +80,10 @@ def test_get_bureau_info_logo_jpg():
 
     assert bureau_info['title'] == 'National Endowment for the Humanities'
     assert bureau_info['code'] == bureau_code
-    assert bureau_info['logo'] == '/fanstatic/datagovtheme/images/logos/418-00.jpg'
+    if six.PY3:
+        assert bureau_info['logo'] == '/images/logos/418-00.jpg'
+    else:
+        assert bureau_info['logo'] == '/fanstatic/datagovtheme/images/logos/418-00.jpg'
     assert_url(bureau_info['url'], bureau_code)
 
 
@@ -98,7 +105,10 @@ def test_get_bureau_info_list():
 
     assert bureau_info['title'] == 'Bureau of Land Management'
     assert bureau_info['code'] == bureau_code
-    assert bureau_info['logo'] == '/fanstatic/datagovtheme/images/logos/010-04.png'
+    if six.PY3:
+        assert bureau_info['logo'] == '/images/logos/010-04.png'
+    else:
+        assert bureau_info['logo'] == '/fanstatic/datagovtheme/images/logos/010-04.png'
     assert_url(bureau_info['url'], bureau_code)
 
 
