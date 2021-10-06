@@ -73,4 +73,12 @@ class TestMapLoading(object):
             find(id='dataset-map-container'). \
             contents
 
+        a = html.find(id='dataset-map')
+        print(a)
+        b = a.find('div', {'class': 'dataset-map'})
+        print(b)
+        c = b.find(id='dataset-map-container')
+        print(c)
+
+
         assert len(map_div_elements) > 0
