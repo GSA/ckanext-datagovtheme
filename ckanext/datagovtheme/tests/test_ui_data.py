@@ -73,4 +73,4 @@ class TestMapLoading(object):
             find(id='dataset-map-container'). \
             contents
 
-        assert map_div_elements > 0
+        assert len(map_div_elements) > 0
