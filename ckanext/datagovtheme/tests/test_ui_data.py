@@ -61,3 +61,16 @@ class TestApiLinks(object):
         html = BeautifulSoup(index_response.body, 'html.parser')
         api_href = html.find('a', string='API')['href']
         assert '/api/3' == api_href
+
+
+class TestMapLoading(object):
+    def test_map_html(self, app):
+        index_response = app.get('/dataset')
+        html = BeautifulSoup(index_response.body, 'html.parser')
+
+        map_div_elements = html.find(id='dataset-map'). \
+            find('div', {'class': 'dataset-map'}). \
+            find(id='dataset-map-container'). \
+            contents
+
+        assert map_div_elements > 0
