@@ -80,5 +80,4 @@ class TestMapLoading(object):
         c = b.find(id='dataset-map-container')
         print(c)
 
-
         assert len(map_div_elements) > 0
