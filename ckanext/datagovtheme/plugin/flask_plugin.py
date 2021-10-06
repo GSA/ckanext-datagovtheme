@@ -16,4 +16,4 @@ class MixinPlugin(object):
         # anticipate adding new features to the existing 2.8 templates.
         p.toolkit.add_template_directory(config, '../templates/templates_new')
         p.toolkit.add_public_directory(config, '../public')
-        p.toolkit.add_resource('../fanstatic_library_2_8', 'datagovtheme')
+        p.toolkit.add_resource('../fanstatic_library', 'datagovtheme')
