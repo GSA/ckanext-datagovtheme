@@ -1,4 +1,4 @@
-this.ckan.module('datagovtheme-site-wide-search', function($, _) {
+ckan.module('datagovtheme-site-wide-search', function($, _) {
   return {
     options: {
       base_url: 'http://www.data.gov/search/node/'
@@ -17,7 +17,7 @@ this.ckan.module('datagovtheme-site-wide-search', function($, _) {
   }
 });
 
-this.ckan.module('datagovtheme-search-helper-message', function($, _) {
+ckan.module('datagovtheme-search-helper-message', function($, _) {
   return {
     options: {},
     initialize: function() {

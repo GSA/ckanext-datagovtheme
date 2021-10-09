@@ -3,7 +3,7 @@
  *
  */
 setTimeout(function() {
-  this.ckan.module('location-autocomplete', function (jQuery, _) {
+  ckan.module('location-autocomplete', function (jQuery, _) {
     return {
       /* Options for the module */
       options: {

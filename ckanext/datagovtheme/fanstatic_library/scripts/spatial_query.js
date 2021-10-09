@@ -1,7 +1,7 @@
 /* Module for handling the spatial querying
  */
 setTimeout(function() {
-  this.ckan.module('spatial-query', function ($, _) {
+  ckan.module('spatial-query', function ($, _) {
 
     return {
       options: {
