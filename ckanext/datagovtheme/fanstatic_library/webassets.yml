@@ -34,7 +34,7 @@ qa_styles:
 
 spatial_query:
   filters: rjsmin
-  output: datagovtheme/spatial_query.js
+  output: datagovtheme/spatialquery.js
   contents:
     - scripts/vendor/leaflet/leaflet.js
     - scripts/vendor/leaflet.draw/leaflet.draw.js
