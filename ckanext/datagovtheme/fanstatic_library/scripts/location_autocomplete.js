@@ -2,7 +2,7 @@
  *
  *
  */
-setTimeout(function() {
+//setTimeout(function() {
   ckan.module('location-autocomplete', function (jQuery, _) {
     return {
       /* Options for the module */
@@ -204,4 +204,4 @@ setTimeout(function() {
     };
   });
 
-}, 2000);
+//}, 2000);
