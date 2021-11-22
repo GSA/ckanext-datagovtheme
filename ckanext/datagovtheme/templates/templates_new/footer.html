@@ -3,30 +3,33 @@
 {% block footer_content %}
 
         <div class="fluid-row">
-            <div class="{{ 'col-md-6' }} clearfix">
+            <!-- <div class="{{ 'col-md-6' }} clearfix">
                 <div class="footer-logo"> <a href="http://www.data.gov/" class="logo-brand">Data.Gov 2.0</a> </div>
                 <ul class="nav" id="menu-footer2">
                     {% snippet "snippets/footer2_menu.html" %}
                 </ul>
-            </div>
-            <nav role="navigation" class="{{ 'col-md-3' }}">
+            </div> -->
+            <nav role="navigation" class="{{ 'col-md-3' }}" id="menu-footer-parent">
                 <ul class="nav" id="menu-footer">
-                    {% snippet "snippets/footer_menu.html" %}
-            {% if c.userobj%}
-                <li class="local-link"> <a href="{{ h.url_for('/user/_logout') }}" title="{{ _('Log out') }}"></a> </li>
-            {% else %}
-                <li><a href="{{ h.get_login_url() }}" class="local-link"> {{ _('Login') }}</a></li>
-            {% endif %}
+                    <!-- {% snippet "snippets/footer_menu.html" %} -->
+                    <li style="display:inline;"><a style="display:inline;" href="//www.doi.gov/data">Open Data at DOI</a></li>
+                    <li style="display:inline;"><a style="display:inline;" href="//usinterior.ideascale.com">Feedback</a></li>
+                    <li style="display:inline;"><a style="display:inline;" href="//data.doi.gov/about">About</a></li>
+                    <li style="display:inline;"><a style="display:inline;" href="//www.data.gov/open-gov/">Open Government</a></li>
+                    <li style="display:inline;"><a style="display:inline;" href="//data.gov">data.gov</a></li>
+                    <li style="display:inline;"><a style="display:inline;" href="//www.data.gov/data-policy">Data Policy</a></li>
+                    <li style="display:inline;"><a style="display:inline;" href="//www.data.gov/faq">FAQ</a></li>
+                    <li style="display:inline;"><a style="display:inline;" href="//www.data.gov/privacy-policy">Privacy Policy</a></li>
                 </ul>
             </nav>
-            <div class="{{ 'col-md-3' }} social-nav">
+            <!-- <div class="{{ 'col-md-3' }} social-nav">
                 <nav role="navigation">
                     <ul class="nav" id="menu-social_navigation">
                         <li><a href="https://twitter.com/usdatagov"><i class="fa fa-twitter"></i><span>Twitter</span></a></li>
                         <li><a href="http://github.com/GSA/data.gov/"><i class="fa fa-github"></i><span>Github</span></a></li>
                     </ul>
                 </nav>
-         </div>
+         </div> -->
 
 
      </div>

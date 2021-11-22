@@ -1,13 +1,15 @@
-{% block header %}
-{% set menus = h.get_dynamic_menu() %}
+{% block header %} {% set menus = h.get_dynamic_menu() %}
 <a href="#content" class="hide">{{ _('Skip to content') }}</a>
 
 <header class="navbar navbar-static-top masthead">
-    {% if g.debug and not g.debug_supress_header %}
-    <div class="debug">Controller : {{ c.controller }}<br/>Action : {{ c.action }}</div>
-    {% endif %}
+  {% if g.debug and not g.debug_supress_header %}
+  <div class="debug">
+    Controller : {{ c.controller }}<br />Action : {{ c.action }}
+  </div>
+  {% endif %}
 
-    <div class="container">
+  <!-- NOT USED BY DOI -->
+  <!-- <div class="container">
         <div class="searchbox-row skip-navigation">
             <div class="skip-link">
                 <a href="#">Jump to Content</a>
@@ -81,67 +83,106 @@
             {% endblock %}
 
         </hgroup>
-    </div>
-    <div class="header_new banner_new page-heading_new">
-        <div class="container">
-            <div class="page-header_new">
-                <div class="main-heading">
-                    <h1>
-                    {% if menus['topic_header'] %}
-                        {% if menus['topic_header']['multi'] %}
-                        <span class="category-header {{ menus['topic_header']['class'] }}"><a href="{{ menus['topic_header']['url'][0] }}" class="topic_url"><div><i></i></div><span class="topic_name">{{ menus['topic_header']['name'][0] }}</span></a> &nbsp; &mdash; &nbsp; <a href="{{ menus['topic_header']['url'][1] }}"><span class="topic_name">{{ menus['topic_header']['name'][1] }}</span></a> &nbsp; &mdash; &nbsp; </span>
-                        {% else %}
-                        <span class="category-header {{ menus['topic_header']['class'] }}"><a href="{{ menus['topic_header']['url'] }}" class="topic_url"><div><i></i></div><span class="topic_name">{{ menus['topic_header']['name'] }}</span></a> &nbsp; &mdash; &nbsp; </span>
-                        {% endif %}
-                    {% else %}
-                        <span class="category-header "><a href="#" class="topic_url"><div><i></i></div><span class="topic_name"></span></a></span>
-                    {% endif %}
-                        Data Catalog
-                    </h1>
-                </div>
-
-                <div class="toolbar">
-                        {% block breadcrumb %}
-                        <ol class="breadcrumb">
-                            <li class="home"><a href="{{ h.url(controller='package', action='search') }}"><i class="fa fa-home"></i><span> {{ _('Home') }}</span></a></li>
-                            <li class="active">{{ h.nav_link(_('Datasets'), controller='package', action='search', highlight_actions = 'new index') }}</li>
-                        </ol>
-                        {% endblock %}
-                    <div class="add_action">
-                        <a href="{{ h.url_for('organizations_index') }}" class="btn btn_new">{{ _('Organizations') }}</a>
-                        <a href="https://www.data.gov/catalog-help/" class="btn btn-primary question"><i class="fa fa-question-circle"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-    {% if menus['submenus'] %}
-<div class="sub-nav banner-nav">
+    </div> -->
+  <link rel="icon" type="image/png" href="/fanstatic/datagovtheme/images/favicon.ico" />
+  <div class="header_new banner_new page-heading_new">
     <div class="container">
-        <nav role="navigation" class="topic-subnav">
-            <ul class="nav navbar-nav" id="menu-community">
-                {% for submenu in menus['submenus'] if not submenu['parent_id'] %}
-                    {% if submenu['has_children'] %}
-                        {% set parent_id = submenu['id'] %}
-            <li><a href="{{ submenu['link'] }}" class="dropdown-toggle{% if submenu['name']=='Data' %} active{% endif %}" data-toggle="dropdown">{{ submenu['name'] }}<b class="caret"></b></a>
-                <ul class="dropdown-menu topics{% if menus['topic_header'] %} {{ menus['topic_header']['class'] }} {% endif %}">
-                        {% for sub_submenu in menus['submenus'] if sub_submenu['parent_id'] == parent_id %}
-                    <li><a href="{{ sub_submenu['link'] }}">{{ sub_submenu['name'] }}</a></li>
-                        {% endfor %}
-                </ul>
+      <div class="page-header_new">
+        <div class="main-heading">
+          <h1>
+            {% block header_logo %} 
+            {% if g.site_logo %}
+            <a class="logo" href="/dataset"/>
+              <img
+                src="{{ g.site_logo }}"
+                alt="{{ g.site_title }}"
+                title="{{ g.site_title }}"
+                id="header-logo"
+              />
+            </a>
+            {% else %}
+            <h1>
+              <a
+                href="{{ h.nav_link(_('Datasets'), controller='package', action='search', highlight_actions = 'new index') }}"
+                >{{ g.site_title }}</a
+              >
+            </h1>
+            {% endif %} {% if g.site_description %}
+            <h2>{{ g.site_description }}</h2>
+            {% endif %} {% endblock %}
+          </h1>
+        </div>
+
+        <div class="toolbar">
+          {% block breadcrumb %}
+          <ol class="breadcrumb">
+            <li class="home">
+              <a href="{{ h.url(controller='package', action='search') }}"
+                ><i class="fa fa-home"></i><span> {{ _('Home') }}</span></a
+              >
             </li>
-                    {% elif not submenu['parent_id'] %}
-                        {% if submenu['name'] == 'Data' %}
-            <li><a href="{{ submenu['link'] }}" class="active">{{ submenu['name'] }}</a></li>
-                        {% else %}
-            <li><a href="{{ submenu['link'] }}">{{ submenu['name'] }}</a></li>
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        </nav>
+            <li class="active">{{ h.nav_link(_('Datasets'), controller='package', action='search', highlight_actions = 'new index') }}</li>
+          </ol>
+          {% endblock %}
+          <div class="add_action">
+            <a href="{{ h.url_for('organizations_index') }}" class="btn btn_new"
+              >{{ _('Organizations') }}</a
+            >
+            <a
+              href="https://www.data.gov/catalog-help/"
+              class="btn btn-primary question"
+              ><i class="fa fa-question-circle"></i
+            ></a>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+</header>
+{% if menus['submenus'] %}
+<div class="sub-nav banner-nav">
+  <div class="container">
+    <nav role="navigation" class="topic-subnav">
+      <ul class="nav navbar-nav" id="menu-community">
+        {% for submenu in menus['submenus'] if not submenu['parent_id'] %} {% if
+        submenu['has_children'] %} {% set parent_id = submenu['id'] %}
+        <li>
+          <a
+            href="{{ submenu['link'] }}"
+            class="
+              dropdown-toggle{%
+              if
+              submenu['name']=='Data'
+              %}
+              active{%
+              endif
+              %}
+            "
+            data-toggle="dropdown"
+            >{{ submenu['name'] }}<b class="caret"></b
+          ></a>
+          <ul
+            class="dropdown-menu topics{% if menus['topic_header'] %} {{ menus['topic_header']['class'] }} {% endif %}"
+          >
+            {% for sub_submenu in menus['submenus'] if sub_submenu['parent_id']
+            == parent_id %}
+            <li>
+              <a href="{{ sub_submenu['link'] }}">{{ sub_submenu['name'] }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% elif not submenu['parent_id'] %} {% if submenu['name'] == 'Data' %}
+        <li>
+          <a href="{{ submenu['link'] }}" class="active"
+            >{{ submenu['name'] }}</a
+          >
+        </li>
+        {% else %}
+        <li><a href="{{ submenu['link'] }}">{{ submenu['name'] }}</a></li>
+        {% endif %} {% endif %} {% endfor %}
+      </ul>
+    </nav>
+  </div>
 </div>
-    {% endif %}
-{% endblock %}
+{% endif %} {% endblock %}

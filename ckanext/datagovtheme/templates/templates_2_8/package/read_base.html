@@ -12,8 +12,8 @@
 
 {% block content_action %}
 <div class="btn-group actions">
-    <li> <a href="https://www.data.gov/story/?media_url={{g.site_url}}{{ h.url_for(controller='package', action='read', id=pkg.name) }}" class="btn btn-info"> <i class="fa fa-book"></i> Submit Data Story </a> </li>
-    <li> <a href="https://www.data.gov/issue/?media_url={{g.site_url}}{{ h.url_for(controller='package', action='read', id=pkg.name) }}" class="btn btn-warning"> <i class="fa fa-bullhorn"></i> Report Data Issue </a> </li>
+    {# <li> <a href="https://www.data.gov/story/?media_url={{g.site_url}}{{ h.url_for(controller='package', action='read', id=pkg.name) }}" class="btn btn-info"> <i class="fa fa-book"></i> Submit Data Story </a> </li> #}
+    {# <li> <a href="https://www.data.gov/issue/?media_url={{g.site_url}}{{ h.url_for(controller='package', action='read', id=pkg.name) }}" class="btn btn-warning"> <i class="fa fa-bullhorn"></i> Report Data Issue </a> </li> #}
     {# NOTE: Not implemented in stage 1 #}
     {# <li>{% link_for _('History'), controller='package', action='history', id=pkg.name, class_='btn', icon='undo' %}</li> #}
     {% if h.check_access('package_update', {'id':pkg.id }) %}
@@ -25,13 +25,13 @@
 {% if h.get_pkg_dict_extra(pkg, 'accessLevel') == 'non-public' %}
 <div class="no-resource disclaimer"><i class="fa fa-lock"></i><span>This metadata record is available for the public, but the data itself is not public for privacy or security reasons. <a href="#access-use" style="text-decoration:underline;">See details</a></span></div>
 {% endif %}
-{% if c.pkg_dict.organization.organization_type != 'Federal Government' %}
+{# {% if c.pkg_dict.organization.organization_type != 'Federal Government' %}
 <div class="alert-info non-federal"><i class="fa fa-info-circle"></i><span>This is a Non-Federal dataset covered by different Terms of Use than Data.gov.
      {% if c.pkg_dict.organization.terms_of_use %}
         <a href="{{ c.pkg_dict.organization.terms_of_use }}" style="text-decoration:underline;">See Terms</a>
      {% endif %}
     </span></div>
-{% endif %}
+{% endif %} #}
 
 <article itemscope itemtype="http://schema.org/Dataset" class="module prose">
 
