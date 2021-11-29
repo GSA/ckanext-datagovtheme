@@ -6,7 +6,7 @@ build: ## Build the  docker containers
 
 clean: ## Clean workspace and containers
 	find . -name *.pyc -delete
-	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) down -v --remove-orphan
+	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) down -v --remove-orphans
 
 lint: ## Lint the code (python 3 only)
 	docker-compose -f $(COMPOSE_FILE) run --rm app flake8 . --count --show-source --statistics --exclude ckan
