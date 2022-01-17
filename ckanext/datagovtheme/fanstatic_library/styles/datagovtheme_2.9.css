@@ -785,10 +785,12 @@ a {
 .secondary .module .nav-item > a {
     font-size: 13px;
     padding: 5px 15px;
+    z-index: 10;
 }
 .secondary .module .nav-item.active > a:before {
     height: 30px;
     background-position: 0 50%;
+    z-index: 10;
 }
 .secondary .module .module-footer a {
     font-size: 13px;
@@ -1945,6 +1947,7 @@ article.module.prose h3 {
 .secondary .module .topics .nav-item > a
 {
     padding: 5px 15px;
+    z-index: 10;
 
 }
 .topics.nav-simple > li{
@@ -1952,19 +1955,24 @@ article.module.prose h3 {
 }
 .nav-item > ul > li {
     padding: 5px;
+    z-index: 10;
 }
 .sub_nav .nav-item > a {
     margin: -7px -15px !important;
     padding: 5px 15px !important;
+    z-index: 10;
 }
 .ie .nav-item > ul > li > a{
     margin: -7px -15px;
+    z-index: 10;
 }
 .ie9 .nav-item > ul > li > a{
     margin: -7px -15px;
+    z-index: 10;
 }
 .ie10 .nav-item > ul > li > a{
     margin: -7px -15px;
+    z-index: 10;
 }
 .sub_nav.nav-simple{
     margin-top:8px;

@@ -21,8 +21,12 @@ test: ## Run extension tests
 up: ## Start the containers
 	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) up
 
-upd: ## Start the containers in the background, only works with CKAN 2.9
+upd: ## Start the containers in the background
+ifeq ($(CKAN_VERSION), 2.8)
+	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) run --rm app paster --plugin=ckan search-index rebuild -i -o -e
+else
 	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) run --rm app ckan search-index rebuild -i -o -e
+endif
 	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) up -d
 
 .DEFAULT_GOAL := help
