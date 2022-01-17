@@ -14,7 +14,7 @@ class TestSearchFilters():
 
     @pytest.fixture(autouse=True)
     def set_up(self):
-        uid = str(int(time.time())+2)
+        uid = str(int(time.time()) + 2)
         name = "test_org" + uid
         organization = factories.Organization(name=name)
         group_1 = "test_group_1" + uid
