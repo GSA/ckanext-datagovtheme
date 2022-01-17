@@ -39,7 +39,7 @@ CKAN version | Compatibility
 ------------ | -------------
 <=2.7        | no
 2.8          | yes
-2.9          | [in progress](https://github.com/GSA/datagov-ckan-multi/issues/567)
+2.9          | [complete](https://github.com/GSA/datagov-ckan-multi/issues/567)
 
 
 ### Configuration

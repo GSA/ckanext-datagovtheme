@@ -8,5 +8,4 @@ RUN if [[ "${CKAN_VERSION}" = "2.9" ]]; then sudo apk add tzdata; fi
 COPY . $APP_DIR/
 # WORKDIR /app
 
-# python cryptography takes a while to build
 RUN pip install -r $APP_DIR/requirements.txt -r $APP_DIR/dev-requirements.txt -e $APP_DIR/.
