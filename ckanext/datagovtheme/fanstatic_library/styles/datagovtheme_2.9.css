@@ -589,15 +589,18 @@ a {
 }
 #field-location {
     width: 190px;
+    z-index: 12;
 }
 .select2-results .select2-no-results {
     padding: 3px 6px;
 }
 #dataset-map-edit {
     margin: 5px 8px;
+    z-index: 12;
 }
 #dataset-map-edit-buttons {
     display: none;
+    z-index: 12;
 }
 .leaflet-control-draw-rectangle {
     background-image: url("/images/pencil.png");
@@ -639,9 +642,11 @@ a {
     display: block;
     float: right;
     padding: 10px;
+    z-index: 12;
 }
 .dataset-map-expanded #dataset-map #dataset-map-edit {
     display: none;
+    z-index: 12;
 }
 .dataset-map-expanded #dataset-map .module-heading {
     border-top-color: #000;
