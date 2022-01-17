@@ -15,6 +15,12 @@ import pytest
 class TestDatagovthemeServed(object):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
 
+    def test_homepage_redirect(self, app):
+        index_response = app.set('/')
+
+        assert 'Welcome to Geospatial Data' not in index_response.body
+        assert 'No datasets found' in index_response.body
+
     def test_datagovtheme_css_file(self, app):
         """Assert the correct version of CSS is served."""
         index_response = app.get('/dataset')
