@@ -3,6 +3,7 @@ from builtins import object
 from bs4 import BeautifulSoup
 from ckantoolkit.tests import factories
 import pytest
+import time
 
 
 # The /dataset page uses get_pkg_dict_extra which depends on HarvestObject,
@@ -13,11 +14,17 @@ class TestSearchFilters():
 
     @pytest.fixture(autouse=True)
     def set_up(self):
-        organization = factories.Organization()
-        self.group1 = factories.Group()
-        self.group2 = factories.Group()
-        self.dataset1 = factories.Dataset(owner_org=organization['id'], groups=[{"name": self.group1["name"]}])
-        self.dataset2 = factories.Dataset(owner_org=organization['id'], groups=[{"name": self.group2["name"]}])
+        uid = str(int(time.time()))
+        name = "test_org" + uid
+        organization = factories.Organization(name=name)
+        group_1 = "test_group_1" + uid
+        group_2 = "test_group_2" + uid
+        self.group1 = factories.Group(name=group_1)
+        self.group2 = factories.Group(name=group_2)
+        dataset_1 = "test_dataset_1" + uid
+        dataset_2 = "test_dataset_2" + uid
+        self.dataset1 = factories.Dataset(name=dataset_1, owner_org=organization['id'], groups=[{"name": self.group1["name"]}])
+        self.dataset2 = factories.Dataset(name=dataset_2, owner_org=organization['id'], groups=[{"name": self.group2["name"]}])
 
     def test_not_empty_sections(self, app):
         index_response = app.get('/dataset')

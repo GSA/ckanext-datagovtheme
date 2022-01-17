@@ -6,12 +6,13 @@
 from builtins import object
 
 import pytest
+import re
 
 
 # The /dataset page uses get_pkg_dict_extra which depends on HarvestObject,
 # hence the harvest extension. Include it for these tests.
 @pytest.mark.ckan_config('ckan.plugins', 'harvest datagovtheme')
-@pytest.mark.use_fixtures('with_plugins')
+@pytest.mark.use_fixtures('with_plugins', 'clean_db')
 class TestDatagovthemeServed(object):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
 
@@ -19,7 +20,7 @@ class TestDatagovthemeServed(object):
         index_response = app.get('/')
 
         assert 'Welcome to Geospatial Data' not in index_response.body
-        assert 'No datasets found' in index_response.body
+        assert 'datasets found' in index_response.body
 
     def test_datagovtheme_css_file(self, app):
         """Assert the correct version of CSS is served."""
@@ -35,7 +36,7 @@ class TestDatagovthemeServed(object):
 
         assert "Search Data.Gov" in index_response.body
         assert "Search datasets..." in index_response.body
-        assert "No datasets found" in index_response.body
+        assert "datasets found" in index_response.body
 
     def test_datagovtheme_navigation(self, app):
         index_response = app.get('/dataset')
@@ -62,6 +63,8 @@ class TestDatagovthemeServed(object):
     def test_datagovtheme_organizations(self, app):
         index_response = app.get('/organization')
 
-        assert "No organizations found" in index_response.body
+        org_match = r'organizations? found'
+        matches = re.findall(org_match, index_response.body)
+        assert len(matches) > 0
         assert "Search organizations..." in index_response.body
         assert "What are organizations?" in index_response.body
