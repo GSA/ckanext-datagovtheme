@@ -16,7 +16,7 @@ class TestDatagovthemeServed(object):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
 
     def test_homepage_redirect(self, app):
-        index_response = app.set('/')
+        index_response = app.get('/')
 
         assert 'Welcome to Geospatial Data' not in index_response.body
         assert 'No datasets found' in index_response.body
