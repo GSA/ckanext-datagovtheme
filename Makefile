@@ -1,8 +1,8 @@
-CKAN_VERSION ?= 2.8
+CKAN_VERSION ?= 2.9
 COMPOSE_FILE ?= docker-compose.yml
 
 build: ## Build the  docker containers
-	docker-compose -f $(COMPOSE_FILE) build
+	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) build
 
 clean: ## Clean workspace and containers
 	find . -name *.pyc -delete
@@ -21,6 +21,8 @@ test: ## Run extension tests
 up: ## Start the containers
 	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) up
 
+upd: ## Start the containers in the background
+	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) up -d
 
 .DEFAULT_GOAL := help
 .PHONY: clean help lint test test-legacy up
