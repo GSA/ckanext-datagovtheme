@@ -7,6 +7,7 @@ from builtins import object
 
 import pytest
 import re
+import six
 
 
 # The /dataset page uses get_pkg_dict_extra which depends on HarvestObject,
@@ -20,7 +21,11 @@ class TestDatagovthemeServed(object):
         index_response = app.get('/')
 
         assert 'Welcome to Geospatial Data' not in index_response.body
-        assert 'datasets found' in index_response.body
+        if six.PY2:
+            assert ('You should be redirected automatically to target URL: <a href='
+                    '"/dataset">/dataset</a>') in index_response.body
+        else:
+            assert 'datasets found' in index_response.body
 
     def test_datagovtheme_css_file(self, app):
         """Assert the correct version of CSS is served."""

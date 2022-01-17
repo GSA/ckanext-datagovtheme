@@ -9,7 +9,7 @@ clean: ## Clean workspace and containers
 	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) down -v --remove-orphans
 
 lint: ## Lint the code (python 3 only)
-	docker-compose -f $(COMPOSE_FILE) run --rm app flake8 . --count --show-source --statistics --exclude ckan
+	docker-compose -f $(COMPOSE_FILE) run --rm app flake8 ckanext --count --show-source --statistics --exclude ckan
 
 test-legacy: ## Run legacy tests in an existing container
 	@# TODO wait for CKAN to be up; use docker-compose run instead
@@ -21,7 +21,7 @@ test: ## Run extension tests
 up: ## Start the containers
 	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) up
 
-upd: ## Start the containers in the background
+upd: ## Start the containers in the background, only works with CKAN 2.9
 	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) run --rm app ckan search-index rebuild -i -o -e
 	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) up -d
 
