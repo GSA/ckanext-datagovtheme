@@ -23,7 +23,7 @@ services:
       - redis
       - solr
     volumes:
-      - .:/app
+      - ./ckanext:/srv/app/ckanext
       - /etc/timezone:/etc/timezone:ro
   db:
     image: ckan/ckan-postgres-dev:${CKAN_VERSION}

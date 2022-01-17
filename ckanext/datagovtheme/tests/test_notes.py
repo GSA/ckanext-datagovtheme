@@ -1,5 +1,6 @@
 # encoding: utf-8
 from builtins import object
+import time
 import pytest
 
 from ckantoolkit.tests import factories
@@ -15,7 +16,8 @@ class TestNotes(object):
     def test_datagovtheme_html_loads(self, app):
 
         notes = 'Notes for a test dataset'
-        dataset = factories.Dataset(notes=notes)
+        name = 'random_test' + str(int(time.time()))
+        dataset = factories.Dataset(notes=notes, name=name)
 
         dataset_response = app.get('/dataset/{}'.format(dataset['name']))
 
