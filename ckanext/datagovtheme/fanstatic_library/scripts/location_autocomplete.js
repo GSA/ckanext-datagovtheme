@@ -2,9 +2,9 @@
  *
  *
  */
-let check_ckan_exists_spatial;
+let check_ckan_exists_location;
 
-clearInterval(check_ckan_exists_spatial);
+clearInterval(check_ckan_exists_location);
 check_ckan_exists_location = setInterval(function() {
   if(typeof ckan !== 'undefined' && ckan.module && ckan.i18n) {
     clearInterval(check_ckan_exists_location);
