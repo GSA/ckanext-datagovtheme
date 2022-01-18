@@ -1,15 +1,15 @@
-CKAN_VERSION ?= 2.8
+CKAN_VERSION ?= 2.9
 COMPOSE_FILE ?= docker-compose.yml
 
 build: ## Build the  docker containers
-	docker-compose -f $(COMPOSE_FILE) build
+	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) build
 
 clean: ## Clean workspace and containers
 	find . -name *.pyc -delete
 	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) down -v --remove-orphans
 
 lint: ## Lint the code (python 3 only)
-	docker-compose -f $(COMPOSE_FILE) run --rm app flake8 . --count --show-source --statistics --exclude ckan
+	docker-compose -f $(COMPOSE_FILE) run --rm app flake8 ckanext --count --show-source --statistics --exclude ckan
 
 test-legacy: ## Run legacy tests in an existing container
 	@# TODO wait for CKAN to be up; use docker-compose run instead
@@ -21,6 +21,13 @@ test: ## Run extension tests
 up: ## Start the containers
 	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) up
 
+upd: ## Start the containers in the background
+ifeq ($(CKAN_VERSION), 2.8)
+	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) run --rm app paster --plugin=ckan search-index rebuild -i -o -e
+else
+	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) run --rm app ckan search-index rebuild -i -o -e
+endif
+	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) up -d
 
 .DEFAULT_GOAL := help
 .PHONY: clean help lint test test-legacy up

@@ -16,7 +16,6 @@ services:
       CKAN_DATAPUSHER_URL: http://localhost:8080/  # datapusher is not really enabled
       CKAN__PLUGINS: harvest datagovtheme
       PYTHONDONTWRITEBYTECODE: 1
-    working_dir: /app
     ports:
       - "5000:5000"
     depends_on:
@@ -24,7 +23,8 @@ services:
       - redis
       - solr
     volumes:
-      - .:/app
+      - ./ckanext:/srv/app/ckanext
+      - /etc/timezone:/etc/timezone:ro
   db:
     image: ckan/ckan-postgres-dev:${CKAN_VERSION}
     environment:

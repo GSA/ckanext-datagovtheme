@@ -1,6 +1,9 @@
 /* Module for handling the spatial querying
  */
-var check_ckan_exists_spatial = setInterval(function() {
+let check_ckan_exists_spatial;
+
+clearInterval(check_ckan_exists_spatial);
+check_ckan_exists_spatial = setInterval(function() {
   if(typeof ckan !== 'undefined' && ckan.module && ckan.i18n) {
     clearInterval(check_ckan_exists_spatial);
     ckan.module('spatial-query', function ($, _) {

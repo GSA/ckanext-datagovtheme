@@ -8,11 +8,14 @@ except p.toolkit.CkanVersionException:
 else:
     from ckanext.datagovtheme.plugin.flask_plugin import MixinPlugin
 
+from .. import blueprint
+
 
 class DatagovTheme(MixinPlugin, p.SingletonPlugin):
     '''Theme plugin for catalog.data.gov.'''
 
     # Declare the iterfaces this class implements
+    p.implements(p.IBlueprint)
     p.implements(p.IConfigurer)
     p.implements(p.IFacets, inherit=True)
     p.implements(p.IRoutes, inherit=True)
@@ -72,13 +75,6 @@ class DatagovTheme(MixinPlugin, p.SingletonPlugin):
         else:
             return facets_dict
 
-    # IRoutes
-    def before_map(self, map):
-        controller = 'ckanext.datagovtheme.controllers:ViewController'
-        map.connect('map_viewer', '/viewer', controller=controller, action='show')
-        map.redirect('/', '/dataset')
-        return map
-
     # ITemplateHelpers
     def get_helpers(self):
         from ckanext.datagovtheme import helpers as datagovtheme_helpers
@@ -123,3 +119,6 @@ class DatagovTheme(MixinPlugin, p.SingletonPlugin):
         helpers.update(override_helpers)
 
         return helpers
+
+    def get_blueprint(self):
+        return blueprint.pusher

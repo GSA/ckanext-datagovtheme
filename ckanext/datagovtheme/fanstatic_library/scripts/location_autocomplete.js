@@ -2,7 +2,10 @@
  *
  *
  */
-var check_ckan_exists_location = setInterval(function() {
+let check_ckan_exists_spatial;
+
+clearInterval(check_ckan_exists_spatial);
+check_ckan_exists_location = setInterval(function() {
   if(typeof ckan !== 'undefined' && ckan.module && ckan.i18n) {
     clearInterval(check_ckan_exists_location);
     ckan.module('location-autocomplete', function (jQuery, _) {
