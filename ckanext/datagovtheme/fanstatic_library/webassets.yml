@@ -15,10 +15,6 @@ styles:
   # This name is used in development/debug mode, must match the css file in test_datagovtheme.py
   output: datagovtheme/datagovtheme.css
   contents: # list of files that are included into asset
-    - scripts/vendor/leaflet/leaflet.css
-    - scripts/vendor/leaflet/leaflet.ie.css
-    - scripts/vendor/leaflet.draw/leaflet.draw.css
-    - scripts/vendor/leaflet.draw/leaflet.draw.ie.css
     - styles/datagovtheme_2.9.css
 
 qa:
@@ -36,9 +32,6 @@ spatial_query:
   filters: rjsmin
   output: datagovtheme/spatialquery.js
   contents:
-    - scripts/vendor/leaflet/leaflet.js
-    - scripts/vendor/leaflet.draw/leaflet.draw.js
-    - scripts/spatial_query.js
     # TODO can this custom location search be replaced by ckanext-spatial? Can
     # this be pushed upstream to ckanext-spatial as an enhancement?
     - scripts/location_autocomplete.js
