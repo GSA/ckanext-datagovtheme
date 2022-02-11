@@ -28,9 +28,9 @@ qa_styles:
   contents:
     - styles/qa.css
 
-spatial_query:
+location_autocomplete_js:
   filters: rjsmin
-  output: datagovtheme/spatialquery.js
+  output: datagovtheme/location_autocomplete.js
   contents:
     # TODO can this custom location search be replaced by ckanext-spatial? Can
     # this be pushed upstream to ckanext-spatial as an enhancement?
