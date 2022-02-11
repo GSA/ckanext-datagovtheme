@@ -24,6 +24,7 @@ in the context of Features above._
 
 These extensions are required.
 
+- [ckanext-spatial](https://github.com/gsa/ckanext-spatial)
 - [ckanext-harvest](https://github.com/ckan/ckanext-harvest)
 
 Additionally, ckanext-datagovtheme has "weak" dependencies on these extensions.
