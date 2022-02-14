@@ -59,6 +59,11 @@ class DatagovTheme(MixinPlugin, p.SingletonPlugin):
 
     def group_facets(self, facets_dict, organization_type, package_type):
 
+        # For https://github.com/GSA/datagov-deploy/issues/3630
+        # re-evaluate necessity of these two lines after ckan 2.9.6.
+        if organization_type == 'organization':
+            return self.organization_facets(facets_dict, organization_type, package_type)
+
         # get the categories key
         group_id = p.toolkit.c.group_dict['id']
         key = 'vocab___category_tag_%s' % group_id
