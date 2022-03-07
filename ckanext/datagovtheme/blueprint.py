@@ -36,7 +36,8 @@ def show():
 
 
 def redirect_homepage():
-    return redirect("/dataset", code=302)
+    CKAN_SITE_URL = os.environ.get("CKAN_SITE_URL")
+    return redirect(f"{CKAN_SITE_URL}/dataset", code=302)
 
 
 pusher.add_url_rule('/', view_func=redirect_homepage)
