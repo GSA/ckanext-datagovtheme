@@ -22,8 +22,7 @@ class TestDatagovthemeServed(object):
 
         assert 'Welcome to Geospatial Data' not in index_response.body
         if six.PY2:
-            assert ('You should be redirected automatically to target URL: <a href=') \
-                    in index_response.body
+            assert 'You should be redirected automatically to target URL: <a href=' in index_response.body
         else:
             assert 'datasets found' in index_response.body
 
