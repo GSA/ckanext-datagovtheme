@@ -700,6 +700,7 @@ a {
 .results:before,
 .is-search-title:before {
     display: none;
+    content: '\00000A';
 }
 .filter-list {
     margin-bottom: 5px;
