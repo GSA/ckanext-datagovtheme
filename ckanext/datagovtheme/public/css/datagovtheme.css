@@ -699,9 +699,7 @@ a {
 .is-search-title strong:before,
 .results:before,
 .is-search-title:before {
-    display: block;
-    content: '\A';
-    white-space: pre;
+    display: none;
 }
 .filter-list {
     margin-bottom: 5px;
