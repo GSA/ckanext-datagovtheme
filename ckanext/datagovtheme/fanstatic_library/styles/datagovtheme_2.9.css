@@ -2106,6 +2106,11 @@ margin-top: 0px;
     float: left;
     margin-left: 15px;
 }
+
+.search-form h1 {
+    clear: left;
+}
+
 .page_primary_action {
     position: absolute;
     margin-top: -71px;
