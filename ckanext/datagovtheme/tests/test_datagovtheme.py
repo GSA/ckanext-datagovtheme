@@ -4,7 +4,9 @@
 
 '''
 from builtins import object
-
+import ckanext.harvest.model as harvest_model
+from ckan.tests import factories
+from ckan.tests.helpers import reset_db
 import pytest
 import re
 import six
@@ -16,6 +18,33 @@ import six
 @pytest.mark.use_fixtures('with_plugins', 'clean_db')
 class TestDatagovthemeServed(object):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
+
+    @classmethod
+    def setup(cls):
+        # Start data json sources server we can test harvesting against it
+        reset_db()
+        harvest_model.setup()
+
+    def create_datasets(self):
+        self.user = factories.Sysadmin()
+        self.user_name = self.user['name'].encode('ascii')
+        self.organization = factories.Organization(name='myorg',
+                                                   users=[{'name': self.user_name, 'capacity': 'Admin'}],
+                                                   extras=[{'key': 'sub-agencies', 'value': 'sub-agency1,sub-agency2'}])
+        dataset = {
+            'public_access_level': 'public',
+            'unique_id': '',
+            'contact_name': 'Jhon',
+            'contact_email': 'jhon@mail.com',
+            'modified': '2019-01-27 11:41:21',
+            'tag_string': 'tag01,tag02',
+            'version': '1.1',
+            'owner_org': self.organization['id'],
+            'extras': [{'key': 'bureauCode', 'value': '010:00'}]
+        }
+        d1 = dataset.copy()
+        d1.update({'title': 'test 01 dataset', 'unique_id': 't1'})
+        factories.Dataset(**d1)
 
     def test_homepage_redirect(self, app):
         index_response = app.get('/')
@@ -65,10 +94,22 @@ class TestDatagovthemeServed(object):
         assert '<li class="menu-older-adults-health">' in index_response.body
 
     def test_datagovtheme_organizations(self, app):
+        # create datasets
+        self.create_datasets()
+
         index_response = app.get('/organization')
 
-        org_match = r'organizations? found'
+        org_match = r'1 organizations? found'
         matches = re.findall(org_match, index_response.body)
         assert len(matches) > 0
         assert "Search organizations..." in index_response.body
         assert "What are organizations?" in index_response.body
+
+    def test_datagovtheme_bureau_names(self, app):
+        # create datasets
+        self.create_datasets()
+
+        index_response = app.get('/dataset')
+
+        assert "<a href=\"/dataset/?bureauCode=010%3A00\" title=\"\">" in index_response.body
+        assert "<span class=\"item-label\">Department of the Interior</span>" in index_response.body
