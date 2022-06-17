@@ -13,7 +13,7 @@ import time
 class TestSearchFilters():
 
     @pytest.fixture(autouse=True)
-    def set_up(self):
+    def setup(self):
         uid = str(int(time.time()) + 2)
         name = "test_org" + uid
         organization = factories.Organization(name=name)
