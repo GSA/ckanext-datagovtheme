@@ -27,6 +27,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'future',
+        'six>=1.12.0',
     ],
     setup_requires=['wheel'],
     entry_points="""
