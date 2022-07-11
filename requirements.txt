@@ -1,5 +1,3 @@
-future
-
 # ckanext-harvest
 -e git+https://github.com/ckan/ckanext-harvest.git@89b1a322acfcdabdf3274d3c47dd95291c9c5427#egg=ckanext-harvest
 -e git+https://github.com/gsa/ckanext-spatial.git@datagov#egg=ckanext-spatial
@@ -8,4 +6,3 @@ pika>=1.1.0
 pyOpenSSL==18.0.0
 redis
 requests>=2.11.1
-six>=1.12.0
