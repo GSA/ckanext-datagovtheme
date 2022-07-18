@@ -1,6 +1,7 @@
 # ckanext-datagovtheme
 
-[![CircleCI](https://circleci.com/gh/GSA/ckanext-datagovtheme.svg?style=svg)](https://circleci.com/gh/GSA/ckanext-datagovtheme)
+[![Github Actions](https://github.com/GSA/ckanext-datagovtheme/actions/workflows/ckan.yml/badge.svg)](https://github.com/GSA/ckanext-datagovtheme/actions)
+[![PyPI version](https://badge.fury.io/py/ckanext-datagovtheme.svg)](https://badge.fury.io/py/ckanext-datagovtheme)
 
 Data.gov theme, branding, and UI customizations for
 [catalog.data.gov](https://catalog.data.gov/) as a [CKAN](https://ckan.org/)
