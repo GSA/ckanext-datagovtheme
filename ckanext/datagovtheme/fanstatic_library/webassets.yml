@@ -5,6 +5,7 @@ js:
   output: datagovtheme/extension.js
   contents:
     - scripts/vendor/jquery.placeholder.js
+    - scripts/vendor/uswds.js
     - scripts/jquery.cookie.js
     - scripts/datagovtheme.js
     - scripts/tracking.js
@@ -15,6 +16,7 @@ styles:
   # This name is used in development/debug mode, must match the css file in test_datagovtheme.py
   output: datagovtheme/datagovtheme.css
   contents: # list of files that are included into asset
+    - styles/vendor/uswds.css
     - styles/datagovtheme_2.9.css
 
 qa:
