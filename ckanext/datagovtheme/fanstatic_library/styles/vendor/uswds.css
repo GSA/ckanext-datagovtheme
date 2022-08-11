@@ -1729,6 +1729,7 @@ dfn{
   font-size:1.06rem;
   line-height:1.5;
   background-color:#f0f0f0;
+  /* background-color:#dfe1e2; */
 }
 @media all and (min-width: 40em){
   .usa-banner{
@@ -1811,30 +1812,29 @@ dfn{
 }
 
 .usa-banner__inner{
-  padding-left:1rem;
-  padding-right:1rem;
+  padding: 0 3px;
+  /* padding-left:1rem;
+  padding-right:1rem; */
   margin-left:auto;
   margin-right:auto;
   max-width:64rem;
-  padding-left:1rem;
-  padding-right:1rem;
   display:flex;
   flex-wrap:wrap;
   align-items:flex-start;
   padding-right:0;
 }
-@media all and (min-width: 64em){
+/* @media all and (min-width: 64em){
   .usa-banner__inner{
     padding-left:2rem;
     padding-right:2rem;
   }
-}
-@media all and (min-width: 64em){
+} */
+/* @media all and (min-width: 64em){
   .usa-banner__inner{
     padding-left:2rem;
     padding-right:2rem;
   }
-}
+} */
 @media all and (min-width: 40em){
   .usa-banner__inner{
     align-items:center;
