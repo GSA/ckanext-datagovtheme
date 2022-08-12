@@ -6647,7 +6647,7 @@ html.usa-js-loading .usa-nav__submenu.usa-megamenu{
     width:100%;
   }
 }
-@media all and (min-width: 40em){
+@media all and (min-width: 50em){ /* originally set to 40em. changed to support catalog mobile BP */
   .tablet\:grid-col{
     flex:1 1 0%;
     width:auto;
