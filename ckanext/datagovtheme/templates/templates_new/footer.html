@@ -2,7 +2,7 @@
     <div class="footer-section-bottom bg-base-lighter">
         <div class="grid-container">
             <div class="grid-row padding-3">
-                <div class="tablet:grid-col">
+                <div class="tablet:grid-col-auto">
                     <div class="logo-links">
                         <a class="footer-logo media_link" href="https://cloud.gov">
                             <img class="width-30 height-auto"
@@ -10,18 +10,25 @@
                                 alt="Agency logo" />
                         </a>
                     </div>
+                    <ul class="grid-row grid-gap" id="menu-footer2">
+                        {% snippet "snippets/footer2_menu.html" %}
+                    </ul>
                 </div>
                 <div class="tablet:grid-col"></div>
-                <div class="tablet:grid-col">
-                    <ul class="add-list-reset">
-                        <li><a href="/about/">About</a></li>
-                        <li><a href="/open-gov/">Open Government</a></li>
+                <div class="tablet:grid-col-auto">
+                    <ul class="add-list-reset" id="menu-footer">
+                        {% snippet "snippets/footer_menu.html" %}
+                        {% if c.userobj%}
+                            <li><a href="{{ h.url_for('/user/_logout') }}" class="local-link"> {{ _('Logout') }}</a></li>
+                        {% else %}
+                            <li><a href="{{ h.get_login_url() }}" class="local-link"> {{ _('Login') }}</a></li>
+                        {% endif %}
                     </ul>
                 </div>
                 <div class="tablet:grid-col">
                     <ul class="add-list-reset">
-                        <li><a href="https://twitter.com/usdatagov">Twitter</a></li>
-                        <li><a href="https://github.com/GSA/data.gov">Github</a></li>
+                        <li><a href="https://twitter.com/usdatagov"><i class="fa fa-twitter"></i><span>Twitter</span></a></li>
+                        <li><a href="https://github.com/GSA/data.gov"><i class="fa fa-github"></i><span>Github</span></a></li>
                     </ul>
                 </div>
             </div>

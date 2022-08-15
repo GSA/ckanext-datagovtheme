@@ -98,35 +98,11 @@
 			"link": "//www.data.gov/open-gov/",
 			"id": "24492956",
 			"Parent": "No"
-		},
-		{
-			"name": "Blog",
-			"link": "//www.data.gov/meta/",
-			"id": "18795112",
-			"Parent": "No"
-		},
-		{
-			"name": "Metrics",
-			"link": "//www.data.gov/metrics",
-			"id": "129858",
-			"Parent": "No"
-		},
-		{
-			"name": "Events",
-			"link": "//www.data.gov/events/",
-			"id": "18795122",
-			"Parent": "No"
-		},
-		{
-			"name": "Log In",
-			"link": "//www.data.gov/wp/wp-login.php",
-			"id": "132931",
-			"Parent": "No"
 		}
 	],
 	"footer2_navigation": [
 		{
-			"name": "Privacy and Website Policies",
+			"name": "Website Policies",
 			"link": "//www.data.gov/privacy-policy",
 			"id": "18795132",
 			"Parent": "No"
@@ -141,6 +117,23 @@
 			"name": "PERFORMANCE.GOV",
 			"link": "//www.performance.gov/",
 			"id": "18795152",
+			"Parent": "No"
+		},
+		{
+			"name": "FOIA",
+			"link": "//www.gsa.gov/reference/freedom-of-information-act-foia",
+			"id": "18795152",
+			"Parent": "No"
+		},
+		{
+			"name": "Privacy",
+			"link": "//www.gsa.gov/website-information/website-policies#privacy",
+			"id": "18795152",
+			"Parent": "No"
+		},
+		{
+			"name": "Accessibility",
+			"link": "//www.gsa.gov/website-information/website-policies#accessibility",
 			"Parent": "No"
 		}
 	],
