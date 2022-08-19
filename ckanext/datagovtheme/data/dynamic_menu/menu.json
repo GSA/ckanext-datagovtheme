@@ -86,9 +86,7 @@
 			"Parent": "No"
 		}
 	],
-	"footer_navigation": [
-
-	],
+	"footer_navigation": [],
 	"footer2_navigation": [
 		{
 			"name": "About",
