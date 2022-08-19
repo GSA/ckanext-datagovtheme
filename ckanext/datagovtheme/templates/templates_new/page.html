@@ -1,20 +1,11 @@
-{% ckan_extends %}
-
-{% block maintag %}<div role="main" class="controller-{{c.controller}} action-{{c.action}}">{% endblock %}
-
-{% block flash %}
-  {% set flash_messages = h.flash.pop_messages() | list %}
-  {% if flash_messages %}
+{% ckan_extends %} {% block maintag %}
+<div role="main" class="controller-{{c.controller}} action-{{c.action}}">
+    {% endblock %} {% block flash %} {% set flash_messages = h.flash.pop_messages() | list %} {% if flash_messages %}
     <div class="flash-messages">
-      {% for message in flash_messages %}
-        <div class="alert fade in {{ message.category }}">
-          {{ h.literal(message) }}
-        </div>
-      {% endfor %}
+        {% for message in flash_messages %}
+        <div class="alert fade in {{ message.category }}">{{ h.literal(message) }}</div>
+        {% endfor %}
     </div>
-  {% endif %}
-{% endblock %}
-
-{% block footer %}
-  {% include "footer.html" %}
-{% endblock %}
+    {% endif %} {% endblock %} {% block footer %} {% include "footer.html" %} {% include "snippets/identifier.html" %} {%
+    endblock %}
+</div>

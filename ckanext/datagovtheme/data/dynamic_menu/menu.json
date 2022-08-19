@@ -87,6 +87,9 @@
 		}
 	],
 	"footer_navigation": [
+
+	],
+	"footer2_navigation": [
 		{
 			"name": "About",
 			"link": "//www.data.gov/about",
@@ -98,9 +101,7 @@
 			"link": "//www.data.gov/open-gov/",
 			"id": "24492956",
 			"Parent": "No"
-		}
-	],
-	"footer2_navigation": [
+		},
 		{
 			"name": "Website Policies",
 			"link": "//www.data.gov/privacy-policy",
@@ -108,32 +109,9 @@
 			"Parent": "No"
 		},
 		{
-			"name": "USA.GOV",
-			"link": "//www.usa.gov/",
-			"id": "18795142",
-			"Parent": "No"
-		},
-		{
 			"name": "PERFORMANCE.GOV",
 			"link": "//www.performance.gov/",
 			"id": "18795152",
-			"Parent": "No"
-		},
-		{
-			"name": "FOIA",
-			"link": "//www.gsa.gov/reference/freedom-of-information-act-foia",
-			"id": "18795152",
-			"Parent": "No"
-		},
-		{
-			"name": "Privacy",
-			"link": "//www.gsa.gov/website-information/website-policies#privacy",
-			"id": "18795152",
-			"Parent": "No"
-		},
-		{
-			"name": "Accessibility",
-			"link": "//www.gsa.gov/website-information/website-policies#accessibility",
 			"Parent": "No"
 		}
 	],

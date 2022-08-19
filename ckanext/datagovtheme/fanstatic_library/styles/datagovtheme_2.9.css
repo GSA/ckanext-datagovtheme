@@ -1155,8 +1155,7 @@ footer.site-footer {
     border-top: 1px solid #E7E7E7;
 }
 .site-footer {
-    background-color: #EFEFEF;
-    padding: 3em 0;
+    padding: 0;
 }
 .col-md-4 {
     width: 33.3333%;
