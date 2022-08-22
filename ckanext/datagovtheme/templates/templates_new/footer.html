@@ -1,34 +1,39 @@
 <footer class="usa-footer site-footer" role="contentinfo">
     <div class="footer-section-bottom bg-base-lighter">
         <div class="grid-container">
-            <div class="grid-row padding-3">
+            <div class="grid-row padding-y-3">
                 <div class="tablet:grid-col-auto">
                     <div class="logo-links">
-                        <a class="footer-logo media_link" href="https://cloud.gov">
-                            <img class="width-30 height-auto"
+                        <a class="footer-logo media_link" href="https://data.gov">
+                            <img
+                                class="width-30 height-auto"
                                 src="https://s3-us-gov-west-1.amazonaws.com/cg-0817d6e3-93c4-4de8-8b32-da6919464e61/logo.png"
-                                alt="Agency logo" />
+                                alt="Data.gov logo"
+                            />
                         </a>
                     </div>
                     <ul class="grid-row grid-gap" id="menu-footer2">
-                        {% snippet "snippets/footer2_menu.html" %}
+                        {% snippet "snippets/footer2_menu.html" %} {% if c.userobj%}
+                        <li><a href="{{ h.url_for('/user/_logout') }}" class="local-link"> {{ _('Logout') }}</a></li>
+                        {% else %}
+                        <li><a href="{{ h.get_login_url() }}" class="local-link"> {{ _('Login') }}</a></li>
+                        {% endif %}
                     </ul>
                 </div>
                 <div class="tablet:grid-col"></div>
                 <div class="tablet:grid-col-auto">
                     <ul class="add-list-reset" id="menu-footer">
                         {% snippet "snippets/footer_menu.html" %}
-                        {% if c.userobj%}
-                            <li><a href="{{ h.url_for('/user/_logout') }}" class="local-link"> {{ _('Logout') }}</a></li>
-                        {% else %}
-                            <li><a href="{{ h.get_login_url() }}" class="local-link"> {{ _('Login') }}</a></li>
-                        {% endif %}
                     </ul>
                 </div>
                 <div class="tablet:grid-col">
                     <ul class="add-list-reset">
-                        <li><a href="https://twitter.com/usdatagov"><i class="fa fa-twitter"></i><span>Twitter</span></a></li>
-                        <li><a href="https://github.com/GSA/data.gov"><i class="fa fa-github"></i><span>Github</span></a></li>
+                        <li>
+                            <a href="https://twitter.com/usdatagov"><i class="fa fa-twitter"></i><span>Twitter</span></a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/GSA/data.gov"><i class="fa fa-github"></i><span>Github</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>
