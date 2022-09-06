@@ -102,6 +102,8 @@ body,
     -o-border-radius: 0;
     border-radius: 0;
 }
+
+.usa-footer.site-footer a,
 a {
     color: #284a7a;
 }
@@ -189,14 +191,14 @@ a {
     display: block;
     float: left;
     height: 53px;
-    background-image: url("../images/logo.png");
+    background-image: url("/images/logo.png");
     width: 204px;
 }
 .masthead .container .logo a {
     display: block;
     float: left;
     height: 48px;
-    background: url("../images/logo.svg") no-repeat scroll 0 0 / contain  rgba(0, 0, 0, 0);
+    background: url("/images/logo.svg") no-repeat scroll 0 0 / contain  rgba(0, 0, 0, 0);
     width: 200px;
 }
 .masthead .container .logo a span {
@@ -226,7 +228,7 @@ a {
     font-weight: bold;
     padding-left: 16px;
     font-size: 12px;
-    background: transparent url("../images/icon-login.gif") 0 50% no-repeat;
+    background: transparent url("/images/icon-login.gif") 0 50% no-repeat;
 }
 .masthead .container .account-wrapper .not-authed a span {
     text-decoration: underline;
@@ -457,7 +459,7 @@ a {
     position: relative;
     padding: 0;
     margin: 0 9px 10px 9px;
-    background: url("../images/banner.jpg");
+    background: url("/images/banner.jpg");
     height: 301px;
     overflow: hidden;
 }
@@ -502,12 +504,12 @@ a {
 .format-label[data-format="ISO-19139"],
 .format-label[data-format*="ISO-19139"] {
     background-position: 0 0;
-    background-image: url("../images/icon-iso-19139.png");
+    background-image: url("/images/icon-iso-19139.png");
 }
 .format-label[data-format="FGDC"],
 .format-label[data-format*="FGDC"] {
     background-position: 0 0;
-    background-image: url("../images/icon-fgdc.png");
+    background-image: url("/images/icon-fgdc.png");
 }
 .format-label[data-format="web page"],
 .format-label[data-format*="web page"],
@@ -549,7 +551,7 @@ a {
 .format-label[data-format=wms],
 .format-label[data-format*=wms] {
     background-position: 0 0;
-    background-image: url("../images/icon-wms.png");
+    background-image: url("/images/icon-wms.png");
 }
 #search-helper-message {
     display: none;
@@ -600,7 +602,7 @@ a {
     display: none;
 }
 .leaflet-control-draw-rectangle {
-    background-image: url("../images/pencil.png");
+    background-image: url("/images/pencil.png");
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -o-border-radius: 5px;
@@ -834,7 +836,7 @@ a {
     margin-top: -10px;
 }
 .ie7 .toolbar .breadcrumb li {
-    background-image: url("../images/breadcrumb-slash-ie7.png");
+    background-image: url("/images/breadcrumb-slash-ie7.png");
 }
 .ie7 .dataset-map-expanded #dataset-map {
     width: 938px;
@@ -872,35 +874,35 @@ a {
 }
 .ie7 .organization-type[data-organization-type="federal"],
 .ie8 .organization-type[data-organization-type="federal"] {
-    background-image: url("../images/organization-type/federal.png");
+    background-image: url("/images/organization-type/federal.png");
 }
 .ie7 .organization-type[data-organization-type="university"],
 .ie8 .organization-type[data-organization-type="university"] {
-    background-image: url("../images/organization-type/university.png");
+    background-image: url("/images/organization-type/university.png");
 }
 .ie7 .organization-type[data-organization-type="state"],
 .ie8 .organization-type[data-organization-type="state"] {
-    background-image: url("../images/organization-type/state.png");
+    background-image: url("/images/organization-type/state.png");
 }
 .ie7 .organization-type[data-organization-type="tribal"],
 .ie8 .organization-type[data-organization-type="tribal"] {
-    background-image: url("../images/organization-type/tribal.png");
+    background-image: url("/images/organization-type/tribal.png");
 }
 .ie7 .organization-type[data-organization-type="non-profit"],
 .ie8 .organization-type[data-organization-type="non-profit"] {
-    background-image: url("../images/organization-type/non-profit.png");
+    background-image: url("/images/organization-type/non-profit.png");
 }
 .ie7 .organization-type[data-organization-type="other"],
 .ie8 .organization-type[data-organization-type="other"] {
-    background-image: url("../images/organization-type/other.png");
+    background-image: url("/images/organization-type/other.png");
 }
 .ie7 .organization-type[data-organization-type="local"],
 .ie8 .organization-type[data-organization-type="local"] {
-    background-image: url("../images/organization-type/local.png");
+    background-image: url("/images/organization-type/local.png");
 }
 .ie7 .organization-type[data-organization-type="commercial"],
 .ie8 .organization-type[data-organization-type="commercial"] {
-    background-image: url("../images/organization-type/commercial.png");
+    background-image: url("/images/organization-type/commercial.png");
 }
 .select2-default {
     color: #595959 !important;
@@ -1094,6 +1096,7 @@ body .searchbox-row.skip-navigation {
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
 }
+
 .btn_new {
     display:inline-block;
     margin-bottom:0;
@@ -1152,8 +1155,7 @@ footer.site-footer {
     border-top: 1px solid #E7E7E7;
 }
 .site-footer {
-    background-color: #EFEFEF;
-    padding: 3em 0;
+    padding: 0;
 }
 .col-md-4 {
     width: 33.3333%;
@@ -1185,7 +1187,7 @@ footer.site-footer {
     background: url("http://data.gov/wp-content/themes/roots-nextdatagov/assets/img/logo.svg") no-repeat scroll 0 0 / contain  rgba(0, 0, 0, 0);
 }
 a.logo-brand {
-    background: url("../images/logo.png") no-repeat scroll left center;
+    background: url("/images/logo.png") no-repeat scroll left center;
     margin-left: 15px;
     overflow: hidden;
     text-indent: -9999em;
@@ -1733,19 +1735,19 @@ aside.secondary{
     margin-left: 3px;
 }
 .format-label[data-format="Data-Dictionary"] {
-    background-image:url('../images/data-dictionary.png');
+    background-image:url('/images/data-dictionary.png');
     height: 35px;
     width: 31px;
     background-position:0px 0px;
 }
 .format-label[data-format="Landing-Page"] {
-    background-image:url('../images/landing-page.png');
+    background-image:url('/images/landing-page.png');
     height: 33px;
     width: 32px;
     background-position:0px 0px;
 }
 .format-label[data-format="API-Endpoint"] {
-    background-image:url('../images/api-endpoint.png');
+    background-image:url('/images/api-endpoint.png');
     height: 23px;
     width: 35px;
     background-position:0px 0px;
@@ -1841,7 +1843,7 @@ p.module-content{padding-left: 18px !important;}
 }
 
 .dataset-collection .icon-collection{
-    background: transparent url('../images/collection.png') no-repeat;
+    background: transparent url('/images/collection.png') no-repeat;
     height:12px;
 }
 
@@ -2057,12 +2059,6 @@ color:#2a6496;
     margin-top: 4px;
 }
 
-@media only screen and (min-width: 768px) {
-    .btn-navbar {
-        display: none;
-    }
-}
-
 .site-footer .nav > li > a:hover {
     color: #428bca;
 }
@@ -2106,6 +2102,11 @@ margin-top: 0px;
     float: left;
     margin-left: 15px;
 }
+
+.search-form h1 {
+    clear: left;
+}
+
 .page_primary_action {
     position: absolute;
     margin-top: -71px;
@@ -2118,6 +2119,28 @@ margin-top: 0px;
     color: #fff;
 }
 
+.faded.disclaimer {
+    margin-bottom: 10px;
+    visibility: hidden;
+    height: 0px;
+}
+
+body .wrapper:before {
+    z-index: -1
+}
+
+.fa+span {
+    padding-left: 0.5rem;
+}
+
+.logo-links+ul.grid-row {
+    padding-inline-start: 10px;
+}
+
+ul#menu-footer li {
+    padding-right: 1rem;
+}
+
 /* media Queries */
 /* chrome specific queries*/
 @media screen and (-webkit-min-device-pixel-ratio:0) {
@@ -2125,6 +2148,12 @@ margin-top: 0px;
     .page-header_new .toolbar .breadcrumb a{font-weight: lighter;}
     .btn-primary.question {
         float:none !important ;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .btn-navbar {
+        display: none;
     }
 }
 
@@ -2304,10 +2333,4 @@ margin-top: 0px;
         border-radius: 0;
         width: 100%;
     }
-}
-
-.faded.disclaimer {
-    margin-bottom:10px;
-    visibility: hidden;
-    height:0px;
 }

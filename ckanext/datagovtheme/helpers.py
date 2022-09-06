@@ -9,10 +9,8 @@ import json
 import logging
 import os
 import re
-import sys
 import urllib.parse
 import urllib.request
-import six
 
 import pkg_resources
 
@@ -749,11 +747,8 @@ def get_bureau_info(bureau_code):
 
     if not bureau_code:
         return None
-    if six.PY3:
-        WEB_PATH = '/images/logos/'
-    else:
-        WEB_PATH = '/fanstatic/datagovtheme/images/logos/'
 
+    WEB_PATH = '/images/logos/'
     LOCAL_PATH = 'fanstatic_library/images/logos/'
 
     # handle both '007:15', or ['007:15', '007:16']
@@ -767,18 +762,12 @@ def get_bureau_info(bureau_code):
         return None
 
     controller = 'dataset'
-    if not p.toolkit.check_ckan_version(min_version='2.9'):
-        # TODO remove this after CKAN 2.8 support is dropped
-        controller = 'package'
 
     # TODO in python 3, replace pkg_resources with [importlib-resources](https://pypi.org/project/importlib-resources/)
     bureau_filename = pkg_resources.resource_filename('ckanext.datagovtheme.data', 'omb_bureau_codes.csv')
-    if sys.version_info >= (3, 0):
-        # Python 3 csv.reader wants text data
-        bureau_file = open(bureau_filename, 'r', newline='', encoding='utf8')
-    else:
-        # Python 2 csv.reader wants binary data
-        bureau_file = open(bureau_filename, 'rb')
+
+    # Python 3 csv.reader wants text data
+    bureau_file = open(bureau_filename, 'r', newline='', encoding='utf8')
 
     # Should this be cached in memory as an index to speed things up?
     bureau_table = csv.reader(bureau_file)
