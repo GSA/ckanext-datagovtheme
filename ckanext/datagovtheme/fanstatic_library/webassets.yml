@@ -17,7 +17,7 @@ styles:
   output: datagovtheme/datagovtheme.css
   contents: # list of files that are included into asset
     - styles/vendor/uswds.css
-    - styles/datagovtheme_2.9.css
+    - styles/datagovtheme.css
 
 qa:
   filters: rjsmin
