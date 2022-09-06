@@ -39,9 +39,8 @@ This extension is compatible with these versions of CKAN.
 
 CKAN version | Compatibility
 ------------ | -------------
-<=2.7        | no
-2.8          | yes
-2.9          | [complete](https://github.com/GSA/datagov-ckan-multi/issues/567)
+<=2.8        | no
+2.9          | yes
 
 
 ### Configuration
@@ -106,14 +105,7 @@ If this is the case, run `python setup.py develop` in the container.
 
 ### Matrix builds
 
-The existing development environment assumes a full catalog.data.gov test setup. This makes
-it difficult to develop and test against new versions of CKAN (or really any
-dependency) because everything is tightly coupled and would require us to
-upgrade everything at once which doesn't really work. A new make target
-`test-legacy` is introduced with a new `docker-compose.legacy.yml` file in order
-to run tests in the legacy docker environment.
-
-The "new" development environment drops as many dependencies as possible. It is
+The development environment drops as many dependencies as possible. It is
 not meant to have feature parity with
 [GSA/catalog.data.gov](https://github.com/GSA/catalog.data.gov/) or
 [GSA/inventory-app](https://github.com/GSA/inventory-app/). Tests should mock
@@ -123,19 +115,10 @@ In order to support multiple versions of CKAN, or even upgrade to new versions
 of CKAN, we support development and testing through the `CKAN_VERSION`
 environment variable.
 
-    $ make CKAN_VERSION=2.8 test
     $ make CKAN_VERSION=2.9 test
 
 
-Other docker-compose make targets work in both new and legacy environments through
-the `COMPOSE_FILE` make variable. To test the legacy environment:
-
-    $ make COMPOSE_FILE=docker-compose.legacy.yml up
-    $ make COMPOSE_FILE=docker-compose.legacy.yml test-legacy
-
-_Note: the test-legacy target only works in the legacy docker environment._
-
 Variable | Description | Default
 -------- | ----------- | -------
-CKAN_VERSION | Version of CKAN to use. | 2.8
+CKAN_VERSION | Version of CKAN to use. | 2.9
 COMPOSE_FILE | docker-compose service description file. | docker-compose.yml
