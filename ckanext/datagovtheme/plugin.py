@@ -1,17 +1,12 @@
 import ckan.plugins as p
 from sqlalchemy.util import OrderedDict
 
-try:
-    p.toolkit.requires_ckan_version("2.9")
-except p.toolkit.CkanVersionException:
-    from ckanext.datagovtheme.plugin.pylons_plugin import MixinPlugin
-else:
-    from ckanext.datagovtheme.plugin.flask_plugin import MixinPlugin
+p.toolkit.requires_ckan_version("2.9")
 
-from .. import blueprint
+import blueprint
 
 
-class DatagovTheme(MixinPlugin, p.SingletonPlugin):
+class DatagovTheme(p.SingletonPlugin):
     '''Theme plugin for catalog.data.gov.'''
 
     # Declare the iterfaces this class implements
@@ -20,6 +15,18 @@ class DatagovTheme(MixinPlugin, p.SingletonPlugin):
     p.implements(p.IFacets, inherit=True)
     p.implements(p.IRoutes, inherit=True)
     p.implements(p.ITemplateHelpers)
+
+    # IConfigurer
+    def update_config(self, config):
+        # TODO remove template/templates_2_8 and move templates/templates_new
+        # to templates once we're off of CKAN 2.8.
+        #
+        # Using a separate dir for templates avoids having to maintain
+        # backwards compatibility using a sprinkling of conditionals. We don't
+        # anticipate adding new features to the existing 2.8 templates.
+        p.toolkit.add_template_directory(config, '../templates/')
+        p.toolkit.add_public_directory(config, '../public')
+        p.toolkit.add_resource('../fanstatic_library', 'datagovtheme')
 
     # IFacets
     def dataset_facets(self, facets_dict, package_type):
