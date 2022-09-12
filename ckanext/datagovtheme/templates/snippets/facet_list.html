@@ -38,4 +38,6 @@
         </p>
         {% else %}
         <p class="module-content empty">{{ _('There are no {facet_type} that match this search').format(facet_type=title) }}</p>
+        {% endif %}
+    {% endwith %}
 {% endblock %}
