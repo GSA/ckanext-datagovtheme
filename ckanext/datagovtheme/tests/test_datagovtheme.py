@@ -3,7 +3,6 @@
 '''Tests for the ckanext.datagovtheme extension.
 
 '''
-from builtins import object
 import ckanext.harvest.model as harvest_model
 from ckan.tests import factories
 from ckan.tests.helpers import reset_db
