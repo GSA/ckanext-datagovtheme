@@ -1,5 +1,3 @@
-from builtins import object
-
 from bs4 import BeautifulSoup
 from ckantoolkit.tests import factories
 import pytest

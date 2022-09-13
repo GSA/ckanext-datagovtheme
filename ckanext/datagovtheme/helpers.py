@@ -1,8 +1,3 @@
-from __future__ import division
-from future import standard_library
-standard_library.install_aliases()
-
-from builtins import str
 import copy
 import csv
 import json

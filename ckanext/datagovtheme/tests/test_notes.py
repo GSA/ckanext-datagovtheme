@@ -1,5 +1,4 @@
 # encoding: utf-8
-from builtins import object
 import time
 import pytest
 
