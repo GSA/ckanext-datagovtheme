@@ -108,3 +108,12 @@ class TestDatagovthemeServed(object):
 
         assert "<a href=\"/dataset/?bureauCode=010%3A00\" title=\"\">" in index_response.body
         assert "<span class=\"item-label\">Department of the Interior</span>" in index_response.body
+
+    def test_datagovtheme_metadata(self, app):
+        # create datasets
+        self.create_datasets()
+
+        index_response = app.get('/dataset/ek500-water-column-sonar-data-collected-during-al0001')
+
+        print(index_response.body)
+        assert False in index_response.body
