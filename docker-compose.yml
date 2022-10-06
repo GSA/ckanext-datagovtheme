@@ -24,6 +24,9 @@ services:
       - solr
     volumes:
       - ./ckanext:/srv/app/ckanext
+      - ./test.sh:/srv/app/test.sh
+      - ./test.ini:/srv/app/test.ini
+      - ./setup.py:/srv/app/setup.py
       - /etc/timezone:/etc/timezone:ro
   db:
     image: ckan/ckan-postgres-dev:${CKAN_VERSION}
