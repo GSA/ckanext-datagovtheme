@@ -6,6 +6,7 @@
 import ckanext.harvest.model as harvest_model
 from ckan.tests import factories
 from ckan.tests.helpers import reset_db
+from ckan.lib.search import rebuild
 import pytest
 import re
 
@@ -18,12 +19,16 @@ class TestDatagovthemeServed(object):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
 
     @classmethod
-    def setup(cls):
+    def setup_class(cls):
         # Start data json sources server we can test harvesting against it
-        reset_db()
         harvest_model.setup()
 
-    def create_datasets(self):
+    @classmethod
+    def setup_method(self):
+        reset_db()
+        rebuild()
+
+    def get_base_dataset(self):
         self.user = factories.Sysadmin()
         self.user_name = self.user['name'].encode('ascii')
         self.organization = factories.Organization(name='myorg',
@@ -32,14 +37,12 @@ class TestDatagovthemeServed(object):
         dataset = {
             'public_access_level': 'public',
             'unique_id': '',
-            'contact_name': 'Jhon',
-            'contact_email': 'jhon@mail.com',
-            'modified': '2019-01-27 11:41:21',
-            'tag_string': 'tag01,tag02',
-            'version': '1.1',
             'owner_org': self.organization['id'],
-            'extras': [{'key': 'bureauCode', 'value': '010:00'}]
+            'extras': []
         }
+        return dataset
+
+    def create_datasets(self, dataset):
         d1 = dataset.copy()
         d1.update({'title': 'test 01 dataset', 'unique_id': 't1'})
         factories.Dataset(**d1)
@@ -89,8 +92,7 @@ class TestDatagovthemeServed(object):
         assert '<li class="menu-older-adults-health">' in index_response.body
 
     def test_datagovtheme_organizations(self, app):
-        # create datasets
-        self.create_datasets()
+        self.create_datasets(self.get_base_dataset())
 
         index_response = app.get('/organization')
 
@@ -101,10 +103,20 @@ class TestDatagovthemeServed(object):
         assert "What are organizations?" in index_response.body
 
     def test_datagovtheme_bureau_names(self, app):
-        # create datasets
-        self.create_datasets()
+        dataset = self.get_base_dataset()
+        dataset['extras'].append({'key': 'bureauCode', 'value': '010:00'})
+        self.create_datasets(dataset)
 
         index_response = app.get('/dataset')
 
         assert "<a href=\"/dataset/?bureauCode=010%3A00\" title=\"\">" in index_response.body
         assert "<span class=\"item-label\">Department of the Interior</span>" in index_response.body
+
+    def test_datagovtheme_package_metadata(self, app):
+        dataset = self.get_base_dataset()
+        dataset['extras'].append({'key': 'contact-email', 'value': 'test@email.com'})
+        self.create_datasets(dataset)
+
+        index_response = app.get('/dataset/test_dataset_02')
+
+        assert '<a href=mailto:test@email.com>test@email.com</a>' in index_response.body

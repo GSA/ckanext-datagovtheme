@@ -352,10 +352,12 @@
               <span property="foaf:mbox">
              {% set contact_email = h.get_pkg_dict_extra(c.pkg_dict, 'contact-email', 'Unknown') %}
              {% set name = h.get_pkg_dict_extra(c.pkg_dict, 'name', 'Unknown') %}
-             {% if contact_email == 'Unknown'%}
-              {{contact_email}}
-             {% else %}
-               {{ h.mail_to(email_address=contact_email, name=name) }}
+             {% if contact_email == 'Unknown' %}
+                'Unknown'
+              {% elif name == 'Unknown' %}
+                {{ h.mail_to(email_address=contact_email, name=contact_email) }}
+              {% else %}
+                {{ h.mail_to(email_address=contact_email, name=name) }}
              {% endif %}
              </span></div>
             </td>
