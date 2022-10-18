@@ -16,7 +16,8 @@ class TestNotes(object):
 
         notes = 'Notes for a test dataset'
         name = 'random_test' + str(int(time.time()))
-        dataset = factories.Dataset(notes=notes, name=name)
+        organization = factories.Organization(name='myorg2')
+        dataset = factories.Dataset(notes=notes, name=name, owner_org=organization['id'])
 
         dataset_response = app.get('/dataset/{}'.format(dataset['name']))
 

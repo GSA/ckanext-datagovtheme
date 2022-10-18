@@ -11,6 +11,8 @@ Example:
 
 #}
 
+{% ckan_extends %}
+
 {% set exists = [] %}
 {% if pkg %}
     {% for extra in pkg.extras if extra.key == 'bureauCode' %}
