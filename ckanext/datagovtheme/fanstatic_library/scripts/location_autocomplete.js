@@ -2,7 +2,7 @@
  *
  *
  */
-if(typeof ckan !== 'undefined' && ckan.module) {
+if(typeof ckan !== 'undefined' && ckan.module && ckan.i18n) {
   ckan.module('location-autocomplete', function (jQuery, _) {
     return {
       /* Options for the module */

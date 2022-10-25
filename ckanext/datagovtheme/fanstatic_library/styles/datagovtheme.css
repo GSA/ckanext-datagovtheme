@@ -1361,7 +1361,7 @@ ul.topics li a i:hover {
 @font-face {
     font-family: "datagov-icons";
     src: url("../fonts/datagov-icons.eot");
-    src: url("../fonts/datagov-icons.eot?#iefix") format("embedded-opentype"), url("../fonts/datagov-icons.woff") format("woff"), url("../fonts/datagov-icons.ttf") format("truetype"), url("../fonts/datagov-icons.svg#datagov-icons") format("svg");
+    src: url("../../fonts/datagov-icons.eot?#iefix") format("embedded-opentype"), url("../../fonts/datagov-icons.woff") format("woff"), url("../../fonts/datagov-icons.ttf") format("truetype"), url("../../fonts/datagov-icons.svg#datagov-icons") format("svg");
     font-weight: normal;
     font-style: normal;
 }
