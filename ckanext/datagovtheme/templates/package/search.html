@@ -52,9 +52,6 @@
             <p class="extra">Please try another search.</p>
             {% endtrans %}
             {% endif %}
-            {% if c.q != '' %}
-            <p class="extra"><b>You are searching in the list of datasets. Show results in <a href="//www.data.gov/search-results/?group=site&q={{c.q}}">entire Data.gov site</a>.</b></p>
-            {% endif %}
         </div>
     </form></div>
 <a class="show-filters btn btn-primary">{{ _('Filter Results') }}</a>
@@ -82,9 +79,6 @@
                 <b>
                     {% snippet 'snippets/search_result_text.html', query=c.q, count=c.page.item_count, type='dataset' %}
                 </b>
-                {% endif %}
-                {% if c.q != '' and c.page.item_count > 0 %}
-                <p class="extra"><b>You are searching in the list of datasets. Show results in <a href="//www.data.gov/search-results/?group=site&q={{c.q}}">entire Data.gov site</a>.</b></p>
                 {% endif %}
             </div>
 
