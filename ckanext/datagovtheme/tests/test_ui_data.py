@@ -15,16 +15,18 @@ class TestSearchFilters():
         uid = str(int(time.time()) + 2)
         name = "test_org" + uid
         self.organization = factories.Organization(name=name,
-                                              extras=[{'key': 'email_list', 'value': 'test@datagovhelp.gov'},
-                                                      {'key': 'something_important', 'value': 'blah'}])
+                                                   extras=[{'key': 'email_list', 'value': 'test@datagovhelp.gov'},
+                                                           {'key': 'something_important', 'value': 'blah'}])
         group_1 = "test_group_1" + uid
         group_2 = "test_group_2" + uid
         self.group1 = factories.Group(name=group_1)
         self.group2 = factories.Group(name=group_2)
         dataset_1 = "test_dataset_1" + uid
         dataset_2 = "test_dataset_2" + uid
-        self.dataset1 = factories.Dataset(name=dataset_1, owner_org=self.organization['id'], groups=[{"name": self.group1["name"]}])
-        self.dataset2 = factories.Dataset(name=dataset_2, owner_org=self.organization['id'], groups=[{"name": self.group2["name"]}])
+        self.dataset1 = factories.Dataset(name=dataset_1,
+                                          owner_org=self.organization['id'], groups=[{"name": self.group1["name"]}])
+        self.dataset2 = factories.Dataset(name=dataset_2,
+                                          owner_org=self.organization['id'], groups=[{"name": self.group2["name"]}])
 
     def test_not_empty_sections(self, app):
         index_response = app.get('/dataset')
@@ -50,7 +52,7 @@ class TestSearchFilters():
 
         html = BeautifulSoup(index_response.body, 'html.parser')
 
-        extras_table =  html.select('th.dataset-label')
+        extras_table = html.select('th.dataset-label')
         extras_keys = [i.text for i in extras_table]
         assert extras_keys == ['something_important']
         assert 'email_list' not in extras_keys
