@@ -14,6 +14,12 @@ services:
       CKAN_SOLR_URL: http://solr:8983/solr/ckan
       CKAN_REDIS_URL: redis://redis:6379/
       CKAN_DATAPUSHER_URL: http://localhost:8080/  # datapusher is not really enabled
+      CKAN_SITE_ID: default
+      CKAN_SITE_URL: http://ckan:5000
+      CKAN_SYSADMIN_NAME: admin
+      CKAN_SYSADMIN_PASSWORD: password
+      CKAN_SYSADMIN_EMAIL: your_email@example.com
+      CKAN__STORAGE_PATH: /var/lib/ckan
       CKAN__PLUGINS: harvest datagovtheme
       PYTHONDONTWRITEBYTECODE: 1
     ports:
