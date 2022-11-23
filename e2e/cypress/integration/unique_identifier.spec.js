@@ -1,10 +1,9 @@
-describe('Dataset', () => {
+describe('Dataset page identifier', () => {
     // Uses datasets from data.json local harvest to check
 
     it('check unique identifier is not unknow', () => {
         cy.visit('/dataset/test_dataset_04');
-        cy.get('span[property="dct:identifier"]').should('not.have.text', 'Unknown');
+        cy.get('th[property="rdfs:label"]').contains('Unique Identifier')
+            .get('td[property="rdf:value"]').should('not.have.text', 'Unknown');
     });
-    
-
 });

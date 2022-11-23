@@ -9,19 +9,19 @@ clean: ## Clean workspace and containers
 	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) down -v --remove-orphans
 
 lint: ## Lint the code (python 3 only)
-	docker-compose -f $(COMPOSE_FILE) run --rm app flake8 ckanext --count --show-source --statistics --exclude ckan
+	docker-compose -f $(COMPOSE_FILE) run --rm ckan flake8 ckanext --count --show-source --statistics --exclude ckan
 
 test: ## Run extension tests
-	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) run --rm app ./test.sh
+	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) run --rm ckan ./test.sh
 
-ui-test: 
-	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f docker-compose.yml -f docker-compose.test.yml up --abort-on-container-exit test
+ui-test:
+	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) -f docker-compose.test.yml up --abort-on-container-exit test
 
 up: ## Start the containers
 	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) up
 
 upd: ## Start the containers in the background
-	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) run --rm app ckan search-index rebuild -i -o -e
+	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) run --rm ckan ckan search-index rebuild -i -o -e
 	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) up -d
 
 .DEFAULT_GOAL := help

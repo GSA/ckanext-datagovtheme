@@ -1,4 +1,4 @@
-describe('Dataset', () => {
+describe('Dataset page contact', () => {
     // Uses datasets from data.json local harvest to check
     
     it('check contact email', () => {
