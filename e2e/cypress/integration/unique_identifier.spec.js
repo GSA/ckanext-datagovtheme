@@ -1,5 +1,5 @@
 describe('Dataset page identifier', () => {
-    // Uses datasets from data.json local harvest to check
+    // Uses datasets from seed.py which created test ones to check
 
     it('check unique identifier is not unknow', () => {
         cy.visit('/dataset/test_dataset_04');
