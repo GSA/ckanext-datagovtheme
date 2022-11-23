@@ -9,3 +9,10 @@ syntax: glob
 *.swp
 .DS_Store
 .vscode/
+
+# Cypress
+e2e/cypress/videos/*
+e2e/cypress/screenshots/*
+e2e/cypress/results/output.xml
+node_modules
+package-lock.json

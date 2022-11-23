@@ -1,0 +1,10 @@
+{
+    "baseUrl": "http://ckan:5000",
+    "videoCompression": false,
+    "videoUploadOnPasses": false,
+    "screenshotOnRunFailure": false,
+    "env": {
+        "USER": "admin",
+        "USER_PASSWORD": "password"
+    }
+}

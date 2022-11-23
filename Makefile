@@ -14,6 +14,9 @@ lint: ## Lint the code (python 3 only)
 test: ## Run extension tests
 	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) run --rm app ./test.sh
 
+ui-test: 
+	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f docker-compose.yml -f docker-compose.test.yml up --abort-on-container-exit test
+
 up: ## Start the containers
 	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) up
 
