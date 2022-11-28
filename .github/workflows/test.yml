@@ -16,6 +16,25 @@ jobs:
       - name: Run flake8
         run: flake8 . --count --show-source --statistics --exclude ckan
 
+  ui-test:
+      name: Build and Test
+      runs-on: ubuntu-latest
+      steps:
+        - name: checkout
+          uses: actions/checkout@v3
+        - name: build
+          run: make build
+        - name: ui-test
+          run: make ui-test
+        - name: cypress-artifacs
+          uses: actions/upload-artifact@v3
+          if: failure()
+          with:
+            name: cypress-artifacts
+            path: |
+              ./e2e/cypress/screenshots/
+              ./e2e/cypress/videos/
+
   test:
     needs: lint
     strategy:

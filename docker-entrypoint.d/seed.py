@@ -1,9 +1,6 @@
-from webbrowser import get
 import sqlalchemy
-import sys
 import json
 import ckan.config.middleware
-from ckan import model
 from ckan.common import config
 from ckan.tests.helpers import CKANTestApp
 
@@ -35,8 +32,8 @@ def get_base_dataset():
         'modified': '2019-01-27 11:41:21',
         'tag_string': 'tag01,tag02',
         'owner_org': org_id,
-        'extras': [{'key': 'bureauCode', 'value': '010:00'}, 
-                {'key': 'contact-email', 'value': 'test@email.com'}]
+        'extras': [{'key': 'bureauCode', 'value': '010:00'},
+                   {'key': 'contact-email', 'value': 'test@email.com'}]
     }
 
 
@@ -65,4 +62,4 @@ with test_app.flask_app.test_request_context():
             factories.Dataset(**dataset)
             print(f'Dataset {x} created')
         except Exception as er:
-            print(f'Dataset {x} exists')
+            print(f'exception: {er}')
