@@ -17,6 +17,7 @@ jobs:
         run: flake8 . --count --show-source --statistics --exclude ckan
 
   ui-test:
+      needs: lint
       name: UI Test
       runs-on: ubuntu-latest
       steps:
