@@ -1,7 +1,7 @@
 ---
 version: "3.7"
 services:
-  app:
+  ckan:
     image: datagov/ckanext-datagovtheme:${CKAN_VERSION} # ensures docker-compose will rebuild the right image in case we change CKAN_VERSION
     build:
       context: .
@@ -34,6 +34,7 @@ services:
       - ./test.ini:/srv/app/test.ini
       - ./setup.py:/srv/app/setup.py
       - /etc/timezone:/etc/timezone:ro
+      - ./docker-entrypoint.d/:/docker-entrypoint.d/
   db:
     image: ckan/ckan-postgres-dev:${CKAN_VERSION}
     environment:
