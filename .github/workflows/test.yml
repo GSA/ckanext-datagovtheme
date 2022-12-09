@@ -40,7 +40,14 @@ jobs:
     needs: lint
     strategy:
       matrix:
-        ckan-version: [2.9]
+        ckan-version: [2.9.5, 2.9, 2.9.7]
+        include:
+        - ckan-version: 2.9.5
+          services-version: 2.9
+        - ckan-version: 2.9
+          services-version: 2.9
+        - ckan-version: 2.9.7
+          services-version: 2.9
       fail-fast: false
 
     name: CKAN ${{ matrix.ckan-version }}
@@ -49,9 +56,9 @@ jobs:
       image: openknowledge/ckan-dev:${{ matrix.ckan-version }}
     services:
       solr:
-        image: ckan/ckan-solr-dev:${{ matrix.ckan-version }}
+        image: ckan/ckan-solr-dev:${{ matrix.services-version }}
       postgres:
-        image: ckan/ckan-postgres-dev:${{ matrix.ckan-version }}
+        image: ckan/ckan-postgres-dev:${{ matrix.services-version }}
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
