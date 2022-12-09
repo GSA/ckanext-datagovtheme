@@ -56,7 +56,7 @@ jobs:
       image: openknowledge/ckan-dev:${{ matrix.ckan-version }}
     services:
       solr:
-        image: ckan/ckan-solr-dev:${{ matrix.services-version }}
+        image: datagov/catalog.data.gov.solr:latest
       postgres:
         image: ckan/ckan-postgres-dev:${{ matrix.services-version }}
         env:
