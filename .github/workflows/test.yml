@@ -11,7 +11,6 @@ jobs:
     secrets: inherit
 
   ui-test:
-      needs: lint
       name: UI Test
       runs-on: ubuntu-latest
       steps:
