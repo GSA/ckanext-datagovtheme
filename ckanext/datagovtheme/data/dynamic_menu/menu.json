@@ -107,6 +107,12 @@
 			"Parent": "No"
 		},
 		{
+			"name": "Sitemap",
+			"link": "//catalog.data.gov/sitemap.xml",
+			"id": "18795133",
+			"Parent": "No"
+		},
+		{
 			"name": "PERFORMANCE.GOV",
 			"link": "//www.performance.gov/",
 			"id": "18795152",
