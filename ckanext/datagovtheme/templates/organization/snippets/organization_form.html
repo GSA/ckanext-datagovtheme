@@ -1,0 +1,22 @@
+{% ckan_extends %}
+
+{% block basic_fields %}
+{% set attrs = {'data-module': 'slug-preview-target', 'class': 'form-control'} %}
+{{ form.input('title', label=_('Name'), id='field-name', placeholder=_('My Organization'), value=data.title, error=errors.title, classes=['control-full'], attrs=attrs) }}
+
+{# Perhaps these should be moved into the controller? #}
+{% set prefix = h.url_for(group_type + '.read', id='') %}
+{% set domain = h.url_for(group_type + '.read', id='', qualified=true) %}
+{% set domain = domain|replace("http://", "")|replace("https://", "") %}
+{% set attrs = {'data-module': 'slug-preview-slug', 'class': 'form-control input-sm', 'data-module-prefix': domain, 'data-module-placeholder': '<' + group_type + '>'} %}
+
+{{ form.prepend('name', label=_('URL'), prepend=prefix, id='field-url', placeholder=_('my-' + group_type), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
+
+{{ form.markdown('description', label=_('Description'), id='field-description', placeholder=_('A little information about my organization...'), value=data.description, error=errors.description) }}
+
+{% set is_upload = data.image_url and not data.image_url.startswith('http') %}
+{% set is_url = data.image_url and data.image_url.startswith('http') %}
+
+{{ form.image_upload(data, errors, is_upload_enabled=false, is_url=is_url, is_upload=is_upload, placeholder = _('https://example.com/my-image.jpg')) }}
+
+{% endblock %}
