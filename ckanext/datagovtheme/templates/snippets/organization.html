@@ -1,0 +1,23 @@
+{% ckan_extends %}
+
+{% set exists = [] %}
+{% for extra in organization.extras if extra.key == 'organization_type' %}
+  {% do exists.append(extra.value) %}
+  {% do exists.append(extra.value|replace(' Government', '')) %}
+{% endfor %}
+
+{% block image %}
+  {% if exists and exists[0]  %}
+    {% set organization_type_title = exists[0] %}
+    {% set organization_type = exists[1] %}
+    <span class="organization-type" title="{{ organization_type_title }}" data-organization-type="{{ organization_type|lower }}">
+      <span>{{ organization_type }}</span>
+    </span>
+  {% endif %}
+
+  <div class="image">
+    <a href="{{ url }}">
+      <img src="{{ organization.image_display_url or h.url_for_static('/base/images/placeholder-organization.png') }}" width="200" alt="{{ organization.name }}" />
+    </a>
+  </div>
+{% endblock %}
