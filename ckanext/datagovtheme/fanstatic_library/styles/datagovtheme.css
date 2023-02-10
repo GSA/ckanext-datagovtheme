@@ -1485,6 +1485,7 @@ ul.topics li a i:hover {
 aside.secondary{
     margin-left: 0;
     border-width: 0;
+    padding: 0 1px 0 0;
 }
 
 #content .toolbar .add_action {
