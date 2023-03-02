@@ -7,7 +7,11 @@
       {{ _('What are organizations?') }}
     </h2>
     <div class="module-content">
-      <p>{% trans %}Organizations are entities that publish and manage datasets (for example, the U.S. Geological Survey or NASA). Organizations own the datasets that are published under them. Within organizations, administrators can authorize members and assign them roles, giving them the right to publish datasets from that particular organization.{% endtrans %}</p>
+      {% trans %}
+        <p>Users can view datasets by the federal agency, state, city or county that publishes them, referred to as "organizations" in the Data.gov catalog. You can search for organizations in the search bar on the right.</p>
+        <p>To view all the datasets for a particular organization, click on the image of the organization.</p>
+        <p>Data.gov harvests metadata from organizations on a regular basis, so the list of datasets from a particular organization is updated continuously.</p>
+      {% endtrans %}
     </div>
   </div>
 {% endblock %}
