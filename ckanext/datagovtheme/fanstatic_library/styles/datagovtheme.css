@@ -222,7 +222,7 @@ a {
 }
 .usa-header .account-wrapper {
     position:absolute;
-    top: 10px;
+    top: 1px;
     right:70px;
 }
 .usa-header .account-wrapper .not-authed a {
@@ -1502,12 +1502,12 @@ aside.secondary{
     position: relative;
 }
 .page-header_new .toolbar {
+    float: right;
     background: none !important;
     display: flex;
     align-items: center;
     border: 0 none;
     padding-top: 13px;
-    min-width: 350px;
 }
 .control-group.search-giant {
     float: left;
