@@ -961,7 +961,7 @@ input.search-new{
 .empty{color:#595959;}
 #exitURL{position:absolute;right:15px;width:150px;color:#000;top:35px;z-index:999;}
 header .header_new.banner_new.page-heading_new  {
-    background-color: #4679B2;
+    background-color: #0050d8;
     color: #FFFFFF;
     padding:7px 0 5px 0;
 }
@@ -1145,7 +1145,7 @@ ul#menu-primary-navigation li, .navbar-header .navbar-brand {
     border-top-left-radius: 0;
 }
 .header_new .container {
-    background-color: #4679B2;
+    background-color: #0050d8;
 }
 footer.site-footer {
     border-top: 1px solid #E7E7E7;
@@ -1569,7 +1569,7 @@ aside.secondary{
 .page-header_new .btn.btn_new {
     background: none repeat scroll 0 0 #fff;
     border-radius: 0;
-    color: #4679b2;
+    color: #0050d8;
     font-size: 18px;
 }
 .page-header_new .main-heading h1{margin:5px 0 0 2px;padding:0px;line-height:36px;}
@@ -1892,7 +1892,7 @@ p.module-content{padding-left: 18px !important;}
 }
 #access-use .fa-globe,
 #access-use .access-public strong {
-    color: #4679b2;
+    color: #0050d8;
 }
 #access-use .fa-lock,
 #access-use .access-non-public strong {
