@@ -1,7 +1,7 @@
 {% block header %}
 <section class="usa-banner" aria-label="Official government website">
     <div class="usa-accordion">
-        <header class="usa-banner__header container">
+        <header class="usa-banner__header">
             <div class="usa-banner__inner">
                 <div class="grid-col-auto">
                     <img class="usa-banner__header-flag" src="https://s3-us-gov-west-1.amazonaws.com/cg-0817d6e3-93c4-4de8-8b32-da6919464e61/us_flag_small.png" alt="U.S. flag" />
@@ -59,36 +59,60 @@
         </div>
     </div>
 </section>
-
 {% set menus = h.get_dynamic_menu() %}
 <a href="#content" class="hide">{{ _('Skip to content') }}</a>
 
-<header class="navbar navbar-static-top masthead">
-    {% if g.debug and not g.debug_supress_header %}
-    <div class="debug">Controller : {{ c.controller }}<br/>Action : {{ c.action }}</div>
-    {% endif %}
 
-    <div class="container">
-        <div class="searchbox-row skip-navigation">
-            <div class="skip-link">
-                <a href="#">Jump to Content</a>
-            </div>
-            <div>
-                <form action="/dataset" class="search-form form-inline navbar-right navbar-nav" method="get" role="search">
-                    <div class="input-group">
-                        <label class="hide" for="search-header">Search for:</label>
-                        <input type="search" placeholder="Search Data.Gov" class="search-field form-control" name="q" value="Search Data.Gov" id="search-header" onblur="if(value=='') value = 'Search Data.Gov'" onfocus="if(value=='Search Data.Gov') value = ''">      <span class="input-group-btn">
-                            <button class="search-submit btn_new btn-default" type="submit">
-                                <i class="fa fa-search"></i>
-                                <span class="sr-only">Search</span>
-                            </button>
-                        </span>
+<section class="usa-header usa-header--extended" role="banner">
+    <div class="grid-container">
+        <div class="grid-row">
+            <div class="grid-col-fill desktop:grid-col-auto">
+                <div class="usa-navbar">
+                    <div class="usa-logo" id="extended-logo">
+                        <em class="usa-logo__text"><a href="/" title="Home" aria-label="Home"></a></em>
                     </div>
-                </form>
+
+                    <button class="usa-menu-btn">Menu</button>
+                </div>
+            </div>
+            <div class="grid-col-auto desktop:grid-col-fill">
+                <nav id="menu-navigation" aria-label="Menu navigation" role="navigation" class="usa-nav">
+                    <div class="usa-nav__inner">
+                        <button class="usa-nav__close">
+                            <img src="/images/close.svg" alt="Close" />
+                        </button>
+                        <ul class="usa-nav__primary usa-accordion">
+                            <li class="usa-nav__primary-item">
+                                <a class="usa-nav__link" href="https://catalog.data.gov"><span class="text-uppercase">Data</span></a>
+                            </li>
+                            <li class="usa-nav__primary-item">
+                                <a class="usa-nav__link" href="https://catalog.data.gov/report"><span class="text-uppercase">Reports</span></a>
+                            </li>
+                            <li class="usa-nav__primary-item">
+                                <a class="usa-nav__link" href="/open-gov"><span class="text-uppercase">Open Government</span></a>
+                            </li>
+                            <li class="usa-nav__primary-item">
+                                <a class="usa-nav__link" href="/contact"><span class="text-uppercase">Contact</span></a>
+                            </li>
+                            <li class="usa-nav__primary-item desktop-hide">
+                                <a class="usa-nav__link" href="/user-guide/"><span class="text-uppercase">User Guide</span></a>
+                            </li>
+                        </ul>
+                        <div class="usa-nav__secondary">
+                            <ul class="usa-nav__secondary-links">
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="grid-col-auto user-guide__col desktop-show text-center">
+                <a href="/user-guide/">
+                    <img src="/images/user-guide.svg" alt="User Guide" />
+                    <div class="user-guide__text">User Guide</div>
+                </a>
             </div>
         </div>
         <hgroup class="top">
-
             {% block header_account %}
             <div class="account-wrapper">
                 {% if c.userobj %}
@@ -98,7 +122,6 @@
                             <a href="{{ h.url_for(controller='user', action='read', id=c.userobj.name) }}" class="image" title="{{ _('View profile') }}">
                                 {{ h.gravatar((c.userobj.email_hash if c and c.userobj else ''), size=22) }}
                                 <span class="username">{{ c.userobj.display_name }}</span>
-
                             </a>
                         </li>
                         {% set new_activities = h.new_activities() %}
@@ -124,25 +147,19 @@
                         </li>
                     </ul>
                 </nav>
-
                 {% endif %}
             </div>
             {% endblock %}
-
-
-        </hgroup>
-        <hgroup class="top-nav">
-            <div class="logo">
-                <a href="http://www.data.gov/" class="root"><span>{{ _('data.gov') }}</span></a>
-            </div>
-
-            {% include 'snippets/root_nav.html' %}
-            {% block header_site_navigation %}
-
-            {% endblock %}
-
         </hgroup>
     </div>
+</section>
+
+
+
+<header class="navbar navbar-static-top masthead">
+    {% if g.debug and not g.debug_supress_header %}
+    <div class="debug">Controller : {{ c.controller }}<br/>Action : {{ c.action }}</div>
+    {% endif %}
     <div class="header_new banner_new page-heading_new">
         <div class="container">
             <div class="page-header_new">
