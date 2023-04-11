@@ -81,21 +81,28 @@
                         <button class="usa-nav__close">
                             <img src="/images/close.svg" alt="Close" />
                         </button>
+                        {% if request.endpoint.startswith('report.') %}
+                            {% set current_is_report = 'usa-current' %}
+                            {% set current_is_dataset = '' %}
+                        {% else %}
+                            {% set current_is_report = '' %}
+                            {% set current_is_dataset = 'usa-current' %}
+                        {% endif %}
                         <ul class="usa-nav__primary usa-accordion">
                             <li class="usa-nav__primary-item">
-                                <a class="usa-nav__link" href="/"><span class="text-uppercase">Data</span></a>
+                                <a class="usa-nav__link {{ current_is_dataset }}" href="/"><span class="text-uppercase">Data</span></a>
                             </li>
                             <li class="usa-nav__primary-item">
-                                <a class="usa-nav__link" href="https://catalog.data.gov/report"><span class="text-uppercase">Reports</span></a>
+                                <a class="usa-nav__link {{ current_is_report }}" href="/report"><span class="text-uppercase">Reports</span></a>
                             </li>
                             <li class="usa-nav__primary-item">
-                                <a class="usa-nav__link" href="/open-gov"><span class="text-uppercase">Open Government</span></a>
+                                <a class="usa-nav__link" href="https://data.gov/open-gov/"><span class="text-uppercase">Open Government</span></a>
                             </li>
                             <li class="usa-nav__primary-item">
-                                <a class="usa-nav__link" href="/contact"><span class="text-uppercase">Contact</span></a>
+                                <a class="usa-nav__link" href="https://data.gov/contact/"><span class="text-uppercase">Contact</span></a>
                             </li>
                             <li class="usa-nav__primary-item desktop-hide">
-                                <a class="usa-nav__link" href="/user-guide/"><span class="text-uppercase">User Guide</span></a>
+                                <a class="usa-nav__link" href="https://data.gov/user-guide/"><span class="text-uppercase">User Guide</span></a>
                             </li>
                         </ul>
                         <div class="usa-nav__secondary">
