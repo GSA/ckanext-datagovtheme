@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url(//fonts.googleapis.com/css?family=Lato);
 .clearfix {
     *zoom: 1;
@@ -501,24 +502,6 @@ a {
 #hp-message .alert {
     margin: 0;
 }
-.format-label[data-format='ISO-19139'],
-.format-label[data-format*='ISO-19139'] {
-    background-position: 0 0;
-    background-image: url('/images/icon-iso-19139.png');
-}
-.format-label[data-format='FGDC'],
-.format-label[data-format*='FGDC'] {
-    background-position: 0 0;
-    background-image: url('/images/icon-fgdc.png');
-}
-.format-label[data-format='web page'],
-.format-label[data-format*='web page'],
-.format-label[data-format='data'],
-.format-label[data-format*='data'] {
-    width: 32px;
-    height: 35px;
-    background-position: -320px -62px;
-}
 .label[data-format='web page'],
 .label[data-format*='web page'],
 .label[data-format='data'],
@@ -547,11 +530,6 @@ a {
 .label[data-format='wms'],
 .label[data-format*='wms'] {
     background-color: #f06f64;
-}
-.format-label[data-format='wms'],
-.format-label[data-format*='wms'] {
-    background-position: 0 0;
-    background-image: url('/images/icon-wms.png');
 }
 #search-helper-message {
     display: none;
@@ -1012,7 +990,6 @@ input.form-control {
     font-size: 16px;
     line-height: 1.428571429;
     color: #555;
-    vertical-align: middle;
     background-color: #fff;
     background-image: none;
     border: 1px solid #ccc;
@@ -1200,8 +1177,6 @@ footer.site-footer {
 }
 .col-md-2 {
     width: 16.6667%;
-}
-.col-md-offset-1 {
 }
 .col-md-3 {
     width: 25%;
@@ -1487,7 +1462,6 @@ ul.topics li a i:hover {
     font-weight: normal;
     font-style: normal;
 }
-@charset "UTF-8";
 [class^='menu-'] a i:before,
 [class*=' menu-'] a i:before {
     font-family: 'datagov-icons' !important;
@@ -1495,12 +1469,10 @@ ul.topics li a i:hover {
     font-weight: normal !important;
     font-variant: normal !important;
     text-transform: none !important;
-    speak: none;
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-@charset "UTF-8";
 [class^='topic-'] a i:before,
 [class*=' topic-'] a i:before {
     font-family: 'datagov-icons' !important;
@@ -1508,7 +1480,6 @@ ul.topics li a i:hover {
     font-weight: normal !important;
     font-variant: normal !important;
     text-transform: none !important;
-    speak: none;
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -1893,24 +1864,6 @@ aside.secondary {
     margin-top: 3px;
     margin-left: 3px;
 }
-.format-label[data-format='Data-Dictionary'] {
-    background-image: url('/images/data-dictionary.png');
-    height: 35px;
-    width: 31px;
-    background-position: 0px 0px;
-}
-.format-label[data-format='Landing-Page'] {
-    background-image: url('/images/landing-page.png');
-    height: 33px;
-    width: 32px;
-    background-position: 0px 0px;
-}
-.format-label[data-format='API-Endpoint'] {
-    background-image: url('/images/api-endpoint.png');
-    height: 23px;
-    width: 35px;
-    background-position: 0px 0px;
-}
 #menu-community li {
     line-height: 30px;
 }
@@ -2047,7 +2000,6 @@ p.module-content {
     font-size: 12px;
     padding-left: 5px;
     display: inline-block;
-    font-view: normal;
 }
 .bar-image {
     width: 18px;
