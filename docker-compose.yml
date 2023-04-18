@@ -36,7 +36,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - ./docker-entrypoint.d/:/docker-entrypoint.d/
   db:
-    image: ckan/ckan-postgres-dev:${CKAN_VERSION}
+    image: ckan/ckan-postgres-dev:2.9
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -49,4 +49,4 @@ services:
   redis:
     image: redis
   solr:
-    image: ckan/ckan-solr-dev:${CKAN_VERSION}
+    image: ckan/ckan-solr-dev:2.9
