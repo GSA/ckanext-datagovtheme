@@ -13,7 +13,6 @@ class DatagovTheme(p.SingletonPlugin):
     p.implements(p.IBlueprint)
     p.implements(p.IConfigurer)
     p.implements(p.IFacets, inherit=True)
-    p.implements(p.IRoutes, inherit=True)
     p.implements(p.ITemplateHelpers)
 
     # IConfigurer
