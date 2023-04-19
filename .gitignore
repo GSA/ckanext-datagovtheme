@@ -11,8 +11,8 @@ syntax: glob
 .vscode/
 
 # Cypress
-e2e/cypress/videos/*
-e2e/cypress/screenshots/*
-e2e/cypress/results/output.xml
+cypress/e2e/videos/*
+cypress/e2e/screenshots/*
+cypress/e2e/results/output.xml
 node_modules
 package-lock.json
