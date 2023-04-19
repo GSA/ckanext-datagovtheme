@@ -40,7 +40,7 @@ def get_base_dataset():
 # Without the request context, db operations won't work
 with test_app.flask_app.test_request_context():
     try:
-        user = factories.Sysadmin(name='asdfs')
+        user = factories.Sysadmin()
         user_name = user['name'].encode('ascii')
         print('User created')
     except sqlalchemy.exc.IntegrityError:
@@ -57,7 +57,7 @@ with test_app.flask_app.test_request_context():
     for x in range(1, 6):
         try:
             dataset = get_base_dataset()
-            dataset['extras'].append({'key': 'unique identifier', 'value': f'id-{x}'})
+            dataset['extras'].append({'key': 'identifier', 'value': f'id-{x}'})
             dataset.update({'title': f"test 0{x} dataset", 'id': f't{x}'})
             factories.Dataset(**dataset)
             print(f'Dataset {x} created')
