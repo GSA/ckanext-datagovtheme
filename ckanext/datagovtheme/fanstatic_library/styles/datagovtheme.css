@@ -19,6 +19,12 @@
     background-color: transparent;
     border: 0;
 }
+.hide {
+    display: none;
+}
+.p-2, .masthead {
+    padding: 0px;
+}
 body,
 .main,
 [role='main'],
@@ -954,6 +960,7 @@ header .header_new.banner_new.page-heading_new {
 }
 .header_new.banner_new.page-heading_new {
     border-bottom: 0 none;
+    width: 100vw;
 }
 .page-header_new {
     border-bottom: medium none;
