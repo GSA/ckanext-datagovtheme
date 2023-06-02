@@ -1091,7 +1091,7 @@ ul#menu-primary-navigation li,
 }
 .fa {
     display: inline-block;
-    font-family: FontAwesome;
+    font-family: FontAwesome !important;
     font-style: normal;
     font-weight: normal;
     line-height: 1;
@@ -1677,7 +1677,6 @@ aside.secondary {
 }
 
 .fa-home {
-    font-size: 24px;
     width: 24px;
     vertical-align: -1px;
 }
