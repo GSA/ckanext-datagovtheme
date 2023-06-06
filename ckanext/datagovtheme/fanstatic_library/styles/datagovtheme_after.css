@@ -1495,7 +1495,13 @@ a.logo-brand {
 }
 body {
     font-family: 'Lato', Arial, sans-serif;
+    /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
 }
+
+/* .module-content {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+} */
+
 .secondary li.nav-item > a {
     color: #333333;
 }
