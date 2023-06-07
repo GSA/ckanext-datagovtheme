@@ -639,7 +639,18 @@ a {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
   }
-
+.label[data-diff=added],
+.label[data-diff=updated],
+.label[data-diff=deleted],
+.label[data-diff='not modified'] {
+    color:#000
+  }
+.module .module-content .dataset-list.unstyled .dataset-item .dataset-content {
+    padding-bottom: 0px;
+}
+.module .module-content .dataset-list.unstyled .dataset-item .dataset-resources.unstyled {
+    margin-bottom: 30px;
+}
 .label {
   display: inline;
   padding: 0.2em 0.6em 0.3em;
@@ -651,6 +662,15 @@ a {
   white-space: nowrap;
   vertical-align: baseline;
   border-radius: 0.25em;
+}
+a.label:hover,
+a.label:focus {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+.label:empty {
+  display: none;
 }
 .label[data-format=html],
 .label[data-format*=html] {
@@ -696,9 +716,20 @@ a {
   background-color: #0b4498;
 }
 
-.badge {
-    font-size: 1.0em !important;
-  }
+.item-count.badge {
+display: inline-block;
+min-width: 10px;
+padding: 3px 7px;
+font-size: 12px;
+font-weight: bold;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+background-color: #6E6E6E;
+border-radius: 10px;
+}
 
 #search-helper-message {
     display: none;
@@ -805,7 +836,10 @@ a {
     border-bottom-width: 0;
 }
 .dataset-item .dataset-content {
-    padding: 30px 0 0 0;
+    padding: 0 0 30px 0;
+}
+.dataset-item .dataset-content {
+    padding: 0 0 30px 0;
 }
 .dataset-item .dataset-organization {
     display: inline;
@@ -1832,6 +1866,7 @@ aside.secondary {
 .harvest-types label.radio {
     font-weight: normal;
     margin-bottom: 10px;
+    display: block;
 }
 .main-heading {
     float: left;
@@ -2064,9 +2099,8 @@ form.search-form {
 }
 .module-content.page-header {
     padding-top: 20px;
-    padding-bottom: 20px; 
+    margin-bottom: 20px;
 }
-
 .search-form.no-bottom-border {
     display: flex;
     flex-wrap: wrap;
