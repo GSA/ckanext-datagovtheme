@@ -54,6 +54,9 @@ body,
     padding-top: 0;
     padding-bottom: 0;
 }
+header.masthead {
+    padding: 0 !important;
+}
 
 [role='main'] {
     padding-top: 0;

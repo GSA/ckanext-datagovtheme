@@ -2,7 +2,7 @@
 {% set menus = h.get_dynamic_menu() %}
 <a href="#content" class="hide">{{ _('Skip to content') }}</a>
 
-<header class="navbar navbar-static-top masthead" style="padding:0px !important">
+<header class="navbar navbar-static-top masthead">
     {% if g.debug and not g.debug_supress_header %}
     <div class="debug">Controller : {{ c.controller }}<br/>Action : {{ c.action }}</div>
     {% endif %}
