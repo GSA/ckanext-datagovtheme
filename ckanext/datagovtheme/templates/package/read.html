@@ -24,7 +24,7 @@
 
     {% if h.render_datetime_datagov(pkg.metadata_modified) and h.render_datetime_datagov(pkg.metadata_modified).strip()|length > 0 %}
     <div style="display:inline;">
-       <i class="icon-calendar" style="color:#949494;"></i><span style="font-weight:bold;color:#6e6e6e;margin-left:8px;">Metadata Updated:</span> <span itemprop="dateModified" style="color:#7d7d7d;"><a href="#sec-dates">{{ h.render_datetime_datagov(pkg.metadata_modified) }}</a></span>
+       <i class="fa fa-calendar" style="color:#949494;"></i><span style="font-weight:bold;color:#6e6e6e;margin-left:8px;">Metadata Updated:</span> <span itemprop="dateModified" style="color:#7d7d7d;"><a href="#sec-dates">{{ h.render_datetime_datagov(pkg.metadata_modified) }}</a></span>
     <br clear="all" />
     	
     </div>

@@ -22,9 +22,9 @@
 .hide {
     display: none;
 }
-.p-2, .masthead {
+/* .p-2, .masthead {
     padding: 0px;
-}
+} */
 body,
 .main,
 [role='main'],
@@ -542,18 +542,18 @@ a {
     text-align: center;
     border-top: 1px solid #eeeeee;
     padding-top: 10px;
-  }
+}
 .pagination {
     display: inline-block;
     padding-left: 0;
     margin: 20px 0;
     border-radius: 4px;
-  }
-  .pagination > li {
+}
+.pagination > li {
     display: inline;
-  }
-  .pagination > li > a,
-  .pagination > li > span {
+}
+.pagination > li > a,
+.pagination > li > span {
     position: relative;
     float: left;
     padding: 6px 12px;
@@ -563,82 +563,82 @@ a {
     text-decoration: none;
     background-color: #fff;
     border: 1px solid #ddd;
-  }
-  .pagination > li > a:hover,
-  .pagination > li > span:hover,
-  .pagination > li > a:focus,
-  .pagination > li > span:focus {
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
     z-index: 2;
     color: #113845;
     background-color: #eeeeee;
     border-color: #ddd;
-  }
-  .pagination > li:first-child > a,
-  .pagination > li:first-child > span {
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
     margin-left: 0;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
-  }
-  .pagination > li:last-child > a,
-  .pagination > li:last-child > span {
+}
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
-  }
-  .pagination > .active > a,
-  .pagination > .active > span,
-  .pagination > .active > a:hover,
-  .pagination > .active > span:hover,
-  .pagination > .active > a:focus,
-  .pagination > .active > span:focus {
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
     z-index: 3;
     color: #fff;
     cursor: default;
     background-color: #206b82;
     border-color: #206b82;
-  }
-  .pagination > .disabled > span,
-  .pagination > .disabled > span:hover,
-  .pagination > .disabled > span:focus,
-  .pagination > .disabled > a,
-  .pagination > .disabled > a:hover,
-  .pagination > .disabled > a:focus {
+}
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
     color: #777777;
     cursor: not-allowed;
     background-color: #fff;
     border-color: #ddd;
-  }
-  .pagination-lg > li > a,
-  .pagination-lg > li > span {
+}
+.pagination-lg > li > a,
+.pagination-lg > li > span {
     padding: 10px 16px;
     font-size: 18px;
     line-height: 1.3333333;
-  }
-  .pagination-lg > li:first-child > a,
-  .pagination-lg > li:first-child > span {
+}
+.pagination-lg > li:first-child > a,
+.pagination-lg > li:first-child > span {
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
-  }
-  .pagination-lg > li:last-child > a,
-  .pagination-lg > li:last-child > span {
+}
+.pagination-lg > li:last-child > a,
+.pagination-lg > li:last-child > span {
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
-  }
-  .pagination-sm > li > a,
-  .pagination-sm > li > span {
+}
+.pagination-sm > li > a,
+.pagination-sm > li > span {
     padding: 5px 10px;
     font-size: 12px;
     line-height: 1.5;
-  }
-  .pagination-sm > li:first-child > a,
-  .pagination-sm > li:first-child > span {
+}
+.pagination-sm > li:first-child > a,
+.pagination-sm > li:first-child > span {
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
-  }
-  .pagination-sm > li:last-child > a,
-  .pagination-sm > li:last-child > span {
+}
+.pagination-sm > li:last-child > a,
+.pagination-sm > li:last-child > span {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
-  }
+}
 .label[data-diff=error],
 .label[data-diff=added],
 .label[data-diff=updated],
@@ -2172,6 +2172,7 @@ p.module-content {
 
 .dataset-collection {
     margin-right: 5px;
+    background-color: #777777; 
 }
 
 .dataset-collection .icon-collection {
@@ -2251,9 +2252,18 @@ p.module-content {
 #access-use .access-non-public strong {
     color: #b85123;
 }
-
 #access-use .fa-file-text-o {
     color: #474747;
+}
+#access-use .fa-file-text-o::before {
+    content: "\f0f6"; 
+}
+.fa-building-o:before {
+    content: "\f0f7";
+}
+.fa-edit:before,
+.fa-pencil-square-o:before {
+  content: "\f044";
 }
 .alert-info.non-federal {
     border: 1px solid #ccc;
