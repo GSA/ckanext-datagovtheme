@@ -2175,6 +2175,8 @@ p.module-content {
 .dataset-collection .icon-collection {
     background: transparent url('/images/collection.png') no-repeat;
     height: 12px;
+    display: inline-block;
+    width: 14px
 }
 
 .topic-ecosystems a i:before {
