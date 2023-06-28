@@ -2,8 +2,8 @@
 <div role="main" class="controller-{{c.controller}} action-{{c.action}}">
     {% endblock %} {% block flash %} {% set flash_messages = h.get_flashed_messages() | list %} {% if flash_messages %}
     <div class="flash-messages">
-        {% for message in flash_messages %}
-        <div class="alert fade in {{ message.category }}">{{ h.literal(message) }}</div>
+        {% for category, message in h.get_flashed_messages(with_categories=true) %}
+        <div class="alert alert-dismissible fade show {{ category }}">{{ h.literal(message) }}</div>
         {% endfor %}
     </div>
     {% endif %} {% endblock %} {% block footer %} {% include "footer.html" %} {% include "snippets/identifier.html" %} {%
