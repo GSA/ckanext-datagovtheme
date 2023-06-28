@@ -96,7 +96,6 @@ class DatagovTheme(p.SingletonPlugin):
             'is_web_format': datagovtheme_helpers.is_web_format,
             'is_map_viewer_format': datagovtheme_helpers.is_map_viewer_format,
             'get_map_viewer_params': datagovtheme_helpers.get_map_viewer_params,
-            'resource_preview_custom': datagovtheme_helpers.resource_preview_custom,
             'is_preview_format': datagovtheme_helpers.is_preview_format,
             'is_map_format': datagovtheme_helpers.is_map_format,
             'is_plotly_format': datagovtheme_helpers.is_plotly_format,
