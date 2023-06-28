@@ -27,6 +27,20 @@
   <a onClick="document.getElementById('archive_table').scrollIntoView(false);" style="color:#187794; cursor:pointer;"><strong>More Details</strong></a>
 {% endblock %}
 
+{% block data_preview %}
+  {% if h.is_map_viewer_format(c.resource) %}
+    <div class="actions" style="padding-right: 40px">
+      <li>
+        <a class="btn btn-success" href="/viewer?{{ h.get_map_viewer_params(c.resource) }}">
+            <i class="fa fa-globe"></i> {{ _('View in Advanced Viewer') }}
+        </a>
+      </li>
+    </div>
+  {% endif %}
+
+{% endblock %}
+-
+
 {% set pkg = c.pkg_dict %}
 
 {% block breadcrumb_content_selected %} class="active"{% endblock %}
