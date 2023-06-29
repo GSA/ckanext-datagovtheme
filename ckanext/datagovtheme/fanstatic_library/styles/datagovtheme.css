@@ -22,9 +22,6 @@
 .hide {
     display: none;
 }
-.p-2, .masthead {
-    padding: 0px;
-}
 body,
 .main,
 [role='main'],
@@ -56,6 +53,9 @@ body,
 .masthead {
     padding-top: 0;
     padding-bottom: 0;
+}
+header.masthead {
+    padding: 0 !important;
 }
 
 [role='main'] {
@@ -537,6 +537,201 @@ a {
 .label[data-format*='wms'] {
     background-color: #f06f64;
 }
+
+.pagination-wrapper {
+    text-align: center;
+    border-top: 1px solid #eeeeee;
+    padding-top: 10px;
+}
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+.pagination > li {
+    display: inline;
+}
+.pagination > li > a,
+.pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #206b82;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+    z-index: 2;
+    color: #113845;
+    background-color: #eeeeee;
+    border-color: #ddd;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+    margin-left: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #206b82;
+    border-color: #206b82;
+}
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+    color: #777777;
+    cursor: not-allowed;
+    background-color: #fff;
+    border-color: #ddd;
+}
+.pagination-lg > li > a,
+.pagination-lg > li > span {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+}
+.pagination-lg > li:first-child > a,
+.pagination-lg > li:first-child > span {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+.pagination-lg > li:last-child > a,
+.pagination-lg > li:last-child > span {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+.pagination-sm > li > a,
+.pagination-sm > li > span {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+.pagination-sm > li:first-child > a,
+.pagination-sm > li:first-child > span {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+.pagination-sm > li:last-child > a,
+.pagination-sm > li:last-child > span {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.label[data-diff=error],
+.label[data-diff=added],
+.label[data-diff=updated],
+.label[data-diff=deleted],
+.label[data-diff='not modified'] {
+    color:#000
+  }
+.module .module-content .dataset-list.unstyled .dataset-item .dataset-content {
+    padding-bottom: 0px;
+}
+.module .module-content .dataset-list.unstyled .dataset-item .dataset-resources.unstyled {
+    margin-bottom: 30px;
+}
+.label {
+  display: inline;
+  padding: 0.2em 0.6em 0.3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25em;
+}
+a.label:hover,
+a.label:focus {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+.label:empty {
+  display: none;
+}
+.label[data-format=html],
+.label[data-format*=html] {
+  background-color: #2E759E;
+}
+.label[data-format=json],
+.label[data-format*=json] {
+  background-color: #D63B00;
+}
+.label[data-format=xml],
+.label[data-format*=xml] {
+  background-color: #D63B00;
+}
+.label[data-format=text],
+.label[data-format*=text] {
+  background-color: #1A7EA3;
+}
+.label[data-format=csv],
+.label[data-format*=csv] {
+  background-color: #856A00;
+}
+.label[data-format=xls],
+.label[data-format*=xls] {
+  background-color: #207E42;
+}
+.label[data-format=zip],
+.label[data-format*=zip] {
+  background-color: #686868;
+}
+.label[data-format=api],
+.label[data-format*=api] {
+  background-color: #D22D81;
+}
+.label[data-format=pdf],
+.label[data-format*=pdf] {
+  background-color: #e0051e;
+}
+.label[data-format=rdf],
+.label[data-format*=rdf],
+.label[data-format*=nquad],
+.label[data-format*=ntriples],
+.label[data-format*=turtle] {
+  background-color: #0b4498;
+}
+
+.item-count.badge {
+display: inline-block;
+min-width: 10px;
+padding: 3px 7px;
+font-size: 12px;
+font-weight: bold;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+background-color: #6E6E6E;
+border-radius: 10px;
+}
+
 #search-helper-message {
     display: none;
     position: absolute;
@@ -640,6 +835,9 @@ a {
     padding-bottom: 0;
     margin-bottom: 0;
     border-bottom-width: 0;
+}
+.dataset-item .dataset-content {
+    padding: 0 0 30px 0;
 }
 .dataset-item .dataset-content {
     padding: 0 0 30px 0;
@@ -1091,7 +1289,7 @@ ul#menu-primary-navigation li,
 }
 .fa {
     display: inline-block;
-    font-family: FontAwesome;
+    font-family: FontAwesome !important;
     font-style: normal;
     font-weight: normal;
     line-height: 1;
@@ -1666,10 +1864,11 @@ aside.secondary {
     color: white !important;
     float: none !important;
 }
-.fa-question-circle {
-    font-size: 32px;
+.harvest-types label.radio {
+    font-weight: normal;
+    margin-bottom: 10px;
+    display: block;
 }
-
 .main-heading {
     float: left;
     width: 590px;
@@ -1677,7 +1876,6 @@ aside.secondary {
 }
 
 .fa-home {
-    font-size: 24px;
     width: 24px;
     vertical-align: -1px;
 }
@@ -1902,8 +2100,8 @@ form.search-form {
 }
 .module-content.page-header {
     padding-top: 20px;
+    margin-bottom: 20px;
 }
-
 .search-form.no-bottom-border {
     display: flex;
     flex-wrap: wrap;
@@ -1974,11 +2172,14 @@ p.module-content {
 
 .dataset-collection {
     margin-right: 5px;
+    background-color: #777777; 
 }
 
 .dataset-collection .icon-collection {
     background: transparent url('/images/collection.png') no-repeat;
     height: 12px;
+    display: inline-block;
+    width: 14px
 }
 
 .topic-ecosystems a i:before {
@@ -2053,9 +2254,18 @@ p.module-content {
 #access-use .access-non-public strong {
     color: #b85123;
 }
-
 #access-use .fa-file-text-o {
     color: #474747;
+}
+#access-use .fa-file-text-o::before {
+    content: "\f0f6"; 
+}
+.fa-building-o:before {
+    content: "\f0f7";
+}
+.fa-edit:before,
+.fa-pencil-square-o:before {
+  content: "\f044";
 }
 .alert-info.non-federal {
     border: 1px solid #ccc;
@@ -2238,7 +2448,7 @@ article.module.prose h3 {
     position: absolute;
     right: 29%;
     text-indent: -900em;
-    top: 27%;
+    top: 42px;
     width: 30px;
 }
 
