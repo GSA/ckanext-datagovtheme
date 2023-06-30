@@ -8,7 +8,7 @@ jobs:
     uses: gsa/data.gov/.github/workflows/ckan-test.yml@main
     with:
       ext_name: datagovtheme
-      plugins: harvest datagovtheme
+      plugins: harvest datagovtheme geodatagov
     secrets: inherit
 
   ui-test:
