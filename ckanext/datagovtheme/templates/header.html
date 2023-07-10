@@ -181,7 +181,7 @@
                         {% block breadcrumb %}
                         <ol class="breadcrumb">
                             <li class="home"><a href="{{ h.url_for(controller='dataset', action='search') }}"><i class="fa fa-home"></i><span> {{ _('Home') }}</span></a></li>
-                            <li class="active">{{ h.nav_link(_('Datasets'), controller='dataset', action='search', highlight_actions = 'new index') }}</li>
+                            <li class="active">{{ h.nav_link(_('Datasets'), controller='dataset', action='search') }}</li>
                         </ol>
                         {% endblock %}
                     <div class="add_action">
