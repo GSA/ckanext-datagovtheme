@@ -40,7 +40,8 @@ This extension is compatible with these versions of CKAN.
 CKAN version | Compatibility
 ------------ | -------------
 <=2.8        | no
-2.9          | yes
+2.9          | 0.1.27 (last supported)
+2.10         | >=0.2.0
 
 
 ### Configuration
@@ -115,10 +116,10 @@ In order to support multiple versions of CKAN, or even upgrade to new versions
 of CKAN, we support development and testing through the `CKAN_VERSION`
 environment variable.
 
-    $ make CKAN_VERSION=2.9 test
+    $ make CKAN_VERSION=2.10 test
 
 
 Variable | Description | Default
 -------- | ----------- | -------
-CKAN_VERSION | Version of CKAN to use. | 2.9
+CKAN_VERSION | Version of CKAN to use. | 2.10
 COMPOSE_FILE | docker-compose service description file. | docker-compose.yml
