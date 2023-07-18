@@ -639,7 +639,6 @@ a {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
-.label[data-diff=error],
 .label[data-diff=added],
 .label[data-diff=updated],
 .label[data-diff=deleted],
