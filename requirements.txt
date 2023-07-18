@@ -1,10 +1,16 @@
 # ckanext-harvest
 -e git+https://github.com/ckan/ckanext-harvest.git@master#egg=ckanext_harvest
--e git+https://github.com/gsa/ckanext-spatial.git@datagov#egg=ckanext-spatial
+-e git+https://github.com/ckan/ckanext-spatial.git@master#egg=ckanext-spatial
+-e git+https://github.com/gsa/ckanext-geodatagov.git@main#egg=ckanext-geodatagov
 
 # ckanext-harvest dependencies
 ckantoolkit>=0.0.7
 pika>=1.1.0
-pyOpenSSL==20.0.1
+pyOpenSSL>22.10
 # redis==2.10.6 # included in ckan core
 # requests>=2.11.1 # included in ckan core
+
+boto3
+geojson==3.0.1
+owslib
+-e git+https://github.com/asl2/PyZ3950.git#egg=PyZ3950

@@ -537,35 +537,6 @@ def get_map_viewer_params(resource, advanced=False):
     return urllib.parse.urlencode(params)
 
 
-def resource_preview_custom(resource, pkg_id):
-
-    resource_format = resource.get('format', '').lower()
-
-    if is_map_viewer_format(resource):
-        # TODO rename config option to ckanext.datagovtheme
-        viewer_url = config.get('ckanext.geodatagov.spatial_preview.url')
-
-        url = '{viewer_url}?{params}'.format(
-            viewer_url=viewer_url,
-            params=get_map_viewer_params(resource))
-
-        return p.toolkit.render_snippet("dataviewer/snippets/data_preview.html",
-                                        data={'embed': False,
-                                              'resource_url': url,
-                                              'raw_resource_url': resource['url']})
-
-    elif resource_format in ('web map application', 'arcgis online map') \
-            and ('webmap=' in resource.get('url') or 'services=' in resource.get('url')):
-        url = resource['url'].replace('viewer.html', 'embedViewer.html')
-
-        return p.toolkit.render_snippet("dataviewer/snippets/data_preview.html",
-                                        data={'embed': False,
-                                              'resource_url': url,
-                                              'raw_resource_url': resource['url']})
-
-    return h.resource_preview(resource, pkg_id)
-
-
 types = {
     'web': ('html', 'data', 'esri rest', 'gov', 'org', ''),
     'preview': ('csv', 'xls', 'txt', 'jpg', 'jpeg', 'png', 'gif'),

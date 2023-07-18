@@ -1,10 +1,8 @@
-from future import standard_library
-standard_library.install_aliases()
-
 import urllib.parse
 import ckan.plugins as p
 from ckan.plugins.toolkit import config
-from ckan.lib.base import c, request, abort
+from ckan.lib.base import abort
+from ckan.common import c, request
 
 from flask import Blueprint, redirect
 

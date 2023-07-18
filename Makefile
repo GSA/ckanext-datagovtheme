@@ -1,4 +1,4 @@
-CKAN_VERSION ?= 2.9
+CKAN_VERSION ?= 2.10
 COMPOSE_FILE ?= docker-compose.yml
 
 build: ## Build the  docker containers
@@ -16,6 +16,9 @@ test: ## Run extension tests
 
 ui-test:
 	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) -f docker-compose.test.yml up --abort-on-container-exit test
+
+ui-interactive:
+	CYPRESS_BASE_URL=http://ckan:5000 npx cypress open
 
 up: ## Start the containers
 	CKAN_VERSION=$(CKAN_VERSION) docker-compose -f $(COMPOSE_FILE) up

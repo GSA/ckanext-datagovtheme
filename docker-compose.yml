@@ -20,7 +20,7 @@ services:
       CKAN_SYSADMIN_PASSWORD: password
       CKAN_SYSADMIN_EMAIL: your_email@example.com
       CKAN__STORAGE_PATH: /var/lib/ckan
-      CKAN__PLUGINS: harvest datagovtheme
+      CKAN__PLUGINS: harvest geodatagov datagovtheme
       PYTHONDONTWRITEBYTECODE: 1
     ports:
       - "5000:5000"
@@ -36,7 +36,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - ./docker-entrypoint.d/:/docker-entrypoint.d/
   db:
-    image: ckan/ckan-postgres-dev:${CKAN_VERSION}
+    image: ckan/ckan-postgres-dev:2.10
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -49,4 +49,4 @@ services:
   redis:
     image: redis
   solr:
-    image: ckan/ckan-solr-dev:${CKAN_VERSION}
+    image: ckan/ckan-solr-dev:2.9

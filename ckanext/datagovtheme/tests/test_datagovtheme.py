@@ -6,6 +6,7 @@
 import ckanext.harvest.model as harvest_model
 from ckan.tests import factories
 from ckan.tests.helpers import reset_db
+from ckan.lib.helpers import url_for
 from ckan.lib.search import rebuild
 import pytest
 import re
@@ -13,7 +14,7 @@ import re
 
 # The /dataset page uses get_pkg_dict_extra which depends on HarvestObject,
 # hence the harvest extension. Include it for these tests.
-@pytest.mark.ckan_config('ckan.plugins', 'harvest datagovtheme')
+@pytest.mark.ckan_config('ckan.plugins', 'harvest geodatagov datagovtheme')
 @pytest.mark.use_fixtures('with_plugins', 'clean_db')
 class TestDatagovthemeServed(object):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
@@ -45,7 +46,8 @@ class TestDatagovthemeServed(object):
     def create_datasets(self, dataset):
         d1 = dataset.copy()
         d1.update({'title': 'test 01 dataset', 'unique_id': 't1'})
-        factories.Dataset(**d1)
+        new_dataset = factories.Dataset(**d1)
+        return new_dataset['id']
 
     def test_homepage_redirect(self, app):
         index_response = app.get('/')
@@ -102,8 +104,8 @@ class TestDatagovthemeServed(object):
     def test_datagovtheme_package_metadata(self, app):
         dataset = self.get_base_dataset()
         dataset['extras'].append({'key': 'contact-email', 'value': 'test@email.com'})
-        self.create_datasets(dataset)
+        dataset_id = self.create_datasets(dataset)
 
-        index_response = app.get('/dataset/test_dataset_02')
+        index_response = app.get(url_for("dataset.read", id=dataset_id), status=200)
 
         assert '<a href=mailto:test@email.com>test@email.com</a>' in index_response.body
