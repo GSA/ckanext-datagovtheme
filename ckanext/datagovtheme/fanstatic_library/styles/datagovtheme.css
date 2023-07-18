@@ -646,6 +646,9 @@ a {
 .label[data-diff='not modified'] {
     color:#000
   }
+.label[data-diff=error] {
+   color: #fff;
+}
 .module .module-content .dataset-list.unstyled .dataset-item .dataset-content {
     padding-bottom: 0px;
 }
@@ -864,7 +867,7 @@ border-radius: 10px;
 .dataset-item .more:hover {
     color: #222;
 }
-.dataset-item .label:hover {
+.dataset-item .label:hover:not(.label[data-diff]) {
     background-color: #333;
 }
 .dataset-item.has-organization .dataset-heading {
