@@ -967,6 +967,10 @@ border-radius: 10px;
 .control-order-by select {
     margin-bottom: 0;
 }
+#dataset-search.search-form .control-order-by label,
+#dataset-search.search-form .control-order-by select  {
+    display: block;
+}
 .secondary .module .module-content.empty {
     font-size: 13px;
 }
