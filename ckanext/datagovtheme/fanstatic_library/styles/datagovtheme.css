@@ -2518,6 +2518,11 @@ ul#menu-footer li {
     padding-right: 1rem;
 }
 
+section.additional-info td.dataset-details {
+    max-width: 570px;
+    word-wrap: break-word;
+}
+
 /* override usws*/
 body .usa-banner__header-text,
 body .usa-banner__button-text {
