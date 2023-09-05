@@ -25,11 +25,6 @@ qa:
   contents:
     - qa.js
 
-qa_styles:
-  output: datagovtheme/qa.css
-  contents:
-    - styles/qa.css
-
 location_autocomplete_js:
   filters: rjsmin
   output: datagovtheme/location_autocomplete.js

@@ -639,14 +639,14 @@ a {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
-.label[data-diff=added],
-.label[data-diff=updated],
-.label[data-diff=deleted],
+.label[data-diff='added'],
+.label[data-diff='updated'],
+.label[data-diff='deleted'],
 .label[data-diff='not modified'] {
-    color:#000
-  }
-.label[data-diff=error] {
-   color: #fff;
+    color: #000;
+}
+.label[data-diff='error'] {
+    color: #fff;
 }
 .module .module-content .dataset-list.unstyled .dataset-item .dataset-content {
     padding-bottom: 0px;
@@ -655,83 +655,83 @@ a {
     margin-bottom: 30px;
 }
 .label {
-  display: inline;
-  padding: 0.2em 0.6em 0.3em;
-  font-size: 75%;
-  font-weight: 700;
-  line-height: 1;
-  color: #fff;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  border-radius: 0.25em;
+    display: inline;
+    padding: 0.2em 0.6em 0.3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25em;
 }
 a.label:hover,
 a.label:focus {
-  color: #fff;
-  text-decoration: none;
-  cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
 }
 .label:empty {
-  display: none;
+    display: none;
 }
-.label[data-format=html],
-.label[data-format*=html] {
-  background-color: #2E759E;
+.label[data-format='html'],
+.label[data-format*='html'] {
+    background-color: #2e759e;
 }
-.label[data-format=json],
-.label[data-format*=json] {
-  background-color: #D63B00;
+.label[data-format='json'],
+.label[data-format*='json'] {
+    background-color: #d63b00;
 }
-.label[data-format=xml],
-.label[data-format*=xml] {
-  background-color: #D63B00;
+.label[data-format='xml'],
+.label[data-format*='xml'] {
+    background-color: #d63b00;
 }
-.label[data-format=text],
-.label[data-format*=text] {
-  background-color: #1A7EA3;
+.label[data-format='text'],
+.label[data-format*='text'] {
+    background-color: #1a7ea3;
 }
-.label[data-format=csv],
-.label[data-format*=csv] {
-  background-color: #856A00;
+.label[data-format='csv'],
+.label[data-format*='csv'] {
+    background-color: #856a00;
 }
-.label[data-format=xls],
-.label[data-format*=xls] {
-  background-color: #207E42;
+.label[data-format='xls'],
+.label[data-format*='xls'] {
+    background-color: #207e42;
 }
-.label[data-format=zip],
-.label[data-format*=zip] {
-  background-color: #686868;
+.label[data-format='zip'],
+.label[data-format*='zip'] {
+    background-color: #686868;
 }
-.label[data-format=api],
-.label[data-format*=api] {
-  background-color: #D22D81;
+.label[data-format='api'],
+.label[data-format*='api'] {
+    background-color: #d22d81;
 }
-.label[data-format=pdf],
-.label[data-format*=pdf] {
-  background-color: #e0051e;
+.label[data-format='pdf'],
+.label[data-format*='pdf'] {
+    background-color: #e0051e;
 }
-.label[data-format=rdf],
-.label[data-format*=rdf],
-.label[data-format*=nquad],
-.label[data-format*=ntriples],
-.label[data-format*=turtle] {
-  background-color: #0b4498;
+.label[data-format='rdf'],
+.label[data-format*='rdf'],
+.label[data-format*='nquad'],
+.label[data-format*='ntriples'],
+.label[data-format*='turtle'] {
+    background-color: #0b4498;
 }
 
 .item-count.badge {
-display: inline-block;
-min-width: 10px;
-padding: 3px 7px;
-font-size: 12px;
-font-weight: bold;
-line-height: 1;
-color: #fff;
-text-align: center;
-white-space: nowrap;
-vertical-align: middle;
-background-color: #6E6E6E;
-border-radius: 10px;
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #6e6e6e;
+    border-radius: 10px;
 }
 
 #search-helper-message {
@@ -968,7 +968,7 @@ border-radius: 10px;
     margin-bottom: 0;
 }
 #dataset-search.search-form .control-order-by label,
-#dataset-search.search-form .control-order-by select  {
+#dataset-search.search-form .control-order-by select {
     display: block;
 }
 .secondary .module .module-content.empty {
@@ -2178,14 +2178,14 @@ p.module-content {
 
 .dataset-collection {
     margin-right: 5px;
-    background-color: #777777; 
+    background-color: #777777;
 }
 
 .dataset-collection .icon-collection {
     background: transparent url('/images/collection.png') no-repeat;
     height: 12px;
     display: inline-block;
-    width: 14px
+    width: 14px;
 }
 
 .topic-ecosystems a i:before {
@@ -2264,14 +2264,14 @@ p.module-content {
     color: #474747;
 }
 #access-use .fa-file-text-o::before {
-    content: "\f0f6"; 
+    content: '\f0f6';
 }
 .fa-building-o:before {
-    content: "\f0f7";
+    content: '\f0f7';
 }
 .fa-edit:before,
 .fa-pencil-square-o:before {
-  content: "\f044";
+    content: '\f044';
 }
 .alert-info.non-federal {
     border: 1px solid #ccc;
@@ -2827,4 +2827,9 @@ body .usa-menu-btn {
         border-radius: 0;
         width: 100%;
     }
+}
+
+/* CKAN DEBUG PANEL SCROLL FIX */
+#flDebug .flDebugPanelContent {
+    overflow: scroll;
 }
