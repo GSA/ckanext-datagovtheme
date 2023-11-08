@@ -1,3 +1,4 @@
+
 # ckanext-harvest
 -e git+https://github.com/ckan/ckanext-harvest.git@master#egg=ckanext_harvest
 -e git+https://github.com/ckan/ckanext-spatial.git@master#egg=ckanext-spatial
@@ -14,3 +15,12 @@ boto3
 geojson==3.0.1
 owslib
 -e git+https://github.com/asl2/PyZ3950.git#egg=PyZ3950
+
+# ckanext-spatial dependencies
+lxml>=2.3
+argparse
+pyparsing>=2.1.10
+requests>=1.1.0
+pyproj
+Shapely==2.0.1
+OWSLib==0.28.1

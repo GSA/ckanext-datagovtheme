@@ -3,7 +3,7 @@ FROM openknowledge/ckan-dev:${CKAN_VERSION}
 ARG CKAN_VERSION
 
 # Add timezone data
-RUN sudo apk add tzdata
+RUN sudo apk add tzdata proj-util proj-dev geos-dev
 
 COPY . $APP_DIR/
 

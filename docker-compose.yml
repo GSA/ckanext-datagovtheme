@@ -20,7 +20,7 @@ services:
       CKAN_SYSADMIN_PASSWORD: password
       CKAN_SYSADMIN_EMAIL: your_email@example.com
       CKAN__STORAGE_PATH: /var/lib/ckan
-      CKAN__PLUGINS: harvest geodatagov datagovtheme
+      CKAN__PLUGINS: harvest geodatagov datagovtheme spatial_metadata
       PYTHONDONTWRITEBYTECODE: 1
     ports:
       - "5000:5000"
