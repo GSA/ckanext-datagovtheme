@@ -7,7 +7,7 @@ from ckantoolkit.tests import factories
 
 # The /dataset page uses get_pkg_dict_extra which depends on HarvestObject,
 # hence the harvest extension. Include it for these tests.
-@pytest.mark.ckan_config('ckan.plugins', 'harvest geodatagov datagovtheme')
+@pytest.mark.ckan_config('ckan.plugins', 'harvest geodatagov datagovtheme spatial_metadata')
 @pytest.mark.use_fixtures('with_plugins', 'clean_db', 'clean_index')
 class TestNotes(object):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
