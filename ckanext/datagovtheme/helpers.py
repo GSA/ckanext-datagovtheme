@@ -15,7 +15,7 @@ from ckan import model
 from ckanext.harvest.model import HarvestObject
 from ckan.plugins.toolkit import asbool
 
-from ckan.plugins.toolkit import config, request
+from ckan.plugins.toolkit import config
 
 log = logging.getLogger(__name__)
 
