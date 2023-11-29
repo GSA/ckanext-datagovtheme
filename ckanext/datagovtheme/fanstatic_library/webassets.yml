@@ -7,7 +7,6 @@ js:
     - scripts/vendor/jquery.placeholder.js
     - scripts/vendor/uswds.js
     - scripts/jquery.cookie.js
-    - scripts/datagovtheme.js
     - scripts/tracking.js
     - scripts/hideMaxListItem.js
     - scripts/sorting.js
