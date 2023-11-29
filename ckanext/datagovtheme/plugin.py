@@ -88,6 +88,7 @@ class DatagovTheme(p.SingletonPlugin):
             'datagovtheme_api_doc_url': datagovtheme_helpers.api_doc_url,
             'datagovtheme_get_reference_date': datagovtheme_helpers.get_reference_date,
             'datagovtheme_get_responsible_party': datagovtheme_helpers.get_responsible_party,
+            'is_tagged_ngda': datagovtheme_helpers.is_tagged_ngda,
             'render_datetime_datagov': datagovtheme_helpers.render_datetime_datagov,
             'get_harvest_object_formats': datagovtheme_helpers.get_harvest_object_formats,
             'get_bureau_info': datagovtheme_helpers.get_bureau_info,

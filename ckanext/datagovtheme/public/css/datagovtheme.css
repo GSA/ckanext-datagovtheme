@@ -1790,8 +1790,6 @@ p.module-content{padding-left: 18px !important;}
     float: left;
 }
 
-.topic-aapi a i:before{content:"\e600";}
-
 .dataset-collection {
     margin-right: 5px;
 }
