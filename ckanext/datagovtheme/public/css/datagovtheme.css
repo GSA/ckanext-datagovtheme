@@ -1581,14 +1581,6 @@ aside.secondary{
     font-size: 18px;
 }
 .page-header_new .main-heading h1{margin:5px 0 0 2px;padding:0px;line-height:36px;}
-#menu-community.nav > li > a:hover, #menu-community.nav > li > a:focus {
-    border-bottom: 5px solid #bfd4e1;
-    text-decoration: none;
-    background:none;
-}
-#menu-community{
-    margin-left: 15px;
-}
 .results strong, .is-search-title{display:inline-block;}
 .active_jquery_menu.active {
     border-bottom: 5px solid #ccc;
@@ -1670,20 +1662,6 @@ aside.secondary{
     content: "\e015";
 }
 
-.main-heading .category-header a i {
-    font-size: 35px;
-    margin-left: 1px;
-    margin-right: 9px;
-}
-.main-heading .category-header a div {
-    float: left;
-    text-align: left;
-    vertical-align: middle;
-    margin-right:1px;
-}
-#menu-community .active {
-    border-bottom: 5px solid #bfd4e1;
-}
 .add_action .btn-primary{float:right;}
 .control-group {
     margin-bottom: 5px;
@@ -1709,10 +1687,6 @@ aside.secondary{
 }
 .sub-nav.banner-nav .nav.navbar-nav li a {
     padding-bottom:5px;
-}
-#menu-community.nav .open > a, #menu-community.nav .open > a:hover, #menu-community.nav .open > a:focus {
-    background-color: #eee;
-    border-color: #428bca;
 }
 .ie8 .sub-nav.banner-nav nav li a:hover, .ie8 .sub-nav.banner-nav nav li a.active
 .ie9 .sub-nav.banner-nav nav li a:hover, .ie9 .sub-nav.banner-nav nav li a.active
@@ -1756,15 +1730,6 @@ aside.secondary{
     height: 23px;
     width: 35px;
     background-position:0px 0px;
-}
-#menu-community li{line-height: 30px;}
-.resource-item .btn-group a{min-width:95px;}
-.resource-item .btn-group a.btn{text-align: left !important}
-.ie8 .masthead .container .top-nav .primary {
-    height:55px;
-}
-.topic_name {
-    margin-left: 2px;
 }
 #menu-primary-navigation.navbar-right{margin-right:3px;}
 .search-form .input-group {
@@ -1856,14 +1821,8 @@ p.module-content{padding-left: 18px !important;}
     content: "\e017";
 }
 
-#menu-community .dropdown-toggle .caret {
-    margin-left: 0.325em;
-    margin-top: 0;
-}
 .org_type .terms{display:none;}
 .terms .context-info{display: none;}
-#menu-community .dropdown-menu.topics .active {border:0; background:none;}
-#menu-community .dropdown-menu.topics .active:hover {background-color:#eef7ff;}
 .recent-views{
     color: #ef7100;
     font-size: 12px;

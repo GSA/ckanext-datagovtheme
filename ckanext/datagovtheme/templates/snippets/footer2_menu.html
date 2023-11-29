@@ -1,4 +1,10 @@
-{% set menus = h.get_dynamic_menu() %}
-{% for menu in menus['footer2_navigation'] %}
+{% set menus = [
+  {"name": "About", "link": "//www.data.gov/about"},
+  {"name": "Open Government", "link": "//www.data.gov/open-gov/"},
+  {"name": "Website Policies", "link": "///www.data.gov/privacy-policy"},
+  {"name": "Sitemap", "link": "//catalog.data.gov/sitemap.xml"},
+  {"name": "PERFORMANCE.GOV", "link": "//www.performance.gov/"}
+  ] %}
+{% for menu in menus %}
   <li><a href="{{ menu['link'] }}">{{ menu['name'] }}</a></li>
 {% endfor %}

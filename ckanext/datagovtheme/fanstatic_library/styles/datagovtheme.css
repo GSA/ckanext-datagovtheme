@@ -1903,15 +1903,6 @@ aside.secondary {
     padding: 0px;
     line-height: 36px;
 }
-#menu-community.nav > li > a:hover,
-#menu-community.nav > li > a:focus {
-    border-bottom: 5px solid #bfd4e1;
-    text-decoration: none;
-    background: none;
-}
-#menu-community {
-    margin-left: 15px;
-}
 .results strong,
 .is-search-title {
     display: inline-block;
@@ -1996,20 +1987,6 @@ aside.secondary {
     content: '\e015';
 }
 
-.main-heading .category-header a i {
-    font-size: 35px;
-    margin-left: 1px;
-    margin-right: 9px;
-}
-.main-heading .category-header a div {
-    float: left;
-    text-align: left;
-    vertical-align: middle;
-    margin-right: 1px;
-}
-#menu-community .active {
-    border-bottom: 5px solid #bfd4e1;
-}
 .add_action .btn-primary {
     float: right;
 }
@@ -2041,12 +2018,6 @@ aside.secondary {
 .sub-nav.banner-nav .nav.navbar-nav li a {
     padding-bottom: 5px;
 }
-#menu-community.nav .open > a,
-#menu-community.nav .open > a:hover,
-#menu-community.nav .open > a:focus {
-    background-color: #eee;
-    border-color: #428bca;
-}
 .ie8 .sub-nav.banner-nav nav li a:hover,
 .ie8 .sub-nav.banner-nav nav li a.active .ie9 .sub-nav.banner-nav nav li a:hover,
 .ie9 .sub-nav.banner-nav nav li a.active {
@@ -2074,9 +2045,6 @@ aside.secondary {
     margin-top: 3px;
     margin-left: 3px;
 }
-#menu-community li {
-    line-height: 30px;
-}
 .resource-item .btn-group a {
     min-width: 95px;
 }
@@ -2085,9 +2053,6 @@ aside.secondary {
 }
 .ie8 .masthead .container .top-nav .primary {
     height: 55px;
-}
-.topic_name {
-    margin-left: 2px;
 }
 #menu-primary-navigation.navbar-right {
     margin-right: 3px;
@@ -2191,22 +2156,11 @@ p.module-content {
     content: '\e017';
 }
 
-#menu-community .dropdown-toggle .caret {
-    margin-left: 0.325em;
-    margin-top: 0;
-}
 .org_type .terms {
     display: none;
 }
 .terms .context-info {
     display: none;
-}
-#menu-community .dropdown-menu.topics .active {
-    border: 0;
-    background: none;
-}
-#menu-community .dropdown-menu.topics .active:hover {
-    background-color: #eef7ff;
 }
 .recent-views {
     color: #ef7100;
@@ -2511,10 +2465,6 @@ body .wrapper:before {
 
 .logo-links + ul.grid-row {
     padding-inline-start: 10px;
-}
-
-ul#menu-footer li {
-    padding-right: 1rem;
 }
 
 section.additional-info td.dataset-details {
