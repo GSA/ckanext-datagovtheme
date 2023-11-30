@@ -2130,17 +2130,22 @@ body .tagged-ngda {
     font-size: 0.75em;
 }
 .btn-arrow-right {
-    padding-top: 1px;
-    padding-bottom:2px;
-    line-height: 1;
+    padding-left: 14px;
+    padding-right: 8px;
     margin-right: 8px;
-    cursor: auto;
+}
+.btn-arrow-left {
+    padding-left: 8px;
+    padding-right: 14px;
+    margin-left: 8px;
 }
 .btn-arrow-right,
 .btn-arrow-left {
     position: relative;
-    padding-left: 16px;
-    padding-right: 8px;
+    padding-top: 1px;
+    padding-bottom:2px;
+    line-height: 1;
+    cursor: auto;
 }
 .btn-arrow-right:before,
 .btn-arrow-right:after,
