@@ -647,6 +647,15 @@ def get_bureau_info(bureau_code):
     }
 
 
+# returns true if the package contains a tag with the name 'ngda
+def is_tagged_ngda(pkg_dict):
+    if 'tags' in pkg_dict:
+        for tag in pkg_dict['tags']:
+            if tag['name'].lower() == 'ngda':
+                return True
+    return False
+
+
 # TODO can we drop this dependency on ckanext-harvest? Can this be moved to ckanext-harvest? geodatagov?
 def get_pkg_dict_extra(pkg_dict, key, default=None):
     '''Override the CKAN core helper to add rolled up extras

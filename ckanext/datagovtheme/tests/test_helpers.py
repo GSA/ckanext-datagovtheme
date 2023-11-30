@@ -6,6 +6,7 @@ import mock
 import pytest
 
 from ckanext.datagovtheme import helpers
+import ckan.tests.factories as factories
 
 
 ################
@@ -117,3 +118,21 @@ def test_get_bureau_info_none():
     bureau_info = helpers.get_bureau_info(None)
 
     assert bureau_info is None
+
+
+##################
+# ngda
+##################
+
+
+def test_is_tagged_ngda():
+    """Assert that package with ngda tag returns true."""
+    dataset_ngda = factories.Dataset(
+        name="dataset-ngda", title="Dataset NGDA", tags=[{"name": "nGda"}]
+    )
+    dataset_non_ngda = factories.Dataset(
+        name="dataset-non-ngda", title="Dataset Non NGDA", tags=[{"name": "non-ngda"}]
+    )
+
+    assert helpers.is_tagged_ngda(dataset_ngda) is True
+    assert helpers.is_tagged_ngda(dataset_non_ngda) is False
