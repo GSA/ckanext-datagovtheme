@@ -13,6 +13,7 @@ import ckan.tests.factories as factories
 # get_login_url
 ################
 
+
 @pytest.mark.ckan_config('ckanext.saml2auth.enable_ckan_internal_login', 'false')
 def test_saml2_login_url():
     """ test saml2 URL on Catalog-next """
@@ -30,6 +31,7 @@ def test_login_url():
 # api_doc_url
 ##############
 
+
 @mock.patch('ckanext.datagovtheme.helpers.h')
 def test_api_doc_url(mock_ckan_lib_helpers):
     mock_ckan_lib_helpers.lang.return_value = 'en'
@@ -42,6 +44,7 @@ def test_api_doc_url(mock_ckan_lib_helpers):
 ##################
 # get_bureau_info
 ##################
+
 
 def assert_url(actual_url, expected_bureau_code):
     # In CKAN 2.9, the url_for is returning a path ending in / which does not
@@ -120,6 +123,7 @@ def test_get_bureau_info_none():
 ##################
 # ngda
 ##################
+
 
 def test_is_tagged_ngda():
     """Assert that package with ngda tag returns true."""
