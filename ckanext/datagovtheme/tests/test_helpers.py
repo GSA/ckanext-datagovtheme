@@ -136,3 +136,20 @@ def test_is_tagged_ngda():
 
     assert helpers.is_tagged_ngda(dataset_ngda) is True
     assert helpers.is_tagged_ngda(dataset_non_ngda) is False
+
+##################
+# other data resources
+##################
+
+
+@mock.patch("ckanext.datagovtheme.helpers.get_geoplatform_link")
+def test_is_on_geoplatform(mock_get_geoplatform_link):
+    """Assert that package is available on geoplatform"""
+
+    mock_get_geoplatform_link.return_value = {
+        "geoplatform_url": "https://stg.geoplatform.gov/metadata/36da2c52-1e55-5e9b-959b-7c415478c757"
+    }
+    assert helpers.get_geoplatform_link("u-s-hourly-precipitation-data2") is not None
+
+    mock_get_geoplatform_link.return_value = None
+    assert helpers.get_geoplatform_link("geoplatform_dataset") is None
