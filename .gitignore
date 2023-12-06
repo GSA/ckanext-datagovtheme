@@ -11,7 +11,7 @@ syntax: glob
 .vscode/
 
 # Cypress
-cypress/e2e/videos/*
+cypress/videos/*
 cypress/e2e/screenshots/*
 cypress/e2e/results/output.xml
 node_modules
