@@ -264,6 +264,16 @@ def render_datetime_datagov(date_str):
     return value
 
 
+def get_geoplatform_link(package_name):
+    url = f"https://stg-api.geoplatform.gov/v3/public/lookups/data-gov/dataset?name={package_name}"
+    try:
+        req = urllib.request.urlopen(url)
+        if req.getcode() == 200:
+            return json.loads(req.read())["geoplatform_url"]
+    except Exception:
+        pass
+
+
 def get_harvest_object_formats(harvest_object_id):
     try:
         obj = p.toolkit.get_action('harvest_object_show')({}, {'id': harvest_object_id})
