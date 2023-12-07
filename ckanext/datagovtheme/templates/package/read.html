@@ -276,14 +276,14 @@
     {% endif %}
   {% endif %}
 
-  {% set geoplatform_link = h.get_geoplatform_link(pkg_dict["name"]) %}
-    {% if geoplatform_link %}
-      <section id="dataset-other-resources" class="resources module-content">
-          <h3>Other Data Resources</h3>
-              <a href="{{ geoplatform_link }}">View this on Geoplatform</a>
-      </section>
-  {% endif %}
+  {% block geoplatform_link %}
+    <section id="geoplatform-link-section" class="resources module-content hide" data-package-name="{{ pkg_dict['name'] }}">
+      <h3>Other Data Resources</h3>
+      <a id="geoplatform-link" href="">View this on Geoplatform</a>
+    </section>    
+  {% endblock %}
   
+
   {% set graphic_preview_file =h.get_pkg_dict_extra(pkg, 'graphic-preview-file', None) %}
   {% if graphic_preview_file and graphic_preview_file.lower()[:4] == 'http' %}
     <section id="dataset-graphic-preview" class="resources module-content">

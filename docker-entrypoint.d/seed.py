@@ -8,11 +8,11 @@ from ckan.tests import factories
 
 # Minimum config required for basic app
 config["testing"] = True
-config['__file__'] = '/srv/app/test.ini'
-config['SECRET_KEY'] = 'asdf'
-config['here'] = config['__file__']
-config['who.config_file'] = '/srv/app/who.ini'
-config['beaker.session.secret'] = 'asdf'
+config["__file__"] = "/srv/app/test.ini"
+config["SECRET_KEY"] = "asdf"
+config["here"] = config["__file__"]
+config["who.config_file"] = "/srv/app/who.ini"
+config["beaker.session.secret"] = "asdf"
 
 # Create app
 app = ckan.config.middleware.make_app(config)
@@ -20,20 +20,22 @@ test_app = CKANTestApp(app)
 
 
 def get_base_dataset():
-    res = test_app.post('/api/action/organization_show', data={'id': 'myorg'})
-    org_id = json.loads(res.body)['result']['id']
+    res = test_app.post("/api/action/organization_show", data={"id": "myorg"})
+    org_id = json.loads(res.body)["result"]["id"]
     # Create datasets
     return {
-        'public_access_level': 'public',
-        'unique_id': '',
-        'contact_name': 'Jhon',
-        'program_code': '018:001',
-        'publisher': 'Publisher 01',
-        'modified': '2019-01-27 11:41:21',
-        'tag_string': 'tag01,tag02',
-        'owner_org': org_id,
-        'extras': [{'key': 'bureauCode', 'value': '010:00'},
-                   {'key': 'contact-email', 'value': 'test@email.com'}]
+        "public_access_level": "public",
+        "unique_id": "",
+        "contact_name": "Jhon",
+        "program_code": "018:001",
+        "publisher": "Publisher 01",
+        "modified": "2019-01-27 11:41:21",
+        "tag_string": "tag01,tag02",
+        "owner_org": org_id,
+        "extras": [
+            {"key": "bureauCode", "value": "010:00"},
+            {"key": "contact-email", "value": "test@email.com"},
+        ],
     }
 
 
@@ -41,25 +43,34 @@ def get_base_dataset():
 with test_app.flask_app.test_request_context():
     try:
         user = factories.Sysadmin()
-        user_name = user['name'].encode('ascii')
-        print('User created')
+        user_name = user["name"].encode("ascii")
+        print("User created")
     except sqlalchemy.exc.IntegrityError:
-        print('User exists')
+        print("User exists")
 
     # Create organization
     try:
-        organization = factories.Organization(name='myorg')
-        print('Org created')
+        organization = factories.Organization(name="myorg")
+        print("Org created")
     except sqlalchemy.exc.InvalidRequestError:
-        print('Org exists')
+        print("Org exists")
 
     # Create datasets
     for x in range(1, 6):
         try:
             dataset = get_base_dataset()
-            dataset['extras'].append({'key': 'identifier', 'value': f'id-{x}'})
-            dataset.update({'title': f"test 0{x} dataset", 'id': f't{x}'})
+            dataset["extras"].append({"key": "identifier", "value": f"id-{x}"})
+            dataset.update({"title": f"test 0{x} dataset", "id": f"t{x}"})
             factories.Dataset(**dataset)
-            print(f'Dataset {x} created')
+            print(f"Dataset {x} created")
         except Exception as er:
-            print(f'exception: {er}')
+            print(f"exception: {er}")
+
+    try:
+        # Create geoplatform dataset
+        dataset = get_base_dataset()
+        dataset["name"] = "u-s-hourly-precipitation-data2"
+        factories.Dataset(**dataset)
+        print(f"Dataset {dataset['name']} created")
+    except Exception as er:
+        print(f"exception: {er}")
