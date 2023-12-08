@@ -1,20 +1,39 @@
 describe("Geoplatform Link", () => {
-    it("Get other data resources section", () => {
+    it("Check if other data resources section is visible", () => {
         cy.intercept(
             {
                 method: "GET",
-                url: "https://stg-api.geoplatform.gov/v3/public/lookups/data-gov/dataset?name=u-s-hourly-precipitation-data2",
+                url: "https://stg-api.geoplatform.gov/v3/public/lookups/data-gov/dataset?name=test_mock_geoplatform_data",
             },
             {
                 statusCode: 200,
                 body: {
-                    geoplatform_url:
-                        "https://stg.geoplatform.gov/metadata/36da2c52-1e55-5e9b-959b-7c415478c757",
+                    geoplatform_url: "https://www.youtube.com/",
                 },
             }
         );
 
-        cy.visit("/dataset/u-s-hourly-precipitation-data2");
-        cy.get('section[id="geoplatform-link-section"]').should("exist");
+        cy.visit("/dataset/test_mock_geoplatform_data");
+        cy.get('section[id="geoplatform-link-section"]')
+            .scrollIntoView()
+            .should("be.visible");
+    });
+
+    it("Check if other data resources section is not visible", () => {
+        cy.intercept(
+            {
+                method: "GET",
+                url: "https://stg-api.geoplatform.gov/v3/public/lookups/data-gov/dataset?name=test_bad_mock_geoplatform_data",
+            },
+            {
+                statusCode: 404,
+                body: {},
+            }
+        );
+
+        cy.visit("/dataset/test_bad_mock_geoplatform_data");
+        cy.get('section[id="geoplatform-link-section"]').should(
+            "not.be.visible"
+        );
     });
 });
