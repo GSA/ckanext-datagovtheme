@@ -275,6 +275,8 @@
       </section>
     {% endif %}
   {% endif %}
+  
+  {% include 'package/snippets/geoplatform_link.html' %}
 
   {% set graphic_preview_file =h.get_pkg_dict_extra(pkg, 'graphic-preview-file', None) %}
   {% if graphic_preview_file and graphic_preview_file.lower()[:4] == 'http' %}
