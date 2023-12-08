@@ -63,3 +63,7 @@ with test_app.flask_app.test_request_context():
             print(f'Dataset {x} created')
         except Exception as er:
             print(f'exception: {er}')
+
+    dataset = get_base_dataset()
+    dataset['name'] = 'u-s-hourly-precipitation-data2'
+    factories.Dataset(**dataset)
