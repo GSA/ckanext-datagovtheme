@@ -7,7 +7,7 @@ jQuery(function ($) {
         let datasetName = parentEl.getAttribute("data-package-name");
         try {
             const response = await fetch(
-                `https://stg-api.geoplatform.gov/v3/public/lookups/data-gov/dataset?name=${datasetName}`,
+                `https://api.geoplatform.gov/v3/public/lookups/data-gov/dataset?name=${datasetName}`,
                 { signal: AbortSignal.timeout(20000) }
             )
                 .then((response) => {
