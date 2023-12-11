@@ -10,6 +10,7 @@ js:
     - scripts/tracking.js
     - scripts/hideMaxListItem.js
     - scripts/sorting.js
+    - scripts/geoplatform.js
 
 styles:
   # This name is used in development/debug mode, must match the css file in test_datagovtheme.py

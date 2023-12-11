@@ -63,3 +63,12 @@ with test_app.flask_app.test_request_context():
             print(f'Dataset {x} created')
         except Exception as er:
             print(f'exception: {er}')
+
+    # Create our test geoplatform datasets
+    dataset = get_base_dataset()
+    dataset['name'] = 'test_mock_geoplatform_data'
+    factories.Dataset(**dataset)
+
+    dataset = get_base_dataset()
+    dataset['name'] = 'test_bad_mock_geoplatform_data'
+    factories.Dataset(**dataset)
