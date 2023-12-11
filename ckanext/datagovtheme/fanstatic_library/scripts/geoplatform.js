@@ -23,4 +23,6 @@ async function getGeoplatformLink() {
     }
 }
 
-getGeoplatformLink();
+jQuery(function ($) {
+    getGeoplatformLink();
+});
