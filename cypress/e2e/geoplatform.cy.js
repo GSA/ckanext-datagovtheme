@@ -3,7 +3,7 @@ describe("Geoplatform Link", () => {
         cy.intercept(
             {
                 method: "GET",
-                url: "https://stg-api.geoplatform.gov/v3/public/lookups/data-gov/dataset?name=test_mock_geoplatform_data",
+                url: "https://api.geoplatform.gov/v3/public/lookups/data-gov/dataset?name=test_mock_geoplatform_data",
             },
             {
                 statusCode: 200,
@@ -24,7 +24,7 @@ describe("Geoplatform Link", () => {
         cy.intercept(
             {
                 method: "GET",
-                url: "https://stg-api.geoplatform.gov/v3/public/lookups/data-gov/dataset?name=test_bad_mock_geoplatform_data",
+                url: "https://api.geoplatform.gov/v3/public/lookups/data-gov/dataset?name=test_bad_mock_geoplatform_data",
             },
             {
                 statusCode: 404,
