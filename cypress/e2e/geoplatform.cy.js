@@ -14,6 +14,7 @@ describe("Geoplatform Link", () => {
         );
 
         cy.visit("/dataset/test_mock_geoplatform_data");
+        cy.wait(10000);
         cy.get('section[id="geoplatform-link-section"]')
             .scrollIntoView()
             .should("be.visible");
