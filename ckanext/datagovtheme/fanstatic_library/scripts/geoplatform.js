@@ -24,6 +24,9 @@ jQuery(function ($) {
                     }
                 })
                 .then((data) => {
+                    if (data === undefined) {
+                        return;
+                    }
                     let el = document.getElementById("geoplatform-link");
                     el.href = data.geoplatform_url;
                     parentEl.classList.remove("hide");
