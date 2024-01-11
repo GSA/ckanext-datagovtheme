@@ -2122,6 +2122,18 @@ p.module-content {
     float: left;
 }
 
+/* BEGIN of styling touchpoint form button */
+#contact-btn {
+    visibility: hidden;
+}
+.fba-modal-dialog {
+    border-radius: 10px;
+}
+.fba-modal-dialog .wrapper {
+    border-width: 0;
+}
+/* END of styling touchpoint form button */
+
 /* BEGIN of styling NGDA lable using button arrows for bootstrap 3 */
 body .tagged-ngda {
     background-color: #3498db;

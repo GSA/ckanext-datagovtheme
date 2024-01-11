@@ -4,13 +4,14 @@ js:
   filters: rjsmin
   output: datagovtheme/extension.js
   contents:
+    - scripts/contactform.js
     - scripts/geoplatform.js
     - scripts/vendor/jquery.placeholder.js
-    - scripts/vendor/uswds.js
     - scripts/jquery.cookie.js
     - scripts/tracking.js
     - scripts/hideMaxListItem.js
     - scripts/sorting.js
+    - scripts/vendor/uswds.js
 
 styles:
   # This name is used in development/debug mode, must match the css file in test_datagovtheme.py
