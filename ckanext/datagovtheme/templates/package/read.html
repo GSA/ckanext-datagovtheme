@@ -249,12 +249,6 @@
             </strong>
             <p class="description">
               <a href="/harvest/object/{{ harvest_object_id }}">Download Metadata</a>
-              {% if ho_formats.object_format == 'ISO-19139' %}
-                {% if not dataset_is_datajson %}
-                  &middot;
-                  <a href="/harvest/object/{{ harvest_object_id }}/html">View Full Metadata</a>
-                {% endif %}
-              {% endif %}
             </p>
           </li>
           {% if ho_formats.original_format %}
@@ -265,8 +259,6 @@
               </strong>
               <p class="description">
                 <a href="/harvest/object/{{ harvest_object_id }}/original">Download Original Metadata</a>
-                &middot;
-                <a href="/harvest/object/{{ harvest_object_id }}/html/original">View Original Full Metadata</a>
               </p>
             </li>
           {% endif %}
