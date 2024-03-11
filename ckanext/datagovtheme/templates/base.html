@@ -1,5 +1,12 @@
 {% ckan_extends %}
 
+{% block links %}
+    {{ super() }}
+    {% block googleanalytics_custom_gtag %}
+      {% include '/snippets/gtm/gtm_head.html' %}
+    {% endblock %}
+{% endblock %}
+
 {% block scripts %}
   {{ super() }}
   {% asset 'datagovtheme/js' %}
