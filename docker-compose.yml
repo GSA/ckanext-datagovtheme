@@ -49,12 +49,6 @@ services:
   redis:
     image: redis
   solr:
-    image: ghcr.io/gsa/catalog.data.gov.solr:latest
-    command: /app/solr/local_setup.sh
+    image: datagov/catalog.data.gov.solr:latest
     ports:
       - "8983:8983"
-    deploy:
-      replicas: 1
-    volumes:
-      - solr_data:/var/solr
-      - .:/app
