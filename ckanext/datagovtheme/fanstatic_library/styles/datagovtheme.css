@@ -111,7 +111,7 @@ body,
     border-radius: 0;
 }
 
-.usa-footer.site-footer a,
+.usa-footer.site-footer .footer-section-bottom a,
 a {
     color: #284a7a;
 }
