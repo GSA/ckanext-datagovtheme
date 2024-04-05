@@ -2543,6 +2543,10 @@ section.additional-info td.dataset-details {
     word-wrap: break-word;
 }
 
+body .context-info .description {
+    word-break: normal;
+}
+
 /* override usws*/
 body .usa-banner__header-text,
 body .usa-banner__button-text {
