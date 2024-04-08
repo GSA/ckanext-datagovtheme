@@ -7,6 +7,7 @@
     {% set dataset = pkg.title or pkg.name or "Data.gov Dataset" %}
     {% if pkg.organization %}
       {% set organization = pkg.organization.title or pkg.organization.name or "Data.gov" %}
+    {% endif %}
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https://data.gov">
     <meta property="og:type" content="website">
