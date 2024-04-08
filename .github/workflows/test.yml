@@ -16,13 +16,13 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: checkout
-          uses: actions/checkout@v3
+          uses: actions/checkout@v4
         - name: build
           run: make build
         - name: ui-test
           run: make ui-test
         - name: cypress-artifacs
-          uses: actions/upload-artifact@v3
+          uses: actions/upload-artifact@v4
           if: failure()
           with:
             name: cypress-artifacts
