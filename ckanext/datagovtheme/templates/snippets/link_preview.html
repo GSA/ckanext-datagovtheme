@@ -5,22 +5,22 @@
 
   {% if pkg %}
     {% set dataset = pkg.title or pkg.name or "Data.gov Dataset" %}
-    {% if pkg.organization %}
-      {% set organization = pkg.organization.title or pkg.organization.name or "Data.gov" %}
-    {% endif %}
+    {% set organization = pkg.organization.title or pkg.organization.name or "Data.gov" %}
+    {% set notes = h.markdown_extract(pkg.notes, 180) or "The Home of the U.S. Government's Open Data" %}
+
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https://data.gov">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Data.gov Home - Data.gov">
-    <meta property="og:description" content="The Home of the U.S. Government's Open Data">
+    <meta property="og:title" content="{{ organization }} - {{ dataset }}">
+    <meta property="og:description" content="{{ notes }}">
     <meta property="og:image" content="{{ img }}">
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="data.gov">
     <meta property="twitter:url" content="https://data.gov">
-    <meta name="twitter:title" content="Data.gov Home - Data.gov">
-    <meta name="twitter:description" content="The Home of the U.S. Government's Open Data">
+    <meta name="twitter:title" content="{{ organization }} - {{ dataset }}">
+    <meta name="twitter:description" content="{{ notes }}">
     <meta name="twitter:image" content="{{ img }}">
   {% else %}
     <!-- Facebook Meta Tags -->
