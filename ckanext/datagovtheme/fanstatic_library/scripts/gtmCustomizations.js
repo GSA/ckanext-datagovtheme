@@ -11,8 +11,18 @@ if (window.location.pathname.match(/^\/dataset\/.*$/g)) {
   };
 
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
+  const publisherObjIndex = window.dataLayer.findIndex((o) => o.id === 'datasetPublisher');
+  const publisherObj = {
+    id: 'datasetPublisher',
     event: 'new_view',
     agency: getPublisher(),
-  });
+    dataSetName: document.querySelectorAll('h1[itemprop="name"]')[0]?.innerText || null,
+    uri: window.location.pathname,
+  };
+
+  if (publisherObjIndex === -1) {
+    window.dataLayer.push(publisherObj);
+  } else {
+    window.dataLayer[publisherObjIndex] = publisherObj;
+  }
 }
