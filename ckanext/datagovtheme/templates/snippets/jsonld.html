@@ -41,9 +41,15 @@
         "name": "{{ organization }} - {{ dataset }}"",
         "description": "{{ notes }}",
         "keywords": [
-          {% for tag in pkg.tags %}
-            "{{ tag.name }}"{% if not loop.last %},{% endif %}
-          {% endfor %}
+          {% if pkg.tags %}
+            {% for tag in pkg.tags %}
+              "{{ tag.name }}"{% if not loop.last %},{% endif %}
+            {% endfor %}
+          {% elif pkg_dict['tags'] %}
+            {% for tag in pkg_dict['tags'] %}
+              "{{ tag['name'] }}"{% if not loop.last %},{% endif %}
+            {% endfor %}
+          {% endif %}
         ],
         "publisher": {
           "type": "Organization",
