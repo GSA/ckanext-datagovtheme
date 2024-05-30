@@ -265,7 +265,14 @@ def render_datetime_datagov(date_str):
     return value
 
 
-def get_harvest_object_formats(harvest_object_id):
+def get_harvest_object_formats(harvest_object_id, dataset_is_datajson=False):
+    # simplified return for fake_harvest
+    fake_harvest = asbool(config.get('ckanext.datagovtheme.fake_harvest', 'false'))
+    if fake_harvest:
+        return {
+            'object_format': 'data.json' if dataset_is_datajson else 'ISO-19139'
+        }
+
     try:
         obj = p.toolkit.get_action('harvest_object_show')({}, {'id': harvest_object_id})
     except p.toolkit.ObjectNotFound:
@@ -325,7 +332,11 @@ def get_harvest_source_link(package_dict):
 
     if harvest_source_id and harvest_source_title:
         msg = p.toolkit._('Harvested from')
-        url = h.url_for('harvest_read', id=harvest_source_id)
+        fake_harvest = asbool(config.get('ckanext.datagovtheme.fake_harvest', 'false'))
+        if fake_harvest:
+            url = h.url_for(f'/harvest/{harvest_source_id}')
+        else:
+            url = h.url_for('harvest_read', id=harvest_source_id)
         link = '{msg} <a href="{url}">{title}</a>'.format(url=url, msg=msg, title=harvest_source_title)
         return p.toolkit.literal(link)
 
