@@ -1,0 +1,57 @@
+
+{% block jsonld %}
+  {% set pkg = c.pkg_dict %}
+
+  {% if pkg %}
+    {% set dataset = pkg.title or pkg.name or "Data.gov Dataset" %}
+    {% set organization = pkg.organization.title or pkg.organization.name or "Data.gov" %}
+    {% set notes = h.markdown_extract(pkg.notes, 180) or "The Home of the U.S. Government's Open Data" %}
+
+
+    <script type="application/ld+json" class="jsonld-website">
+      {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "url": "https://data.gov",
+        "name": "Data.gov",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://catalog.data.gov/dataset?q={search_term_string}&sort=views_recent+desc&ext_location=&ext_bbox=&ext_prev_extent=",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+    <script type="application/ld+json" class="jsonld-org">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "url": "https://data.gov",
+        "name": "Data.gov",
+        "slogan": "The Home of the U.S. Government's Open Data",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "url": "https://data.gov/contact/",
+          "contactType": "Datagov Support"
+        }
+      }
+    </script>
+    <script type="application/ld+json" class="jsonld-dataset">
+      {
+        "@type": "schema:Dataset",
+        "name": "{{ organization }} - {{ dataset }}"",
+        "description": "{{ notes }}",
+        "keywords": [
+          {% for tag in pkg.tags %}
+            "{{ tag.name }}"{% if not loop.last %},{% endif %}
+          {% endfor %}
+        ],
+        "publisher": {
+          "type": "Organization",
+          "contactPoint": { "type": "PostalAddress" }
+        },
+        "distribution": []
+      }
+    </script>
+
+  {% endif %}
+{% endblock %}
