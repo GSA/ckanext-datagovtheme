@@ -1,5 +1,4 @@
 ---
-version: "3.7"
 services:
   ckan:
     image: datagov/ckanext-datagovtheme:${CKAN_VERSION} # ensures docker-compose will rebuild the right image in case we change CKAN_VERSION
