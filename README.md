@@ -116,10 +116,10 @@ In order to support multiple versions of CKAN, or even upgrade to new versions
 of CKAN, we support development and testing through the `CKAN_VERSION`
 environment variable.
 
-    $ make CKAN_VERSION=2.10 test
+    $ make CKAN_VERSION=2.10.1 test
 
 
 Variable | Description | Default
 -------- | ----------- | -------
-CKAN_VERSION | Version of CKAN to use. | 2.10
+CKAN_VERSION | Version of CKAN to use. | 2.10.1
 COMPOSE_FILE | docker-compose service description file. | docker-compose.yml
