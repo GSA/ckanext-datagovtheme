@@ -762,3 +762,10 @@ def get_login_url():
         return h.url_for(controller='user', action='login')
 
     return '/user/saml2login'
+
+
+def get_pkg_popular_count(pkg_id):
+    log.info('################################')
+    log.info(pkg_id)
+    if pkg_id:
+        return model.TrackingSummary.get_for_package(pkg_id)

@@ -5,6 +5,7 @@ js:
   output: datagovtheme/extension.js
   contents:
     - scripts/contactform.js
+    - scripts/popular.js
     - scripts/geoplatform.js
     - scripts/vendor/jquery.placeholder.js
     - scripts/jquery.cookie.js

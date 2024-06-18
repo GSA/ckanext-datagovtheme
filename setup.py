@@ -30,5 +30,6 @@ setup(
     entry_points="""
         [ckan.plugins]
         datagovtheme=ckanext.datagovtheme.plugin:DatagovTheme
+        datagovtheme_popular=ckanext.datagovtheme.plugin:DatagovThemePopular
     """,
 )
