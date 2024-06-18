@@ -11,8 +11,8 @@
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https://data.gov">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{{ organization }} - {{ dataset }}">
-    <meta property="og:description" content="{{ notes }}">
+    <meta property="og:title" content="{{ h.literal.escape(organization) }} - {{ h.literal.escape(dataset) }}">
+    <meta property="og:description" content="{{ h.literal.escape(notes) }}">
     <meta property="og:image" content="{{ img }}">
 
     <!-- Twitter Meta Tags -->
