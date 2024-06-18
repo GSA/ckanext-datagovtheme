@@ -63,8 +63,7 @@ Example:
         </span>
         {% endif %}
 
-        {{ h.snippet('snippets/popular.html', title='aaa', number=11, min=10) }}
-        {{ h.popular('recent views', package.tracking_summary.recent, min=10) if package.tracking_summary }}
+        {{ h.snippet('snippets/popular.html') }}
       </h3>
       <div class="notes">
         {% if organization and show_organization %}

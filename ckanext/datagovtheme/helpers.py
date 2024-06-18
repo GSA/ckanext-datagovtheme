@@ -765,7 +765,5 @@ def get_login_url():
 
 
 def get_pkg_popular_count(pkg_id):
-    log.info('################################')
-    log.info(pkg_id)
     if pkg_id:
         return model.TrackingSummary.get_for_package(pkg_id)
