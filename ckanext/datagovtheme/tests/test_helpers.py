@@ -1,12 +1,14 @@
 # encoding: utf-8
 import logging
 import re
+import datetime
 
 import mock
 import pytest
 
 from ckanext.datagovtheme import helpers
 import ckan.tests.factories as factories
+import ckan.lib.helpers as h
 
 
 ################
@@ -136,3 +138,64 @@ def test_is_tagged_ngda():
 
     assert helpers.is_tagged_ngda(dataset_ngda) is True
     assert helpers.is_tagged_ngda(dataset_non_ngda) is False
+
+
+##################
+# recent view
+##################
+
+
+@pytest.fixture
+def track(app):
+    """Post some data to /_tracking directly.
+
+    This simulates what's supposed when you view a page with tracking
+    enabled (an ajax request posts to /_tracking).
+
+    """
+
+    def func(url, type_="page", ip="199.204.138.90", browser="firefox"):
+        params = {"url": url, "type": type_}
+        extra_environ = {
+            # The tracking middleware crashes if these aren't present.
+            "HTTP_USER_AGENT": browser,
+            "REMOTE_ADDR": ip,
+            "HTTP_ACCEPT_LANGUAGE": "en",
+            "HTTP_ACCEPT_ENCODING": "gzip, deflate",
+        }
+        app.post("/_tracking", params=params, extra_environ=extra_environ)
+
+    return func
+
+
+def update_tracking_summary():
+    """Update CKAN's tracking summary data."""
+
+    import ckan.cli.tracking as tracking
+    import ckan.model
+
+    date = (datetime.datetime.now() - datetime.timedelta(days=1)).strftime(
+        "%Y-%m-%d"
+    )
+    tracking.update_all(engine=ckan.model.meta.engine, start_date=date)
+
+
+def test_get_pkgs_popular_count(track):
+    factories.Dataset(id="view-id-1", name="view-id-1")
+    factories.Dataset(id="view-id-2", name="view-id-2")
+
+    ids = "view-id-1,view-id-2"
+    assert helpers.get_pkgs_popular_count(ids) == {
+        'view-id-1': {'recent': 0, 'total': 0},
+        'view-id-2': {'recent': 0, 'total': 0}
+    }
+
+    url = h.url_for("dataset.read", id="view-id-1")
+    track(url)
+    update_tracking_summary()
+
+    # after dataset 1 is viewed, it should have a view count of 1, dataset 2 should still have 0
+    assert helpers.get_pkgs_popular_count(ids) == {
+        'view-id-1': {'recent': 1, 'total': 1},
+        'view-id-2': {'recent': 0, 'total': 0}
+    }
