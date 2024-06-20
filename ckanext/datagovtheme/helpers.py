@@ -10,6 +10,7 @@ import urllib.request
 import pkg_resources
 
 from ckan import plugins as p
+from ckan.lib import base
 from ckan.lib import helpers as h
 from ckan import model
 from ckanext.harvest.model import HarvestObject
@@ -762,3 +763,24 @@ def get_login_url():
         return h.url_for(controller='user', action='login')
 
     return '/user/saml2login'
+
+
+def get_pkgs_popular_count(ids):
+    populars = {}
+    if ids:
+        pkg_ids = ids.split(',')
+        for pkg_id in pkg_ids:
+            populars[pkg_id] = model.TrackingSummary.get_for_package(pkg_id)
+    return populars
+
+
+def render_popular(type, pkg, min, title=''):
+    # If the package has tracking_summary, call core helper function to render it.
+    if pkg.get('tracking_summary'):
+        return h.popular(type, pkg['tracking_summary']['recent'], min, title)
+
+    js_recent_view = asbool(config.get('ckanext.datagovtheme.js_recent_view', False))
+    if js_recent_view:
+        return base.render_snippet('snippets/datagov_popular.html')
+
+    return ''

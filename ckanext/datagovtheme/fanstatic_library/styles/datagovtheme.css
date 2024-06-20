@@ -2239,6 +2239,9 @@ body .tagged-ngda {
     padding-left: 5px;
     display: inline-block;
 }
+.recent-views-datagov {
+    visibility: hidden;
+}
 .bar-image {
     width: 18px;
     display: inline-block;

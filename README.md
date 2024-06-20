@@ -46,7 +46,11 @@ CKAN version | Compatibility
 
 ### Configuration
 
-_TODO: what configuraiton options exist?_
+[Optional]
+`ckanext.datagovtheme.js_recent_view = true`
+
+
+This defaults to `false`. If displaying the recent view count slows down page loading, the optional parameter can be set to `true` to make the recent view count an AJAX call, improving page loading speed. If the recent view count information (package['tracking_summary']) is already present, the AJAX call is disabled to reduce overhead. Therefore, the built-in recent view count rendering must be disabled for this mechanism to take effect.
 
 
 ## Development

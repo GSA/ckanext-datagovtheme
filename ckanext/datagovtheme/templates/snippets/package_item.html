@@ -35,7 +35,7 @@ Example:
         </span>
         </div>
       {% endif %}
-      <h3 class="dataset-heading">
+      <h3 class="dataset-heading" pkg_id="{{ package.id }}">
         {% if package.private %}
           <span class="dataset-private label label-inverse">
             <i class="fa fa-lock"></i>
@@ -63,7 +63,7 @@ Example:
         </span>
         {% endif %}
 
-        {{ h.popular('recent views', package.tracking_summary.recent, min=10) if package.tracking_summary }}
+        {{ h.render_popular('recent views', package, min=10) }}
       </h3>
       <div class="notes">
         {% if organization and show_organization %}
