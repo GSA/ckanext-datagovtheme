@@ -36,7 +36,7 @@ def show():
 
 def redirect_homepage():
     CKAN_SITE_URL = config.get("ckan.site_url")
-    return redirect(CKAN_SITE_URL + "/dataset", code=302)
+    return redirect(CKAN_SITE_URL + "/dataset/", code=302)
 
 
 def get_popuplar_count():
