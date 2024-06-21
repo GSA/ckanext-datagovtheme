@@ -3,12 +3,12 @@
 jQuery(function ($) {
 
   // This api takes a list of package ids from querystring and returns the view count for each package
-  var pupolar_api = "/datagovtheme/get-popular-count";
+  var popular_api = "/datagovtheme/get-popular-count";
 
   // all ids in a string, comma separated
   var pkgs = {'pkgs': collect_all_packages().join(',')};
 
-  $.getJSON(pupolar_api, pkgs, function(data) {
+  $.getJSON(popular_api, pkgs, function(data) {
     $.each( data, function( key, val ) {
       $("ul.dataset-list li.dataset-item h3.dataset-heading").each(function() {
         if ($(this).attr('pkg_id') == key) {
