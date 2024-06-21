@@ -11,16 +11,16 @@
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https://data.gov">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{{ h.literal.escape(organization) }} - {{ h.literal.escape(dataset) }}">
-    <meta property="og:description" content="{{ h.literal.escape(notes) }}">
+    <meta property="og:title" content="{{ organization | forceescape }} - {{ dataset | forceescape }}">
+    <meta property="og:description" content="{{ notes | forceescape }}">
     <meta property="og:image" content="{{ img }}">
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="data.gov">
     <meta property="twitter:url" content="https://data.gov">
-    <meta name="twitter:title" content="{{ organization }} - {{ dataset }}">
-    <meta name="twitter:description" content="{{ notes }}">
+    <meta name="twitter:title" content="{{ organization | forceescape }} - {{ dataset | forceescape }}">
+    <meta name="twitter:description" content="{{ notes | forceescape }}">
     <meta name="twitter:image" content="{{ img }}">
   {% else %}
     <!-- Facebook Meta Tags -->
