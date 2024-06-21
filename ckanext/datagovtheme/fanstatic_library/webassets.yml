@@ -43,3 +43,6 @@ popular-js:
   output: datagovtheme/popular.js
   contents:
     - scripts/popular.js
+  extra:
+    preload:
+      - vendor/jquery
