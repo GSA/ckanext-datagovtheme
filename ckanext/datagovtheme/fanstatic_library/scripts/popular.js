@@ -17,7 +17,7 @@ jQuery(function ($) {
           if (val['recent'] >= 10) {
             $(this).find('span.recent-views').css('visibility', 'visible');
           }else{
-            $(this).find('span.recent-views').css('display', 'hidden');
+            $(this).find('span.recent-views').css('display', 'none');
           }
         }
       });
