@@ -3,8 +3,8 @@
 {% block links %}
     {{ super() }}
     {% block googleanalytics_custom_gtag %}
-      {% include '/snippets/gtm/gtm_head.html' %}
       {% include '/snippets/gtm/gtm_datalayer.html' %}
+      {% include '/snippets/gtm/gtm_head.html' %}
     {% endblock %}
     {% block open_graph_previews %}
       {% include '/snippets/link_preview.html' %}
