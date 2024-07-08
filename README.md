@@ -47,7 +47,13 @@ CKAN version | Compatibility
 ### Configuration
 
 [Optional]
-`ckanext.datagovtheme.js_recent_view = true`
+`ckanext.datagovtheme.harvest_next = false`
+
+By default, this setting is `false`. The template relies on `ckanext-harvest` to display Harvest Object and Harvest Source information in the **Metadata Source** block. For catalog-next, datasets are added via API calls, eliminating the need for the `ckanext-harvest` dependency. Set this to `true` for the harvest_next version of the **Metadata Source** block.
+
+
+[Optional]
+`ckanext.datagovtheme.js_recent_view = false`
 
 
 This defaults to `false`. If displaying the recent view count slows down page loading, the optional parameter can be set to `true` to make the recent view count an AJAX call, improving page loading speed. If the recent view count information (package['tracking_summary']) is already present, the AJAX call is disabled to reduce overhead. Therefore, the built-in recent view count rendering must be disabled for this mechanism to take effect. For catalog.data.gov, it means set setting `ckanext.datagovcatalog.add_packages_tracking_info` to false. 
