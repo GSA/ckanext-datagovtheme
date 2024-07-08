@@ -46,7 +46,12 @@ CKAN version | Compatibility
 
 ### Configuration
 
-_TODO: what configuraiton options exist?_
+[Optional]
+`ckanext.datagovtheme.harvest_next = false`
+
+By default, this setting is `false`. The template relies on `ckanext-harvest` to display Harvest Object and Harvest Source information in the **Metadata Source** block. For catalog-next, datasets are added via API calls, eliminating the need for the `ckanext-harvest` dependency. Set this to `true` for the harvest_next version of the **Metadata Source** block.
+
+**TODO**: re-evaluate the need for this customization after ckan 2.11 release, as described in ticket https://github.com/GSA/data.gov/issues/4798.
 
 
 ## Development
