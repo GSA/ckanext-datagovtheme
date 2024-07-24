@@ -181,10 +181,14 @@ def update_tracking_summary():
 
 
 def test_get_pkgs_popular_count(track):
+    factories.Organization(name='myorg1')
     factories.Dataset(id="view-id-1", name="view-id-1")
     factories.Dataset(id="view-id-2", name="view-id-2")
+    factories.Dataset(id="view-id-3", name="view-id-3", private=True, owner_org="myorg1")
 
-    ids = "view-id-1,view-id-2"
+    ids = "view-id-1,view-id-2,view-id-3,view-id-4"
+    # before any views, all datasets should have 0 views
+    # private view-id-3 and non-existent view-id-4 should not be counted
     assert helpers.get_pkgs_popular_count(ids) == {
         'view-id-1': {'recent': 0, 'total': 0},
         'view-id-2': {'recent': 0, 'total': 0}

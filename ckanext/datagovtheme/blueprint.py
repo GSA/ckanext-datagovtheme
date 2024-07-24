@@ -39,7 +39,7 @@ def redirect_homepage():
     return redirect(CKAN_SITE_URL + "/dataset/", code=302)
 
 
-def get_popuplar_count():
+def get_popular_count():
     pkgs = request.args.get('pkgs')
     return jsonify(helpers.get_pkgs_popular_count(pkgs))
 
@@ -47,4 +47,4 @@ def get_popuplar_count():
 datagovtheme_bp.add_url_rule('/', view_func=redirect_homepage)
 datagovtheme_bp.add_url_rule("/datagovtheme/get-popular-count",
                              methods=['GET'],
-                             view_func=get_popuplar_count)
+                             view_func=get_popular_count)

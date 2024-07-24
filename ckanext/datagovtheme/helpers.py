@@ -9,14 +9,10 @@ import urllib.request
 
 import pkg_resources
 
-from ckan import plugins as p
-from ckan.lib import base
-from ckan.lib import helpers as h
-from ckan import model
+from ckan import plugins as p, model
+from ckan.lib import base, helpers as h
+from ckan.plugins.toolkit import asbool, config
 from ckanext.harvest.model import HarvestObject
-from ckan.plugins.toolkit import asbool
-
-from ckan.plugins.toolkit import config
 
 log = logging.getLogger(__name__)
 
@@ -770,6 +766,10 @@ def get_pkgs_popular_count(ids):
     if ids:
         pkg_ids = ids.split(',')
         for pkg_id in pkg_ids:
+            package = model.Package.get(pkg_id)
+            if not package or package.private:
+                continue
+            # only public package gets here
             populars[pkg_id] = model.TrackingSummary.get_for_package(pkg_id)
     return populars
 
