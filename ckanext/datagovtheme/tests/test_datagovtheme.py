@@ -75,7 +75,7 @@ class TestDatagovthemeServed(object):
         index_response = app.get('/dataset')
 
         assert '<span class="text-uppercase">Data</span></a>' in index_response.body
-        assert '<span class="text-uppercase">Reports</span></a>' in index_response.body
+        assert '<span class="text-uppercase">Metrics</span></a>' in index_response.body
         assert '<span class="text-uppercase">Open Government</span></a>' in index_response.body
         assert '<span class="text-uppercase">Contact</span></a>' in index_response.body
         assert '<span class="text-uppercase">User Guide</span></a>' in index_response.body
