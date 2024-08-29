@@ -24,6 +24,10 @@
         {%- endif %}
         <br clear="both" />
         <div id="dataset-search-ext">{% block dataset_search_ext %}{% endblock %}</div>
+          <h4> For a list of search operators, please see the
+             <a href="https://docs.ckan.org/en/2.10/user-guide.html?#search-in-detail">
+             "Search in Detail" instructions.</a>
+          </h4>
         <div class="results">
             <div class="filter-list">
                 {% for field in c.fields_grouped %}
