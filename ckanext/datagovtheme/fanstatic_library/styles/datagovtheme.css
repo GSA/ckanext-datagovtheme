@@ -2860,3 +2860,9 @@ body .usa-menu-btn {
 #flDebug .flDebugPanelContent {
     overflow: scroll;
 }
+
+
+.search-helper {
+    margin-top: -17px;
+    font-style: italic;
+}
