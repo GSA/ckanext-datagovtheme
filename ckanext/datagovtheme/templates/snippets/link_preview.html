@@ -6,7 +6,10 @@
   {% if pkg %}
     {% set dataset = pkg.title or pkg.name or "Data.gov Dataset" %}
     {% set organization = pkg.organization.title or pkg.organization.name or "Data.gov" %}
-    {% set notes = h.markdown_extract(pkg.notes, 180) or "The Home of the U.S. Government's Open Data" %}
+    {% set notes = h.markdown_extract(pkg.notes, 180) or 
+      h.markdown_extract(c.group_dict.description) or 
+      "The Home of the U.S. Government's Open Data"
+    %}
 
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https://data.gov">
