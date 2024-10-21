@@ -21,7 +21,7 @@ lxml>=2.3
 argparse
 pyparsing>=2.1.10
 requests>=1.1.0
-pyproj
+pyproj==3.6.1
 Shapely==2.0.1
 numpy==1.26.4
 OWSLib==0.28.1
