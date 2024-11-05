@@ -10,7 +10,7 @@ extension.
 
 ## Features
 
-_TODO document these better._
+_TODO document these better._ 
 
 - Provides a new spatial query view (overrides [ckanext-spatial](https://github.com/ckan/ckanext-spatial) some front end)
 
