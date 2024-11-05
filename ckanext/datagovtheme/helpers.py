@@ -326,31 +326,24 @@ def get_harvest_object_formats(harvest_object_id, dataset_is_datajson=False):
     }
 
 
-def get_harvest_source_link(package_dict):
+def get_harvest_source_link(package_dict, type='source'):
     harvest_source_id = get_pkg_dict_extra(package_dict, 'harvest_source_id', None)
     harvest_source_title = get_pkg_dict_extra(package_dict, 'harvest_source_title', None)
+    harvest_object_id = get_pkg_dict_extra(package_dict, 'harvest_object_id', None)
     harvest_admin_url = config.get('ckanext.datagovtheme.harvest_admin_url')
 
     if harvest_source_id and harvest_source_title:
         msg = p.toolkit._('Harvested from')
         harvest_next = asbool(config.get('ckanext.datagovtheme.harvest_next', 'false'))
-        if harvest_next:
-            url = f"{harvest_admin_url}/harvest_source/{harvest_source_id}"
+        if type == 'metadata':
+            url = f"{harvest_admin_url}/harvest_record/{harvest_object_id}/raw"
+            link = '<a href="{url}">{title}</a>'.format(url=url, title='Download Metadata')
         else:
-            url = h.url_for('harvest_read', id=harvest_source_id)
-        link = '{msg} <a href="{url}">{title}</a>'.format(url=url, msg=msg, title=harvest_source_title)
-        return p.toolkit.literal(link)
-
-    return ''
-
-
-def get_harvest_metadata_link(package_dict):
-    harvest_object_id = get_pkg_dict_extra(package_dict, 'harvest_object_id', None)
-    harvest_admin_url = config.get('ckanext.datagovtheme.harvest_admin_url')
-
-    if harvest_object_id:
-        url = f"{harvest_admin_url}/harvest_record/{harvest_object_id}/raw"
-        link = '<a href="{url}">{title}</a>'.format(url=url, title='Download Metadata')
+            if harvest_next:
+                url = f"{harvest_admin_url}/harvest_source/{harvest_source_id}"
+            else:
+                url = h.url_for('harvest_read', id=harvest_source_id)
+            link = '{msg} <a href="{url}">{title}</a>'.format(url=url, msg=msg, title=harvest_source_title)
         return p.toolkit.literal(link)
 
     return ''

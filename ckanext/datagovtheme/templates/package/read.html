@@ -247,7 +247,7 @@
               {{ ho_formats.object_format }} Metadata
             {% endif %}
             </strong>
-            <p class="description">{{ h.get_harvest_metadata_link(pkg) }}</p>
+            <p class="description">{{ h.get_harvest_source_link(pkg, 'metadata') }}</p>
           </li>
           {% if ho_formats.original_format %}
             <li class="resource-item">
