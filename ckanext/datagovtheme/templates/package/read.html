@@ -247,9 +247,7 @@
               {{ ho_formats.object_format }} Metadata
             {% endif %}
             </strong>
-            <p class="description">
-              <a href="/harvest/object/{{ harvest_object_id }}">Download Metadata</a>
-            </p>
+            <p class="description">{{ h.get_harvest_metadata_link(pkg) }}</p>
           </li>
           {% if ho_formats.original_format %}
             <li class="resource-item">
