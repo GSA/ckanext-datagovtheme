@@ -30,7 +30,15 @@
 
             </div>
             <div class="filter-list">
+                {% set is_collection = false %}
+                {% if 'harvest_source_id' in c.fields_grouped and 'isPartOf' in c.fields_grouped %}
+                    {% set is_collection = true %}
+                {% endif %}
                 {% for field in c.fields_grouped %}
+                {% if is_collection and field in ['harvest_source_id', 'isPartOf'] %}
+                    {# skip harvest_source_id and isPartOf if both are present #}
+                    {% continue %}
+                {% endif %}
                 {% if field != 'collection_package_id' %}
                 <span class="facet">{{ c.facet_titles.get(field) }}:</span>
                 {% set search_facets_items = c.search_facets.get(field)['items'] %}
