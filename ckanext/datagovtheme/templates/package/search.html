@@ -32,7 +32,9 @@
         <div class="results">
             <div class="filter-list">
                 {% for field in c.fields_grouped %}
-                {% if field != 'collection_info' %}
+                {% if field in ['collection_info', 'include_collection'] %}
+                {% continue %}
+                {% endif %}
                 <span class="facet">{{ c.facet_titles.get(field) }}:</span>
                 {% set search_facets_items = c.search_facets.get(field)['items'] %}
                 {% for value in c.fields_grouped[field] %}
@@ -49,7 +51,6 @@
                     <a href="{{ c.remove_field(field, value) }}" class="remove" title="{{ _('Remove') }}"><i class="fa fa-times"></i></a>
                   </span>
                 {% endfor %}
-                {% endif %}
                 {% endfor %}
             </div>
             {% if request.args and c.page.item_count == 0 %}
