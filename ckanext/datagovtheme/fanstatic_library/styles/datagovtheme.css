@@ -2850,17 +2850,12 @@ body .usa-menu-btn {
         border-radius: 0;
         width: 100%;
     }
-    .control-custom input {
-        border-radius: 0;
-        width: 100%;
-    }
 }
 
 /* CKAN DEBUG PANEL SCROLL FIX */
 #flDebug .flDebugPanelContent {
     overflow: scroll;
 }
-
 
 .search-helper {
     font-style: italic;
