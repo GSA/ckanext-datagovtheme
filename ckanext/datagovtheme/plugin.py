@@ -1,9 +1,36 @@
+from ckan.config.middleware.common_middleware import TrackingMiddleware
 import ckan.plugins as p
 from sqlalchemy.util import OrderedDict
 
 p.toolkit.requires_ckan_version("2.9")
 
 from . import blueprint
+import uuid
+
+
+def _request_id_from_uuid():
+    return str(uuid.uuid4())
+
+
+class MyRequestIdMiddleware():
+    def __init__(self, app, config, header_name="X-Request-ID", generator_func=_request_id_from_uuid):
+        self.app = app
+        self.config = config
+
+        self._header_name = header_name
+        self._flask_header_name = header_name.upper().replace("-", "_")
+        self._generator_func = generator_func        
+
+    def __call__(self, environ, start_response):
+        header_key = "HTTP_{0}".format(self._flask_header_name)
+        environ.setdefault(header_key, self._generator_func())
+        req_id = environ[header_key]
+        environ["FLASK_REQUEST_ID"] = req_id
+
+        def new_start_response(status, response_headers, exc_info=None):
+            response_headers.append((self._header_name, req_id))
+            return start_response(status, response_headers, exc_info)
+        return self.app(environ, new_start_response)
 
 
 class DatagovTheme(p.SingletonPlugin):
@@ -14,6 +41,7 @@ class DatagovTheme(p.SingletonPlugin):
     p.implements(p.IConfigurer)
     p.implements(p.IFacets, inherit=True)
     p.implements(p.ITemplateHelpers)
+    p.implements(p.IMiddleware, inherit=True)
 
     # IConfigurer
     def update_config(self, config):
@@ -125,6 +153,14 @@ class DatagovTheme(p.SingletonPlugin):
         helpers.update(override_helpers)
 
         return helpers
+
+    # IMiddleware
+    def make_middleware(self, app, config):
+        app = MyRequestIdMiddleware(app, config)        
+        return app
+
+    def make_error_log_middleware(self, app, config):
+        return app
 
     def get_blueprint(self):
         return blueprint.datagovtheme_bp
