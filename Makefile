@@ -9,7 +9,7 @@ clean: ## Clean workspace and containers
 	CKAN_VERSION=$(CKAN_VERSION) docker compose  -f $(COMPOSE_FILE) down -v --remove-orphans
 
 lint: ## Lint the code (python 3 only)
-	docker compose  -f $(COMPOSE_FILE) run --rm ckan flake8 ckanext --count --show-source --statistics --exclude ckan
+	CKAN_VERSION=$(CKAN_VERSION) docker compose -f $(COMPOSE_FILE) run --rm ckan flake8 ckanext --count --show-source --statistics --exclude ckan
 
 test: ## Run extension tests
 	CKAN_VERSION=$(CKAN_VERSION) docker compose  -f $(COMPOSE_FILE) run --rm ckan ./test.sh
