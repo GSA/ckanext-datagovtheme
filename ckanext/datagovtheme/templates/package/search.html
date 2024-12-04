@@ -52,11 +52,6 @@
                 {% endif %}
                 {% endfor %}
             </div>
-            {% if request.args and c.page.item_count == 0 %}
-            {% trans %}
-            <p class="extra">Please try another search.</p>
-            {% endtrans %}
-            {% endif %}
         </div>
     </form></div>
 <a class="show-filters btn btn-primary">{{ _('Filter Results') }}</a>
@@ -91,6 +86,11 @@
 
 <section class="module">
     <div class="module-content">
+        {% if request.args and c.page.item_count == 0 %}
+        {% trans %}
+        <p class="extra">Please try another search.</p>
+        {% endtrans %}
+        {% endif %}
         <p>
             <small>
                 {% set api_link = h.link_to(_('API'), h.url_for(controller='api', action='get_api', ver=3)) %}
