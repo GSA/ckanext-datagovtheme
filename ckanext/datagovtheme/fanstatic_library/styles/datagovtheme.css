@@ -2470,6 +2470,7 @@ article.module.prose h3 {
     height: auto;
     padding: 14px 10px;
     width: 100%;
+    color: #595959
 }
 .search-giant button {
     background: transparent url('/../../base/images/icon-search-27x26.png') no-repeat scroll center center;
