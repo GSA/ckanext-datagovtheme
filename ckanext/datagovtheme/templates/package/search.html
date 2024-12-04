@@ -52,11 +52,6 @@
                 {% endif %}
                 {% endfor %}
             </div>
-            {% if request.args and c.page.item_count == 0 %}
-            {% trans %}
-            <p class="extra">Please try another search.</p>
-            {% endtrans %}
-            {% endif %}
         </div>
     </form></div>
 <a class="show-filters btn btn-primary">{{ _('Filter Results') }}</a>
@@ -95,6 +90,11 @@
             <small>
                 {% set api_link = h.link_to(_('API'), h.url_for(controller='api', action='get_api', ver=3)) %}
                 {% set api_doc_link = h.link_to(_('API Docs'), h.datagovtheme_api_doc_url()) %}
+                {% if request.args and c.page.item_count == 0 %}
+                {% trans %}
+                <p class="extra">Please try another search.</p>
+                {% endtrans %}
+                {% endif %}
                 {% if g.dumps_url -%}
                 {% set dump_link = h.link_to(_('full {format} dump').format(format=g.dumps_format), g.dumps_url) %}
                 {% trans %}
