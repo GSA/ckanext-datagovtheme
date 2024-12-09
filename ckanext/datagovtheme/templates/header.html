@@ -78,7 +78,7 @@
                         <button class="usa-nav__close">
                             <img src="/images/close.svg" alt="Close" />
                         </button>
-                        {% if request.endpoint.startswith('report.') %}
+                        {% if request and request.endpoint and request.endpoint.startswith('report.') %}
                             {% set current_is_report = 'usa-current' %}
                             {% set current_is_dataset = '' %}
                         {% else %}
