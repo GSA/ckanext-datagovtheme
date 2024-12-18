@@ -2860,4 +2860,11 @@ body .usa-menu-btn {
 
 .search-helper {
     font-style: italic;
+    margin-bottom: 15px
+}
+
+@media (pointer:fine) {
+#dataset-search {
+      margin-bottom: -20px;
+  } 
 }
