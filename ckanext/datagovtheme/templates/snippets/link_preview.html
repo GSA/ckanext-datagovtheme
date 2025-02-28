@@ -22,6 +22,9 @@
     {% set notes = h.markdown_extract(org.description, 180) %}
   {% endif %}
 
+  <!-- Common Meta Tags -->
+  <meta property="description" content="{{ notes | forceescape }}">
+
   <!-- Facebook Meta Tags -->
   <meta property="og:url" content="https://data.gov">
   <meta property="og:type" content="website">
