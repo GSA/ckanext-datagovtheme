@@ -1,12 +1,10 @@
-ARG CKAN_VERSION=2.10.1
+ARG CKAN_VERSION=2.11.2
 FROM ckan/ckan-dev:${CKAN_VERSION}
 ARG CKAN_VERSION
 
-# add sudo
-RUN set -ex && apk --no-cache add sudo
+USER root
 
-# Add timezone data
-RUN sudo apk add tzdata proj-util proj-dev geos-dev
+RUN apt-get update && apt-get install -y libgeos-dev
 
 COPY . $APP_DIR/
 
