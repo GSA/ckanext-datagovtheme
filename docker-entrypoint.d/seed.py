@@ -1,5 +1,7 @@
 import sqlalchemy
 import json
+import uuid
+
 import ckan.config.middleware
 from ckan.common import config
 from ckan.tests.helpers import CKANTestApp
@@ -58,7 +60,7 @@ with test_app.flask_app.test_request_context():
         try:
             dataset = get_base_dataset()
             dataset['extras'].append({'key': 'identifier', 'value': f'id-{x}'})
-            dataset.update({'title': f"test 0{x} dataset", 'id': f't{x}'})
+            dataset.update({'title': f"test 0{x} dataset", 'id': f'{uuid.uuid4()}'})
             factories.Dataset(**dataset)
             print(f'Dataset {x} created')
         except Exception as er:
