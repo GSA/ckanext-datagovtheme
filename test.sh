@@ -9,11 +9,11 @@ set -o errexit
 set -o pipefail
 
 # Database is listening, but still unavailable. Just keep trying...
-while ! ckan -c test.ini db init; do
-    echo Retrying in 5 seconds...
+while ! ckan -c test.ini db init 2>/dev/null; do
+    echo db init failed, retrying in 5 seconds...
     sleep 5
 done
 
 # pytest --ckan-ini=test.ini --cov=ckanext.datagovtheme --disable-warnings ckanext/datagovtheme/tests
 
-pytest -s --ckan-ini=test.ini --cov=ckanext.datagovtheme --disable-warnings ckanext/datagovtheme/tests/test_notes.py
+pytest --ckan-ini=test.ini --cov=ckanext.datagovtheme --disable-warnings ckanext/datagovtheme/tests/test_ui_data.py

@@ -14,6 +14,7 @@ from ckan.lib import base, helpers as h
 from ckan.plugins.toolkit import asbool, config
 from ckanext.harvest.model import HarvestObject
 from ckanext.tracking.model import TrackingSummary
+import ckanext.tracking.helpers as tracking_helpers
 
 log = logging.getLogger(__name__)
 
@@ -778,7 +779,7 @@ def get_pkgs_popular_count(ids):
 def render_popular(type, pkg, min, title=''):
     # If the package has tracking_summary, call core helper function to render it.
     if pkg.get('tracking_summary'):
-        return h.popular(type, pkg['tracking_summary']['recent'], min, title)
+        return tracking_helpers.popular(type, pkg['tracking_summary']['recent'], min, title)
 
     js_recent_view = asbool(config.get('ckanext.datagovtheme.js_recent_view', False))
     if js_recent_view:
