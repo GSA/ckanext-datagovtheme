@@ -177,6 +177,7 @@ def update_tracking_summary():
     )
     tracking.update_all(start_date=date)
 
+
 def test_get_pkgs_popular_count(track):
     factories.Organization(name='myorg1')
     id1 = factories.Dataset(name="view-id-1")['id']
