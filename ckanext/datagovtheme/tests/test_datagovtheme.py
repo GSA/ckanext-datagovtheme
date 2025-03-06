@@ -20,7 +20,6 @@ from ckan.lib.search import rebuild
 class TestDatagovthemeServed(object):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
 
-    @classmethod
     def setup_method(self):
         reset_db()
         rebuild()

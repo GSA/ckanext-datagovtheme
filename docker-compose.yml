@@ -51,3 +51,9 @@ services:
     image: datagov/catalog.data.gov.solr:latest
     ports:
       - "8983:8983"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8983/solr/admin/ping?wt=json", "||", "exit", "1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
