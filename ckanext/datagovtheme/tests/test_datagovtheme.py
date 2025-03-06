@@ -3,13 +3,14 @@
 '''Tests for the ckanext.datagovtheme extension.
 
 '''
-import ckanext.harvest.model as harvest_model
+import pytest
+import re
+
+from ckan.model.meta import Session, metadata
 from ckan.tests import factories
 from ckan.tests.helpers import reset_db
 from ckan.lib.helpers import url_for
 from ckan.lib.search import rebuild
-import pytest
-import re
 
 
 # The /dataset page uses get_pkg_dict_extra which depends on HarvestObject,
@@ -20,14 +21,10 @@ class TestDatagovthemeServed(object):
     '''Tests for the ckanext.datagovtheme.plugin module.'''
 
     @classmethod
-    def setup_class(cls):
-        # Start data json sources server we can test harvesting against it
-        harvest_model.setup()
-
-    @classmethod
     def setup_method(self):
         reset_db()
         rebuild()
+        metadata.create_all(bind=Session.bind)
 
     def get_base_dataset(self):
         self.user = factories.Sysadmin()

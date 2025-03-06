@@ -14,6 +14,4 @@ while ! ckan -c test.ini db init 2>/dev/null; do
     sleep 5
 done
 
-# pytest --ckan-ini=test.ini --cov=ckanext.datagovtheme --disable-warnings ckanext/datagovtheme/tests
-
-pytest --ckan-ini=test.ini --cov=ckanext.datagovtheme --disable-warnings ckanext/datagovtheme/tests/test_ui_data.py
+pytest --ckan-ini=test.ini --cov=ckanext.datagovtheme --disable-warnings ckanext/datagovtheme/tests
