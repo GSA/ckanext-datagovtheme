@@ -9,6 +9,7 @@ import pytest
 from ckanext.datagovtheme import helpers
 import ckan.tests.factories as factories
 import ckan.lib.helpers as h
+import ckanext.tracking.cli.tracking as tracking
 
 
 ################
@@ -37,11 +38,11 @@ def test_login_url():
 @mock.patch('ckanext.datagovtheme.helpers.h')
 def test_api_doc_url(mock_ckan_lib_helpers):
     mock_ckan_lib_helpers.lang.return_value = 'en'
-    mock_ckan_lib_helpers.ckan_version.return_value = '2.8.7'
+    mock_ckan_lib_helpers.ckan_version.return_value = '2.11.2'
 
     api_doc_url = helpers.api_doc_url()
 
-    assert 'https://docs.ckan.org/en/2.8/api/index.html' == api_doc_url
+    assert 'https://docs.ckan.org/en/2.11/api/index.html' == api_doc_url
 
 ##################
 # get_bureau_info
@@ -52,7 +53,7 @@ def assert_url(actual_url, expected_bureau_code):
     # In CKAN 2.9, the url_for is returning a path ending in / which does not
     # happen in 2.8. Include an optional ending / in the path, use URL encoded
     # characters.
-    bureau_url_re = re.compile('/dataset/?\\?q=bureauCode%3A%22(?P<agency_part>[0-9]{3})%3A(?P<bureau_part>[0-9]{2})%22')
+    bureau_url_re = re.compile('/dataset/?\\?q=bureauCode:%22(?P<agency_part>[0-9]{3}):(?P<bureau_part>[0-9]{2})%22')
 
     match = bureau_url_re.match(actual_url)
     assert match, 'URL should match pattern /dataset?q=bureauCode:"000:00"'
@@ -171,27 +172,24 @@ def track(app):
 def update_tracking_summary():
     """Update CKAN's tracking summary data."""
 
-    import ckan.cli.tracking as tracking
-    import ckan.model
-
     date = (datetime.datetime.now() - datetime.timedelta(days=1)).strftime(
         "%Y-%m-%d"
     )
-    tracking.update_all(engine=ckan.model.meta.engine, start_date=date)
-
+    tracking.update_all(start_date=date)
 
 def test_get_pkgs_popular_count(track):
     factories.Organization(name='myorg1')
-    factories.Dataset(id="view-id-1", name="view-id-1")
-    factories.Dataset(id="view-id-2", name="view-id-2")
-    factories.Dataset(id="view-id-3", name="view-id-3", private=True, owner_org="myorg1")
+    id1 = factories.Dataset(name="view-id-1")['id']
+    id2 = factories.Dataset(name="view-id-2")['id']
+    id3 = factories.Dataset(name="view-id-3", private=True, owner_org="myorg1")['id']
+    id4 = "11111111-2222-3333-4444-555555555555"
 
-    ids = "view-id-1,view-id-2,view-id-3,view-id-4"
+    ids = f"{id1},{id2},{id3},{id4}"
     # before any views, all datasets should have 0 views
     # private view-id-3 and non-existent view-id-4 should not be counted
     assert helpers.get_pkgs_popular_count(ids) == {
-        'view-id-1': {'recent': 0, 'total': 0},
-        'view-id-2': {'recent': 0, 'total': 0}
+        id1: {'recent': 0, 'total': 0},
+        id2: {'recent': 0, 'total': 0}
     }
 
     url = h.url_for("dataset.read", id="view-id-1")
@@ -200,6 +198,6 @@ def test_get_pkgs_popular_count(track):
 
     # after dataset 1 is viewed, it should have a view count of 1, dataset 2 should still have 0
     assert helpers.get_pkgs_popular_count(ids) == {
-        'view-id-1': {'recent': 1, 'total': 1},
-        'view-id-2': {'recent': 0, 'total': 0}
+        id1: {'recent': 1, 'total': 1},
+        id2: {'recent': 0, 'total': 0}
     }

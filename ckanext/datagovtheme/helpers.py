@@ -13,6 +13,7 @@ from ckan import plugins as p, model
 from ckan.lib import base, helpers as h
 from ckan.plugins.toolkit import asbool, config
 from ckanext.harvest.model import HarvestObject
+from ckanext.tracking.model import TrackingSummary
 
 log = logging.getLogger(__name__)
 
@@ -770,7 +771,7 @@ def get_pkgs_popular_count(ids):
             if not package or package.private:
                 continue
             # only public package gets here
-            populars[pkg_id] = model.TrackingSummary.get_for_package(pkg_id)
+            populars[pkg_id] = TrackingSummary.get_for_package(pkg_id)
     return populars
 
 
