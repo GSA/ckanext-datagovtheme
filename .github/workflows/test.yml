@@ -5,7 +5,7 @@ on: [push]
 jobs:
   lint-test:
     name: Lint + Test
-    uses: gsa/data.gov/.github/workflows/ckan-test.yml@39a7b0776b8496aaf8a24500a98d4acdad72f3e3
+    uses: gsa/data.gov/.github/workflows/ckan-test.yml@4216d55f38186709c99c35922ab59d9701510d4c
     with:
       ext_name: datagovtheme
       plugins: tracking harvest datagovtheme geodatagov spatial_metadata
