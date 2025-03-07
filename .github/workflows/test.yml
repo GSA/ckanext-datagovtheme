@@ -5,10 +5,10 @@ on: [push]
 jobs:
   lint-test:
     name: Lint + Test
-    uses: gsa/data.gov/.github/workflows/ckan-test.yml@main
+    uses: gsa/data.gov/.github/workflows/ckan-test.yml@ckan-211-test
     with:
       ext_name: datagovtheme
-      plugins: harvest datagovtheme geodatagov spatial_metadata
+      plugins: tracking harvest datagovtheme geodatagov spatial_metadata
     secrets: inherit
 
   ui-test:
