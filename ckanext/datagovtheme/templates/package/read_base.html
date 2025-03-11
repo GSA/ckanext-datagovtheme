@@ -67,7 +67,7 @@
     {% block package_organization %}
     {% if pkg.organization %}
         {% set org = h.get_organization(pkg.organization.id) %}
-        {% snippet "snippets/organization.html", organization=org, pkg=pkg %}
+        {% snippet "organization/snippets/info.html", organization=org, pkg=pkg %}
     {% endif %}
     {% endblock %}
 </div>
@@ -156,7 +156,7 @@
 
 
 <div class="terms">
-    {% snippet "snippets/organization.html", organization=pkg.organization %}
+    {% snippet "organization/snippets/info.html", organization=pkg.organization %}
 </div>
 
 {% endblock %}
