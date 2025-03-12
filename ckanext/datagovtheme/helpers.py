@@ -9,6 +9,7 @@ import urllib.request
 
 import pkg_resources
 
+import ckan.logic as logic
 from ckan import plugins as p, model
 from ckan.lib import base, helpers as h
 from ckan.plugins.toolkit import asbool, config
@@ -668,6 +669,24 @@ def is_tagged_ngda(pkg_dict):
             if tag['name'].lower() == 'ngda':
                 return True
     return False
+
+
+def is_collection_parent(pkg_dict):
+    '''Returns True if the package is a collection parent
+       this relies on the searching with collection_info fq
+       collection_info is handled in geodatagov'''
+    sid = get_pkg_dict_extra(pkg_dict, 'harvest_source_id', None)
+    pid = get_pkg_dict_extra(pkg_dict, 'identifier', None)
+    package_search = logic.get_action('package_search')
+    search_params = {
+        'fq': f'collection_info:"{sid} {pid}"'
+    }
+    base_results = package_search(
+        {'ignore_auth': True},
+        search_params
+    )
+
+    return asbool(base_results['results'])
 
 
 # TODO can we drop this dependency on ckanext-harvest? Can this be moved to ckanext-harvest? geodatagov?
