@@ -9,6 +9,7 @@ import urllib.request
 
 import pkg_resources
 
+import ckan.logic as logic
 from ckan import plugins as p, model
 from ckan.lib import base, helpers as h
 from ckan.plugins.toolkit import asbool, config
@@ -261,7 +262,14 @@ def render_datetime_datagov(date_str):
     return value
 
 
-def get_harvest_object_formats(harvest_object_id):
+def get_harvest_object_formats(harvest_object_id, dataset_is_datajson=False):
+    # simplified return for harvest_next
+    harvest_next = asbool(config.get('ckanext.datagovtheme.harvest_next', 'false'))
+    if harvest_next:
+        return {
+            'object_format': 'data.json' if dataset_is_datajson else 'ISO-19139'
+        }
+
     try:
         obj = p.toolkit.get_action('harvest_object_show')({}, {'id': harvest_object_id})
     except p.toolkit.ObjectNotFound:
@@ -315,14 +323,24 @@ def get_harvest_object_formats(harvest_object_id):
     }
 
 
-def get_harvest_source_link(package_dict):
+def get_harvest_source_link(package_dict, type='source'):
     harvest_source_id = get_pkg_dict_extra(package_dict, 'harvest_source_id', None)
     harvest_source_title = get_pkg_dict_extra(package_dict, 'harvest_source_title', None)
+    harvest_object_id = get_pkg_dict_extra(package_dict, 'harvest_object_id', None)
+    harvest_admin_url = config.get('ckanext.datagovtheme.harvest_admin_url')
 
     if harvest_source_id and harvest_source_title:
         msg = p.toolkit._('Harvested from')
-        url = h.url_for('harvest_read', id=harvest_source_id)
-        link = '{msg} <a href="{url}">{title}</a>'.format(url=url, msg=msg, title=harvest_source_title)
+        harvest_next = asbool(config.get('ckanext.datagovtheme.harvest_next', 'false'))
+        if type == 'metadata':
+            url = f"{harvest_admin_url}/harvest_record/{harvest_object_id}/raw"
+            link = '<a href="{url}">{title}</a>'.format(url=url, title='Download Metadata')
+        else:
+            if harvest_next:
+                url = f"{harvest_admin_url}/harvest_source/{harvest_source_id}"
+            else:
+                url = h.url_for('harvest_read', id=harvest_source_id)
+            link = '{msg} <a href="{url}">{title}</a>'.format(url=url, msg=msg, title=harvest_source_title)
         return p.toolkit.literal(link)
 
     return ''
@@ -653,6 +671,24 @@ def is_tagged_ngda(pkg_dict):
     return False
 
 
+def is_collection_parent(pkg_dict):
+    '''Returns True if the package is a collection parent
+       this relies on the searching with collection_info fq
+       collection_info is handled in geodatagov'''
+    sid = get_pkg_dict_extra(pkg_dict, 'harvest_source_id', None)
+    pid = get_pkg_dict_extra(pkg_dict, 'identifier', None)
+    package_search = logic.get_action('package_search')
+    search_params = {
+        'fq': f'collection_info:"{sid} {pid}"'
+    }
+    base_results = package_search(
+        {'ignore_auth': True},
+        search_params
+    )
+
+    return asbool(base_results['results'])
+
+
 # TODO can we drop this dependency on ckanext-harvest? Can this be moved to ckanext-harvest? geodatagov?
 def get_pkg_dict_extra(pkg_dict, key, default=None):
     '''Override the CKAN core helper to add rolled up extras
@@ -679,8 +715,10 @@ def get_pkg_dict_extra(pkg_dict, key, default=None):
                 if k == key:
                     return value
 
+    harvest_next = asbool(config.get('ckanext.datagovtheme.harvest_next', 'false'))
     # Also include harvest information if exists
-    if key in ['harvest_object_id', 'harvest_source_id', 'harvest_source_title']:
+    if key in ['harvest_object_id', 'harvest_source_id', 'harvest_source_title'] \
+            and not harvest_next:
 
         harvest_object = model.Session.query(HarvestObject) \
                 .filter(HarvestObject.package_id == pkg_dict['id']) \
