@@ -17,8 +17,13 @@ Example:
 
 {% if packages %}
   <ul class="{{ list_class or 'dataset-list unstyled' }}">
+    {% set collection_packages = h.get_collection_packages(packages) %}
     {% for package in packages %}
-      {% snippet 'snippets/package_item.html', package=package, item_class=item_class, hide_resources=hide_resources, banner=banner, truncate=truncate, truncate_title=truncate_title, show_organization=show_organization %}
+
+      {% if package.id in collection_packages %}
+        {% set is_collection = true %}
+      {% endif %}
+      {% snippet 'snippets/package_item.html', is_collection=is_collection, package=package, item_class=item_class, hide_resources=hide_resources, banner=banner, truncate=truncate, truncate_title=truncate_title, show_organization=show_organization %}
     {% endfor %}
   </ul>
 {% endif %}

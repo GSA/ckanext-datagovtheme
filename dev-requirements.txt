@@ -3,5 +3,4 @@ factory-boy>=2
 flake8
 mock
 pytest
-pytest-ckan
 pytest-cov
