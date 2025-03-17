@@ -5,6 +5,7 @@ import logging
 import os
 import re
 import urllib.parse
+from collections import namedtuple, Counter
 
 import pkg_resources
 
@@ -670,22 +671,118 @@ def is_tagged_ngda(pkg_dict):
     return False
 
 
-def is_collection_parent(pkg_dict):
-    '''Returns True if the package is a collection parent
-       this relies on the searching with collection_info fq
-       collection_info is handled in geodatagov'''
-    sid = get_pkg_dict_extra(pkg_dict, 'harvest_source_id', None)
-    pid = get_pkg_dict_extra(pkg_dict, 'identifier', None)
+def get_collection_packages(pkgs):
+    """
+    returns a list of package IDs that are a collection.
+
+    The purpose of this function is to use one Solr query to determine which
+    packages are collections, rather than making a separate query for each
+    package.
+
+    The function performs the following steps:
+    1. Iterates over the provided packages to extract 'harvest_source_id' and
+       'identifier' extras.
+    2. Constructs a search query to find packages with matching (harvest_source_id:sid isPartOf:pid)
+    3. Executes the search query using CKAN's 'package_search' action.
+    4. Find collection packages by sid and pid in the facet result.
+    5. Eleminate possible false positives by making more Solr queries.
+    """
+    # use a named tuple to store the package id, harvest_source_id, and identifier,
+    # so that we don't have to repeat the iteration over these packages again and again
+    PkgTuple = namedtuple('PkgTuple', ['id', 'sid', 'pid'])
+    pkgs_tuple = []
+    id_query = []
+
+    for pkg in pkgs:
+        sid = get_pkg_dict_extra(pkg, 'harvest_source_id', None)
+        pid = get_pkg_dict_extra(pkg, 'identifier', None)
+        if sid and pid:
+            pkgs_tuple.append(PkgTuple(pkg['id'], sid, pid))
+            id_query.append(f'(harvest_source_id:{sid} isPartOf:{pid})')
+
+    if not pkgs_tuple:
+        return []
+
+    # making search query for collection_info like
+    # fq=((harvest_source_id:sid1 isPartOf:pid1)OR(harvest_source_id:sid2 isPartOf:pid2)include_collection:true)
+    # &rows=0&facet.field=["isPartOf","harvest_source_id"]
+    fq = f'({"OR".join(id_query)}include_collection:true)'
+
     package_search = logic.get_action('package_search')
     search_params = {
-        'fq': f'collection_info:"{sid} {pid}"'
+        'fq': fq,
+        'rows': 0,
+        'facet.field': ['harvest_source_id', 'isPartOf']
     }
-    base_results = package_search(
+    result = package_search(
         {'ignore_auth': True},
         search_params
     )
 
-    return asbool(base_results['results'])
+    if not result['count']:
+        return []
+
+    """"
+    4 out of these 5 packages are collections:
+      (sid1 pid1) => 11
+      (sid1 pid2) => 0
+      (sid1 pid3) => 100
+      (sid2 pid1) => 3
+      (sid2 pid2) => 20
+
+    the searcg result looks like this:
+    ...
+    result": {
+        "count": 2,
+        "facets": {
+            "harvest_source_id": {
+                "sid1": 111,
+                "sid2": 23
+            },
+            "isPartOf": {
+                "pid1": 14,
+                "pid2": 20,
+                "pid3": 100
+            }
+        }
+
+    if a pkg's pid and sid are both in the facets result, then it is considered a collection.
+    there are 2 * 3 possible combinations of (sid, pid) pairs, false positives are rare but
+    possible if two packages have the same identifier on the same listing.
+    Here (sid1 pid2) => 0 is not a collection, but since sid1 and pid2 each is in the facets results,
+    we have a false positive (sid1 pid2).
+
+    CKAN core does not support facet.pivot, so we have to do this check manually.
+    """
+
+    pids = result['facets']['isPartOf']
+    sids = result['facets']['harvest_source_id']
+
+    collection_pkgs = [pkg for pkg in pkgs_tuple if pkg.pid in pids and pkg.sid in sids]
+
+    # find pids that appear more than once
+    pids = [pkg.pid for pkg in collection_pkgs]
+    pid_counts = Counter(pids)
+    pids_in_question = [pid for pid, count in pid_counts.items() if count > 1]
+
+    # if pids_in_question is not empty, we need to do extra checks to eliminate false positives
+    for pkg in collection_pkgs:
+        if pkg.pid in pids_in_question:
+            # make a solr query to check if this pid is actually a collection
+            search_params = {
+                'fq': f'collection_info:"{pkg.sid} {pkg.pid}"',
+                'rows': 0,
+            }
+            base_results = package_search(
+                {'ignore_auth': True},
+                search_params
+            )
+            if not asbool(base_results['count']):
+                # remove this pkg.id from collection_pkgs
+                collection_pkgs.remove(pkg)
+
+    # return the list of package ids that are collections
+    return [pkg.id for pkg in collection_pkgs]
 
 
 # TODO can we drop this dependency on ckanext-harvest? Can this be moved to ckanext-harvest? geodatagov?
