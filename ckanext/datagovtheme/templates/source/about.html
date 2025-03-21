@@ -1,0 +1,32 @@
+{% extends "source/read_base.html" %}
+{#Customization:
+   - added a section for the last harvest job, which is copied from 
+     https://github.com/ckan/ckanext-harvest/blob/v1.6.1/ckanext/harvest/templates/source/admin.html
+     with "View full job report" button removed
+#}
+
+{% block primary_content_inner %}
+  <section class="module-content">
+    <h1>{{ harvest_source.title or harvest_source.name }}</h1>
+    {% if harvest_source.notes %}
+      <p>{{ h.markdown_extract(harvest_source.notes)|urlize }}</p>
+    {% else %}
+      <p class="empty">{{ _('There is no description for this harvest source') }}</p>
+    {% endif %}
+  </section>
+
+  {% snippet "package/snippets/additional_info.html", pkg_dict=harvest_source %}
+
+  <section class="module-content">
+    <h3>{{ _('Last Harvest Job') }}</h2>
+    {% if harvest_source.status and harvest_source.status.last_job and harvest_source.status.last_job.status == 'running' %}
+      <p class="running">{{ _('The last harvest job is still running') }}</p>
+    {% endif %}
+    {% if harvest_source.status and harvest_source.status.last_job %}
+      {% snippet "snippets/job_details.html", job=harvest_source.status.last_job %}
+    {% else %}
+      <p class="empty">{{ _('No jobs yet for this source') }}</p>
+    {% endif %}
+  </section>
+
+{% endblock %}

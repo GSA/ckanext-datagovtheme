@@ -32,7 +32,7 @@
 {% endblock %}
 
 {% block secondary_content %}
-  {% snippet 'snippets/organization.html', organization=c.group_dict, show_nums=true, bureau_codes=request.args.get('bureauCode') %}
+    {% snippet 'organization/snippets/info.html', organization=c.group_dict, show_nums=true, bureau_codes=request.args.get('bureauCode') %}
     {% for facet in c.facet_titles %}
     {{ h.snippet('snippets/facet_list.html', title=c.facet_titles[facet], name=facet, extras={'id':group_dict.id}, search_facets=search_facets) }}
   {% endfor %}
