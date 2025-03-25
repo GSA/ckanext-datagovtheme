@@ -2211,9 +2211,6 @@ margin-top: 0px;
     .module-content.page-header {
         margin: 0 -15px;
     }
-    .search-form .search-input button {
-        background: transparent url("/images/icon-search-27x26.png") no-repeat scroll center center;
-    }
     .alert-info.non-federal{
         width:90%;
     }
