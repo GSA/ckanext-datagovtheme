@@ -2023,7 +2023,6 @@ color:#2a6496;
     width: 100%;
 }
 .search-giant button {
-    background: transparent url("/../../base/images/icon-search-27x26.png") no-repeat scroll center center;
     border: medium none;
     cursor: pointer;
     display: block;
@@ -2031,7 +2030,10 @@ color:#2a6496;
     padding: 0;
     position: absolute;
     right: 29%;
-    text-indent: -900em;
+    text-indent: 0;
+    overflow: visible;
+    background-color: white;
+    color: #aaa;
     top: 27%;
     width: 30px;
 }
@@ -2208,9 +2210,6 @@ margin-top: 0px;
     }
     .module-content.page-header {
         margin: 0 -15px;
-    }
-    .search-form .search-input button {
-        background: transparent url("/../../base/images/icon-search-27x26.png") no-repeat scroll center center;
     }
     .alert-info.non-federal{
         width:90%;
