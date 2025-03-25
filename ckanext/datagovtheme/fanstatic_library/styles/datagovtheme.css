@@ -2473,7 +2473,6 @@ article.module.prose h3 {
     color: #595959
 }
 .search-giant button {
-    background: transparent url('/../../base/images/icon-search-27x26.png') no-repeat scroll center center;
     border: medium none;
     cursor: pointer;
     display: block;
@@ -2481,7 +2480,10 @@ article.module.prose h3 {
     padding: 0;
     position: absolute;
     right: 29%;
-    text-indent: -900em;
+    text-indent: 0;
+    overflow: visible;
+    background-color: white;
+    color: #aaa;
     top: 42px;
     width: 30px;
 }
@@ -2814,7 +2816,7 @@ body .usa-menu-btn {
         margin: 0 -15px;
     }
     .search-form .search-input button {
-        background: transparent url('/../../base/images/icon-search-27x26.png') no-repeat scroll center center;
+        background: transparent url('/images/icon-search-27x26.png') no-repeat scroll center center;
     }
     .alert-info.non-federal {
         width: 90%;
