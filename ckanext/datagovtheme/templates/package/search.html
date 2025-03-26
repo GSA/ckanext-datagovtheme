@@ -14,7 +14,7 @@
         <span class="control-group search-giant">
           <label for="search-big" class="hide">{{ _('Search datasets') }}</label>
           <input id="search-big" type="text" class="search" name="q" value="{{ c.q }}" autocomplete="off" placeholder="{{ search_placeholder }}" onblur="if(value=='') value = '{{ search_placeholder }}'" onfocus="if(value=='{{ search_placeholder }}') value = ''"/>
-          <button type="submit" value="search" class="search-button" aria-label="Search"><i class="fa fa-search fa-2x" aria-hidden="true"></i></button>
+          <button type="submit" value="search" class="search-button" aria-label="Search"><i class="fa fa-search fa-xl" aria-hidden="true"></i></button>
         </span>
         {{ h.snippet('snippets/sort_by.html', sort=c.sort_by_selected) }}
         {% if c.fields -%}
