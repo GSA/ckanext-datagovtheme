@@ -12,7 +12,7 @@ import pkg_resources
 from ckan import plugins as p, model
 from ckan.lib import base, helpers as h
 from ckan.plugins.toolkit import asbool, config
-from ckanext.harvest.model import HarvestObject
+from ckanext.harvest.model import HarvestSource, HarvestObject
 from ckanext.tracking.model import TrackingSummary
 import ckanext.tracking.helpers as tracking_helpers
 
@@ -261,6 +261,11 @@ def render_datetime_datagov(date_str):
     except (ValueError, TypeError):
         return date_str
     return value
+
+
+def get_next_run(harvest_source_id):
+    source = HarvestSource.get(harvest_source_id)
+    return source.next_run.strftime('%Y-%m-%d %H:%M:%S') if source.next_run else ''
 
 
 def get_harvest_object_formats(harvest_object_id):

@@ -4,6 +4,7 @@
 #}
 
 {% set pkg_count = h.package_count_for_source(pkg_dict.id) %}
+{% set next_run = h.get_next_run(pkg_dict.id) %}
 
 <section class="module-content additional-info">
   <h3>{{ _('Harvest Source') }}</h3>
@@ -62,6 +63,16 @@
           <th scope="row" class="dataset-label">{{ _('Harvesting Frequency') }}</th>
           <td class="dataset-details">{{ pkg_dict.frequency }}</td>
         </tr>
+
+        {% if next_run %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _('Next Job Scheduled') }}</th>
+            <td class="dataset-details">
+              {% snippet 'snippets/local_friendly_datetime.html', datetime_obj=next_run %}
+            </td>
+          </tr>
+        {% endif %}
+
         <tr>
           <th scope="row" class="dataset-label">{{ _('Source Type') }}</th>
           <td class="dataset-details">{{ pkg_dict.source_type }}</td>
