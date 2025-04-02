@@ -38,11 +38,3 @@ location_autocomplete_js:
     # TODO can this custom location search be replaced by ckanext-spatial? Can
     # this be pushed upstream to ckanext-spatial as an enhancement?
     - scripts/location_autocomplete.js
-
-popular-js:
-  output: datagovtheme/popular.js
-  contents:
-    - scripts/popular.js
-  extra:
-    preload:
-      - vendor/jquery
