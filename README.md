@@ -46,13 +46,7 @@ CKAN version | Compatibility
 
 ### Configuration
 
-[Optional]
-`ckanext.datagovtheme.js_recent_view = true`
-
-
-This defaults to `false`. If displaying the recent view count slows down page loading, the optional parameter can be set to `true` to make the recent view count an AJAX call, improving page loading speed. If the recent view count information (package['tracking_summary']) is already present, the AJAX call is disabled to reduce overhead. Therefore, the built-in recent view count rendering must be disabled for this mechanism to take effect. For catalog.data.gov, it means set setting `ckanext.datagovcatalog.add_packages_tracking_info` to false. 
-
-**TODO**: re-evaluate the need for this customization after ckan 2.11 release, as described in ticket https://github.com/GSA/data.gov/issues/4798.
+_TODO: what configuraiton options exist?_
 
 
 ## Development
