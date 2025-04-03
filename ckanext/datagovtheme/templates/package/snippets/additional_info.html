@@ -64,7 +64,7 @@
           <td class="dataset-details">{{ pkg_dict.frequency }}</td>
         </tr>
 
-        {% if next_run %}
+        {% if next_run and pkg_dict.frequency|upper != "MANUAL" %}
           <tr>
             <th scope="row" class="dataset-label">{{ _('Next Job Scheduled') }}</th>
             <td class="dataset-details">

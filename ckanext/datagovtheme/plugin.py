@@ -110,8 +110,6 @@ class DatagovTheme(p.SingletonPlugin):
             'convert_top_category_to_list': datagovtheme_helpers.convert_top_category_to_list,
             'get_pkg_dict_extra': datagovtheme_helpers.get_pkg_dict_extra,
             'get_login_url': datagovtheme_helpers.get_login_url,
-            'get_pkgs_popular_count': datagovtheme_helpers.get_pkgs_popular_count,
-            'render_popular': datagovtheme_helpers.render_popular,
         }
 
         # https://github.com/GSA/ckan/blob/datagov/ckan/config/environment.py#L70:L70
@@ -128,4 +126,4 @@ class DatagovTheme(p.SingletonPlugin):
         return helpers
 
     def get_blueprint(self):
-        return blueprint.datagovtheme_bp
+        return blueprint.pusher

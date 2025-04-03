@@ -3,14 +3,13 @@ import ckan.plugins as p
 from ckan.plugins.toolkit import config
 from ckan.lib.base import abort
 from ckan.common import c, request
-from ckanext.datagovtheme import helpers
 
-from flask import Blueprint, redirect, jsonify
+from flask import Blueprint, redirect
 
 import logging
 log = logging.getLogger(__name__)
 
-datagovtheme_bp = Blueprint('datagovtheme', __name__)
+pusher = Blueprint('datagovtheme', __name__)
 
 
 def show():
@@ -39,12 +38,4 @@ def redirect_homepage():
     return redirect(CKAN_SITE_URL + "/dataset/", code=302)
 
 
-def get_popular_count():
-    pkgs = request.args.get('pkgs')
-    return jsonify(helpers.get_pkgs_popular_count(pkgs))
-
-
-datagovtheme_bp.add_url_rule('/', view_func=redirect_homepage)
-datagovtheme_bp.add_url_rule("/datagovtheme/get-popular-count",
-                             methods=['GET'],
-                             view_func=get_popular_count)
+pusher.add_url_rule('/', view_func=redirect_homepage)
