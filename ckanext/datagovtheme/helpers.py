@@ -698,7 +698,7 @@ def get_collection_packages(pkgs):
         pid = get_pkg_dict_extra(pkg, 'identifier', None)
         if sid and pid:
             pkgs_tuple.append(PkgTuple(pkg['id'], sid, pid))
-            id_query.append(f'(harvest_source_id:{sid} isPartOf:{pid})')
+            id_query.append(f'(harvest_source_id:{sid} isPartOf:"{pid}")')
 
     if not pkgs_tuple:
         return []
