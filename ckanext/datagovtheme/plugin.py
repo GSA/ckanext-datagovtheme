@@ -91,7 +91,6 @@ class DatagovTheme(p.SingletonPlugin):
             'is_tagged_ngda': datagovtheme_helpers.is_tagged_ngda,
             'get_collection_packages': datagovtheme_helpers.get_collection_packages,
             'render_datetime_datagov': datagovtheme_helpers.render_datetime_datagov,
-            'get_next_run': datagovtheme_helpers.get_next_run,
             'get_harvest_object_formats': datagovtheme_helpers.get_harvest_object_formats,
             'get_bureau_info': datagovtheme_helpers.get_bureau_info,
             'get_harvest_source_link': datagovtheme_helpers.get_harvest_source_link,

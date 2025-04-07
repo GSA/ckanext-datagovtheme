@@ -9,7 +9,7 @@ set -o errexit
 set -o pipefail
 
 # Database is listening, but still unavailable. Just keep trying...
-while ! ckan -c test.ini db init 2>/dev/null; do
+while ! ckan -c test.ini db init; do
     echo db init failed, retrying in 5 seconds...
     sleep 5
 done
