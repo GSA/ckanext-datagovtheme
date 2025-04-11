@@ -5,7 +5,8 @@
   {% if pkg %}
     {% set dataset = pkg.title or pkg.name or "Data.gov Dataset" %}
     {% set organization = pkg.organization.title or pkg.organization.name or "Data.gov" %}
-    {% set notes = h.markdown_extract(pkg.notes, 180) or "The Home of the U.S. Government's Open Data" %}
+    {# notes has to be JSON-escaped here #}
+    {% set notes = h.markdown_extract(h.escape_js(pkg.notes), 180) or "The Home of the U.S. Government's Open Data" %}
 
 
     <script type="application/ld+json" class="jsonld-website">
