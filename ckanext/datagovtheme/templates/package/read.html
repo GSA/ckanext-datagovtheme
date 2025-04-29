@@ -231,7 +231,8 @@
   </section>
 
   {% set harvest_object_id = h.get_pkg_dict_extra(pkg, 'harvest_object_id', None) %}
-  {% if harvest_object_id %}
+  {% set harvest_source_title = h.get_pkg_dict_extra(pkg, 'harvest_source_title', None) %}
+  {% if harvest_object_id and harvest_source_title %}
     {% set ho_formats = h.get_harvest_object_formats(harvest_object_id, dataset_is_datajson=dataset_is_datajson) %}
     {% if ho_formats.object_format %}
       <section id="dataset-metadata-source" class="resources module-content">
@@ -247,7 +248,7 @@
               {{ ho_formats.object_format }} Metadata
             {% endif %}
             </strong>
-            <p class="description">{{ h.get_harvest_source_link(pkg, 'metadata') }}</p>
+            <p class="description"><a href={{ h.get_harvest_source_link(pkg, 'metadata') }}>Download Metadata</a></p>
           </li>
           {% if ho_formats.original_format %}
             <li class="resource-item">
@@ -261,7 +262,10 @@
             </li>
           {% endif %}
         </ul>
-        <p class="{{ 'text-muted' }}">{{ h.get_harvest_source_link(pkg) }}</p>
+        <p class='text-muted'>Harvested from <a href={{ h.url_for('organization.read', id=pkg.organization.name) }}?harvest_source_title={{ harvest_source_title }}>{{ harvest_source_title }}</a>
+        <br>
+        <i class="fa fa-circle-info"></i> <a href={{ h.get_harvest_source_link(pkg) }} class="small">Source Technical Details</a>
+        </p>
       </section>
     {% endif %}
   {% endif %}

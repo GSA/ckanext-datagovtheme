@@ -330,18 +330,11 @@ def get_harvest_source_link(package_dict, type='source'):
     harvest_admin_url = config.get('ckanext.datagovtheme.harvest_admin_url')
 
     if harvest_source_id and harvest_source_title:
-        msg = p.toolkit._('Harvested from')
-        harvest_next = asbool(config.get('ckanext.datagovtheme.harvest_next', 'false'))
         if type == 'metadata':
             url = f"{harvest_admin_url}/harvest_record/{harvest_object_id}/raw"
-            link = '<a href="{url}">{title}</a>'.format(url=url, title='Download Metadata')
         else:
-            if harvest_next:
-                url = f"{harvest_admin_url}/harvest_source/{harvest_source_id}"
-            else:
-                url = h.url_for('harvest_read', id=harvest_source_id)
-            link = '{msg} <a href="{url}">{title}</a>'.format(url=url, msg=msg, title=harvest_source_title)
-        return p.toolkit.literal(link)
+            url = f"{harvest_admin_url}/harvest_source/{harvest_source_id}"
+        return p.toolkit.literal(url)
 
     return ''
 
