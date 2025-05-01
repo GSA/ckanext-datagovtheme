@@ -262,7 +262,7 @@
             </li>
           {% endif %}
         </ul>
-        <p class='text-muted'>Harvested from <a href={{ h.url_for('organization.read', id=pkg.organization.name) }}?harvest_source_title={{ harvest_source_title }}>{{ harvest_source_title }}</a>
+        <p class='text-muted'>Harvested from <a href="{{ h.url_for('organization.read', id=pkg.organization.name) }}?harvest_source_title={{ harvest_source_title }}">{{ harvest_source_title }}</a>
         <br>
         <i class="fa fa-circle-info"></i> <a href={{ h.get_harvest_source_link(pkg) }} class="small">Source Technical Details</a>
         </p>
