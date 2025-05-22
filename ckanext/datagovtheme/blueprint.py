@@ -4,7 +4,7 @@ from ckan.plugins.toolkit import config
 from ckan.lib.base import abort
 from ckan.common import c, request
 
-from flask import Blueprint, redirect
+from flask import Blueprint, redirect, session
 
 import logging
 log = logging.getLogger(__name__)
@@ -39,3 +39,9 @@ def redirect_homepage():
 
 
 pusher.add_url_rule('/', view_func=redirect_homepage)
+
+
+@pusher.before_app_request
+def refresh_session():
+    """ Refresh session expiration time on each request """
+    session.modified = True
