@@ -267,7 +267,7 @@ def get_harvest_object_formats(harvest_object_id, dataset_is_datajson=False):
     harvest_next = asbool(config.get('ckanext.datagovtheme.harvest_next', 'false'))
     if harvest_next:
         return {
-            'object_format': 'data.json' if dataset_is_datajson else 'ISO-19139'
+            'object_format': 'Data.json' if dataset_is_datajson else 'XML'
         }
 
     try:
@@ -277,6 +277,8 @@ def get_harvest_object_formats(harvest_object_id, dataset_is_datajson=False):
         return {}
 
     def get_extra(obj, key, default=None):
+        # note: given the below something must normalize the
+        # extras into a single dict instead of a list of dicts
         for k, v in obj['extras'].items():
             if k == key:
                 return v
@@ -287,7 +289,8 @@ def get_harvest_object_formats(harvest_object_id, dataset_is_datajson=False):
             'iso': 'ISO-19139',
             'fgdc': 'FGDC',
             'arcgis_json': 'ArcGIS JSON',
-            'ckan': 'CKAN'
+            'ckan': 'CKAN',
+            "data.json": 'Data.json',
         }
         return format_titles[format_name] if format_name in format_titles else format_name
 
@@ -297,9 +300,9 @@ def get_harvest_object_formats(harvest_object_id, dataset_is_datajson=False):
 
         if format_name in ('iso', 'fgdc'):
             format_type = 'xml'
-        elif format_name in ('arcgis'):
+        elif format_name in ('arcgis', "data.json", "json"):
             format_type = 'json'
-        elif format_name in ('ckan'):
+        elif format_name in ('ckan',):
             format_type = 'ckan'
         else:
             format_type = ''
