@@ -6,6 +6,7 @@ import os
 import re
 import urllib.parse
 from collections import Counter, namedtuple
+from typing import Any, Dict
 
 import ckan.logic as logic
 import pkg_resources
@@ -257,13 +258,13 @@ def render_datetime_datagov(date_str):
     return value
 
 
-def get_harvest_object_formats(harvest_object_id: str, dataset_is_datajson: bool = False) -> Dict[str, str]:
+def get_harvest_object_formats(
+    harvest_object_id: str, dataset_is_datajson: bool = False
+) -> Dict[str, str]:
     # simplified return for harvest_next
     harvest_next = asbool(config.get("ckanext.datagovtheme.harvest_next", "false"))
     if harvest_next:
-        return {
-            'object_format': 'Data.json' if dataset_is_datajson else 'XML'
-        }
+        return {"object_format": "Data.json" if dataset_is_datajson else "XML"}
 
     try:
         obj = p.toolkit.get_action("harvest_object_show")({}, {"id": harvest_object_id})
@@ -274,18 +275,18 @@ def get_harvest_object_formats(harvest_object_id: str, dataset_is_datajson: bool
     def get_extra(obj: Dict[str, Any], key: str, default: Any = None) -> Any:
         # note: given the below something must normalize the
         # extras into a single dict instead of a list of dicts
-        for k, v in obj['extras'].items():
+        for k, v in obj["extras"].items():
             if k == key:
                 return v
         return default
 
     def format_title(format_name: str) -> str:
         format_titles = {
-            'iso': 'ISO-19139',
-            'fgdc': 'FGDC',
-            'arcgis_json': 'ArcGIS JSON',
-            'ckan': 'CKAN',
-            "data.json": 'Data.json',
+            "iso": "ISO-19139",
+            "fgdc": "FGDC",
+            "arcgis_json": "ArcGIS JSON",
+            "ckan": "CKAN",
+            "data.json": "Data.json",
         }
         return (
             format_titles[format_name] if format_name in format_titles else format_name
@@ -295,12 +296,12 @@ def get_harvest_object_formats(harvest_object_id: str, dataset_is_datajson: bool
         if not format_name:
             return ""
 
-        if format_name in ('iso', 'fgdc'):
-            format_type = 'xml'
-        elif format_name in ('arcgis', "data.json", "json"):
-            format_type = 'json'
-        elif format_name in ('ckan',):
-            format_type = 'ckan'
+        if format_name in ("iso", "fgdc"):
+            format_type = "xml"
+        elif format_name in ("arcgis", "data.json", "json"):
+            format_type = "json"
+        elif format_name in ("ckan",):
+            format_type = "ckan"
         else:
             format_type = ""
         return format_type

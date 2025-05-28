@@ -1,16 +1,14 @@
 # encoding: utf-8
+import json
 import logging
 import re
+from unittest.mock import patch
 
 import ckan.tests.factories as factories
 import mock
 import pytest
 
 from ckanext.datagovtheme import helpers
-import ckan.tests.factories as factories
-from unittest.mock import patch
-import json
-
 
 ################
 # get_login_url
@@ -177,7 +175,9 @@ def harvest_object_json():
 
 @patch("ckanext.datagovtheme.helpers.p.toolkit.get_action")
 @patch("ckanext.datagovtheme.helpers.config")
-def test_get_harvest_object_formats_xml(mock_config, mock_get_action, harvest_object_xml):
+def test_get_harvest_object_formats_xml(
+    mock_config, mock_get_action, harvest_object_xml
+):
     """
     Test the get_harvest_object_formats function for XML format,
     while harvest_next is False.
@@ -200,7 +200,9 @@ def test_get_harvest_object_formats_xml(mock_config, mock_get_action, harvest_ob
 
 @patch("ckanext.datagovtheme.helpers.p.toolkit.get_action")
 @patch("ckanext.datagovtheme.helpers.config")
-def test_get_harvest_object_formats_json(mock_config, mock_get_action, harvest_object_json):
+def test_get_harvest_object_formats_json(
+    mock_config, mock_get_action, harvest_object_json
+):
     """
     Test the get_harvest_object_formats function for JSON format,
     while harvest_next is False.
