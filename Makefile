@@ -9,7 +9,7 @@ clean: ## Clean workspace and containers
 	CKAN_VERSION=$(CKAN_VERSION) docker compose  -f $(COMPOSE_FILE) down -v --remove-orphans
 
 lint: ## Lint the code (python 3 only)
-	CKAN_VERSION=$(CKAN_VERSION) docker compose -f $(COMPOSE_FILE) run --rm ckan flake8 ckanext --count --show-source --statistics --exclude ckan
+	CKAN_VERSION=$(CKAN_VERSION) docker compose -f $(COMPOSE_FILE) run --rm ckan flake8 ckanext --count --show-source --statistics --exclude ckan --ignore=W503
 
 test: ## Run extension tests
 	CKAN_VERSION=$(CKAN_VERSION) docker compose  -f $(COMPOSE_FILE) run --rm ckan ./test.sh
@@ -22,6 +22,9 @@ ui-interactive:
 
 up: ## Start the containers
 	CKAN_VERSION=$(CKAN_VERSION) docker compose  -f $(COMPOSE_FILE) up
+
+down: ## Stop the containers
+	CKAN_VERSION=$(CKAN_VERSION) docker compose -f $(COMPOSE_FILE) down
 
 upd: ## Start the containers in the background
 	CKAN_VERSION=$(CKAN_VERSION) docker compose  -f $(COMPOSE_FILE) run --rm ckan ckan search-index rebuild -i -o -e
