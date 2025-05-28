@@ -6,6 +6,7 @@ import os
 import re
 import urllib.parse
 from collections import namedtuple, Counter
+from typing import Dict, Any
 
 import pkg_resources
 
@@ -262,7 +263,7 @@ def render_datetime_datagov(date_str):
     return value
 
 
-def get_harvest_object_formats(harvest_object_id, dataset_is_datajson=False):
+def get_harvest_object_formats(harvest_object_id: str, dataset_is_datajson: bool = False) -> Dict[str, str]:
     # simplified return for harvest_next
     harvest_next = asbool(config.get('ckanext.datagovtheme.harvest_next', 'false'))
     if harvest_next:
@@ -276,7 +277,7 @@ def get_harvest_object_formats(harvest_object_id, dataset_is_datajson=False):
         log.info('Harvest object not found {0}:'.format(harvest_object_id))
         return {}
 
-    def get_extra(obj, key, default=None):
+    def get_extra(obj: Dict[str, Any], key: str, default: Any = None) -> Any:
         # note: given the below something must normalize the
         # extras into a single dict instead of a list of dicts
         for k, v in obj['extras'].items():
@@ -284,7 +285,7 @@ def get_harvest_object_formats(harvest_object_id, dataset_is_datajson=False):
                 return v
         return default
 
-    def format_title(format_name):
+    def format_title(format_name: str) -> str:
         format_titles = {
             'iso': 'ISO-19139',
             'fgdc': 'FGDC',
@@ -294,7 +295,7 @@ def get_harvest_object_formats(harvest_object_id, dataset_is_datajson=False):
         }
         return format_titles[format_name] if format_name in format_titles else format_name
 
-    def format_type(format_name):
+    def format_type(format_name: str) -> str:
         if not format_name:
             return ''
 
