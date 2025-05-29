@@ -264,7 +264,10 @@ def get_harvest_object_formats(
     # simplified return for harvest_next
     harvest_next = asbool(config.get("ckanext.datagovtheme.harvest_next", "false"))
     if harvest_next:
-        return {"object_format": "Data.json" if dataset_is_datajson else "XML"}
+        return {
+            "object_format": "Data.json" if dataset_is_datajson else "ISO-19139",
+            "object_format_type": "json" if dataset_is_datajson else "xml",
+        }
 
     try:
         obj = p.toolkit.get_action("harvest_object_show")({}, {"id": harvest_object_id})
@@ -281,18 +284,26 @@ def get_harvest_object_formats(
         return default
 
     def format_title(format_name: str) -> str:
+        """
+        Returns a human-readable title for the format.
+        """
         format_titles = {
             "iso": "ISO-19139",
             "fgdc": "FGDC",
             "arcgis_json": "ArcGIS JSON",
             "ckan": "CKAN",
             "data.json": "Data.json",
+            "json": "JSON",
         }
         return (
             format_titles[format_name] if format_name in format_titles else format_name
         )
 
     def format_type(format_name: str) -> str:
+        """
+        Returns the type of format based on the format name.
+        Used for the `data-format` attribute in the template.
+        """
         if not format_name:
             return ""
 
@@ -306,8 +317,8 @@ def get_harvest_object_formats(
             format_type = ""
         return format_type
 
-    format_name = get_extra(obj, "format", "iso")
-    original_format_name = get_extra(obj, "original_format")
+    format_name = get_extra(obj, "format", "iso").lower()
+    original_format_name = get_extra(obj, "original_format").lower()
 
     # check if harvest_object holds a ckan_url key
     try:

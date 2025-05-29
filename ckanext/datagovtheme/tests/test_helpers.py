@@ -212,11 +212,10 @@ def test_get_harvest_object_formats_json(
     mock_get_action.return_value = lambda context, data: harvest_object_json
 
     result = helpers.get_harvest_object_formats("fake-id")
-
     assert result == {
         "object_format": "Data.json",
         "object_format_type": "json",
-        "original_format": "json",
+        "original_format": "JSON",
         "original_format_type": "json",
     }
 
@@ -237,9 +236,7 @@ def test_get_harvest_object_formats_json_harvest_next(
 
     result = helpers.get_harvest_object_formats("fake-id", dataset_is_datajson=True)
 
-    assert result == {
-        "object_format": "Data.json",
-    }
+    assert result == {"object_format": "Data.json", "object_format_type": "json"}
 
 
 @patch("ckanext.datagovtheme.helpers.p.toolkit.get_action")
@@ -259,6 +256,4 @@ def test_get_harvest_object_formats_xml_harvest_next(
 
     result = helpers.get_harvest_object_formats("fake-id", dataset_is_datajson=False)
 
-    assert result == {
-        "object_format": "XML",
-    }
+    assert result == {"object_format": "ISO-19139", "object_format_type": "xml"}
