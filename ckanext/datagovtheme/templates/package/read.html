@@ -240,11 +240,11 @@
         <ul class="resource-list">
           <li class="resource-item">
             <strong class="heading">
-            {% if dataset_is_datajson and ho_formats.object_format != 'CKAN' %}
+            {% if dataset_is_datajson and ho_formats.object_format_type != 'ckan' %}
               <span class="format-label" property="dc:format" data-format="Data.json">Data.json</span>
               Data.json Metadata
             {% else %}
-              <span class="format-label" property="dc:format" data-format="{{ ho_formats.object_format }}">{{ ho_formats.object_format }}</span>
+              <span class="format-label" property="dc:format" data-format="{{ ho_formats.object_format_type }}">{{ ho_formats.object_format_type }}</span>
               {{ ho_formats.object_format }} Metadata
             {% endif %}
             </strong>
