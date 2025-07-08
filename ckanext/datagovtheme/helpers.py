@@ -6,7 +6,7 @@ import os
 import re
 import urllib.parse
 from collections import Counter, namedtuple
-from typing import Any, Dict
+from typing import Dict
 
 import ckan.logic as logic
 import pkg_resources
@@ -264,6 +264,7 @@ def get_harvest_object_formats(
         "object_format": "Data.json" if dataset_is_datajson else "ISO-19139",
         "object_format_type": "json" if dataset_is_datajson else "xml",
     }
+
 
 def get_harvest_source_link(package_dict, type="source"):
     harvest_source_id = get_pkg_dict_extra(package_dict, "harvest_source_id", None)
