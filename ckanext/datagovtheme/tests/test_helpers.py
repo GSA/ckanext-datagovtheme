@@ -174,63 +174,12 @@ def harvest_object_json():
 
 
 @patch("ckanext.datagovtheme.helpers.p.toolkit.get_action")
-@patch("ckanext.datagovtheme.helpers.config")
-def test_get_harvest_object_formats_xml(
-    mock_config, mock_get_action, harvest_object_xml
-):
-    """
-    Test the get_harvest_object_formats function for XML format,
-    while harvest_next is False.
-    """
-    # Simulate harvest_next being False
-    mock_config.get.return_value = "false"
-
-    # Simulate harvest_object_show returning nour fixture
-    mock_get_action.return_value = lambda context, data: harvest_object_xml
-
-    result = helpers.get_harvest_object_formats("fake-id")
-
-    assert result == {
-        "object_format": "FGDC",
-        "object_format_type": "xml",
-        "original_format": "ISO-19139",
-        "original_format_type": "xml",
-    }
-
-
-@patch("ckanext.datagovtheme.helpers.p.toolkit.get_action")
-@patch("ckanext.datagovtheme.helpers.config")
 def test_get_harvest_object_formats_json(
-    mock_config, mock_get_action, harvest_object_json
+    mock_get_action, harvest_object_json
 ):
     """
     Test the get_harvest_object_formats function for JSON format,
-    while harvest_next is False.
     """
-    mock_config.get.return_value = "false"
-
-    mock_get_action.return_value = lambda context, data: harvest_object_json
-
-    result = helpers.get_harvest_object_formats("fake-id")
-    assert result == {
-        "object_format": "Data.json",
-        "object_format_type": "json",
-        "original_format": "JSON",
-        "original_format_type": "json",
-    }
-
-
-@patch("ckanext.datagovtheme.helpers.p.toolkit.get_action")
-@patch("ckanext.datagovtheme.helpers.config")
-def test_get_harvest_object_formats_json_harvest_next(
-    mock_config, mock_get_action, harvest_object_json
-):
-    """
-    Test the get_harvest_object_formats function for JSON format,
-    while harvest_next is True. This should short circuit the
-    logic and return a simplified format.
-    """
-    mock_config.get.return_value = "true"
 
     mock_get_action.return_value = lambda context, data: harvest_object_json
 
@@ -240,17 +189,12 @@ def test_get_harvest_object_formats_json_harvest_next(
 
 
 @patch("ckanext.datagovtheme.helpers.p.toolkit.get_action")
-@patch("ckanext.datagovtheme.helpers.config")
-def test_get_harvest_object_formats_xml_harvest_next(
-    mock_config, mock_get_action, harvest_object_xml
+def test_get_harvest_object_formats_xml(
+    mock_get_action, harvest_object_xml
 ):
     """
-    Test the get_harvest_object_formats function for XML format,
-    while harvest_next is True. This should short circuit the
-    logic and return a simplified format.
+    Test the get_harvest_object_formats function for XML format.
     """
-
-    mock_config.get.return_value = "true"
 
     mock_get_action.return_value = lambda context, data: harvest_object_xml
 

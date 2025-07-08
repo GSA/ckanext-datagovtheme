@@ -10,12 +10,10 @@ from typing import Any, Dict
 
 import ckan.logic as logic
 import pkg_resources
-from ckan import model
 from ckan import plugins as p
 from ckan.lib import helpers as h
 from ckan.plugins.toolkit import asbool, config
 
-from ckanext.harvest.model import HarvestObject
 
 log = logging.getLogger(__name__)
 
@@ -261,79 +259,11 @@ def render_datetime_datagov(date_str):
 def get_harvest_object_formats(
     harvest_object_id: str, dataset_is_datajson: bool = False
 ) -> Dict[str, str]:
-    # simplified return for harvest_next
-    harvest_next = asbool(config.get("ckanext.datagovtheme.harvest_next", "false"))
-    if harvest_next:
-        return {
-            "object_format": "Data.json" if dataset_is_datajson else "ISO-19139",
-            "object_format_type": "json" if dataset_is_datajson else "xml",
-        }
-
-    try:
-        obj = p.toolkit.get_action("harvest_object_show")({}, {"id": harvest_object_id})
-    except p.toolkit.ObjectNotFound:
-        log.info("Harvest object not found {0}:".format(harvest_object_id))
-        return {}
-
-    def get_extra(obj: Dict[str, Any], key: str, default: Any = None) -> Any:
-        # note: given the below something must normalize the
-        # extras into a single dict instead of a list of dicts
-        for k, v in obj["extras"].items():
-            if k == key:
-                return v
-        return default
-
-    def format_title(format_name: str) -> str:
-        """
-        Returns a human-readable title for the format.
-        """
-        format_titles = {
-            "iso": "ISO-19139",
-            "fgdc": "FGDC",
-            "arcgis_json": "ArcGIS JSON",
-            "ckan": "CKAN",
-            "data.json": "Data.json",
-            "json": "JSON",
-        }
-        return (
-            format_titles[format_name] if format_name in format_titles else format_name
-        )
-
-    def format_type(format_name: str) -> str:
-        """
-        Returns the type of format based on the format name.
-        Used for the `data-format` attribute in the template.
-        """
-        if not format_name:
-            return ""
-
-        if format_name in ("iso", "fgdc"):
-            format_type = "xml"
-        elif format_name in ("arcgis", "data.json", "json"):
-            format_type = "json"
-        elif format_name in ("ckan",):
-            format_type = "ckan"
-        else:
-            format_type = ""
-        return format_type
-
-    format_name = get_extra(obj, "format", "iso").lower()
-    original_format_name = get_extra(obj, "original_format").lower()
-
-    # check if harvest_object holds a ckan_url key
-    try:
-        json.loads(obj["content"])["ckan_url"]
-        format_name = "ckan"
-    except Exception:
-        pass
 
     return {
-        "object_format": format_title(format_name),
-        "object_format_type": format_type(format_name),
-        "original_format": format_title(original_format_name),
-        "original_format_type": format_type(original_format_name),
+        "object_format": "Data.json" if dataset_is_datajson else "ISO-19139",
+        "object_format_type": "json" if dataset_is_datajson else "xml",
     }
-
 
 def get_harvest_source_link(package_dict, type="source"):
     harvest_source_id = get_pkg_dict_extra(package_dict, "harvest_source_id", None)
@@ -863,28 +793,6 @@ def get_pkg_dict_extra(pkg_dict, key, default=None):
             for k, value in rolledup_extras.items():
                 if k == key:
                     return value
-
-    harvest_next = asbool(config.get("ckanext.datagovtheme.harvest_next", "false"))
-    # Also include harvest information if exists
-    if (
-        key in ["harvest_object_id", "harvest_source_id", "harvest_source_title"]
-        and not harvest_next
-    ):
-
-        harvest_object = (
-            model.Session.query(HarvestObject)
-            .filter(HarvestObject.package_id == pkg_dict["id"])
-            .filter(HarvestObject.current is True)
-            .first()
-        )  # noqa
-
-        if harvest_object:
-            if key == "harvest_object_id":
-                return harvest_object.id
-            elif key == "harvest_source_id":
-                return harvest_object.source.id
-            elif key == "harvest_source_title":
-                return harvest_object.source.title
 
     return default
 

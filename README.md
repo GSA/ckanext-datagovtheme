@@ -26,7 +26,6 @@ in the context of Features above._
 These extensions are required.
 
 - [ckanext-spatial](https://github.com/gsa/ckanext-spatial)
-- [ckanext-harvest](https://github.com/ckan/ckanext-harvest)
 
 Additionally, ckanext-datagovtheme has "weak" dependencies on these extensions.
 The dependency might be on templates, template helpers, or other functionality.
@@ -42,16 +41,6 @@ CKAN version | Compatibility
 <=2.8        | no
 2.9          | 0.1.27 (last supported)
 2.10         | >=0.2.0
-
-
-### Configuration
-
-[Optional]
-`ckanext.datagovtheme.harvest_next = false`
-
-By default, this setting is `false`. The template relies on `ckanext-harvest` to display Harvest Object and Harvest Source information in the **Metadata Source** block. For catalog-next, datasets are added via API calls, eliminating the need for the `ckanext-harvest` dependency. Set this to `true` for the harvest_next version of the **Metadata Source** block.
-
-**TODO**: re-evaluate the need for this customization after ckan 2.11 release, as described in ticket https://github.com/GSA/data.gov/issues/4798.
 
 
 ## Development
