@@ -10,7 +10,7 @@ with open(path.join(here, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="ckanext-datagovtheme",
-    version="0.4.0",
+    version="0.4.1",
     description="CKAN Extension to manage data.gov theme",
     long_description=long_description,
     classifiers=[
