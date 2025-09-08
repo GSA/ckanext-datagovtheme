@@ -272,7 +272,7 @@ def get_harvest_source_link(package_dict, type="source"):
         package_dict, "harvest_source_title", None
     )
     harvest_object_id = get_pkg_dict_extra(package_dict, "harvest_object_id", None)
-    harvest_admin_url = config.get("ckanext.datagovtheme.harvest_admin_url")
+    harvest_admin_url = config.get("ckanext.datagovtheme.harvest_admin_url", "").rstrip("/")
 
     if harvest_source_id and harvest_source_title:
         if type == "metadata":
