@@ -694,9 +694,9 @@ def get_collection_packages(pkgs):
         return []
 
     # making search query for collection_info like
-    # fq=((harvest_source_id:sid1 isPartOf:pid1)OR(harvest_source_id:sid2 isPartOf:pid2)include_collection:true)
+    # fq=((harvest_source_id:sid1 isPartOf:pid1)OR(harvest_source_id:sid2 isPartOf:pid2))
     # &rows=0&facet.field=["isPartOf","harvest_source_id"]
-    fq = f'({"OR".join(id_query)}include_collection:true)'
+    fq = f'({"OR".join(id_query)})'
 
     package_search = logic.get_action("package_search")
     search_params = {
