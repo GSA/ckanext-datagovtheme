@@ -27,7 +27,7 @@
         <div class="results">
             <div class="filter-list">
                 {% for field in c.fields_grouped %}
-                {% if field in ['collection_info', 'include_collection'] %}
+                {% if field in ['collection_info', 'exclude_collection'] %}
                 {% continue %}
                 {% endif %}
                 <span class="facet">{{ c.facet_titles.get(field) }}:</span>
