@@ -5,10 +5,8 @@ import logging
 import os
 import re
 import urllib.parse
-from collections import Counter, namedtuple
 from typing import Dict
 
-import ckan.logic as logic
 import pkg_resources
 from ckan import plugins as p
 from ckan.lib import helpers as h
