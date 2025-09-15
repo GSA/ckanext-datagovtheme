@@ -2182,19 +2182,6 @@ body .tagged-ngda {
 }
 /* END of styling NGDA lable using button arrows for bootstrap 3 */
 
-
-.dataset-collection {
-    margin-right: 5px;
-    background-color: #777777;
-}
-
-.dataset-collection .icon-collection {
-    background: transparent url('/images/collection.png') no-repeat;
-    height: 12px;
-    display: inline-block;
-    width: 14px;
-}
-
 .topic-ecosystems a i:before {
     content: '\e017';
 }
