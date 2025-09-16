@@ -1,7 +1,6 @@
 {#
 Displays a single of dataset.
 
-is_collection  - If true, indicates that the package is a collection.
 package        - A package to display.
 item_class     - The class name to use on the list item.
 hide_resources - If true hides the resources (default: false).
@@ -42,13 +41,6 @@ Example:
             <i class="fa fa-lock"></i>
             {{ _('Private') }}
           </span>
-        {% endif %}
-
-        {% if is_collection %}
-            <span class="dataset-collection label {{ 'label-default' }}">
-                <i class="icon-collection"></i>
-                {{ _('Collection') }}
-            </span>
         {% endif %}
 
         {{ h.link_to(title, h.url_for(controller='dataset', action='read', id=package.name)) }}
