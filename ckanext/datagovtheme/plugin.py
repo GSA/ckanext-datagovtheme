@@ -29,8 +29,6 @@ class DatagovTheme(p.SingletonPlugin):
 
         return OrderedDict(
             [
-                ("groups", "Topics"),
-                ("vocab_category_all", "Topic Categories"),
                 ("metadata_type", "Dataset Type"),
                 ("tags", "Tags"),
                 ("res_format", "Formats"),
@@ -47,15 +45,11 @@ class DatagovTheme(p.SingletonPlugin):
         if not package_type:
             return OrderedDict(
                 [
-                    ("groups", "Topics"),
-                    ("vocab_category_all", "Topic Categories"),
                     ("metadata_type", "Dataset Type"),
                     ("tags", "Tags"),
                     ("res_format", "Formats"),
-                    ("groups", "Topics"),
                     ("harvest_source_title", "Harvest Source"),
                     ("capacity", "Visibility"),
-                    ("dataset_type", "Resource Type"),
                     ("publisher", "Publishers"),
                     ("bureauCode", "Bureaus"),
                 ]
