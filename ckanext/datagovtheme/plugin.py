@@ -1,9 +1,9 @@
 import ckan.plugins as p
 from sqlalchemy.util import OrderedDict
 
-p.toolkit.requires_ckan_version("2.9")
-
 from . import blueprint
+
+p.toolkit.requires_ckan_version("2.9")
 
 
 class DatagovTheme(p.SingletonPlugin):
