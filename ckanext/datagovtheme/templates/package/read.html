@@ -393,7 +393,11 @@
                 {% endif %}
 
                 {% if value != '[]' %}
-                     {{ value }}
+                  {% if h.is_url(value) %}
+                    <a href="{{ value }}" target="_blank" rel="nofollow">{{ value }}</a>
+                  {% else %}
+                    {{ value }}
+                  {% endif %}
                 {% endif %}
               </td>
             </tr>
